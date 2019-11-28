@@ -1,0 +1,75 @@
+{
+  "name": "vsc-package-installer",
+  "displayName": "Package Installer",
+  "description": "Visually install packages in a similar way to VSC extensions",
+  "version": "0.0.1",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "publisher": "sketchbuch",
+  "main": "./out/extension.js",
+  "icon": "logo.png",
+  "activationEvents": [
+    "*"
+  ],
+  "author": {
+    "name": "sketchbuch"
+  },
+  "bugs": {
+    "url": "https://github.com/sketchbuch/vsc-package-installer/issues"
+  },
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsc-package-installer-activitybar",
+          "title": "Package Installer",
+          "icon": "./resources/light/activitybar-light.svg"
+        }
+      ]
+    },
+    "views": {
+      "vsc-package-installer-activitybar": [
+        {
+          "id": "vsc-package-installer-activitybar-list",
+          "name": "List"
+        }
+      ]
+    }
+  },
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sketchbuch/vsc-package-installer"
+  },
+  "scripts": {
+    "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
+    "compile": "tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "yarn run compile && node ./node_modules/vscode/bin/test",
+    "vscode:prepublish": "yarn run compile",
+    "lint:js": "eslint --config ./.eslintrc.js --fix  --max-warnings=0 './{src,config}/**/*.{js,ts}'",
+    "lint:js:dry": "eslint --config ./.eslintrc.js --fix-dry-run  --max-warnings=0 './{src,config}/**/*.{js,ts}'",
+    "lint:prettier": "prettier --write --config ./.prettierrc.js './src/**/*.{js,ts}'",
+    "lint:ts": "tsc --jsx preserve --project ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@schemastore/package": "^0.0.5",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "@types/sinon": "^7.0.13",
+    "chai": "^4.2.0",
+    "sinon": "^7.3.2",
+    "ts-mockito": "^2.3.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "yarn-audit-html": "^1.1.0"
+  }
+}
