@@ -1,2 +1,2 @@
-export { default as getPackageJsonPackageList } from './getPackageJson';
-export { default as pathExists } from './pathExists';
+export { default as getPackageJson } from './fs/getPackageJson';
+export { default as pathExists } from './fs/pathExists';

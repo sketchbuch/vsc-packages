@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import PackageListItem from './PackageListItem';
-import getPackageJson from '../../utils/getPackageJson';
+import { getPackageJson } from '../../utils/';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListItem | undefined> = new vscode.EventEmitter<
@@ -8,7 +8,10 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
   >();
   onDidChangeTreeData: vscode.Event<PackageListItem | undefined> = this._onDidChangeTreeData.event;
 
-  constructor(private workspaceFolders: vscode.WorkspaceFolder[] | null) {}
+  constructor(
+    private packageKey: string,
+    private workspaceFolders: vscode.WorkspaceFolder[] | null
+  ) {}
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
@@ -25,26 +28,22 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
       const packageJson = getPackageJson(this.workspaceFolders[0]);
 
       if (packageJson) {
-        if (packageJson.dependencies) {
-          Object.keys(packageJson.dependencies).forEach((dep: string) => {
-            const depItem = new PackageListItem(dep, vscode.TreeItemCollapsibleState.None);
-            children.push(depItem);
-          });
-        }
-
-        if (packageJson.devDependencies) {
-          Object.keys(packageJson.devDependencies).forEach((dep: string) => {
+        if (packageJson[this.packageKey]) {
+          Object.keys(packageJson[this.packageKey]).forEach((dep: string) => {
             const depItem = new PackageListItem(dep, vscode.TreeItemCollapsibleState.None);
             children.push(depItem);
           });
         }
       }
     } else {
-      const empty = new PackageListItem('No packages', vscode.TreeItemCollapsibleState.None);
+      const empty = new PackageListItem(
+        `No ${this.packageKey} found`,
+        vscode.TreeItemCollapsibleState.None
+      );
       children.push(empty);
     }
 
-    return Promise.resolve(children);
+    return Promise.resolve(children.sort());
   }
 }
 

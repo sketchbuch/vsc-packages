@@ -32,8 +32,12 @@
     "views": {
       "vsc-package-installer-activitybar": [
         {
-          "id": "vsc-package-installer-activitybar-list",
-          "name": "List"
+          "id": "vsc-package-installer-activitybar-deps",
+          "name": "Dependencies"
+        },
+        {
+          "id": "vsc-package-installer-activitybar-dev-deps",
+          "name": "Dev Dependencies"
         }
       ]
     }
