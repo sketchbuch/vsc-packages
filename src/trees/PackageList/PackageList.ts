@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import PackageListItem from './PackageListItem';
 import { getPackageJson } from '../../utils/';
+import { CMD_DISPLAY_PACKAGE } from '../../constants';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListItem | undefined> = new vscode.EventEmitter<
@@ -36,7 +37,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
               version,
               vscode.TreeItemCollapsibleState.None,
               {
-                command: 'extension.openPackageOnNpm',
+                command: CMD_DISPLAY_PACKAGE,
                 title: '',
                 arguments: [dependency],
               }

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { EXT_PACKAGELIST_ITEM_CTX } from '../../constants';
 
 class PackageListItem extends vscode.TreeItem {
   constructor(
@@ -20,11 +21,11 @@ class PackageListItem extends vscode.TreeItem {
   }
 
   iconPath = {
-    light: path.join(__filename, '..', '..', '..', 'resources', 'light', 'activitybar-light.svg'),
-    dark: path.join(__filename, '..', '..', '..', 'resources', 'dark', 'activitybar-dark.svg'),
+    light: path.join('.', 'resources', 'light', 'activitybar-light.svg'),
+    dark: path.join('.', 'resources', 'dark', 'activitybar-dark.svg'),
   };
 
-  contextValue = 'package-list-item';
+  contextValue = EXT_PACKAGELIST_ITEM_CTX;
 }
 
 export default PackageListItem;
