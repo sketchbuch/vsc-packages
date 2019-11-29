@@ -29,8 +29,18 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
 
       if (packageJson) {
         if (packageJson[this.packageKey]) {
-          Object.keys(packageJson[this.packageKey]).forEach((dep: string) => {
-            const depItem = new PackageListItem(dep, vscode.TreeItemCollapsibleState.None);
+          Object.keys(packageJson[this.packageKey]).forEach((dependency: string) => {
+            const version: string = packageJson[this.packageKey][dependency];
+            const depItem = new PackageListItem(
+              dependency,
+              version,
+              vscode.TreeItemCollapsibleState.None,
+              {
+                command: 'extension.openPackageOnNpm',
+                title: '',
+                arguments: [dependency],
+              }
+            );
             children.push(depItem);
           });
         }
@@ -38,6 +48,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     } else {
       const empty = new PackageListItem(
         `No ${this.packageKey} found`,
+        '',
         vscode.TreeItemCollapsibleState.None
       );
       children.push(empty);

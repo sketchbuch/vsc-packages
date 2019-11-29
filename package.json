@@ -1,5 +1,5 @@
 {
-  "name": "vsc-package-installer",
+  "name": "vsc-packages",
   "displayName": "Package Installer",
   "description": "Visually install packages in a similar way to VSC extensions",
   "version": "0.0.1",
@@ -14,30 +14,36 @@
     "name": "sketchbuch"
   },
   "bugs": {
-    "url": "https://github.com/sketchbuch/vsc-package-installer/issues"
+    "url": "https://github.com/sketchbuch/vsc-packages/issues"
   },
   "categories": [
     "Other"
   ],
   "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "vsc-package-installer-activitybar",
-          "title": "Package Installer",
-          "icon": "./resources/light/activitybar-light.svg"
-        }
-      ]
-    },
+    "commands": [
+      {
+        "command": "nodeDependencies.addEntry",
+        "title": "Add"
+      }
+    ],
     "views": {
-      "vsc-package-installer-activitybar": [
+      "vsc-packages-activitybar": [
         {
-          "id": "vsc-package-installer-activitybar-deps",
+          "id": "vsc-packages-activitybar-deps",
           "name": "Dependencies"
         },
         {
-          "id": "vsc-package-installer-activitybar-dev-deps",
+          "id": "vsc-packages-activitybar-dev-deps",
           "name": "Dev Dependencies"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsc-packages-activitybar",
+          "title": "Package Installer",
+          "icon": "./resources/light/activitybar-light.svg"
         }
       ]
     }
@@ -48,7 +54,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/sketchbuch/vsc-package-installer"
+    "url": "https://github.com/sketchbuch/vsc-packages"
   },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
