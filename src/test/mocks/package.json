@@ -1,0 +1,9 @@
+{
+  "test": true,
+  "dependencies": {
+    "react": "1.0.1"
+  },
+  "devDependencies": {
+    "react-dom": "1.0.1"
+  }
+}

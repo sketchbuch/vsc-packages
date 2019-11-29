@@ -28,25 +28,25 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     if (this.workspaceFolders !== null && this.workspaceFolders.length > 0) {
       const packageJson = getPackageJson(this.workspaceFolders[0]);
 
-      if (packageJson) {
-        if (packageJson[this.packageKey]) {
-          Object.keys(packageJson[this.packageKey]).forEach((dependency: string) => {
-            const version: string = packageJson[this.packageKey][dependency];
-            const depItem = new PackageListItem(
-              dependency,
-              version,
-              vscode.TreeItemCollapsibleState.None,
-              {
-                command: CMD_DISPLAY_PACKAGE,
-                title: '',
-                arguments: [dependency],
-              }
-            );
-            children.push(depItem);
-          });
-        }
+      if (packageJson && packageJson[this.packageKey]) {
+        Object.keys(packageJson[this.packageKey]).forEach((dependency: string) => {
+          const version: string = packageJson[this.packageKey][dependency];
+          const depItem = new PackageListItem(
+            dependency,
+            version,
+            vscode.TreeItemCollapsibleState.None,
+            {
+              command: CMD_DISPLAY_PACKAGE,
+              title: '',
+              arguments: [dependency],
+            }
+          );
+          children.push(depItem);
+        });
       }
-    } else {
+    }
+
+    if (children.length < 1) {
       const empty = new PackageListItem(
         `No ${this.packageKey} found`,
         '',

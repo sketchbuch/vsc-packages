@@ -1,37 +1,29 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as sinon from 'sinon';
-import * as vscode from 'vscode';
 import { expect } from 'chai';
 import * as pathExists from '../../../utils/fs/pathExists';
 import getPackageJson from '../../../utils/fs/getPackageJson';
+import mockWorkspaceFolder from '../../mocks/mockWorkspaceFolder';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../../constants';
 
 suite('utils/fs: getPackageJson()', () => {
-  const mockWorkspaceFolder: vscode.WorkspaceFolder = {
-    index: 0,
-    name: 'folder',
-    uri: {
-      fsPath: `${__dirname}/../../../../src/test/utils/fs`,
-      path: `${__dirname}/../../../../src/test/utils/fs`,
-      scheme: 'file',
-    } as vscode.Uri,
-  };
+  const mockWsFolder = mockWorkspaceFolder();
 
-  const testPath = path.join(mockWorkspaceFolder.uri.fsPath, FS_PACKAGEJSON);
+  const testPath = path.join(mockWsFolder.uri.fsPath, FS_PACKAGEJSON);
 
   test('Correctly calls path.join() once', () => {
     const spy = sinon.spy(path, 'join');
-    getPackageJson(mockWorkspaceFolder);
+    getPackageJson(mockWsFolder);
 
     sinon.assert.calledOnce(spy);
-    sinon.assert.calledWith(spy, mockWorkspaceFolder.uri.fsPath, FS_PACKAGEJSON);
+    sinon.assert.calledWith(spy, mockWsFolder.uri.fsPath, FS_PACKAGEJSON);
     spy.restore();
   });
 
   test('Correctly calls pathExists() once', () => {
     const spy = sinon.spy(pathExists, 'pathExists');
-    getPackageJson(mockWorkspaceFolder);
+    getPackageJson(mockWsFolder);
 
     sinon.assert.calledOnce(spy);
     sinon.assert.calledWith(spy, testPath);
@@ -39,15 +31,7 @@ suite('utils/fs: getPackageJson()', () => {
   });
 
   test('Returns null if the workspace folder does NOT exist', () => {
-    const mockNonexistentWorkspaceFolder: vscode.WorkspaceFolder = {
-      index: 0,
-      name: 'folder',
-      uri: {
-        fsPath: '/some/folder/',
-        path: '/some/folder/',
-        scheme: 'file',
-      } as vscode.Uri,
-    };
+    const mockNonexistentWorkspaceFolder = mockWorkspaceFolder(true);
 
     const result = getPackageJson(mockNonexistentWorkspaceFolder);
     expect(result).to.be.null;
@@ -56,7 +40,7 @@ suite('utils/fs: getPackageJson()', () => {
   suite('If package.json file exists:', () => {
     test('Calls JSON.parse() once', () => {
       const spy = sinon.spy(JSON, 'parse');
-      getPackageJson(mockWorkspaceFolder);
+      getPackageJson(mockWsFolder);
 
       sinon.assert.calledOnce(spy);
       spy.restore();
@@ -64,7 +48,7 @@ suite('utils/fs: getPackageJson()', () => {
 
     test('Correctly calls fs.readFileSync() once', () => {
       const spy = sinon.spy(fs, 'readFileSync');
-      getPackageJson(mockWorkspaceFolder);
+      getPackageJson(mockWsFolder);
 
       sinon.assert.calledOnce(spy);
       sinon.assert.calledWith(spy, testPath, FS_UTF8);
@@ -72,8 +56,16 @@ suite('utils/fs: getPackageJson()', () => {
     });
 
     test('Returns passed JSON from the existing file', () => {
-      const result = getPackageJson(mockWorkspaceFolder);
-      expect(result).to.be.eql({ test: true });
+      const result = getPackageJson(mockWsFolder);
+      expect(result).to.be.eql({
+        test: true,
+        dependencies: {
+          react: '1.0.1',
+        },
+        devDependencies: {
+          'react-dom': '1.0.1',
+        },
+      });
     });
   });
 });
