@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../constants';
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
-import { pathExists } from '..';
+import { pathExists } from './pathExists';
 
 const getPackageJson = (
   wkspFolder: vscode.WorkspaceFolder
