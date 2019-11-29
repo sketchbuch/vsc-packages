@@ -1,4 +1,5 @@
 export { CMD_DISPLAY_PACKAGE } from './commands';
+export { CMD_VSCODE_OPEN } from './commands';
 export { CMD_OPEN_NPM } from './commands';
 
 export { EXT } from './ext';
@@ -10,3 +11,5 @@ export { extViews } from './ext';
 
 export { FS_UTF8 } from './fs';
 export { FS_PACKAGEJSON } from './fs';
+
+export { URL_NPM } from './urls';

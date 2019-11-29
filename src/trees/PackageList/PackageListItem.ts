@@ -21,8 +21,8 @@ class PackageListItem extends vscode.TreeItem {
   }
 
   iconPath = {
-    light: path.join('.', 'resources', 'light', 'activitybar-light.svg'),
-    dark: path.join('.', 'resources', 'dark', 'activitybar-dark.svg'),
+    light: path.join('../', '../', '../', 'resources', 'light', 'activitybar-light.svg'),
+    dark: path.join('../', '../', '../', 'resources', 'dark', 'activitybar-dark.svg'),
   };
 
   contextValue = EXT_PACKAGELIST_ITEM_CTX;

@@ -1,9 +1,8 @@
 import * as vscode from 'vscode';
+import { ExtViewList, ExtViews } from '../types';
 import { PackageList } from '../trees';
-import { extViews } from '../constants';
-import { ExtViewList } from '../types';
 
-const setupSidebar = () => {
+const setupSidebar = (extViews: ExtViews) => {
   Object.keys(extViews).forEach((view: string) => {
     const treeDataProvider = new PackageList(view, vscode.workspace.workspaceFolders || null);
     vscode.window.registerTreeDataProvider(extViews[view as ExtViewList], treeDataProvider);
