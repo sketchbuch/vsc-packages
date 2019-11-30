@@ -1,0 +1,15 @@
+import * as sinon from 'sinon';
+import * as vscode from 'vscode';
+import { cmdDisplayPackage } from '../../../commands';
+
+suite('commands/callbacks: cmdDisplayPackage()', () => {
+  const packageName = 'test';
+
+  test('Calls vscode.window.showInformationMessage()', () => {
+    const spy = sinon.stub(vscode.window, 'showInformationMessage');
+    cmdDisplayPackage(packageName);
+
+    sinon.assert.callCount(spy, 1);
+    spy.restore();
+  });
+});

@@ -1,2 +1,2 @@
-export { ExtViews } from './ext';
-export { ExtViewList } from './ext';
+export { Cmd, CmdCallback } from './ext';
+export { ExtViewList, ExtViews } from './ext';
