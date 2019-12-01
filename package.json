@@ -94,15 +94,14 @@
   },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
-    "compile": "tsc -p ./",
+    "compile": "tsc --project ./",
+    "lint:prettier": "prettier --write --config ./.prettierrc.js './src/**/*.{js,ts}'",
+    "lint:ts": "yarn lint:ts:src && yarn lint:ts:test",
+    "lint:ts:src": "tslint --config ./tslint.json --fix './src/**/*.{js,ts}' --exclude './src/test/**/*'",
+    "lint:ts:test": "tslint --config ./src/test/tslint.json --fix './src/**/*.{js,ts}' --exclude './src/test/**/*'",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "yarn run compile && node ./node_modules/vscode/bin/test",
     "vscode:prepublish": "yarn run compile",
-    "lint:js": "yarn lint:js:src && yarn lint:js:test",
-    "lint:js:src": "tslint --config ./tslint.json --fix './src/**/*.{js,ts}' --exclude './src/test/**/*'",
-    "lint:js:test": "tslint --config ./src/test/tslint.json --fix './src/**/*.{js,ts}' --exclude './src/test/**/*'",
-    "lint:prettier": "prettier --write --config ./.prettierrc.js './src/**/*.{js,ts}'",
-    "lint:ts": "tsc --jsx preserve --project ./",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
