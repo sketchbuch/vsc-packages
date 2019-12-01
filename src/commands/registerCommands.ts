@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Cmd } from '../types';
 
-const registerCommands = (cmdList: Cmd[]) => {
+const registerCommands = (cmdList: Cmd[]): void => {
   const { registerCommand } = vscode.commands;
 
   cmdList.forEach((cmd: Cmd) => {

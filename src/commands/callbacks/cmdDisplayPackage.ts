@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { CmdCallback } from '../../types';
 
-export const cmdDisplayPackage: CmdCallback = (packageName: string) => {
+const cmdDisplayPackage: CmdCallback = (packageName: string): void => {
   vscode.window.showInformationMessage('Display ' + packageName);
 };
 
