@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { expect } from 'chai';
-import PackageListItem from '../../../trees/PackageList/PackageListItem';
+import PackageListItem from '../../../sidebar/PackageList/PackageListItem';
 import { EXT_PACKAGELIST_ITEM_CTX } from '../../../constants';
 
 suite('PackageListItem()', () => {

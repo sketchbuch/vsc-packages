@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import PackageListItem from './PackageListItem';
-import { getPackageJson } from '../../utils/';
+import { getPackageJson } from '../../utils';
 import { CMD_DISPLAY_PACKAGE } from '../../constants';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListItem> {

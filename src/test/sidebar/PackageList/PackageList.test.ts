@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { expect } from 'chai';
 import mockWorkspaceFolder from '../../mocks/mockWorkspaceFolder';
-import { PackageList, PackageListItem } from '../../../trees';
+import { PackageList, PackageListItem } from '../../../sidebar';
 
 suite('PackageList()', function() {
   const packageKey = 'dependencies';

@@ -1,6 +1,7 @@
 export { CMD_DISPLAY_PACKAGE } from './commands';
-export { CMD_VSCODE_OPEN } from './commands';
 export { CMD_OPEN_NPM } from './commands';
+export { CMD_VSCODE_OPEN } from './commands';
+export { CMD_VSCODE_OPEN_WV } from './commands';
 
 export { EXT } from './ext';
 export { EXT_ACTIVITYBAR } from './ext';

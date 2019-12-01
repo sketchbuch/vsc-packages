@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import { CMD_VSCODE_OPEN, URL_NPM } from '../../../constants';
 import { cmdOpenNpm } from '../../../commands';
 
-suite('commands/callbacks: cmdOpenNpm()', () => {
+suite('cmdOpenNpm()', () => {
   const packageName = 'test';
 
   test('Calls vscode.commands.executeCommand()', () => {

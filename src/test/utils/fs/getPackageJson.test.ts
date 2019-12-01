@@ -7,7 +7,7 @@ import getPackageJson from '../../../utils/fs/getPackageJson';
 import mockWorkspaceFolder from '../../mocks/mockWorkspaceFolder';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../../constants';
 
-suite('utils/fs: getPackageJson()', () => {
+suite('getPackageJson()', () => {
   const mockWsFolder = mockWorkspaceFolder();
 
   const testPath = path.join(mockWsFolder.uri.fsPath, FS_PACKAGEJSON);

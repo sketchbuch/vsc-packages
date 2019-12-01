@@ -3,7 +3,7 @@ import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM } from '../../constants';
 import { Cmd } from '../../types';
 import { cmdList } from '../../commands';
 
-suite('commands: cmdList()', () => {
+suite('cmdList()', () => {
   test('Returns the correct number of commands', () => {
     expect(cmdList).to.have.length(2);
   });

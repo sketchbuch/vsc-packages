@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import { expect } from 'chai';
 import pathExists from '../../../utils/fs/pathExists';
 
-suite('utils/fs: pathExists()', () => {
+suite('pathExists()', () => {
   test('Calls fs.accessSync() once', () => {
     const spy = sinon.spy(fs, 'accessSync');
     pathExists('./nonexistent-file.txt');

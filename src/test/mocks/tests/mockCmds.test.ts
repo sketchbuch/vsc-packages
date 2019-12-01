@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import mockCmds from '../mockCmds';
 
-suite('Mocks: mockCmds()', () => {
+suite('mockCmds()', () => {
   test('Has correct length', () => {
     expect(mockCmds).to.have.length(1);
   });
