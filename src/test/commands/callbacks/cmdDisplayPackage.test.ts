@@ -6,7 +6,7 @@ import { cmdDisplayPackage } from '../../../commands';
 suite('cmdDisplayPackage()', () => {
   const packageName = 'test';
 
-  test('Calls vscode.window.showInformationMessage()', () => {
+  test('Calls Package.createOrShow() correctly', () => {
     const stub = sinon.stub(Package, 'createOrShow');
     cmdDisplayPackage(packageName, mockContext);
 
