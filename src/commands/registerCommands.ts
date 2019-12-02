@@ -5,7 +5,9 @@ const registerCommands = (cmdList: Cmd[], context: vscode.ExtensionContext): voi
   const { registerCommand } = vscode.commands;
 
   cmdList.forEach((cmd: Cmd) => {
-    const disposable = registerCommand(cmd.cmd, (packageName: string) => cmd.callback(packageName));
+    const disposable = registerCommand(cmd.cmd, (packageName: string) =>
+      cmd.callback(packageName, context)
+    );
     context.subscriptions.push(disposable);
   });
 };

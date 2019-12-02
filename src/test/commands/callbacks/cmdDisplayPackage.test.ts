@@ -1,15 +1,17 @@
 import * as sinon from 'sinon';
-import * as vscode from 'vscode';
+import mockContext from '../../mocks/mockContext';
+import { Package } from '../../../webviews';
 import { cmdDisplayPackage } from '../../../commands';
 
 suite('cmdDisplayPackage()', () => {
   const packageName = 'test';
 
   test('Calls vscode.window.showInformationMessage()', () => {
-    const spy = sinon.stub(vscode.window, 'createWebviewPanel');
-    cmdDisplayPackage(packageName);
+    const stub = sinon.stub(Package, 'createOrShow');
+    cmdDisplayPackage(packageName, mockContext);
 
-    sinon.assert.callCount(spy, 1);
-    spy.restore();
+    sinon.assert.callCount(stub, 1);
+    sinon.assert.calledWith(stub, mockContext.extensionPath, packageName);
+    stub.restore();
   });
 });

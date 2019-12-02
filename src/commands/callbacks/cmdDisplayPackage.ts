@@ -1,14 +1,12 @@
 import * as vscode from 'vscode';
 import { CmdCallback } from '../../types';
-import { CMD_VSCODE_OPEN_WV } from '../../constants';
-import { getPackageTabTitle } from '../../utils';
+import Package from '../../webviews/Package/Package';
 
-const cmdDisplayPackage: CmdCallback = (packageName: string): void => {
-  vscode.window.createWebviewPanel(
-    CMD_VSCODE_OPEN_WV,
-    getPackageTabTitle(packageName),
-    vscode.ViewColumn.Active
-  );
+const cmdDisplayPackage: CmdCallback = (
+  packageName: string,
+  context: vscode.ExtensionContext
+): void => {
+  Package.createOrShow(context.extensionPath, packageName);
 };
 
 export default cmdDisplayPackage;
