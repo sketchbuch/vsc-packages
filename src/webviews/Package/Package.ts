@@ -41,7 +41,7 @@ class Package {
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
 
-    context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+    Package.setStateForRevival(context, packageName);
 
     if (Package.currentPanel) {
       if (packageName !== Package.currentPackage) {
@@ -70,15 +70,22 @@ class Package {
   }
 
   /*
-    Called in deserializeWebviewPanel to recreate the panel on startup.
+    Called in registerWebviews() during deserialization to recreate the panel on startup.
   */
   public static revive(
     panel: vscode.WebviewPanel,
     context: vscode.ExtensionContext,
     packageName: string
   ) {
-    context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+    Package.setStateForRevival(context, packageName);
     Package.updatePackageAndPanel(panel, context, packageName);
+  }
+
+  /*
+    The state set here is used in registerWebviews() to enable revival.
+  */
+  public static setStateForRevival(context: vscode.ExtensionContext, packageName: string) {
+    context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
   }
 
   private static updatePackageAndPanel(
@@ -129,7 +136,7 @@ class Package {
     isConstructionUpdate: boolean = false
   ) {
     if (isConstructionUpdate || packageName !== Package.currentPackage) {
-      context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+      Package.setStateForRevival(context, packageName);
       const webview = this._panel.webview;
 
       this._panel.webview.html = this._getHtmlForWebview(webview, packageName);
