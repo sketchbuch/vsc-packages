@@ -1,16 +1,15 @@
-export { CMD_DISPLAY_PACKAGE } from './commands';
-export { CMD_OPEN_NPM } from './commands';
-export { CMD_VSCODE_OPEN } from './commands';
-export { CMD_VSCODE_OPEN_WV } from './commands';
+export { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM, CMD_VSCODE_OPEN, CMD_VSCODE_OPEN_WV } from './commands';
 
-export { EXT } from './ext';
-export { EXT_ACTIVITYBAR } from './ext';
-export { EXT_ACTIVITYBAR_DEPS } from './ext';
-export { EXT_ACTIVITYBAR_DEVDEPS } from './ext';
-export { EXT_PACKAGELIST_ITEM_CTX } from './ext';
-export { extViews } from './ext';
+export {
+  EXT,
+  EXT_ACTIVITYBAR,
+  EXT_ACTIVITYBAR_DEPS,
+  EXT_ACTIVITYBAR_DEVDEPS,
+  EXT_GLOBALSTATE_KEY,
+  EXT_PACKAGELIST_ITEM_CTX,
+  extViews,
+} from './ext';
 
-export { FS_UTF8 } from './fs';
-export { FS_PACKAGEJSON } from './fs';
+export { FS_PACKAGEJSON, FS_UTF8 } from './fs';
 
 export { URL_NPM } from './urls';

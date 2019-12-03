@@ -11,7 +11,7 @@ suite('cmdDisplayPackage()', () => {
     cmdDisplayPackage(packageName, mockContext);
 
     sinon.assert.callCount(stub, 1);
-    sinon.assert.calledWith(stub, mockContext.extensionPath, packageName);
+    sinon.assert.calledWith(stub, mockContext, packageName);
     stub.restore();
   });
 });

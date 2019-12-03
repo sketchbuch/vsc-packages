@@ -6,7 +6,7 @@ const cmdDisplayPackage: CmdCallback = (
   packageName: string,
   context: vscode.ExtensionContext
 ): void => {
-  Package.createOrShow(context.extensionPath, packageName);
+  Package.createOrShow(context, packageName);
 };
 
 export default cmdDisplayPackage;

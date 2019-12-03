@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { CMD_VSCODE_OPEN_WV } from '../../constants';
+import { CMD_VSCODE_OPEN_WV, EXT_GLOBALSTATE_KEY } from '../../constants';
 import { getPackageTabTitle, getNonce } from '../../utils';
 
 class Package {
@@ -8,18 +8,24 @@ class Package {
   private readonly _extensionPath: string;
   private readonly _panel: vscode.WebviewPanel;
   public static currentPanel: Package | undefined;
+  public static currentPackage: string = '';
   public static readonly viewType = CMD_VSCODE_OPEN_WV;
 
-  private constructor(panel: vscode.WebviewPanel, extensionPath: string, packageName: string = '') {
+  private constructor(
+    panel: vscode.WebviewPanel,
+    context: vscode.ExtensionContext,
+    packageName: string = ''
+  ) {
     this._panel = panel;
-    this._extensionPath = extensionPath;
+    this._extensionPath = context.extensionPath;
 
-    this._update(packageName);
+    this._update(packageName, context, true);
+
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
     this._panel.onDidChangeViewState(
       () => {
         if (this._panel.visible) {
-          this._update(packageName);
+          this._update(Package.currentPackage, context);
         }
       },
       null,
@@ -27,40 +33,26 @@ class Package {
     );
   }
 
-  public dispose() {
-    Package.currentPanel = undefined;
-    this._panel.dispose();
-
-    this._disposables.forEach((disposable: vscode.Disposable) => {
-      disposable.dispose();
-    });
-  }
-
-  private _update(packageName: string) {
-    const webview = this._panel.webview;
-    this._panel.webview.html = this._getHtmlForWebview(webview, packageName);
-
-    if (packageName) {
-      this._panel.title = getPackageTabTitle(packageName);
-    }
-  }
-
-  public static revive(panel: vscode.WebviewPanel, extensionPath: string) {
-    Package.currentPanel = new Package(panel, extensionPath);
-  }
-
-  public static createOrShow(extensionPath: string, packageName: string) {
+  /*
+    Called in cmdDisplayPackage() when an item in the side bar is clicked on.
+  */
+  public static createOrShow(context: vscode.ExtensionContext, packageName: string) {
     const column = vscode.window.activeTextEditor
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
 
+    context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+
     if (Package.currentPanel) {
-      Package.currentPanel._panel.title = getPackageTabTitle(packageName);
-      Package.currentPanel._panel.webview.html = Package.currentPanel._getHtmlForWebview(
-        Package.currentPanel._panel.webview,
-        packageName
-      );
-      Package.currentPanel._panel.reveal(column);
+      if (packageName !== Package.currentPackage) {
+        Package.currentPackage = packageName;
+        Package.currentPanel._panel.title = getPackageTabTitle(packageName);
+        Package.currentPanel._panel.webview.html = Package.currentPanel._getHtmlForWebview(
+          Package.currentPanel._panel.webview,
+          packageName
+        );
+        Package.currentPanel._panel.reveal(column);
+      }
       return;
     }
 
@@ -70,11 +62,42 @@ class Package {
       vscode.ViewColumn.Active,
       {
         enableScripts: true,
-        localResourceRoots: [vscode.Uri.file(path.join(extensionPath, 'media'))],
+        localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'media'))],
       }
     );
 
-    Package.currentPanel = new Package(panel, extensionPath, packageName);
+    Package.updatePackageAndPanel(panel, context, packageName);
+  }
+
+  /*
+    Called in deserializeWebviewPanel to recreate the panel on startup.
+  */
+  public static revive(
+    panel: vscode.WebviewPanel,
+    context: vscode.ExtensionContext,
+    packageName: string
+  ) {
+    context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+    Package.updatePackageAndPanel(panel, context, packageName);
+  }
+
+  private static updatePackageAndPanel(
+    panel: vscode.WebviewPanel,
+    context: vscode.ExtensionContext,
+    packageName: string
+  ) {
+    Package.currentPackage = packageName;
+    Package.currentPanel = new Package(panel, context, packageName);
+  }
+
+  public dispose() {
+    Package.currentPanel = undefined;
+    Package.currentPackage = '';
+
+    this._panel.dispose();
+    this._disposables.forEach((disposable: vscode.Disposable) => {
+      disposable.dispose();
+    });
   }
 
   private _getHtmlForWebview(webview: vscode.Webview, packageName: string) {
@@ -98,6 +121,20 @@ class Package {
                 <script nonce="${nonce}" src="${scriptUri}"></script>
             </body>
             </html>`;
+  }
+
+  private _update(
+    packageName: string,
+    context: vscode.ExtensionContext,
+    isConstructionUpdate: boolean = false
+  ) {
+    if (isConstructionUpdate || packageName !== Package.currentPackage) {
+      context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
+      const webview = this._panel.webview;
+
+      this._panel.webview.html = this._getHtmlForWebview(webview, packageName);
+      this._panel.title = getPackageTabTitle(packageName);
+    }
   }
 }
 
