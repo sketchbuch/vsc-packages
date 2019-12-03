@@ -45,12 +45,8 @@ class Package {
 
     if (Package.currentPanel) {
       if (packageName !== Package.currentPackage) {
-        Package.currentPackage = packageName;
-        Package.currentPanel._panel.title = getPackageTabTitle(packageName);
-        Package.currentPanel._panel.webview.html = Package.currentPanel._getHtmlForWebview(
-          Package.currentPanel._panel.webview,
-          packageName
-        );
+        Package.updatePackageAndPanel(packageName);
+        Package.updatePanelContent(packageName, Package.currentPanel._panel, Package.currentPanel);
         Package.currentPanel._panel.reveal(column);
       }
       return;
@@ -66,7 +62,7 @@ class Package {
       }
     );
 
-    Package.updatePackageAndPanel(panel, context, packageName);
+    Package.updatePackageAndPanel(packageName, panel, context);
   }
 
   /*
@@ -78,7 +74,7 @@ class Package {
     packageName: string
   ) {
     Package.setStateForRevival(context, packageName);
-    Package.updatePackageAndPanel(panel, context, packageName);
+    Package.updatePackageAndPanel(packageName, panel, context);
   }
 
   /*
@@ -89,12 +85,24 @@ class Package {
   }
 
   private static updatePackageAndPanel(
-    panel: vscode.WebviewPanel,
-    context: vscode.ExtensionContext,
-    packageName: string
+    packageName: string,
+    panel?: vscode.WebviewPanel,
+    context?: vscode.ExtensionContext
   ) {
     Package.currentPackage = packageName;
-    Package.currentPanel = new Package(panel, context, packageName);
+
+    if (panel && context) {
+      Package.currentPanel = new Package(panel, context, packageName);
+    }
+  }
+
+  private static updatePanelContent(
+    packageName: string,
+    panel: vscode.WebviewPanel,
+    currentPanel: Package
+  ) {
+    panel.title = getPackageTabTitle(packageName);
+    panel.webview.html = currentPanel._getHtmlForWebview(panel.webview, packageName);
   }
 
   public dispose() {
@@ -121,7 +129,7 @@ class Package {
                 <title>${packageName}</title>
             </head>
             <body>
-                <h1 id="lines-of-code-counter">${packageName}</h1>
+                <h1 id="vsc-package-name">${packageName}</h1>
                 <script nonce="${nonce}" src="${scriptUri}"></script>
             </body>
             </html>`;
@@ -134,10 +142,7 @@ class Package {
   ) {
     if (isConstructionUpdate || packageName !== Package.currentPackage) {
       Package.setStateForRevival(context, packageName);
-      const webview = this._panel.webview;
-
-      this._panel.webview.html = this._getHtmlForWebview(webview, packageName);
-      this._panel.title = getPackageTabTitle(packageName);
+      Package.updatePanelContent(packageName, this._panel, this);
     }
   }
 }
