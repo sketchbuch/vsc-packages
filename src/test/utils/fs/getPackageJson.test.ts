@@ -4,12 +4,11 @@ import * as sinon from 'sinon';
 import { expect } from 'chai';
 import * as pathExists from '../../../utils/fs/pathExists';
 import getPackageJson from '../../../utils/fs/getPackageJson';
-import mockWorkspaceFolder from '../../mocks/mockWorkspaceFolder';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../../constants';
+import { mockWorkspaceFolder } from '../../mocks';
 
 suite('getPackageJson()', () => {
   const mockWsFolder = mockWorkspaceFolder();
-
   const testPath = path.join(mockWsFolder.uri.fsPath, FS_PACKAGEJSON);
 
   test('Correctly calls path.join() once', () => {

@@ -2,9 +2,8 @@ import * as sinon from 'sinon';
 import * as commands from '../../commands';
 import * as sidebar from '../../sidebar';
 import * as webviews from '../../webviews';
-import mockCmds from '../mocks/mockCmds';
-import mockContext from '../mocks/mockContext';
 import { extViews } from '../../constants';
+import { mockCmds, mockContext } from '../mocks';
 import { setupExt } from '../../core/activate';
 
 suite('activate()', function() {

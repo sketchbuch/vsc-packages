@@ -8,4 +8,4 @@ const mockCmds: Cmd[] = [
   },
 ];
 
-export default mockCmds;
+export default [...mockCmds];

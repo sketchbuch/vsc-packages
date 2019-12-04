@@ -5,7 +5,7 @@ const registerWebviews = (context: vscode.ExtensionContext) => {
   if (vscode.window.registerWebviewPanelSerializer) {
     vscode.window.registerWebviewPanelSerializer(Package.viewType, {
       async deserializeWebviewPanel(webviewPanel: vscode.WebviewPanel) {
-        Package.revive(webviewPanel, context, context.globalState.get('lastPackage') || '');
+        Package.revive(context.globalState.get('lastPackage') || '', webviewPanel, context);
       },
     });
   }

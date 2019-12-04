@@ -1,8 +1,9 @@
 import { expect } from 'chai';
-import mockCmds from '../mockCmds';
+import { mockCmds } from '..';
 
 suite('mockCmds()', () => {
   test('Has correct length', () => {
+    expect(mockCmds).to.be.an('array');
     expect(mockCmds).to.have.length(1);
   });
 

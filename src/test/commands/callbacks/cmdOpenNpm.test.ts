@@ -1,12 +1,10 @@
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
-import mockContext from '../../mocks/mockContext';
 import { CMD_VSCODE_OPEN, URL_NPM } from '../../../constants';
 import { cmdOpenNpm } from '../../../commands';
+import { mockContext, packageName } from '../../mocks';
 
 suite('cmdOpenNpm()', () => {
-  const packageName = 'test';
-
   test('Calls vscode.commands.executeCommand()', () => {
     const spy = sinon.stub(vscode.commands, 'executeCommand');
     cmdOpenNpm(packageName, mockContext);

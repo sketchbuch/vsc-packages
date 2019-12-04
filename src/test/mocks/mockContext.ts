@@ -1,10 +1,15 @@
 import * as vscode from 'vscode';
+import { extensionPath } from '.';
 
-const mockSubscriptions: { dispose(): any }[] = [];
-
-const mockContext: vscode.ExtensionContext = {
-  subscriptions: mockSubscriptions,
-  extensionPath: '/test/path',
+const mockContext = {
+  asAbsolutePath: (relativePath: string) => relativePath,
+  extensionPath,
+  globalState: {} as vscode.Memento,
+  globalStoragePath: '',
+  logPath: '',
+  storagePath: '',
+  subscriptions: [],
+  workspaceState: {} as vscode.Memento,
 } as vscode.ExtensionContext;
 
-export default mockContext;
+export default { ...mockContext };
