@@ -46,7 +46,7 @@ class Package {
     if (Package.currentPanel) {
       if (packageName !== Package.currentPackage) {
         Package.updatePackageAndPanel(packageName);
-        Package.updatePanelContent(packageName, Package.currentPanel._panel, Package.currentPanel);
+        Package.updatePanelContent(packageName, Package.currentPanel);
         Package.currentPanel._panel.reveal(column);
       }
       return;
@@ -96,13 +96,12 @@ class Package {
     }
   }
 
-  private static updatePanelContent(
-    packageName: string,
-    panel: vscode.WebviewPanel,
-    currentPanel: Package
-  ) {
-    panel.title = getPackageTabTitle(packageName);
-    panel.webview.html = currentPanel._getHtmlForWebview(panel.webview, packageName);
+  private static updatePanelContent(packageName: string, currentPanel: Package) {
+    currentPanel._panel.title = getPackageTabTitle(packageName);
+    currentPanel._panel.webview.html = currentPanel._getHtmlForWebview(
+      currentPanel._panel.webview,
+      packageName
+    );
   }
 
   public dispose() {
@@ -142,7 +141,7 @@ class Package {
   ) {
     if (isConstructionUpdate || packageName !== Package.currentPackage) {
       Package.setStateForRevival(context, packageName);
-      Package.updatePanelContent(packageName, this._panel, this);
+      Package.updatePanelContent(packageName, this);
     }
   }
 }
