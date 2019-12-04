@@ -4,7 +4,10 @@ import { extensionPath } from '.';
 const mockContext = {
   asAbsolutePath: (relativePath: string) => relativePath,
   extensionPath,
-  globalState: {} as vscode.Memento,
+  globalState: {
+    get: (key: string) => {},
+    update: (key: string, value: any) => {},
+  } as vscode.Memento,
   globalStoragePath: '',
   logPath: '',
   storagePath: '',
