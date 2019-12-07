@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import { Package } from '../../../webviews';
+import Package from '../../../webviews/Package/Package';
 import { cmdDisplayPackage } from '../../../commands';
 import { mockContext, packageName } from '../../mocks';
 

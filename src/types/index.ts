@@ -1,2 +1,2 @@
-export { Cmd, CmdCallback } from './ext';
-export { ExtViewList, ExtViews } from './ext';
+export { Cmd, CmdCallback, ExtViewList, ExtViews } from './ext';
+export { GetHtml, GetTemplate } from './webviews';

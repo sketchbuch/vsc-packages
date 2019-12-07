@@ -1,7 +1,9 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { CMD_VSCODE_OPEN_WV, EXT_GLOBALSTATE_KEY } from '../../constants';
-import { getPackageTabTitle, getNonce } from '../../utils';
+import { getPackageTabTitle } from '../../utils';
+import { getHtml } from '..';
+import getTemplate from './getTemplate';
 
 class Package {
   private _disposables: vscode.Disposable[] = [];
@@ -61,7 +63,7 @@ class Package {
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
 
-    Package.setStateForRevival(context, packageName);
+    Package.setStateForRevival(packageName, context);
 
     if (Package.currentPanel) {
       if (packageName !== Package.currentPackage) {
@@ -93,35 +95,24 @@ class Package {
     panel: vscode.WebviewPanel,
     context: vscode.ExtensionContext
   ) {
-    Package.setStateForRevival(context, packageName);
+    Package.setStateForRevival(packageName, context);
     Package.updatePackageAndPanel(packageName, panel, context);
   }
 
   /*
     The state set here is used in registerWebviews() to enable revival.
   */
-  public static setStateForRevival(context: vscode.ExtensionContext, packageName: string) {
+  public static setStateForRevival(packageName: string, context: vscode.ExtensionContext) {
     context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
   }
 
   private _getHtmlForWebview(webview: vscode.Webview, packageName: string) {
-    const scriptPathOnDisk = vscode.Uri.file(path.join(this._extensionPath, 'media', 'main.js'));
-    const scriptUri = webview.asWebviewUri(scriptPathOnDisk);
-    const nonce = getNonce();
-
-    return `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="Content-Security-Policy" content="default-src 'none';">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>${packageName}</title>
-            </head>
-            <body>
-                <h1 id="vsc-package-name">${packageName}</h1>
-                <script nonce="${nonce}" src="${scriptUri}"></script>
-            </body>
-            </html>`;
+    return getHtml({
+      getTemplate,
+      extensionPath: this._extensionPath,
+      packageName,
+      webview,
+    });
   }
 
   private _update(
@@ -130,7 +121,7 @@ class Package {
     isConstructionUpdate: boolean = false
   ) {
     if (isConstructionUpdate || packageName !== Package.currentPackage) {
-      Package.setStateForRevival(context, packageName);
+      Package.setStateForRevival(packageName, context);
       Package.updatePanelContent(packageName, this);
     }
   }

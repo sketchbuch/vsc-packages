@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { mockPanel } from '..';
+import { getPackageTabTitle } from '../../../utils';
+import { mockPanel, packageName } from '..';
 
 suite('mockPanel()', () => {
   test('Has correct shape', () => {
@@ -9,7 +10,7 @@ suite('mockPanel()', () => {
     expect(rest).to.have.eql({
       active: true,
       options: {},
-      title: 'A Title',
+      title: getPackageTabTitle(packageName),
       viewType: 'test-view-type',
       visible: true,
     });

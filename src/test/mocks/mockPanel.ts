@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { getPackageTabTitle } from '../../utils';
+import { packageName } from '.';
 
 const webview = {
   asWebviewUri: (localResource: vscode.Uri) => {},
@@ -11,10 +13,10 @@ const mockPanel: vscode.WebviewPanel = {
   onDidDispose: (e: any) => {},
   options: {},
   reveal: (viewColumn?: vscode.ViewColumn, preserveFocus?: boolean) => {},
-  title: 'A Title',
+  title: getPackageTabTitle(packageName),
   viewType: 'test-view-type',
   visible: true,
   webview,
 } as vscode.WebviewPanel;
 
-export default { ...mockPanel };
+export default { ...mockPanel } as vscode.WebviewPanel;

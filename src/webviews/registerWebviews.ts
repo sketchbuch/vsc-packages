@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { Package } from '.';
+import Package from './Package/Package';
 
 const registerWebviews = (context: vscode.ExtensionContext) => {
   if (vscode.window.registerWebviewPanelSerializer) {
