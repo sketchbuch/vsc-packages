@@ -6,7 +6,7 @@ const getTemplate = ({ packageName, nonce, scriptUri }: GetTemplate) => {
     <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <meta http-equiv="Content-Security-Policy" content="default-src 'none';">
+            <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}';">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${packageName}</title>
         </head>
@@ -18,3 +18,5 @@ const getTemplate = ({ packageName, nonce, scriptUri }: GetTemplate) => {
 };
 
 export default getTemplate;
+
+// <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">

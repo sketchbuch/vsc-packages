@@ -10,6 +10,14 @@ export {
   extViews,
 } from './ext';
 
-export { FS_PACKAGEJSON, FS_UTF8 } from './fs';
+export {
+  FS_FOLDER_IMAGES,
+  FS_FOLDER_IMAGES_DARK,
+  FS_FOLDER_IMAGES_LIGHT,
+  FS_FOLDER_JS,
+  FS_FOLDER_RESOURCES,
+  FS_PACKAGEJSON,
+  FS_UTF8,
+} from './fs';
 
 export { URL_NPM } from './urls';

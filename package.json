@@ -24,16 +24,16 @@
       {
         "command": "vsc-packages-display-package",
         "icon": {
-          "light": "./resources/light/activitybar-light.svg",
-          "dark": "./resources/dark/activitybar-dark.svg"
+          "light": "./resources/images/light/activitybar-light.svg",
+          "dark": "./resources/images/dark/activitybar-dark.svg"
         },
         "title": "Display Package"
       },
       {
         "command": "vsc-packages-open-npmurl",
         "icon": {
-          "light": "./resources/light/activitybar-light.svg",
-          "dark": "./resources/dark/activitybar-dark.svg"
+          "light": "./resources/images/light/activitybar-light.svg",
+          "dark": "./resources/images/dark/activitybar-dark.svg"
         },
         "title": "Open the NPM Page for this Package"
       }
@@ -44,8 +44,8 @@
           "command": "vsc-packages-open-npmurl",
           "group": "inline",
           "icon": {
-            "light": "./resources/light/activitybar-light.svg",
-            "dark": "./resources/dark/activitybar-dark.svg"
+            "light": "./resources/images/light/activitybar-light.svg",
+            "dark": "./resources/images/dark/activitybar-dark.svg"
           },
           "title": "Open the NPM Page for this Package",
           "when": "view == vsc-packages-activitybar-deps && viewItem == package-list-item"
@@ -54,8 +54,8 @@
           "command": "vsc-packages-open-npmurl",
           "group": "inline",
           "icon": {
-            "light": "./resources/light/activitybar-light.svg",
-            "dark": "./resources/dark/activitybar-dark.svg"
+            "light": "./resources/images/light/activitybar-light.svg",
+            "dark": "./resources/images/dark/activitybar-dark.svg"
           },
           "title": "Open the NPM Page for this Package",
           "when": "view == vsc-packages-activitybar-dev-deps && viewItem == package-list-item"
@@ -77,7 +77,7 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "icon": "./resources/light/activitybar-light.svg",
+          "icon": "./resources/images/light/activitybar-light.svg",
           "id": "vsc-packages-activitybar",
           "title": "Packages (Node)"
         }

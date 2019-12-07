@@ -44,7 +44,7 @@ suite('Package getTemplate()', () => {
 
     test('Contains a Content-Security-Policy meta tag', () => {
       expect(result).contains(
-        `<meta http-equiv="Content-Security-Policy" content="default-src 'none';">`
+        `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${props.nonce}';">`
       );
     });
 

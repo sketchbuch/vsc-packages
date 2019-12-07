@@ -1,12 +1,24 @@
 import * as vscode from 'vscode';
 import { expect } from 'chai';
 import PackageListItem from '../../../sidebar/PackageList/PackageListItem';
-import { EXT_PACKAGELIST_ITEM_CTX } from '../../../constants';
+import {
+  EXT_PACKAGELIST_ITEM_CTX,
+  FS_FOLDER_IMAGES,
+  FS_FOLDER_IMAGES_DARK,
+  FS_FOLDER_IMAGES_LIGHT,
+  FS_FOLDER_RESOURCES,
+} from '../../../constants';
+import { extensionPath } from '../../mocks';
 
 suite('PackageListItem()', () => {
   const label = 'test-package';
   const version = '1.0.0';
-  const newItem = new PackageListItem(label, version, vscode.TreeItemCollapsibleState.Collapsed);
+  const newItem = new PackageListItem(
+    label,
+    version,
+    extensionPath,
+    vscode.TreeItemCollapsibleState.Collapsed
+  );
 
   test('tooltip is correct', () => {
     expect(newItem.tooltip).to.be.equal(`${label} (${version})`);
@@ -17,11 +29,15 @@ suite('PackageListItem()', () => {
   });
 
   test('iconPath light is correct', () => {
-    expect(newItem.iconPath.light).to.be.equal('../../../resources/light/activitybar-light.svg');
+    expect(newItem.iconPath.light).to.be.equal(
+      `${extensionPath}/${FS_FOLDER_RESOURCES}/${FS_FOLDER_IMAGES}/${FS_FOLDER_IMAGES_LIGHT}/activitybar-light.svg`
+    );
   });
 
   test('iconPath dark is correct', () => {
-    expect(newItem.iconPath.dark).to.be.equal('../../../resources/dark/activitybar-dark.svg');
+    expect(newItem.iconPath.dark).to.be.equal(
+      `${extensionPath}/${FS_FOLDER_RESOURCES}/${FS_FOLDER_IMAGES}/${FS_FOLDER_IMAGES_DARK}/activitybar-dark.svg`
+    );
   });
 
   test('contextValue is correct', () => {

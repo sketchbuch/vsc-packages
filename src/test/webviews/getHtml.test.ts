@@ -1,8 +1,9 @@
 import * as path from 'path';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
-import * as utils from '../../utils';
 import { assert, expect } from 'chai';
+import * as utils from '../../utils';
+import { FS_FOLDER_JS, FS_FOLDER_RESOURCES } from '../../constants';
 import { GetHtml } from '../../types';
 import { extensionPath, mockPanel, packageName } from '../mocks';
 import { getHtml } from '../../webviews';
@@ -23,7 +24,10 @@ suite('getHtml()', () => {
     const spy = sinon.spy(vscode.Uri, 'file');
     getHtml(props);
     sinon.assert.calledOnce(spy);
-    sinon.assert.calledWith(spy, path.join(extensionPath, 'media', 'main.js'));
+    sinon.assert.calledWith(
+      spy,
+      path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS, 'webview-package.js')
+    );
     spy.restore();
   });
 

@@ -11,7 +11,8 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
 
   constructor(
     private packageKey: string,
-    private workspaceFolders: vscode.WorkspaceFolder[] | null
+    private workspaceFolders: vscode.WorkspaceFolder[] | null,
+    private extensionPath: string
   ) {}
 
   refresh(): void {
@@ -34,6 +35,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
           const depItem = new PackageListItem(
             dependency,
             version,
+            this.extensionPath,
             vscode.TreeItemCollapsibleState.None,
             {
               command: CMD_DISPLAY_PACKAGE,
@@ -50,6 +52,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
       const empty = new PackageListItem(
         `No ${this.packageKey} found`,
         '',
+        this.extensionPath,
         vscode.TreeItemCollapsibleState.None
       );
       children.push(empty);

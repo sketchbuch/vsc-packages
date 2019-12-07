@@ -1,6 +1,11 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { CMD_VSCODE_OPEN_WV, EXT_GLOBALSTATE_KEY } from '../../constants';
+import {
+  CMD_VSCODE_OPEN_WV,
+  EXT_GLOBALSTATE_KEY,
+  FS_FOLDER_JS,
+  FS_FOLDER_RESOURCES,
+} from '../../constants';
 import { getPackageTabTitle } from '../../utils';
 import { getHtml } from '..';
 import getTemplate from './getTemplate';
@@ -80,7 +85,9 @@ class Package {
       vscode.ViewColumn.Active,
       {
         enableScripts: true,
-        localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'media'))],
+        localResourceRoots: [
+          vscode.Uri.file(path.join(context.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS)),
+        ],
       }
     );
 

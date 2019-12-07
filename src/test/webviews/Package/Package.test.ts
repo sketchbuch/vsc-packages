@@ -6,7 +6,12 @@ import * as webviews from '../../../webviews';
 import * as utils from '../../../utils';
 import Package from '../../../webviews/Package/Package';
 import getTemplate from '../../../webviews/Package/getTemplate';
-import { CMD_VSCODE_OPEN_WV, EXT_GLOBALSTATE_KEY } from '../../../constants';
+import {
+  CMD_VSCODE_OPEN_WV,
+  EXT_GLOBALSTATE_KEY,
+  FS_FOLDER_JS,
+  FS_FOLDER_RESOURCES,
+} from '../../../constants';
 import { GetHtml } from '../../../types';
 import { mockContext, mockPanel, packageName, extensionPath } from '../../mocks';
 
@@ -50,7 +55,11 @@ suite('Package()', () => {
         vscode.ViewColumn.Active,
         {
           enableScripts: true,
-          localResourceRoots: [vscode.Uri.file(path.join(mockContext.extensionPath, 'media'))],
+          localResourceRoots: [
+            vscode.Uri.file(
+              path.join(mockContext.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS)
+            ),
+          ],
         }
       );
       spy.restore();
