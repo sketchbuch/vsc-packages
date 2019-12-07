@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import * as vscode from 'vscode';
 import { assert, expect } from 'chai';
 import * as utils from '../../utils';
-import { FS_FOLDER_JS, FS_FOLDER_RESOURCES } from '../../constants';
+import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_WEBVIEW_PACKAGE_JS } from '../../constants';
 import { GetHtml } from '../../types';
 import { extensionPath, mockPanel, packageName } from '../mocks';
 import { getHtml } from '../../webviews';
@@ -26,7 +26,7 @@ suite('getHtml()', () => {
     sinon.assert.calledOnce(spy);
     sinon.assert.calledWith(
       spy,
-      path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS, 'webview-package.js')
+      path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS, FS_WEBVIEW_PACKAGE_JS)
     );
     spy.restore();
   });

@@ -11,6 +11,7 @@ export {
 } from './ext';
 
 export {
+  FS_FOLDER_CSS,
   FS_FOLDER_IMAGES,
   FS_FOLDER_IMAGES_DARK,
   FS_FOLDER_IMAGES_LIGHT,
@@ -18,6 +19,8 @@ export {
   FS_FOLDER_RESOURCES,
   FS_PACKAGEJSON,
   FS_UTF8,
+  FS_WEBVIEW_PACKAGE_CSS,
+  FS_WEBVIEW_PACKAGE_JS,
 } from './fs';
 
 export { URL_NPM } from './urls';

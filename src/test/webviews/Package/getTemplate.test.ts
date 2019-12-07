@@ -7,6 +7,7 @@ import { EXT } from '../../../constants';
 
 suite('Package getTemplate()', () => {
   const props: GetTemplate = {
+    cssUri: {} as vscode.Uri,
     packageName,
     nonce: '3w342erf32',
     scriptUri: {} as vscode.Uri,

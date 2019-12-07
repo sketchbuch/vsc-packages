@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 export interface GetTemplate {
+  cssUri: vscode.Uri;
   packageName: string;
   nonce: string;
   scriptUri: vscode.Uri;
