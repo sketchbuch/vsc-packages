@@ -6,12 +6,10 @@ const getTemplate = ({ cssUri, packageName, nonce, scriptUri }: GetTemplate) => 
     <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'nonce-${nonce}' vscode-resource://file*; style-src 'self' vscode-resource://file*;">
+            <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src nonce-${nonce}; style-src nonce-${nonce};">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
             <title>${packageName}</title>
-
-            <link href="${cssUri}" type="text/css" rel="stylesheet">
+            <link href="${cssUri}" nonce="${nonce}" rel="stylesheet" type="text/css">
         </head>
         <body>
             <h1 id="${EXT}__name">${packageName}</h1>
