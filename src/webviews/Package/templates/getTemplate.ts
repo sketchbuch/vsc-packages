@@ -1,5 +1,5 @@
-import { GetTemplate } from '../../types';
-import { EXT, FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../constants';
+import { EXT, FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constants';
+import { GetTemplate } from '../../../types';
 
 const getTemplate = ({ cssPath, packageName, nonce, scriptPath }: GetTemplate) => {
   return `<!DOCTYPE html>

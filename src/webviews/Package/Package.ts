@@ -9,7 +9,7 @@ import {
 } from '../../constants';
 import { getPackageTabTitle } from '../../utils';
 import { getHtml } from '..';
-import getTemplate from './getTemplate';
+import getTemplate from './templates/getTemplate';
 
 class Package {
   private _disposables: vscode.Disposable[] = [];

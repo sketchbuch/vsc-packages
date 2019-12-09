@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import * as vscode from 'vscode';
 import { assert, expect } from 'chai';
 import * as utils from '../../utils';
-import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_WEBVIEW_PACKAGE_JS } from '../../constants';
+import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_FOLDER_CSS } from '../../constants';
 import { GetHtml } from '../../types';
 import { extensionPath, mockPanel, packageName } from '../mocks';
 import { getHtml } from '../../webviews';
@@ -23,23 +23,17 @@ suite('getHtml()', () => {
   test('Calls vscode.Uri.file() correctly', () => {
     const spy = sinon.spy(vscode.Uri, 'file');
     getHtml(props);
-    sinon.assert.calledOnce(spy);
-    sinon.assert.calledWith(
-      spy,
-      path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS, FS_WEBVIEW_PACKAGE_JS)
+    sinon.assert.calledTwice(spy);
+    expect(
+      spy.getCall(0).calledWithExactly(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS))
+    );
+    expect(
+      spy.getCall(1).calledWithExactly(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_CSS))
     );
     spy.restore();
   });
 
-  test('Calls webview.asWebviewUri() correctly', () => {
-    const spy = sinon.spy(mockPanel.webview, 'asWebviewUri');
-    getHtml(props);
-    sinon.assert.calledOnce(spy);
-    assert.instanceOf(spy.getCall(0).args[0], vscode.Uri);
-    spy.restore();
-  });
-
-  test('Calls webview.asWebviewUri() correctly', () => {
+  test('Calls utils.getNonce() correctly', () => {
     const spy = sinon.spy(utils, 'getNonce');
     getHtml(props);
     sinon.assert.calledOnce(spy);

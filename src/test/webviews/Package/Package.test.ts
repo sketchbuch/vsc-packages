@@ -5,12 +5,13 @@ import { expect } from 'chai';
 import * as webviews from '../../../webviews';
 import * as utils from '../../../utils';
 import Package from '../../../webviews/Package/Package';
-import getTemplate from '../../../webviews/Package/getTemplate';
+import getTemplate from '../../../webviews/Package/templates/getTemplate';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
   FS_FOLDER_JS,
   FS_FOLDER_RESOURCES,
+  FS_FOLDER_CSS,
 } from '../../../constants';
 import { GetHtml } from '../../../types';
 import { mockContext, mockPanel, packageName, extensionPath } from '../../mocks';
@@ -56,6 +57,9 @@ suite('Package()', () => {
         {
           enableScripts: true,
           localResourceRoots: [
+            vscode.Uri.file(
+              path.join(mockContext.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_CSS)
+            ),
             vscode.Uri.file(
               path.join(mockContext.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS)
             ),

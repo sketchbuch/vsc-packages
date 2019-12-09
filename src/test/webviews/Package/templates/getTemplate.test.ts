@@ -1,9 +1,8 @@
-import * as vscode from 'vscode';
 import { expect } from 'chai';
-import getTemplate from '../../../webviews/Package/getTemplate';
-import { GetTemplate } from '../../../types';
-import { packageName } from '../../mocks';
-import { EXT } from '../../../constants';
+import getTemplate from '../../../../webviews/Package/templates/getTemplate';
+import { GetTemplate } from '../../../../types';
+import { packageName } from '../../../mocks';
+import { EXT } from '../../../../constants';
 
 suite('Package getTemplate()', () => {
   const props: GetTemplate = {
@@ -44,9 +43,11 @@ suite('Package getTemplate()', () => {
     });
 
     test('Contains a Content-Security-Policy meta tag', () => {
-      expect(result).contains(
-        `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${props.nonce}';">`
-      );
+      expect(result).contains('<meta http-equiv="Content-Security-Policy"');
+      expect(result).contains(`content="default-src 'self' vscode-resource: 'nonce-${props.nonce}`);
+      expect(result).contains(`img-src 'self' vscode-resource: 'nonce-${props.nonce}`);
+      expect(result).contains(`script-src 'self' vscode-resource: 'nonce-${props.nonce}`);
+      expect(result).contains(`style-src 'self' vscode-resource: 'nonce-${props.nonce}`);
     });
 
     test('Contains other expected meta tags', () => {
