@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
+  FS_FOLDER_CSS,
   FS_FOLDER_JS,
   FS_FOLDER_RESOURCES,
 } from '../../constants';
@@ -86,6 +87,7 @@ class Package {
       {
         enableScripts: true,
         localResourceRoots: [
+          vscode.Uri.file(path.join(context.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_CSS)),
           vscode.Uri.file(path.join(context.extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS)),
         ],
       }

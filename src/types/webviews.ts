@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
 
 export interface GetTemplate {
-  cssUri: vscode.Uri;
+  cssPath: string;
   packageName: string;
   nonce: string;
-  scriptUri: vscode.Uri;
+  scriptPath: string;
 }
 
 export interface GetHtml {
