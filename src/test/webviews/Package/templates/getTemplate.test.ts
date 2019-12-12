@@ -60,13 +60,12 @@ suite('Package getTemplate()', () => {
 
   suite('<body>', () => {
     test('Contains an <h1> tag', () => {
-      expect(result).contains(`<h1 id="${EXT}__name"`);
+      expect(result).contains(`<h1 class="${EXT}__name"`);
       expect(result).contains('</h1>');
     });
 
-    test('Contains a <script> tag with nonce set', () => {
-      expect(result).contains('<script nonce');
-      expect(result).contains('</script>');
+    test('Contains a loader', () => {
+      expect(result).contains(`<div class="${EXT}__loader"`);
     });
   });
 });
