@@ -1,0 +1,115 @@
+.vsc-packages__loader {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Based on: https://loading.io/css/ */
+.vsc-packages__loader-spinner {
+  display: inline-block;
+  height: 80px;
+  position: relative;
+  transform: scale(0.66);
+  width: 80px;
+}
+
+.vsc-packages__loader-spinner div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+
+.vsc-packages__loader-spinner div:after {
+  background: var(--vscode-editor-foreground);
+  border-radius: 50%;
+  content: ' ';
+  display: block;
+  height: 7px;
+  margin: -4px 0 0 -4px;
+  opacity: 0.5;
+  position: absolute;
+  width: 7px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(1):after {
+  left: 63px;
+  top: 63px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(2):after {
+  left: 56px;
+  top: 68px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(3):after {
+  left: 48px;
+  top: 71px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(4):after {
+  left: 40px;
+  top: 72px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(5):after {
+  left: 32px;
+  top: 71px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(6):after {
+  left: 24px;
+  top: 68px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(7):after {
+  left: 17px;
+  top: 63px;
+}
+
+.vsc-packages__loader-spinner div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+
+.vsc-packages__loader-spinner div:nth-child(8):after {
+  left: 12px;
+  top: 56px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

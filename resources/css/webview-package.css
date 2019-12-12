@@ -1,8 +1,2 @@
-html,
-body {
-  background: red;
-}
-
-h1 {
-  background: blue;
-}
+@import './tags.css';
+@import './vsc-packages__loader.css';

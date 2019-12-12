@@ -1,4 +1,4 @@
-import { EXT, FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constants';
+import { EXT, FS_WEBVIEW_PACKAGE_CSS } from '../../../constants';
 import { GetTemplate } from '../../../types';
 
 const getTemplate = ({ cssPath, packageName, nonce, scriptPath }: GetTemplate) => {
@@ -17,12 +17,21 @@ const getTemplate = ({ cssPath, packageName, nonce, scriptPath }: GetTemplate) =
             <link href="${cssPath}/${FS_WEBVIEW_PACKAGE_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
         </head>
         <body>
-            <h1 id="${EXT}__name">${packageName}</h1>
-            <script nonce="${nonce}" src="${scriptPath}/${FS_WEBVIEW_PACKAGE_JS}"></script>
+            <h1 class="${EXT}__name">${packageName}</h1>
+            <div class="${EXT}__loader">
+              <div class="${EXT}__loader-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
         </body>
     </html>`;
 };
 
 export default getTemplate;
-
-// <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
