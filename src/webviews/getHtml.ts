@@ -1,14 +1,12 @@
-import * as path from 'path';
-import * as vscode from 'vscode';
 import { GetHtml } from '../types';
-import { getNonce } from '../utils';
-import { FS_FOLDER_CSS, FS_FOLDER_JS, FS_FOLDER_RESOURCES } from '../constants';
+import { getNonce, getResourceUri } from '../utils';
+import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../constants';
 
 const getHtml = ({ extensionPath, getTemplate, packageName }: GetHtml): string => {
-  const scriptPath = vscode.Uri.file(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS))
+  const scriptPath = getResourceUri(extensionPath, FS_FOLDER_JS)
     .with({ scheme: 'vscode-resource' })
     .toString(true);
-  const cssPath = vscode.Uri.file(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_CSS))
+  const cssPath = getResourceUri(extensionPath, FS_FOLDER_CSS)
     .with({ scheme: 'vscode-resource' })
     .toString(true);
 

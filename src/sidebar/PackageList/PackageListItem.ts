@@ -1,12 +1,10 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
 import {
   EXT_PACKAGELIST_ITEM_CTX,
-  FS_FOLDER_IMAGES,
   FS_FOLDER_IMAGES_DARK,
   FS_FOLDER_IMAGES_LIGHT,
-  FS_FOLDER_RESOURCES,
 } from '../../constants';
+import { getImagePath } from '../../utils';
 
 class PackageListItem extends vscode.TreeItem {
   constructor(
@@ -28,20 +26,8 @@ class PackageListItem extends vscode.TreeItem {
   }
 
   iconPath = {
-    light: path.join(
-      this.extensionPath,
-      FS_FOLDER_RESOURCES,
-      FS_FOLDER_IMAGES,
-      FS_FOLDER_IMAGES_LIGHT,
-      'activitybar-light.svg'
-    ),
-    dark: path.join(
-      this.extensionPath,
-      FS_FOLDER_RESOURCES,
-      FS_FOLDER_IMAGES,
-      FS_FOLDER_IMAGES_DARK,
-      'activitybar-dark.svg'
-    ),
+    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'activitybar-light.svg'),
+    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'activitybar-dark.svg'),
   };
 
   contextValue = EXT_PACKAGELIST_ITEM_CTX;
