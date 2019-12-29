@@ -141,9 +141,10 @@ class Package {
     return getHtml({
       extensionPath: this._extensionPath,
       getTemplate,
-      packageName,
-      state,
-      webview,
+      htmlData: {
+        packageName,
+        state,
+      },
     });
   }
 

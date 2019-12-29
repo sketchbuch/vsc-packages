@@ -2,22 +2,23 @@ import * as path from 'path';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
 import { assert, expect } from 'chai';
-import * as utils from '../../utils';
-import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_FOLDER_CSS } from '../../constants';
-import { GetHtml } from '../../types';
-import { extensionPath, mockPanel, packageName } from '../mocks';
-import { getHtml } from '../../webviews';
+import * as utils from '../../../../utils';
+import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_FOLDER_CSS } from '../../../../constants';
+import { GetHtml } from '../../../../types';
+import { extensionPath, packageName } from '../../../mocks';
+import { getHtml } from '../../../../webviews';
 
 suite('getHtml()', () => {
   const props: GetHtml = {
     getTemplate: args => '',
     extensionPath,
-    packageName,
-    state: {
-      data: undefined,
-      error: undefined,
+    htmlData: {
+      packageName,
+      state: {
+        data: undefined,
+        error: undefined,
+      },
     },
-    webview: mockPanel.webview,
   };
 
   test('Returns a string', () => {
@@ -49,7 +50,7 @@ suite('getHtml()', () => {
     getHtml(props);
     sinon.assert.calledOnce(spy);
     const args = spy.getCall(0).args[0];
-    expect(args.packageName).to.be.eql(packageName);
+    expect(args.htmlData.packageName).to.be.eql(packageName);
     assert.isString(args.nonce);
     spy.restore();
   });

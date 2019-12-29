@@ -126,12 +126,13 @@ suite('Package()', () => {
       const getHtmlArgs: GetHtml = {
         getTemplate,
         extensionPath,
-        packageName,
-        state: {
-          data: undefined,
-          error: undefined,
+        htmlData: {
+          packageName,
+          state: {
+            data: undefined,
+            error: undefined,
+          },
         },
-        webview: mockPanel.webview,
       };
       new Package(packageName, mockPanel, mockContext);
       sinon.assert.calledOnce(spy);

@@ -1,19 +1,20 @@
 import { expect } from 'chai';
 import getTemplate from '../../../../webviews/Package/templates/getTemplate';
-import { EXT } from '../../../../constants';
 import { GetTemplate } from '../../../../types';
 import { packageName } from '../../../mocks';
 
 suite('Package getTemplate()', () => {
   const props: GetTemplate = {
     cssPath: '',
-    packageName,
+    htmlData: {
+      packageName,
+      state: {
+        data: undefined,
+        error: undefined,
+      },
+    },
     nonce: '3w342erf32',
     scriptPath: '',
-    state: {
-      data: undefined,
-      error: undefined,
-    },
   };
   const result = getTemplate(props);
 
@@ -64,12 +65,12 @@ suite('Package getTemplate()', () => {
 
   suite('<body>', () => {
     test('Contains an <h1> tag', () => {
-      expect(result).contains(`<h1 class="${EXT}__name"`);
+      expect(result).contains(`<h1 class="name"`);
       expect(result).contains('</h1>');
     });
 
     test('Contains a loader', () => {
-      expect(result).contains(`<div class="${EXT}__loader"`);
+      expect(result).contains(`<div class="loader"`);
     });
   });
 });

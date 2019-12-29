@@ -1,0 +1,39 @@
+.data-info {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.data-info li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-family: var(--vscode-font-family);
+  font-size: 18px;
+}
+
+.data-info li.homepage,
+.data-info li.repository {
+  font-size: 14px;
+}
+
+.data-info li:not(:first-child) {
+  margin-left: -2px;
+}
+
+.data-info li:not(:first-child)::before {
+  content: '|';
+  display: inline-block;
+  opacity: 0.33;
+  text-align: center;
+  width: 1.2rem;
+}
+
+.data-info li a,
+.data-info li a:hover,
+.data-info li a:active,
+.data-info li a:focus {
+  color: var(--vscode-foreground);
+  text-decoration: none;
+}

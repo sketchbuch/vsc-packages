@@ -1,4 +1,4 @@
-.vsc-packages__loader {
+.loader {
   align-items: center;
   display: flex;
   height: 100%;
@@ -8,7 +8,7 @@
 }
 
 /* Based on: https://loading.io/css/ */
-.vsc-packages__loader-spinner {
+.loader__spinner {
   display: inline-block;
   height: 80px;
   position: relative;
@@ -16,12 +16,12 @@
   width: 80px;
 }
 
-.vsc-packages__loader-spinner div {
+.loader__spinner div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
 }
 
-.vsc-packages__loader-spinner div:after {
+.loader__spinner div:after {
   background: var(--vscode-progressBar-background);
   border-radius: 50%;
   content: ' ';
@@ -33,74 +33,74 @@
   width: 7px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(1) {
+.loader__spinner div:nth-child(1) {
   animation-delay: -0.036s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(1):after {
+.loader__spinner div:nth-child(1):after {
   left: 63px;
   top: 63px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(2) {
+.loader__spinner div:nth-child(2) {
   animation-delay: -0.072s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(2):after {
+.loader__spinner div:nth-child(2):after {
   left: 56px;
   top: 68px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(3) {
+.loader__spinner div:nth-child(3) {
   animation-delay: -0.108s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(3):after {
+.loader__spinner div:nth-child(3):after {
   left: 48px;
   top: 71px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(4) {
+.loader__spinner div:nth-child(4) {
   animation-delay: -0.144s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(4):after {
+.loader__spinner div:nth-child(4):after {
   left: 40px;
   top: 72px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(5) {
+.loader__spinner div:nth-child(5) {
   animation-delay: -0.18s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(5):after {
+.loader__spinner div:nth-child(5):after {
   left: 32px;
   top: 71px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(6) {
+.loader__spinner div:nth-child(6) {
   animation-delay: -0.216s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(6):after {
+.loader__spinner div:nth-child(6):after {
   left: 24px;
   top: 68px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(7) {
+.loader__spinner div:nth-child(7) {
   animation-delay: -0.252s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(7):after {
+.loader__spinner div:nth-child(7):after {
   left: 17px;
   top: 63px;
 }
 
-.vsc-packages__loader-spinner div:nth-child(8) {
+.loader__spinner div:nth-child(8) {
   animation-delay: -0.288s;
 }
 
-.vsc-packages__loader-spinner div:nth-child(8):after {
+.loader__spinner div:nth-child(8):after {
   left: 12px;
   top: 56px;
 }

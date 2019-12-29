@@ -1,9 +1,7 @@
-import { EXT } from '../../../constants';
-
-const getLoading = () => {
+const loadingView = () => {
   return `
-    <div class="${EXT}__loader">
-      <div class="${EXT}__loader-spinner">
+    <div class="loader">
+      <div class="loader__spinner">
         <div></div>
         <div></div>
         <div></div>
@@ -16,4 +14,4 @@ const getLoading = () => {
     </div>`;
 };
 
-export default getLoading;
+export default loadingView;

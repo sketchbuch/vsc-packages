@@ -1,8 +1,8 @@
-import { GetHtml } from '../types';
-import { getNonce, getResourceUri } from '../utils';
-import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../constants';
+import { GetHtml } from '../../../types';
+import { getNonce, getResourceUri } from '../../../utils';
+import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../../../constants';
 
-const getHtml = ({ extensionPath, getTemplate, packageName, state }: GetHtml): string => {
+const getHtml = ({ extensionPath, getTemplate, htmlData }: GetHtml): string => {
   const scriptPath = getResourceUri(extensionPath, FS_FOLDER_JS)
     .with({ scheme: 'vscode-resource' })
     .toString(true);
@@ -12,10 +12,9 @@ const getHtml = ({ extensionPath, getTemplate, packageName, state }: GetHtml): s
 
   return getTemplate({
     cssPath,
+    htmlData,
     nonce: getNonce(),
-    packageName,
     scriptPath,
-    state,
   });
 };
 

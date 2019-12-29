@@ -1,3 +1,6 @@
-@import './tags.css';
-@import './vsc-packages__loader.css';
-@import './vsc-packages__error.css';
+@import './base/tags.css';
+
+@import './components/data-info.css';
+@import './components/error.css';
+@import './components/loader.css';
+@import './components/name.css';
