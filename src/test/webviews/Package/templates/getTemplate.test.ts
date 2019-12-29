@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import getTemplate from '../../../../webviews/Package/templates/getTemplate';
+import { EXT } from '../../../../constants';
 import { GetTemplate } from '../../../../types';
 import { packageName } from '../../../mocks';
-import { EXT } from '../../../../constants';
 
 suite('Package getTemplate()', () => {
   const props: GetTemplate = {
@@ -10,6 +10,10 @@ suite('Package getTemplate()', () => {
     packageName,
     nonce: '3w342erf32',
     scriptPath: '',
+    state: {
+      data: undefined,
+      error: undefined,
+    },
   };
   const result = getTemplate(props);
 

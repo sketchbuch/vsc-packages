@@ -2,7 +2,7 @@ import { GetHtml } from '../types';
 import { getNonce, getResourceUri } from '../utils';
 import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../constants';
 
-const getHtml = ({ extensionPath, getTemplate, packageName }: GetHtml): string => {
+const getHtml = ({ extensionPath, getTemplate, packageName, state }: GetHtml): string => {
   const scriptPath = getResourceUri(extensionPath, FS_FOLDER_JS)
     .with({ scheme: 'vscode-resource' })
     .toString(true);
@@ -12,9 +12,10 @@ const getHtml = ({ extensionPath, getTemplate, packageName }: GetHtml): string =
 
   return getTemplate({
     cssPath,
-    packageName,
     nonce: getNonce(),
+    packageName,
     scriptPath,
+    state,
   });
 };
 

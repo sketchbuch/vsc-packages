@@ -5,16 +5,21 @@ import {
   FS_FOLDER_CSS,
   FS_FOLDER_JS,
 } from '../../constants';
-import { getPackageTabTitle, getResourceUri } from '../../utils';
-import { getHtml } from '..';
 import getTemplate from './templates/getTemplate';
+import { NpmPackageData, PackageState } from '../../types';
+import { getHtml } from '..';
+import { getPackageTabTitle, getResourceUri, getNpmPackageData } from '../../utils';
 
 class Package {
   private _disposables: vscode.Disposable[] = [];
   private readonly _extensionPath: string;
   private readonly _panel: vscode.WebviewPanel;
-  public static currentPanel: Package | undefined;
+  private static state: PackageState = {
+    data: undefined,
+    error: undefined,
+  };
   public static currentPackage: string = '';
+  public static currentPanel: Package | undefined;
   public static readonly viewType = CMD_VSCODE_OPEN_WV;
 
   public constructor(
@@ -51,11 +56,30 @@ class Package {
     }
   }
 
+  private static loadPanelContent(packageName: string, currentPanel: Package) {
+    Package.state = {
+      data: undefined,
+      error: undefined,
+    };
+    Package.updatePanelContent(packageName, currentPanel);
+
+    getNpmPackageData(packageName)
+      .then((data: NpmPackageData) => {
+        Package.state.data = data;
+        Package.updatePanelContent(packageName, currentPanel);
+      })
+      .catch((error: Error) => {
+        Package.state.error = error;
+        Package.updatePanelContent(packageName, currentPanel);
+      });
+  }
+
   private static updatePanelContent(packageName: string, currentPanel: Package) {
     currentPanel._panel.title = getPackageTabTitle(packageName);
     currentPanel._panel.webview.html = currentPanel._getHtmlForWebview(
       currentPanel._panel.webview,
-      packageName
+      packageName,
+      Package.state
     );
   }
 
@@ -72,7 +96,7 @@ class Package {
     if (Package.currentPanel) {
       if (packageName !== Package.currentPackage) {
         Package.updatePackageAndPanel(packageName);
-        Package.updatePanelContent(packageName, Package.currentPanel);
+        Package.loadPanelContent(packageName, Package.currentPanel);
         Package.currentPanel._panel.reveal(column);
       }
       return;
@@ -113,11 +137,12 @@ class Package {
     context.globalState.update(EXT_GLOBALSTATE_KEY, packageName);
   }
 
-  private _getHtmlForWebview(webview: vscode.Webview, packageName: string) {
+  private _getHtmlForWebview(webview: vscode.Webview, packageName: string, state: PackageState) {
     return getHtml({
-      getTemplate,
       extensionPath: this._extensionPath,
+      getTemplate,
       packageName,
+      state,
       webview,
     });
   }
@@ -129,7 +154,7 @@ class Package {
   ) {
     if (isConstructionUpdate || packageName !== Package.currentPackage) {
       Package.setStateForRevival(packageName, context);
-      Package.updatePanelContent(packageName, this);
+      Package.loadPanelContent(packageName, this);
     }
   }
 

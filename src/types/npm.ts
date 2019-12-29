@@ -46,7 +46,7 @@ export interface NpmPackageData {
   contributors: NpmContributors[];
   description: string;
   'dist-tags': NpmTags;
-  homepage: string;
+  homepage?: string;
   keywords: string[];
   license: string;
   maintainers: NpmMaintainer[];

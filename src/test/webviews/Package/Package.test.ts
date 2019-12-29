@@ -127,6 +127,10 @@ suite('Package()', () => {
         getTemplate,
         extensionPath,
         packageName,
+        state: {
+          data: undefined,
+          error: undefined,
+        },
         webview: mockPanel.webview,
       };
       new Package(packageName, mockPanel, mockContext);

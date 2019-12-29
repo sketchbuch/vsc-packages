@@ -1,8 +1,22 @@
+import getDetail from './getDetail';
+import getError from './getError';
+import getLoading from './getLoading';
 import { EXT, FS_WEBVIEW_PACKAGE_CSS } from '../../../constants';
 import { GetTemplate } from '../../../types';
 
-const getTemplate = ({ cssPath, packageName, nonce, scriptPath }: GetTemplate) => {
-  return `<!DOCTYPE html>
+const getTemplate = ({ cssPath, packageName, nonce, state }: GetTemplate) => {
+  let content: string;
+
+  if (state.error) {
+    content = getError(state.error);
+  } else if (state.data) {
+    content = getDetail(state.data);
+  } else {
+    content = getLoading();
+  }
+
+  return `
+    <!DOCTYPE html>
     <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -18,18 +32,7 @@ const getTemplate = ({ cssPath, packageName, nonce, scriptPath }: GetTemplate) =
         </head>
         <body>
             <h1 class="${EXT}__name">${packageName}</h1>
-            <div class="${EXT}__loader">
-              <div class="${EXT}__loader-spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+            ${content}
         </body>
     </html>`;
 };

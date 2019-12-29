@@ -22,7 +22,7 @@
 }
 
 .vsc-packages__loader-spinner div:after {
-  background: var(--vscode-editor-foreground);
+  background: var(--vscode-progressBar-background);
   border-radius: 50%;
   content: ' ';
   display: block;

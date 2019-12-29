@@ -13,6 +13,10 @@ suite('getHtml()', () => {
     getTemplate: args => '',
     extensionPath,
     packageName,
+    state: {
+      data: undefined,
+      error: undefined,
+    },
     webview: mockPanel.webview,
   };
 
