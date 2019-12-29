@@ -23,4 +23,5 @@ export {
   FS_WEBVIEW_PACKAGE_JS,
 } from './fs';
 
-export { URL_NPM } from './urls';
+export { httpStatusCodes } from './network';
+export { URL_NPM, URL_NPM_REG, URL_NPM_SEARCH } from './urls';
