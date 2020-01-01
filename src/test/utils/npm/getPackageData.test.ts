@@ -1,9 +1,9 @@
-import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import { expect } from 'chai';
-import { NpmPackageData } from '../../../types';
 import { getNpmPackageData } from '../../../utils';
 import { httpStatusCodes, URL_NPM_REG } from '../../../constants';
+import { NpmPackageData } from '../../../types';
 
 suite('getNpmPackageData()', () => {
   test('Rejects if a network error occurs', async () => {

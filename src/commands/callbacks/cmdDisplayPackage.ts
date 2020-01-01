@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CmdCallback } from '../../types';
 import Package from '../../webviews/Package/Package';
+import { CmdCallback } from '../../types';
 
 const cmdDisplayPackage: CmdCallback = (
   packageName: string,

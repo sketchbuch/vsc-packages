@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import { Cmd, ExtViews } from '../types';
 import { cmdList, registerCommands } from '../commands';
 import { extViews } from '../constants';
-import { setupSidebar } from '../sidebar';
 import { registerWebviews } from '../webviews';
+import { setupSidebar } from '../sidebar';
 
 export const setupExt = (cmdList: Cmd[], extViews: ExtViews, context: vscode.ExtensionContext) => {
   registerCommands(cmdList, context);

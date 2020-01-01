@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as sinon from 'sinon';
-import { expect } from 'chai';
 import * as pathExists from '../../../utils/fs/pathExists';
+import * as sinon from 'sinon';
 import getPackageJson from '../../../utils/fs/getPackageJson';
+import { expect } from 'chai';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../../constants';
 import { mockWorkspaceFolder } from '../../mocks';
 

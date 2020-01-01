@@ -1,8 +1,8 @@
-import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import { expect } from 'chai';
-import { NpmSearchResults } from '../../../types';
 import { httpStatusCodes, URL_NPM_SEARCH } from '../../../constants';
+import { NpmSearchResults } from '../../../types';
 import { searchNpm } from '../../../utils';
 
 suite('searchNpm()', () => {

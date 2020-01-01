@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
+import { getImagePath } from '../../utils';
 import {
   EXT_PACKAGELIST_ITEM_CTX,
   FS_FOLDER_IMAGES_DARK,
   FS_FOLDER_IMAGES_LIGHT,
 } from '../../constants';
-import { getImagePath } from '../../utils';
 
 class PackageListItem extends vscode.TreeItem {
   constructor(

@@ -1,11 +1,18 @@
 import * as path from 'path';
 import * as sinon from 'sinon';
-import * as vscode from 'vscode';
-import { expect } from 'chai';
-import * as webviews from '../../../webviews';
 import * as utils from '../../../utils';
-import Package from '../../../webviews/Package/Package';
+import * as vscode from 'vscode';
+import * as webviews from '../../../webviews';
 import getTemplate from '../../../webviews/Package/templates/getTemplate';
+import Package from '../../../webviews/Package/Package';
+import { expect } from 'chai';
+import {
+  extensionPath,
+  mockContext,
+  mockPanel,
+  packageName
+  } from '../../mocks';
+import { GetHtml } from '../../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
@@ -13,8 +20,6 @@ import {
   FS_FOLDER_RESOURCES,
   FS_FOLDER_CSS,
 } from '../../../constants';
-import { GetHtml } from '../../../types';
-import { mockContext, mockPanel, packageName, extensionPath } from '../../mocks';
 
 suite('Package()', () => {
   test('Creating an instance is successful', () => {

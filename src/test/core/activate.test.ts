@@ -1,6 +1,6 @@
-import * as sinon from 'sinon';
 import * as commands from '../../commands';
 import * as sidebar from '../../sidebar';
+import * as sinon from 'sinon';
 import * as webviews from '../../webviews';
 import { extViews } from '../../constants';
 import { mockCmds, mockContext } from '../mocks';

@@ -6,9 +6,9 @@ const repositorySnippet = (repository: NpmRepository): string => {
 
     if (url) {
       if (type) {
-        return `<li class="repository"><a href="${url}">Repository</a></li>`;
+        return `<li class="data__repository"><a href="${url}">Repository</a></li>`;
       }
-      return `<li class="repository"><a href="${url}">Repository</a></li>`;
+      return `<li class="data__repository"><a href="${url}">Repository</a></li>`;
     }
   }
 

@@ -1,9 +1,0 @@
-h1.name {
-  color: var(--vscode-editor-foreground);
-}
-
-h1.name span {
-  font-weight: normal;
-  opacity: 0.5;
-  padding-left: 1rem;
-}

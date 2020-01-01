@@ -1,5 +1,5 @@
-import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM } from '../constants';
 import { Cmd } from '../types';
+import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM } from '../constants';
 import { cmdDisplayPackage, cmdOpenNpm } from '.';
 
 export const cmdList: Cmd[] = [

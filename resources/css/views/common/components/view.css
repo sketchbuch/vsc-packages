@@ -1,0 +1,50 @@
+.view {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.view__header {
+  background: var(--vscode-editor-background);
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.45);
+  color: var(--vscode-foreground);
+  height: 122px;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.view__header-content {
+  padding: 20px;
+}
+
+.view__name {
+  color: inherit;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 30px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view__content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 122px);
+  justify-content: flex-start;
+  overflow: scroll;
+  position: relative;
+  top: 123px;
+  width: 100%;
+}
+
+.view__content-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+}

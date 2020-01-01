@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
-import { expect } from 'chai';
 import PackageListItem from '../../../sidebar/PackageList/PackageListItem';
+import { expect } from 'chai';
+import { extensionPath } from '../../mocks';
 import {
   EXT_PACKAGELIST_ITEM_CTX,
   FS_FOLDER_IMAGES,
@@ -8,7 +9,6 @@ import {
   FS_FOLDER_IMAGES_LIGHT,
   FS_FOLDER_RESOURCES,
 } from '../../../constants';
-import { extensionPath } from '../../mocks';
 
 suite('PackageListItem()', () => {
   const label = 'test-package';

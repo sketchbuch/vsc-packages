@@ -9,11 +9,11 @@ const getTemplate = ({ cssPath, htmlData, nonce }: GetTemplate) => {
   let content: string;
 
   if (state.error) {
-    content = getError(state.error);
+    content = getError(packageName, state.error);
   } else if (state.data) {
-    content = getDetail(state.data);
+    content = getDetail(packageName, state.data);
   } else {
-    content = getLoading();
+    content = getLoading(packageName);
   }
 
   return `
@@ -31,8 +31,8 @@ const getTemplate = ({ cssPath, htmlData, nonce }: GetTemplate) => {
         <title>${packageName}</title>
         <link href="${cssPath}/${FS_WEBVIEW_PACKAGE_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
       </head>
+
       <body>
-        <h1 class="name">${packageName}</h1>
         ${content}
       </body>
     </html>`;

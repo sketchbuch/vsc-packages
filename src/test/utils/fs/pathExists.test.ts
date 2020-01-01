@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as sinon from 'sinon';
-import { expect } from 'chai';
 import pathExists from '../../../utils/fs/pathExists';
+import { expect } from 'chai';
 
 suite('pathExists()', () => {
   test('Calls fs.accessSync() once', () => {

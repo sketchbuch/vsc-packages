@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import getTemplate from '../../../../webviews/Package/templates/getTemplate';
+import { expect } from 'chai';
 import { GetTemplate } from '../../../../types';
 import { packageName } from '../../../mocks';
 

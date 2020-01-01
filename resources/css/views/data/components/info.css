@@ -1,0 +1,40 @@
+.data__info {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 6px;
+}
+
+.data__info li {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.data__info li:not(.data__author) {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.data__info li:not(:first-child) {
+  margin-left: -2px;
+}
+
+.data__info li:not(:first-child) {
+  border-left: 1px solid hsla(0, 0%, 50%, 0.7);
+  margin-left: 14px;
+  padding-left: 14px;
+}
+
+.data__info li a,
+.data__info li a:hover,
+.data__info li a:active,
+.data__info li a:focus {
+  color: var(--vscode-foreground);
+  text-decoration: none;
+}

@@ -1,0 +1,16 @@
+.data__readme {
+  line-height: 22px;
+  margin: 0 auto;
+  max-width: 650px;
+  max-width: 780px;
+}
+
+.data__readme > *:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.data__readme > *:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

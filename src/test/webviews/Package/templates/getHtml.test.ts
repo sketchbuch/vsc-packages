@@ -1,11 +1,11 @@
 import * as path from 'path';
 import * as sinon from 'sinon';
+import * as utils from '../../../../utils';
 import * as vscode from 'vscode';
 import { assert, expect } from 'chai';
-import * as utils from '../../../../utils';
-import { FS_FOLDER_JS, FS_FOLDER_RESOURCES, FS_FOLDER_CSS } from '../../../../constants';
-import { GetHtml } from '../../../../types';
 import { extensionPath, packageName } from '../../../mocks';
+import { FS_FOLDER_CSS, FS_FOLDER_JS, FS_FOLDER_RESOURCES } from '../../../../constants';
+import { GetHtml } from '../../../../types';
 import { getHtml } from '../../../../webviews';
 
 suite('getHtml()', () => {

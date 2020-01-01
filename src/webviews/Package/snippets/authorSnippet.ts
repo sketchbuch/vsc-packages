@@ -5,10 +5,10 @@ const authorSnippet = (author: NpmAuthor | undefined): string => {
     const { name, url } = author;
 
     if (url) {
-      return `<li class="author"><a href="${url}">${name}</a></li>`;
+      return `<li class="data__author"><a href="${url}">${name}</a></li>`;
     }
 
-    return `<li class="author">${name}</li>`;
+    return `<li class="data__author">${name}</li>`;
   }
 
   return '';

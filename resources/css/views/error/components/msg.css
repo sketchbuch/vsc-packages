@@ -1,12 +1,3 @@
-.error {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 .error__msg {
   background: var(--vscode-errorForeground);
   color: var(--vscode-editor-foreground);

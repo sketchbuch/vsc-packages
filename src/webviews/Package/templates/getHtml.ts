@@ -1,6 +1,6 @@
+import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../../../constants';
 import { GetHtml } from '../../../types';
 import { getNonce, getResourceUri } from '../../../utils';
-import { FS_FOLDER_CSS, FS_FOLDER_JS } from '../../../constants';
 
 const getHtml = ({ extensionPath, getTemplate, htmlData }: GetHtml): string => {
   const scriptPath = getResourceUri(extensionPath, FS_FOLDER_JS)

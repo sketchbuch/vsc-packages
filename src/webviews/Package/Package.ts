@@ -1,14 +1,14 @@
 import * as vscode from 'vscode';
+import getTemplate from './templates/getTemplate';
+import { getHtml } from '..';
+import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
+import { NpmPackageData, PackageState } from '../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
   FS_FOLDER_CSS,
   FS_FOLDER_JS,
 } from '../../constants';
-import getTemplate from './templates/getTemplate';
-import { NpmPackageData, PackageState } from '../../types';
-import { getHtml } from '..';
-import { getPackageTabTitle, getResourceUri, getNpmPackageData } from '../../utils';
 
 class Package {
   private _disposables: vscode.Disposable[] = [];

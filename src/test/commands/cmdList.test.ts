@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM } from '../../constants';
 import { Cmd } from '../../types';
+import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM } from '../../constants';
 import { cmdList } from '../../commands';
+import { expect } from 'chai';
 
 suite('cmdList()', () => {
   test('Returns the correct number of commands', () => {
