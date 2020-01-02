@@ -44,6 +44,10 @@ a.inline-list__element:focus {
   background: hsla(0, 0%, 53%, 0.05);
 }
 
+a.inline-list__element:active {
+  background: hsla(0, 0%, 53%, 0.09);
+}
+
 a.inline-list__element:focus {
   outline-color: #a6b39b;
 }

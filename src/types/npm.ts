@@ -48,7 +48,7 @@ export interface NpmPackageData {
   bugs?: NpmBugs;
   contributors: NpmContributors[];
   description: string;
-  'dist-tags': NpmTags;
+  'dist-tags'?: NpmTags;
   homepage?: string;
   keywords: string[];
   license: string;

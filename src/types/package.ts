@@ -10,3 +10,8 @@ export interface InlineListSnippet {
   label: string;
   url?: string;
 }
+
+export interface TableListSnippet {
+  label: string;
+  value: string;
+}

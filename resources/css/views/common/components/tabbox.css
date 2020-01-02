@@ -1,6 +1,7 @@
 .tabbox {
-  width: 100%;
   overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .tabbox__buttons {
@@ -28,7 +29,6 @@
 
 .tabbox__button:not(:first-child) {
   margin-left: -4px;
-  padding-right: 16px;
 }
 
 .tabbox__button a {

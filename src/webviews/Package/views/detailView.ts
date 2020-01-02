@@ -2,25 +2,36 @@ import { NpmPackageData } from '../../../types';
 import {
   authorSnippet,
   bugsSnippet,
+  columnsSnippet,
   contribSnippet,
   homepageSnippet,
+  licenceSnippet,
   maintainerSnippet,
   readmeSnippet,
   repositorySnippet,
+  tagsSnippet,
+  timeSnippet,
 } from '../snippets';
 
-// ${readmeSnippet(readme)}
+/*
+${readmeSnippet(readme)}
+${maintainerSnippet(maintainers)}
+${contribSnippet(contributors)}
+*/
 
 const detailView = (packageName: string, data: NpmPackageData) => {
   const {
+    'dist-tags': tags,
     author,
     bugs,
     contributors,
     description,
     homepage,
-    readme,
+    license,
     maintainers,
+    readme,
     repository,
+    time,
   } = data;
 
   return `
@@ -33,6 +44,7 @@ const detailView = (packageName: string, data: NpmPackageData) => {
             ${homepageSnippet(homepage)}
             ${repositorySnippet(repository)}
             ${bugsSnippet(bugs)}
+            ${licenceSnippet(license)}
           </ul>
           <p class="data__description">${description}</p>
         </div>
@@ -40,14 +52,17 @@ const detailView = (packageName: string, data: NpmPackageData) => {
       <div class="data__content view__content">
         <div class="tabbox">
           <ul class="tabbox__buttons">
-            <li class="tabbox__button"><a data-selected="true" href="#">Readme</a></li>
-            <li class="tabbox__button"><a href="#">Contributors</a></li>
+            <li class="tabbox__button"><a href="#">Readme</a></li>
+            <li class="tabbox__button"><a data-selected="true" href="#">Versions</a></li>
+            <li class="tabbox__button"><a href="#">Dependents</a></li>
           </ul>
           <div class="tabbox__content">
             <div class="tabbox__content-box">
-              ${maintainerSnippet(maintainers)}
-              ${contribSnippet(contributors)}
-            </div>
+              ${columnsSnippet(
+                () => tagsSnippet(tags, packageName),
+                () => timeSnippet(time, packageName)
+              )}
+              </div>
           </div>
         </div>
       </div>

@@ -11,5 +11,6 @@ export {
   NpmSearchResult,
   NpmSearchResults,
   NpmTags,
+  NpmTime,
 } from './npm';
-export { InlineListSnippet, PackageState } from './package';
+export { InlineListSnippet, PackageState, TableListSnippet } from './package';

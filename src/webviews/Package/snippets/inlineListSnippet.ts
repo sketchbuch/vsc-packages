@@ -5,7 +5,7 @@ const inlineListSnippet = (items: InlineListSnippet[], title?: string): string =
     const sortedItems = items.sort((a, b) => a.label.localeCompare(b.label));
 
     return `
-      <div class="inline-list">
+      <section class="inline-list">
         ${title ? `<h2 class="inline-list__title">${title}</h2>` : ''}
         <div class="inline-list__list">
           ${sortedItems
@@ -26,7 +26,7 @@ const inlineListSnippet = (items: InlineListSnippet[], title?: string): string =
             })
             .join('')}
           </div>
-      </div>`;
+      </section>`;
   }
 
   return '';
