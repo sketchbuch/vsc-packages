@@ -8,6 +8,7 @@ export { default as licenceSnippet } from './licenceSnippet';
 export { default as maintainerSnippet } from './maintainerSnippet';
 export { default as readmeSnippet } from './readmeSnippet';
 export { default as repositorySnippet } from './repositorySnippet';
+export { default as tabboxSnippet } from './tabboxSnippet';
 export { default as tableListSnippet } from './tableListSnippet';
 export { default as tagsSnippet } from './tagsSnippet';
 export { default as timeSnippet } from './timeSnippet';

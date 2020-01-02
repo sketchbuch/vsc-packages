@@ -1,16 +1,17 @@
-import { NpmPackageData } from '../../../types';
+import { NpmPackageData, TabboxItems } from '../../../types';
 import {
+  // contribSnippet,
+  // maintainerSnippet,
+  readmeSnippet,
   authorSnippet,
   bugsSnippet,
-  columnsSnippet,
-  // contribSnippet,
+  // columnsSnippet,
   homepageSnippet,
   licenceSnippet,
-  // maintainerSnippet,
-  // readmeSnippet,
   repositorySnippet,
-  tagsSnippet,
-  timeSnippet,
+  tabboxSnippet,
+  // tagsSnippet,
+  // timeSnippet,
 } from '../snippets';
 
 /*
@@ -21,7 +22,7 @@ ${contribSnippet(contributors)}
 
 const detailView = (packageName: string, data: NpmPackageData) => {
   const {
-    'dist-tags': tags,
+    // 'dist-tags': tags,
     author,
     bugs,
     // contributors,
@@ -29,10 +30,37 @@ const detailView = (packageName: string, data: NpmPackageData) => {
     homepage,
     license,
     // maintainers,
-    // readme,
+    readme,
     repository,
-    time,
+    // time,
   } = data;
+
+  const tabboxItems: TabboxItems = [
+    {
+      button: {
+        label: 'Readme',
+        selected: true,
+      },
+      content: () => readmeSnippet(readme),
+      id: 'readme',
+    },
+    {
+      button: {
+        label: 'Versions',
+        selected: false,
+      },
+      content: () => '<p>Versions</p>',
+      id: 'versions',
+    },
+    {
+      button: {
+        label: 'Dependents',
+        selected: false,
+      },
+      content: () => '<p>Dependents</p>',
+      id: 'dependents',
+    },
+  ];
 
   return `
     <section class="data view">
@@ -50,21 +78,7 @@ const detailView = (packageName: string, data: NpmPackageData) => {
         </div>
       </header>
       <div class="data__content view__content">
-        <div class="tabbox">
-          <ul class="tabbox__buttons">
-            <li class="tabbox__button"><a id="tabbtn-readme" data-selected="true" href="#">Readme</a></li>
-            <li class="tabbox__button"><a id="tabbtn-versions" href="#">Versions</a></li>
-            <li class="tabbox__button"><a id="tabbtn-dependents" href="#">Dependents</a></li>
-          </ul>
-          <div class="tabbox__content">
-            <div class="tabbox__content-box">
-              ${columnsSnippet(
-                () => tagsSnippet(tags, packageName),
-                () => timeSnippet(time, packageName)
-              )}
-              </div>
-          </div>
-        </div>
+        ${tabboxSnippet(tabboxItems)}
       </div>
     </section>`;
 };
