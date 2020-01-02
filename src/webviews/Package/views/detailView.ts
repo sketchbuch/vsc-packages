@@ -1,13 +1,27 @@
+import { NpmPackageData } from '../../../types';
 import {
   authorSnippet,
+  bugsSnippet,
+  contribSnippet,
   homepageSnippet,
+  maintainerSnippet,
   readmeSnippet,
-  repositorySnippet
-  } from '../snippets';
-import { NpmPackageData } from '../../../types';
+  repositorySnippet,
+} from '../snippets';
+
+// ${readmeSnippet(readme)}
 
 const detailView = (packageName: string, data: NpmPackageData) => {
-  const { author, description, homepage, readme, repository } = data;
+  const {
+    author,
+    bugs,
+    contributors,
+    description,
+    homepage,
+    readme,
+    maintainers,
+    repository,
+  } = data;
 
   return `
     <section class="data view">
@@ -18,13 +32,23 @@ const detailView = (packageName: string, data: NpmPackageData) => {
             ${authorSnippet(author)}
             ${homepageSnippet(homepage)}
             ${repositorySnippet(repository)}
+            ${bugsSnippet(bugs)}
           </ul>
           <p class="data__description">${description}</p>
         </div>
       </header>
-      <div class="view__content">
-        <div class="view__content-box">
-          ${readmeSnippet(readme)}
+      <div class="data__content view__content">
+        <div class="tabbox">
+          <ul class="tabbox__buttons">
+            <li class="tabbox__button"><a data-selected="true" href="#">Readme</a></li>
+            <li class="tabbox__button"><a href="#">Contributors</a></li>
+          </ul>
+          <div class="tabbox__content">
+            <div class="tabbox__content-box">
+              ${maintainerSnippet(maintainers)}
+              ${contribSnippet(contributors)}
+            </div>
+          </div>
         </div>
       </div>
     </section>`;

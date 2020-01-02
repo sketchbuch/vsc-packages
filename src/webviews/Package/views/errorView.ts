@@ -6,12 +6,8 @@ const errorView = (packageName: string, error: Error) => {
           <h1 class="error__name view__name">${packageName}</h1>
         </div>
       </header>
-      <div class="error__content view__content">
-        <div class="view__content-box">
-          <p class="error__msg">An error occured</p>
-          <p class="error__msg-sub">${error.message}</p>
-        </div>
-      </div>
+      <p class="error__msg">An error occured</p>
+      <p class="error__msg-sub">${error.message}</p>
     </section>`;
 };
 

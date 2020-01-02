@@ -1,0 +1,65 @@
+.tabbox {
+  width: 100%;
+  overflow: hidden;
+}
+
+.tabbox__buttons {
+  background: var(--vscode-editor-background);
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.45);
+  display: inline-block;
+  height: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
+  position: relative;
+  width: 100%;
+}
+
+.tabbox__button {
+  color: var(--vscode-foreground);
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 36px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.tabbox__button:not(:first-child) {
+  margin-left: -4px;
+  padding-right: 16px;
+}
+
+.tabbox__button a {
+  color: var(--vscode-foreground);
+  margin-right: 16px;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.tabbox__button a:hover {
+  text-decoration: underline;
+}
+
+.tabbox__button a:focus {
+  opacity: 1;
+  outline-color: #a6b39b;
+}
+
+.tabbox__button a[data-selected] {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.tabbox__content {
+  height: calc(100% - 27px);
+  overflow: scroll;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.tabbox__content-box {
+  padding: 20px;
+}

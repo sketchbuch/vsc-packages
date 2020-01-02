@@ -38,3 +38,8 @@
   color: var(--vscode-foreground);
   text-decoration: none;
 }
+
+.data__info li a:focus {
+  color: var(--vscode-foreground);
+  outline-color: #a6b39b;
+}

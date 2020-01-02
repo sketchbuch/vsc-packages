@@ -23,7 +23,7 @@ const getTemplate = ({ cssPath, htmlData, nonce }: GetTemplate) => {
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy" 
           content="default-src 'self' vscode-resource: 'nonce-${nonce}';
-          img-src 'self' vscode-resource: 'nonce-${nonce}';"
+          img-src 'self' vscode-resource: data: 'nonce-${nonce}';"
           script-src 'self' vscode-resource: 'nonce-${nonce}';
           style-src 'self' vscode-resource: 'nonce-${nonce}';
         >

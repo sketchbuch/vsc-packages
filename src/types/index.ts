@@ -3,10 +3,13 @@ export { GetHtml, GetTemplate } from './webviews';
 export { HttpStatusCodes } from './network';
 export {
   NpmAuthor,
+  NpmBugs,
+  NpmContributors,
+  NpmMaintainer,
   NpmPackageData,
   NpmRepository,
   NpmSearchResult,
   NpmSearchResults,
   NpmTags,
 } from './npm';
-export { PackageState } from './package';
+export { InlineListSnippet, PackageState } from './package';

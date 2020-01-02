@@ -6,22 +6,7 @@ const loadingView = (packageName: string) => {
           <h1 class="loading__name view__name">${packageName}</h1>
         </div>
       </header>
-      <div class="view__content">
-        <div class="view__content-box">
-          <div class="loader">
-            <div class="loader__spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="vsc-loader"></div>
     </section>`;
 };
 

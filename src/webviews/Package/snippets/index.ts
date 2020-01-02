@@ -1,5 +1,9 @@
 export { default as authorSnippet } from './authorSnippet';
+export { default as bugsSnippet } from './bugsSnippet';
+export { default as contribSnippet } from './contribSnippet';
 export { default as homepageSnippet } from './homepageSnippet';
+export { default as inlineListSnippet } from './inlineListSnippet';
+export { default as maintainerSnippet } from './maintainerSnippet';
 export { default as readmeSnippet } from './readmeSnippet';
 export { default as repositorySnippet } from './repositorySnippet';
-export { default as versionSnippet } from './versionSnippet';
+export { default as tableSnippet } from './tableSnippet';

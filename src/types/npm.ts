@@ -10,7 +10,10 @@ export interface NpmBugs {
 }
 
 export interface NpmContributors {
+  email?: string;
+  githubUsername?: string;
   name: string;
+  url?: string;
 }
 
 export interface NpmMaintainer {
