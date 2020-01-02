@@ -1,5 +1,17 @@
-
-// This script will be run within the webview itself
-// It cannot access the main VS Code APIs directly.
 (function () {
-}());
+  const vscode = acquireVsCodeApi();
+  function testAlert() {
+    vscode.postMessage({
+      command: 'alert',
+      text: '🐛  on line ',
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    const element = document.getElementById('tabbtn-versions');
+
+    element.addEventListener('click', function (event) {
+      testAlert();
+    });
+  });
+})();

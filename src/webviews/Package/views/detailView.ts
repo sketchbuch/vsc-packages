@@ -3,11 +3,11 @@ import {
   authorSnippet,
   bugsSnippet,
   columnsSnippet,
-  contribSnippet,
+  // contribSnippet,
   homepageSnippet,
   licenceSnippet,
-  maintainerSnippet,
-  readmeSnippet,
+  // maintainerSnippet,
+  // readmeSnippet,
   repositorySnippet,
   tagsSnippet,
   timeSnippet,
@@ -24,12 +24,12 @@ const detailView = (packageName: string, data: NpmPackageData) => {
     'dist-tags': tags,
     author,
     bugs,
-    contributors,
+    // contributors,
     description,
     homepage,
     license,
-    maintainers,
-    readme,
+    // maintainers,
+    // readme,
     repository,
     time,
   } = data;
@@ -52,9 +52,9 @@ const detailView = (packageName: string, data: NpmPackageData) => {
       <div class="data__content view__content">
         <div class="tabbox">
           <ul class="tabbox__buttons">
-            <li class="tabbox__button"><a href="#">Readme</a></li>
-            <li class="tabbox__button"><a data-selected="true" href="#">Versions</a></li>
-            <li class="tabbox__button"><a href="#">Dependents</a></li>
+            <li class="tabbox__button"><a id="tabbtn-readme" data-selected="true" href="#">Readme</a></li>
+            <li class="tabbox__button"><a id="tabbtn-versions" href="#">Versions</a></li>
+            <li class="tabbox__button"><a id="tabbtn-dependents" href="#">Dependents</a></li>
           </ul>
           <div class="tabbox__content">
             <div class="tabbox__content-box">

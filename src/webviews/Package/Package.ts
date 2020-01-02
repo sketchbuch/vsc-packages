@@ -29,6 +29,13 @@ class Package {
   ) {
     this._panel = panel;
     this._extensionPath = context.extensionPath;
+    this._panel.webview.onDidReceiveMessage(
+      message => {
+        console.log('### onDidReceiveMessage()', message);
+      },
+      undefined,
+      context.subscriptions
+    );
 
     this._update(packageName, context, true);
 

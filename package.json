@@ -95,7 +95,7 @@
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
     "compile": "tsc --project ./",
-    "lint:prettier": "prettier --write --config ./.prettierrc.js './src/**/*.{js,ts}'",
+    "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
     "lint:ts": "yarn lint:ts:src && yarn lint:ts:test",
     "lint:ts:src": "tslint --config ./tslint.json --fix './src/**/*.ts' --exclude './src/test/**/*'",
     "lint:ts:test": "tslint --config ./src/test/tslint.json --fix './src/test/**/*.ts'",
