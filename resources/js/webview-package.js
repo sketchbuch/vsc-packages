@@ -1,12 +1,6 @@
 (function () {
   const vscode = acquireVsCodeApi();
 
-  const postTabChangeMesage = (tabId) => {
-    vscode.postMessage({
-      activeTab: tabId,
-    });
-  }
-
   const setupTabs = () => {
     const allTabs = [];
     const selectedAttr = 'data-selected';
@@ -22,7 +16,7 @@
         }
         allTabs.push(tab)
 
-        tab.addEventListener('click', function (event) {
+        tab.addEventListener('click', () => {
           if (!tab.dataset.selected) {
             if (selectedTab) {
               selectedTab.removeAttribute(selectedAttr);
@@ -30,7 +24,9 @@
 
             tab.setAttribute(selectedAttr, true);
             selectedTab = tab
-            postTabChangeMesage(tabId);
+            vscode.postMessage({
+              activeTab: tabId,
+            });
           }
         });
       }
@@ -41,7 +37,7 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function (event) {
+  document.addEventListener('DOMContentLoaded', () => {
     setupTabs();
   });
 })();
