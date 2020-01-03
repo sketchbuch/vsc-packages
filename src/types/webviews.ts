@@ -1,4 +1,4 @@
-import { PackageState } from './';
+import { PackageState, TabboxId } from './';
 
 export interface GetTemplate {
   cssPath: string;
@@ -8,6 +8,7 @@ export interface GetTemplate {
 }
 
 export interface HtmlData {
+  activeTab: TabboxId;
   packageName: string;
   state: PackageState;
 }
@@ -17,16 +18,3 @@ export interface GetHtml {
   getTemplate: (args: GetTemplate) => string;
   htmlData: HtmlData;
 }
-
-export interface TabboxButton {
-  label: string;
-  selected: boolean;
-}
-
-export interface TabboxItem {
-  button: TabboxButton;
-  content: () => string;
-  id: string;
-}
-
-export type TabboxItems = TabboxItem[];

@@ -1,3 +1,4 @@
+import { messageSnippet } from './';
 import { TabboxItem, TabboxItems } from '../../../types';
 
 const tabboxSnippet = (items: TabboxItems): string => {
@@ -22,7 +23,7 @@ const tabboxSnippet = (items: TabboxItems): string => {
       </ul>
       <div class="tabbox__content">
         <div class="tabbox__content-box">
-          ${selectedItem.content()}
+          ${selectedItem.content() || messageSnippet(selectedItem.emptyMessage)}
         </div>
       </div>
     </div>`;

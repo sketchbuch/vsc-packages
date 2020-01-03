@@ -132,6 +132,7 @@ suite('Package()', () => {
         getTemplate,
         extensionPath,
         htmlData: {
+          activeTab: 'readme',
           packageName,
           state: {
             data: undefined,

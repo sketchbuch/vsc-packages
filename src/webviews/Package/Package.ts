@@ -2,7 +2,12 @@ import * as vscode from 'vscode';
 import getTemplate from './templates/getTemplate';
 import { getHtml } from '..';
 import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
-import { NpmPackageData, PackageState } from '../../types';
+import {
+  NpmPackageData,
+  PackageState,
+  TabboxId,
+  TabMessage
+  } from '../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
@@ -20,6 +25,7 @@ class Package {
   };
   public static currentPackage: string = '';
   public static currentPanel: Package | undefined;
+  public static activeTab: TabboxId = 'readme';
   public static readonly viewType = CMD_VSCODE_OPEN_WV;
 
   public constructor(
@@ -30,8 +36,9 @@ class Package {
     this._panel = panel;
     this._extensionPath = context.extensionPath;
     this._panel.webview.onDidReceiveMessage(
-      message => {
-        console.log('### onDidReceiveMessage()', message);
+      (message: TabMessage) => {
+        Package.activeTab = message.activeTab;
+        Package.updatePanelContent(packageName, this);
       },
       undefined,
       context.subscriptions
@@ -68,6 +75,7 @@ class Package {
       data: undefined,
       error: undefined,
     };
+    Package.activeTab = 'readme';
     Package.updatePanelContent(packageName, currentPanel);
 
     getNpmPackageData(packageName)
@@ -149,6 +157,7 @@ class Package {
       extensionPath: this._extensionPath,
       getTemplate,
       htmlData: {
+        activeTab: Package.activeTab,
         packageName,
         state,
       },

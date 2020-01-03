@@ -1,5 +1,4 @@
 import * as MarkdownIt from 'markdown-it';
-
 const md = new MarkdownIt();
 
 const readmeSnippet = (readme: string): string => {

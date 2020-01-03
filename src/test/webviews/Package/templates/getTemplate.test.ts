@@ -7,6 +7,7 @@ suite('Package getTemplate()', () => {
   const props: GetTemplate = {
     cssPath: '',
     htmlData: {
+      activeTab: 'readme',
       packageName,
       state: {
         data: undefined,

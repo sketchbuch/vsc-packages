@@ -1,63 +1,64 @@
-import { NpmPackageData, TabboxItems } from '../../../types';
+import { NpmPackageData, TabboxId, TabboxItems } from '../../../types';
 import {
-  // contribSnippet,
-  // maintainerSnippet,
+  contribSnippet,
+  maintainerSnippet,
   readmeSnippet,
   authorSnippet,
   bugsSnippet,
-  // columnsSnippet,
+  columnsSnippet,
   homepageSnippet,
   licenceSnippet,
   repositorySnippet,
   tabboxSnippet,
-  // tagsSnippet,
-  // timeSnippet,
+  tagsSnippet,
+  timeSnippet,
 } from '../snippets';
 
-/*
-${readmeSnippet(readme)}
-${maintainerSnippet(maintainers)}
-${contribSnippet(contributors)}
-*/
-
-const detailView = (packageName: string, data: NpmPackageData) => {
+const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageData) => {
   const {
-    // 'dist-tags': tags,
+    'dist-tags': tags,
     author,
     bugs,
-    // contributors,
+    contributors,
     description,
     homepage,
     license,
-    // maintainers,
+    maintainers,
     readme,
     repository,
-    // time,
+    time,
   } = data;
 
   const tabboxItems: TabboxItems = [
     {
       button: {
         label: 'Readme',
-        selected: true,
+        selected: activeTab === 'readme',
       },
       content: () => readmeSnippet(readme),
+      emptyMessage: 'No readme available',
       id: 'readme',
     },
     {
       button: {
         label: 'Versions',
-        selected: false,
+        selected: activeTab === 'versions',
       },
-      content: () => '<p>Versions</p>',
+      content: () =>
+        columnsSnippet(
+          () => tagsSnippet(tags, packageName),
+          () => timeSnippet(time, packageName)
+        ),
+      emptyMessage: 'No version information available',
       id: 'versions',
     },
     {
       button: {
         label: 'Dependents',
-        selected: false,
+        selected: activeTab === 'dependents',
       },
-      content: () => '<p>Dependents</p>',
+      content: () => maintainerSnippet(maintainers) + contribSnippet(contributors),
+      emptyMessage: 'No maintainer/contributor infromation available',
       id: 'dependents',
     },
   ];

@@ -13,6 +13,7 @@ suite('getHtml()', () => {
     getTemplate: args => '',
     extensionPath,
     htmlData: {
+      activeTab: 'readme',
       packageName,
       state: {
         data: undefined,

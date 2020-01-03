@@ -5,13 +5,13 @@ import { FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constant
 import { GetTemplate } from '../../../types';
 
 const getTemplate = ({ cssPath, htmlData, nonce, scriptPath }: GetTemplate) => {
-  const { packageName, state } = htmlData;
+  const { activeTab, packageName, state } = htmlData;
   let content: string;
 
   if (state.error) {
     content = getError(packageName, state.error);
   } else if (state.data) {
-    content = getDetail(packageName, state.data);
+    content = getDetail(packageName, activeTab, state.data);
   } else {
     content = getLoading(packageName);
   }

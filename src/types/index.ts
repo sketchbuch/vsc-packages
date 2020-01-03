@@ -1,5 +1,5 @@
 export { Cmd, CmdCallback, ExtViewList, ExtViews } from './ext';
-export { GetHtml, GetTemplate, TabboxButton, TabboxItem, TabboxItems } from './webviews';
+export { GetHtml, GetTemplate } from './webviews';
 export { HttpStatusCodes } from './network';
 export {
   NpmAuthor,
@@ -13,4 +13,13 @@ export {
   NpmTags,
   NpmTime,
 } from './npm';
-export { InlineListSnippet, PackageState, TableListSnippet } from './package';
+export {
+  InlineListSnippet,
+  PackageState,
+  TabMessage,
+  TabboxButton,
+  TabboxId,
+  TabboxItem,
+  TabboxItems,
+  TableListSnippet,
+} from './package';
