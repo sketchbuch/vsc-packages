@@ -2,7 +2,7 @@
 
 **(vsc-packages)**
 
-A VSC extension to list packages from package.json and search for and install pacages.
+A VSC extension to list packages from package.json and search for and install packages.
 
 **This is a work-in-progress and has not been released yet. This project began so that I could learn how to make webviews for VSC extensions**
 

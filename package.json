@@ -1,7 +1,7 @@
 {
   "name": "vsc-packages",
   "displayName": "Package Installer",
-  "description": "Visually install packages in a similar way to VSC extensions",
+  "description": "A VSC extension to list packages from package.json and search for and install packages.",
   "version": "0.0.1",
   "license": "SEE LICENSE IN LICENSE.txt",
   "publisher": "sketchbuch",
