@@ -4,7 +4,7 @@
   const setupTabs = () => {
     const allTabs = [];
     const selectedAttr = 'data-selected';
-    const tabs = ['readme', 'versions', 'dependents'];
+    const tabs = ['readme', 'versions', 'developers'];
     let selectedTab = null;
 
     tabs.forEach((tabId) => {

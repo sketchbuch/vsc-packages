@@ -16,7 +16,7 @@ const timeSnippet = (time: NpmTime | undefined, packageName: string): string => 
       )
       .reverse();
 
-    return tableListSnippet(items, packageName, 'Version History');
+    return tableListSnippet(items, packageName, `Version History (${items.length})`);
   }
 
   return '';

@@ -21,7 +21,7 @@ export interface TabboxButton {
   selected: boolean;
 }
 
-export type TabboxId = 'readme' | 'versions' | 'dependents';
+export type TabboxId = 'readme' | 'versions' | 'developers';
 
 export interface TabboxItem {
   button: TabboxButton;

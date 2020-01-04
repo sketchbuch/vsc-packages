@@ -15,7 +15,7 @@ const tableListSnippet = (
             .map((item: TableListSnippet): string => {
               return `
               <div class="table-list__item">
-                <a class="table-list__item-element" href="${URL_NPM}${packageName}/v/${item.label}">
+                <a class="table-list__item-element" href="${URL_NPM}${packageName}/v/${item.label}" title="Open NPM page for v${item.label}">
                   <span class="table-list__item-label">
                     ${item.label}
                   </span>

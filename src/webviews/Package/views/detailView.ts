@@ -54,12 +54,12 @@ const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageDa
     },
     {
       button: {
-        label: 'Dependents',
-        selected: activeTab === 'dependents',
+        label: 'Developers',
+        selected: activeTab === 'developers',
       },
       content: () => maintainerSnippet(maintainers) + contribSnippet(contributors),
       emptyMessage: 'No maintainer/contributor infromation available',
-      id: 'dependents',
+      id: 'developers',
     },
   ];
 

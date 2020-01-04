@@ -12,7 +12,7 @@ const tagsSnippet = (tags: NpmTags | undefined, packageName: string): string => 
       }
     );
 
-    return tableListSnippet(items, packageName, 'Current Tags');
+    return tableListSnippet(items, packageName, `Current Tags (${items.length})`);
   }
 
   return '';
