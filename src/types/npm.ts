@@ -2,7 +2,7 @@ import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
 
 export interface NpmAuthor {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export interface NpmBugs {

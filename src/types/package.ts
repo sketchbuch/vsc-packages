@@ -35,3 +35,20 @@ export type TabboxItems = TabboxItem[];
 export interface TabMessage {
   activeTab: TabboxId;
 }
+
+export type Snippets =
+  | 'authorSnippet'
+  | 'bugsSnippet'
+  | 'columnsSnippet'
+  | 'contribSnippet'
+  | 'homepageSnippet'
+  | 'inlineListSnippet'
+  | 'licenceSnippet'
+  | 'maintainerSnippet'
+  | 'messageSnippet'
+  | 'readmeSnippet'
+  | 'repositorySnippet'
+  | 'tabboxSnippet'
+  | 'tableListSnippet'
+  | 'tagsSnippet'
+  | 'timeSnippet';
