@@ -5,11 +5,11 @@ const columnsSnippet = (left: () => string, right: () => string): string => {
   return `
     <div class="columns">
       ${leftContent &&
-        `<div class="column">
+        `<div class="column column--left">
           ${leftContent}
         </div>`}
       ${rightContent &&
-        `<div class="column">
+        `<div class="column column--right">
           ${rightContent}
         </div>`}
     </div>

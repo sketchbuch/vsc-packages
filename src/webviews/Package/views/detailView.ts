@@ -7,7 +7,7 @@ import {
   bugsSnippet,
   columnsSnippet,
   homepageSnippet,
-  licenceSnippet,
+  licenseSnippet,
   repositorySnippet,
   tabboxSnippet,
   tagsSnippet,
@@ -73,7 +73,7 @@ const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageDa
             ${homepageSnippet(homepage)}
             ${repositorySnippet(repository)}
             ${bugsSnippet(bugs)}
-            ${licenceSnippet(license)}
+            ${licenseSnippet(license)}
           </ul>
           <p class="data__description">${description}</p>
         </div>

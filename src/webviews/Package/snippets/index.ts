@@ -4,7 +4,7 @@ export { default as columnsSnippet } from './columnsSnippet';
 export { default as contribSnippet } from './contribSnippet';
 export { default as homepageSnippet } from './homepageSnippet';
 export { default as inlineListSnippet } from './inlineListSnippet';
-export { default as licenceSnippet } from './licenceSnippet';
+export { default as licenseSnippet } from './licenseSnippet';
 export { default as maintainerSnippet } from './maintainerSnippet';
 export { default as messageSnippet } from './messageSnippet';
 export { default as readmeSnippet } from './readmeSnippet';

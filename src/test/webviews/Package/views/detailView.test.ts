@@ -21,7 +21,7 @@ const testSnippetCall = (methodName: Snippets): void => {
   });
 };
 
-suite.only('detailView()', () => {
+suite('detailView()', () => {
   test('Returns a string', () => {
     expect(detailView(packageName, 'readme', mockNpmData)).to.be.a('string');
   });

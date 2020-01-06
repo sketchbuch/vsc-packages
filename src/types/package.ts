@@ -43,7 +43,7 @@ export type Snippets =
   | 'contribSnippet'
   | 'homepageSnippet'
   | 'inlineListSnippet'
-  | 'licenceSnippet'
+  | 'licenseSnippet'
   | 'maintainerSnippet'
   | 'messageSnippet'
   | 'readmeSnippet'
