@@ -6,12 +6,7 @@ import * as webviews from '../../../webviews';
 import getTemplate from '../../../webviews/Package/templates/getTemplate';
 import Package from '../../../webviews/Package/Package';
 import { expect } from 'chai';
-import {
-  extensionPath,
-  mockContext,
-  mockPanel,
-  packageName
-  } from '../../mocks';
+import { extensionPath, mockContext, mockPanel, packageName } from '../../mocks';
 import { GetHtml } from '../../../types';
 import {
   CMD_VSCODE_OPEN_WV,

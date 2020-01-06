@@ -1,11 +1,8 @@
-import * as path from 'path';
 import * as sinon from 'sinon';
-import * as utils from '../../../../utils';
-import * as vscode from 'vscode';
 import { assert, expect } from 'chai';
-import { extensionPath, packageName } from '../../../mocks';
-import { FS_FOLDER_CSS, FS_FOLDER_JS, FS_FOLDER_RESOURCES } from '../../../../constants';
+import * as utils from '../../../../utils';
 import { GetHtml } from '../../../../types';
+import { extensionPath, packageName } from '../../../mocks';
 import { getHtml } from '../../../../webviews';
 
 suite('getHtml()', () => {
@@ -26,16 +23,10 @@ suite('getHtml()', () => {
     expect(getHtml(props)).to.be.a('string');
   });
 
-  test('Calls vscode.Uri.file() correctly', () => {
-    const spy = sinon.spy(vscode.Uri, 'file');
+  test('Calls utils.getResourceUri() correctly', () => {
+    const spy = sinon.spy(utils, 'getResourceUri');
     getHtml(props);
     sinon.assert.calledTwice(spy);
-    expect(
-      spy.getCall(0).calledWithExactly(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_JS))
-    );
-    expect(
-      spy.getCall(1).calledWithExactly(path.join(extensionPath, FS_FOLDER_RESOURCES, FS_FOLDER_CSS))
-    );
     spy.restore();
   });
 

@@ -3,6 +3,7 @@ import { getPackageTabTitle } from '../../utils';
 import { packageName } from '.';
 
 const webview = {
+  onDidReceiveMessage: (callback: () => void) => {},
   asWebviewUri: (localResource: vscode.Uri) => {},
 } as vscode.Webview;
 

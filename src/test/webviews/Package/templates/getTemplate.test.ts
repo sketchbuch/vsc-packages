@@ -48,10 +48,10 @@ suite('Package getTemplate()', () => {
       expect(result).contains('</title>');
     });
 
-    test('Contains a Content-Security-Policy meta tag', () => {
+    test('Contains the correct Content-Security-Policy meta tag', () => {
       expect(result).contains('<meta http-equiv="Content-Security-Policy"');
       expect(result).contains(`content="default-src 'self' vscode-resource: 'nonce-${props.nonce}`);
-      expect(result).contains(`img-src 'self' vscode-resource: 'nonce-${props.nonce}`);
+      expect(result).contains(`img-src 'self' vscode-resource: data: 'nonce-${props.nonce}`);
       expect(result).contains(`script-src 'self' vscode-resource: 'nonce-${props.nonce}`);
       expect(result).contains(`style-src 'self' vscode-resource: 'nonce-${props.nonce}`);
     });
@@ -65,13 +65,9 @@ suite('Package getTemplate()', () => {
   });
 
   suite('<body>', () => {
-    test('Contains an <h1> tag', () => {
-      expect(result).contains(`<h1 class="name"`);
-      expect(result).contains('</h1>');
-    });
-
-    test('Contains a loader', () => {
-      expect(result).contains(`<div class="loader"`);
+    test('Contains a <script> tag', () => {
+      expect(result).contains(`<script nonce="${props.nonce}" `);
+      expect(result).contains('</script>');
     });
   });
 });
