@@ -87,7 +87,13 @@
   "engines": {
     "vscode": "^1.40.0"
   },
-  "keywords": [],
+  "keywords": [
+    "dependencies",
+    "installer",
+    "npm",
+    "package.json",
+    "package"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sketchbuch/vsc-packages"
