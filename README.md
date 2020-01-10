@@ -6,6 +6,8 @@ A VSC extension to list packages from package.json and search for and install pa
 
 **This is a work-in-progress and began so that I could learn how to make webviews for VSC extensions**
 
+![alt text](https://github.com/sketchbuch/school-report/blob/master/docs/images/github.com_sketchbuch_school-report.gif 'School Report')
+
 ## Todo
 
 - Add a search function
