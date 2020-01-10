@@ -1,31 +1,33 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { mockContributors } from '../../../mocks';
+import { mockMaintainers } from '../../../mocks';
 import * as snippets from '../../../../webviews/Package/snippets';
 import * as utils from '../../../../utils';
 
-const contribSnippet = snippets.contribSnippet;
+const maintainerSnippet = snippets.maintainerSnippet;
 
-suite('contribSnippet()', () => {
-  test('Returns an empty string if no contributors', () => {
-    const result = contribSnippet(undefined);
-    expect(result).to.equal('');
+suite('maintainerSnippet()', () => {
+  test('Returns an empty string if maintainers undfined or empty', () => {
+    const result1 = maintainerSnippet(undefined);
+    expect(result1).to.be.a('string');
+    expect(result1).to.equal('');
 
-    const result2 = contribSnippet([]);
+    const result2 = maintainerSnippet([]);
+    expect(result2).to.be.a('string');
     expect(result2).to.equal('');
   });
 
   test('Calls mapNpmObjToInlineList() correctly', () => {
     const spy = sinon.spy(utils, 'mapNpmObjToInlineList');
-    contribSnippet(mockContributors);
+    maintainerSnippet(mockMaintainers);
     sinon.assert.callCount(spy, 1);
-    sinon.assert.calledWith(spy, mockContributors);
+    sinon.assert.calledWith(spy, mockMaintainers);
     spy.restore();
   });
 
   test('Calls inlineListSnippet()', () => {
     const spy = sinon.spy(snippets, 'inlineListSnippet');
-    contribSnippet(mockContributors);
+    maintainerSnippet(mockMaintainers);
     sinon.assert.callCount(spy, 1);
     spy.restore();
   });

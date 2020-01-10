@@ -1,10 +1,10 @@
 import { inlineListSnippet } from './';
 import { NpmContributors } from '../../../types';
-import { mapContributorsToInlineList } from '../../../utils';
+import { mapNpmObjToInlineList } from '../../../utils';
 
 const contribSnippet = (contributors: NpmContributors[] | undefined): string => {
   if (contributors && contributors.length > 0) {
-    const items = mapContributorsToInlineList(contributors);
+    const items = mapNpmObjToInlineList(contributors);
     return inlineListSnippet(items, 'Contributors');
   }
 

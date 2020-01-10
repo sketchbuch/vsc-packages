@@ -1,15 +1,9 @@
 import { NpmRepository } from '../../../types';
 
-const repositorySnippet = (repository: NpmRepository): string => {
+const repositorySnippet = (repository: NpmRepository | undefined): string => {
   if (repository) {
-    const { type, url } = repository;
-
-    if (url) {
-      if (type) {
-        return `<li class="data__repository"><a href="${url}">Repository</a></li>`;
-      }
-      return `<li class="data__repository"><a href="${url}">Repository</a></li>`;
-    }
+    const { url } = repository;
+    return `<li class="data__repository"><a href="${url}">Repository</a></li>`;
   }
 
   return '';

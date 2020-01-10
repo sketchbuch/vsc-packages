@@ -13,3 +13,4 @@ export { default as tabboxSnippet } from './tabboxSnippet';
 export { default as tableListSnippet } from './tableListSnippet';
 export { default as tagsSnippet } from './tagsSnippet';
 export { default as timeSnippet } from './timeSnippet';
+export { default as versionSnippet } from './versionSnippet';

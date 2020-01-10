@@ -1,6 +1,6 @@
 import { InlineListSnippet } from '../../types';
 
-const mockInlineListItems: InlineListSnippet[] = [
+const mockInlineListContributors: InlineListSnippet[] = [
   {
     label: 'The Cat',
   },
@@ -18,4 +18,4 @@ const mockInlineListItems: InlineListSnippet[] = [
   },
 ];
 
-export default mockInlineListItems;
+export default mockInlineListContributors;

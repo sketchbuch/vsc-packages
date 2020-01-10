@@ -1,6 +1,7 @@
 export { Cmd, CmdCallback, ExtViewList, ExtViews } from './ext';
 export { GetHtml, GetTemplate } from './webviews';
 export { HttpStatusCodes } from './network';
+export { isContributor } from './guards/isContributor';
 export {
   NpmAuthor,
   NpmBugs,

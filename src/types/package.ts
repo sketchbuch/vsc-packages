@@ -11,6 +11,12 @@ export interface InlineListSnippet {
   url?: string;
 }
 
+export interface InlineListSnippet {
+  email?: string;
+  label: string;
+  url?: string;
+}
+
 export interface TableListSnippet {
   label: string;
   value: string;

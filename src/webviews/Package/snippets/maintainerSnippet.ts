@@ -1,20 +1,10 @@
-import { InlineListSnippet, NpmMaintainer } from '../../../types';
+import { NpmMaintainer } from '../../../types';
 import { inlineListSnippet } from '.';
+import { mapNpmObjToInlineList } from '../../../utils';
 
-const maintainerSnippet = (maintainers: NpmMaintainer[]): string => {
+const maintainerSnippet = (maintainers: NpmMaintainer[] | undefined): string => {
   if (maintainers && maintainers.length > 0) {
-    const items = maintainers.map(
-      (maintainer: NpmMaintainer): InlineListSnippet => {
-        const newContributor: InlineListSnippet = { label: maintainer.name };
-
-        if (maintainer.email) {
-          newContributor.email = maintainer.email;
-        }
-
-        return newContributor;
-      }
-    );
-
+    const items = mapNpmObjToInlineList(maintainers);
     return inlineListSnippet(items, 'Maintainers');
   }
 
