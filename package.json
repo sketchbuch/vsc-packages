@@ -71,6 +71,14 @@
         {
           "id": "vsc-packages-activitybar-dev-deps",
           "name": "Dev Dependencies"
+        },
+        {
+          "id": "vsc-packages-activitybar-peer-deps",
+          "name": "Peer Dependencies"
+        },
+        {
+          "id": "vsc-packages-activitybar-optional-deps",
+          "name": "Optional Dependencies"
         }
       ]
     },
