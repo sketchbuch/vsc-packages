@@ -2,7 +2,7 @@ import { NpmTags } from '../../../types';
 
 const versionSnippet = (distTags: NpmTags | undefined): string => {
   if (distTags && distTags.latest) {
-    return `<p class="version">v<strong>${distTags.latest}</strong></p>`;
+    return `<li class="data__version" title="Latest Version">v${distTags.latest}</li>`;
   }
 
   return '';

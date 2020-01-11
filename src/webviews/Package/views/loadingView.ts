@@ -1,9 +1,12 @@
-const loadingView = (packageName: string) => {
+import { CmdCallbackData } from '../../../types';
+import { headlineSnippet } from '../snippets';
+
+const loadingView = (packageData: CmdCallbackData) => {
   return `
     <section class="loading view">
       <header class="loading__header view__header">
         <div class="view__header-content">
-          <h1 class="loading__name view__name">${packageName}</h1>
+        ${headlineSnippet(packageData, 'loading')}
         </div>
       </header>
       <div class="vsc-loader"></div>

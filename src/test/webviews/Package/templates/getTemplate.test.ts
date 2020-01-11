@@ -1,14 +1,14 @@
 import getTemplate from '../../../../webviews/Package/templates/getTemplate';
 import { expect } from 'chai';
 import { GetTemplate } from '../../../../types';
-import { packageName } from '../../../mocks';
+import { mockPackageData } from '../../../mocks';
 
 suite('Package getTemplate()', () => {
   const props: GetTemplate = {
     cssPath: '',
     htmlData: {
       activeTab: 'readme',
-      packageName,
+      packageData: mockPackageData,
       state: {
         data: undefined,
         error: undefined,

@@ -28,6 +28,14 @@
   white-space: nowrap;
 }
 
+.view__name--version {
+  color: inherit;
+  display: inline-block;
+  font-weight: normal;
+  opacity: 0.5;
+  padding-left: 0.66rem;
+}
+
 .view__content {
   align-items: center;
   display: flex;

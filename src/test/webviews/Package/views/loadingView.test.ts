@@ -1,19 +1,19 @@
 import { expect } from 'chai';
 import { loadingView } from '../../../../webviews/Package/views';
-import { packageName } from '../../../mocks';
+import { mockPackageData } from '../../../mocks';
 
 suite('loadingView()', () => {
   test('Returns a string', () => {
-    expect(loadingView(packageName)).to.be.a('string');
+    expect(loadingView(mockPackageData)).to.be.a('string');
   });
 
   test('Renders a title', () => {
-    expect(loadingView(packageName)).contains(
-      `<h1 class="loading__name view__name">${packageName}</h1>`
+    expect(loadingView(mockPackageData)).contains(
+      `<h1 class="loading__name view__name">${mockPackageData.packageName}</h1>`
     );
   });
 
   test('Renders a loader', () => {
-    expect(loadingView(packageName)).contains('<div class="vsc-loader"></div>');
+    expect(loadingView(mockPackageData)).contains('<div class="vsc-loader"></div>');
   });
 });

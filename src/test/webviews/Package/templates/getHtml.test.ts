@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import { assert, expect } from 'chai';
 import * as utils from '../../../../utils';
 import { GetHtml } from '../../../../types';
-import { extensionPath, packageName } from '../../../mocks';
+import { extensionPath, mockPackageData, packageName } from '../../../mocks';
 import { getHtml } from '../../../../webviews';
 
 suite('getHtml()', () => {
@@ -11,7 +11,7 @@ suite('getHtml()', () => {
     extensionPath,
     htmlData: {
       activeTab: 'readme',
-      packageName,
+      packageData: mockPackageData,
       state: {
         data: undefined,
         error: undefined,
@@ -42,7 +42,7 @@ suite('getHtml()', () => {
     getHtml(props);
     sinon.assert.calledOnce(spy);
     const args = spy.getCall(0).args[0];
-    expect(args.htmlData.packageName).to.be.eql(packageName);
+    expect(args.htmlData.packageData.packageName).to.be.eql(packageName);
     assert.isString(args.nonce);
     spy.restore();
   });

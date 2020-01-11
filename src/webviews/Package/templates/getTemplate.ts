@@ -5,15 +5,15 @@ import { FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constant
 import { GetTemplate } from '../../../types';
 
 const getTemplate = ({ cssPath, htmlData, nonce, scriptPath }: GetTemplate) => {
-  const { activeTab, packageName, state } = htmlData;
+  const { activeTab, packageData, state } = htmlData;
   let content: string;
 
   if (state.error) {
-    content = getError(packageName, state.error);
+    content = getError(packageData, state.error);
   } else if (state.data) {
-    content = getDetail(packageName, activeTab, state.data);
+    content = getDetail(packageData, activeTab, state.data);
   } else {
-    content = getLoading(packageName);
+    content = getLoading(packageData);
   }
 
   return `
@@ -28,7 +28,7 @@ const getTemplate = ({ cssPath, htmlData, nonce, scriptPath }: GetTemplate) => {
           style-src 'self' vscode-resource: 'nonce-${nonce}'";
         >
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${packageName}</title>
+        <title>${packageData.packageName}</title>
         <link href="${cssPath}/${FS_WEBVIEW_PACKAGE_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
       </head>
 

@@ -7,7 +7,7 @@ import { mockContext, packageName } from '../../mocks';
 suite('cmdOpenNpm()', () => {
   test('Calls vscode.commands.executeCommand()', () => {
     const spy = sinon.stub(vscode.commands, 'executeCommand');
-    cmdOpenNpm(packageName, mockContext);
+    cmdOpenNpm({ packageName }, mockContext);
 
     sinon.assert.callCount(spy, 1);
     sinon.assert.calledWith(spy, CMD_VSCODE_OPEN);
@@ -16,7 +16,7 @@ suite('cmdOpenNpm()', () => {
 
   test('Calls vscode.Uri.parse()', () => {
     const spy = sinon.stub(vscode.Uri, 'parse');
-    cmdOpenNpm(packageName, mockContext);
+    cmdOpenNpm({ packageName }, mockContext);
 
     sinon.assert.callCount(spy, 1);
     sinon.assert.calledWith(spy, `${URL_NPM}${packageName}`);

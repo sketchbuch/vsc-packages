@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { detailView } from '../../../../webviews/Package/views';
-import { packageName, mockNpmData } from '../../../mocks';
+import { mockNpmData, mockPackageData } from '../../../mocks';
 import { Snippets } from '../../../../types';
 import * as snippets from '../../../../webviews/Package/snippets';
 
 const testSnippetCall = (methodName: Snippets): void => {
   test(`${methodName}() called once`, () => {
     const spy = sinon.spy(snippets, methodName);
-    detailView(packageName, 'readme', mockNpmData);
+    detailView(mockPackageData, 'readme', mockNpmData);
     sinon.assert.calledOnce(spy);
 
     if (methodName !== 'tabboxSnippet') {
@@ -23,7 +23,7 @@ const testSnippetCall = (methodName: Snippets): void => {
 
 suite('detailView()', () => {
   test('Returns a string', () => {
-    expect(detailView(packageName, 'readme', mockNpmData)).to.be.a('string');
+    expect(detailView(mockPackageData, 'readme', mockNpmData)).to.be.a('string');
   });
 
   ([
@@ -36,12 +36,14 @@ suite('detailView()', () => {
   ] as Snippets[]).forEach((methodName: Snippets) => testSnippetCall(methodName));
 
   test('Renders a title', () => {
-    const result = detailView(packageName, 'readme', mockNpmData);
-    expect(result).contains(`<h1 class="data__name view__name">${packageName}</h1>`);
+    const result = detailView(mockPackageData, 'readme', mockNpmData);
+    expect(result).contains(
+      `<h1 class="data__name view__name">${mockPackageData.packageName}</h1>`
+    );
   });
 
   test('Renders a description', () => {
-    const result = detailView(packageName, 'readme', mockNpmData);
+    const result = detailView(mockPackageData, 'readme', mockNpmData);
     expect(result).contains(`<p class="data__description">${mockNpmData.description}</p>`);
   });
 });

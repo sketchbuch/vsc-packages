@@ -1,20 +1,22 @@
-import { NpmPackageData, TabboxId, TabboxItems } from '../../../types';
+import { NpmPackageData, TabboxId, TabboxItems, CmdCallbackData } from '../../../types';
 import {
-  contribSnippet,
-  maintainerSnippet,
-  readmeSnippet,
   authorSnippet,
   bugsSnippet,
   columnsSnippet,
+  contribSnippet,
+  headlineSnippet,
   homepageSnippet,
   licenseSnippet,
+  maintainerSnippet,
+  readmeSnippet,
   repositorySnippet,
   tabboxSnippet,
   tagsSnippet,
   timeSnippet,
+  versionSnippet,
 } from '../snippets';
 
-const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageData) => {
+const detailView = (packageData: CmdCallbackData, activeTab: TabboxId, data: NpmPackageData) => {
   const {
     'dist-tags': tags,
     author,
@@ -46,8 +48,8 @@ const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageDa
       },
       content: () =>
         columnsSnippet(
-          () => tagsSnippet(tags, packageName),
-          () => timeSnippet(time, packageName)
+          () => tagsSnippet(tags, packageData.packageName),
+          () => timeSnippet(time, packageData.packageName)
         ),
       emptyMessage: 'No version information available',
       id: 'versions',
@@ -67,9 +69,10 @@ const detailView = (packageName: string, activeTab: TabboxId, data: NpmPackageDa
     <section class="data view">
       <header class="data__header view__header">
         <div class="view__header-content">
-          <h1 class="data__name view__name">${packageName}</h1>
+          ${headlineSnippet(packageData, 'data')}
           <ul class="data__info">
             ${authorSnippet(author)}
+            ${versionSnippet(tags)}
             ${homepageSnippet(homepage)}
             ${repositorySnippet(repository)}
             ${bugsSnippet(bugs)}

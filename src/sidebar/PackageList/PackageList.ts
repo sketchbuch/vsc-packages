@@ -40,7 +40,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
             {
               command: CMD_DISPLAY_PACKAGE,
               title: '',
-              arguments: [dependency],
+              arguments: [dependency, version],
             }
           );
           children.push(depItem);

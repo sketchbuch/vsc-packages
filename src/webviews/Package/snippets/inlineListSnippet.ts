@@ -18,7 +18,7 @@ const inlineListSnippet = (items: InlineListSnippet[], title?: string): string =
               } else if (item.email) {
                 return `
                   <div class="inline-list__item">
-                    <a class="inline-list__element" href="mailto:${item.email}">@ ${item.label}</a>
+                    <a class="inline-list__element" href="mailto:${item.email}" title="Email ${item.email}">@ ${item.label}</a>
                   </div>`;
               }
 

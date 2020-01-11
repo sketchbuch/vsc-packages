@@ -1,4 +1,4 @@
-import { PackageState, TabboxId } from './';
+import { PackageState, TabboxId, CmdCallbackData } from './';
 
 export interface GetTemplate {
   cssPath: string;
@@ -9,7 +9,7 @@ export interface GetTemplate {
 
 export interface HtmlData {
   activeTab: TabboxId;
-  packageName: string;
+  packageData: CmdCallbackData;
   state: PackageState;
 }
 
