@@ -2,19 +2,23 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../constants';
-import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
+import { GetPackageJson } from '../../types';
 import { pathExists } from './pathExists';
 
-const getPackageJson = (
-  wkspFolder: vscode.WorkspaceFolder
-): JSONSchemaForNPMPackageJsonFiles | null => {
-  const packageJsonPath: string = path.join(wkspFolder.uri.fsPath, FS_PACKAGEJSON);
+const getPackageJson = (workspaceFolders: vscode.WorkspaceFolder[] | undefined): GetPackageJson => {
+  if (workspaceFolders && workspaceFolders.length > 0) {
+    const packageJsonPath: string = path.join(workspaceFolders[0].uri.fsPath, FS_PACKAGEJSON);
 
-  if (pathExists(packageJsonPath)) {
-    const packageJson: JSONSchemaForNPMPackageJsonFiles = JSON.parse(
-      fs.readFileSync(packageJsonPath, FS_UTF8)
-    );
-    return packageJson;
+    if (pathExists(packageJsonPath)) {
+      let packageJson: string = '';
+
+      try {
+        packageJson = fs.readFileSync(packageJsonPath, FS_UTF8);
+        return JSON.parse(packageJson);
+      } catch (error) {
+        return error;
+      }
+    }
   }
 
   return null;

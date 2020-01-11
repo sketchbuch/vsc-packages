@@ -1,4 +1,4 @@
-export { Cmd, CmdCallback, CmdCallbackData, ExtViewList, ExtViews } from './ext';
+export { Cmd, CmdCallback, CmdCallbackData, ExtViewList, ExtViews, GetPackageJson } from './ext';
 export { GetHtml, GetTemplate } from './webviews';
 export { HttpStatusCodes } from './network';
 export { isContributor } from './guards/isContributor';

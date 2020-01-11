@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+/* import * as fs from 'fs';
 import * as path from 'path';
 import * as pathExists from '../../../utils/fs/pathExists';
 import * as sinon from 'sinon';
@@ -67,4 +67,4 @@ suite('getPackageJson()', () => {
       });
     });
   });
-});
+}); */

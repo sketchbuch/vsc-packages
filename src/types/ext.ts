@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { FS_FOLDER_IMAGES_DARK, FS_FOLDER_IMAGES_LIGHT } from '../constants';
+import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
 
 export type ExtViewList = 'dependencies' | 'devDependencies';
 export type ExtViews = { [view in ExtViewList]: string };
@@ -16,3 +17,5 @@ export interface Cmd {
 }
 
 export type ImgType = typeof FS_FOLDER_IMAGES_DARK | typeof FS_FOLDER_IMAGES_LIGHT;
+
+export type GetPackageJson = JSONSchemaForNPMPackageJsonFiles | null | Error;
