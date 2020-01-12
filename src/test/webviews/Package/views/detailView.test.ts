@@ -36,10 +36,12 @@ suite('detailView()', () => {
   ] as Snippets[]).forEach((methodName: Snippets) => testSnippetCall(methodName));
 
   test('Renders a title', () => {
-    const result = detailView(mockPackageData, 'readme', mockNpmData);
-    expect(result).contains(
-      `<h1 class="data__name view__name">${mockPackageData.packageName}</h1>`
-    );
+    const spy = sinon.spy(snippets, 'headlineSnippet');
+    detailView(mockPackageData, 'readme', mockNpmData);
+
+    sinon.assert.callCount(spy, 1);
+    sinon.assert.calledWith(spy, mockPackageData, 'data');
+    spy.restore();
   });
 
   test('Renders a description', () => {

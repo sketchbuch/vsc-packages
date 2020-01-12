@@ -1,6 +1,8 @@
 import { expect } from 'chai';
+import * as sinon from 'sinon';
 import { errorView } from '../../../../webviews/Package/views';
 import { mockPackageData } from '../../../mocks';
+import * as snippets from '../../../../webviews/Package/snippets';
 
 suite('errorView()', () => {
   const mockError = new Error('An error occured!');
@@ -10,9 +12,12 @@ suite('errorView()', () => {
   });
 
   test('Renders a title', () => {
-    expect(errorView(mockPackageData, mockError)).contains(
-      `<h1 class="error__name view__name">${mockPackageData.packageName}</h1>`
-    );
+    const spy = sinon.spy(snippets, 'headlineSnippet');
+    errorView(mockPackageData, mockError);
+
+    sinon.assert.callCount(spy, 1);
+    sinon.assert.calledWith(spy, mockPackageData, 'error');
+    spy.restore();
   });
 
   test('Renders the error message', () => {

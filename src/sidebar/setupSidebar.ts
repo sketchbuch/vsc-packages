@@ -9,7 +9,7 @@ const treeProviders: { [key: string]: PackageList } = {};
 const setupSidebar = (extViews: ExtViews, context: vscode.ExtensionContext): void => {
   const packageJson: GetPackageJson = getPackageJson(vscode.workspace.workspaceFolders);
 
-  Object.keys(extViews).forEach(view => {
+  Object.keys(extViews).forEach((view: string) => {
     // Update the value used by the view's "when" condition
     const isVisible = shouldShowView(view as ExtViewList, packageJson);
     vscode.commands.executeCommand('setContext', `${EXT}-${view}`, isVisible);

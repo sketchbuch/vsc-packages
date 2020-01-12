@@ -1,6 +1,8 @@
 import { expect } from 'chai';
+import * as sinon from 'sinon';
 import { loadingView } from '../../../../webviews/Package/views';
 import { mockPackageData } from '../../../mocks';
+import * as snippets from '../../../../webviews/Package/snippets';
 
 suite('loadingView()', () => {
   test('Returns a string', () => {
@@ -8,9 +10,12 @@ suite('loadingView()', () => {
   });
 
   test('Renders a title', () => {
-    expect(loadingView(mockPackageData)).contains(
-      `<h1 class="loading__name view__name">${mockPackageData.packageName}</h1>`
-    );
+    const spy = sinon.spy(snippets, 'headlineSnippet');
+    loadingView(mockPackageData);
+
+    sinon.assert.callCount(spy, 1);
+    sinon.assert.calledWith(spy, mockPackageData, 'loading');
+    spy.restore();
   });
 
   test('Renders a loader', () => {

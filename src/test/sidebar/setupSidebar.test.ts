@@ -9,7 +9,7 @@ suite('setupSidebar()', () => {
     const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
     setupSidebar(extViews, mockContext);
 
-    sinon.assert.callCount(spy, 2);
+    sinon.assert.callCount(spy, 4);
     spy.restore();
   });
 });

@@ -8,6 +8,6 @@ suite('getResourceUri()', () => {
   test('Returns the expected path', () => {
     const result = getResourceUri(extensionPath, 'temp');
     expect(result).to.be.an.instanceof(vscode.Uri);
-    expect(result.path).to.equal(`${extensionPath}/${FS_FOLDER_RESOURCES}/temp`);
+    expect(result.fsPath).to.equal(`${extensionPath}/${FS_FOLDER_RESOURCES}/temp`);
   });
 });

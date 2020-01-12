@@ -6,14 +6,15 @@ import * as webviews from '../../../webviews';
 import getTemplate from '../../../webviews/Package/templates/getTemplate';
 import Package, { defaultPackageData } from '../../../webviews/Package/Package';
 import { expect } from 'chai';
-import { extensionPath, mockContext, mockPackageData, mockPanel, packageName } from '../../mocks';
+import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
 import { GetHtml } from '../../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
+  EXT_GLOBALSTATE_VERSION_KEY,
+  FS_FOLDER_CSS,
   FS_FOLDER_JS,
   FS_FOLDER_RESOURCES,
-  FS_FOLDER_CSS,
 } from '../../../constants';
 
 suite('Package()', () => {
@@ -26,7 +27,7 @@ suite('Package()', () => {
       new Package(mockPackageData, mockPanel, mockContext);
 
       expect(Package.currentPanel).to.equal(undefined);
-      expect(Package.currentPackageData).to.equal(defaultPackageData);
+      expect(Package.currentPackageData).to.eql(defaultPackageData);
       expect(Package.viewType).to.equal(CMD_VSCODE_OPEN_WV);
     });
 
@@ -52,7 +53,7 @@ suite('Package()', () => {
       sinon.assert.calledWith(
         spy,
         Package.viewType,
-        utils.getPackageTabTitle(packageName),
+        utils.getPackageTabTitle(mockPackageData.packageName),
         vscode.ViewColumn.Active,
         {
           enableScripts: true,
@@ -92,8 +93,14 @@ suite('Package()', () => {
     test('Calls context.globalState.update correctly', () => {
       const spy = sinon.spy(mockContext.globalState, 'update');
       Package.setStateForRevival(mockPackageData, mockContext);
-      sinon.assert.calledOnce(spy);
-      sinon.assert.calledWith(spy, EXT_GLOBALSTATE_KEY, packageName);
+      sinon.assert.calledTwice(spy);
+
+      const callArgs1 = spy.getCall(0).args;
+      const callArgs2 = spy.getCall(1).args;
+      expect(callArgs1[0]).to.equal(EXT_GLOBALSTATE_KEY);
+      expect(callArgs1[1]).to.equal(mockPackageData.packageName);
+      expect(callArgs2[0]).to.equal(EXT_GLOBALSTATE_VERSION_KEY);
+      expect(callArgs2[1]).to.equal(mockPackageData.packageVersion);
       spy.restore();
     });
   });
@@ -105,10 +112,10 @@ suite('Package()', () => {
       expect(Package.currentPanel).to.equal(undefined);
     });
 
-    test('Resets Package.currentPackage', () => {
+    test('Resets Package.currentPackageData', () => {
       const instance = new Package(mockPackageData, mockPanel, mockContext);
       instance.dispose();
-      expect(Package.currentPackageData).to.equal('');
+      expect(Package.currentPackageData).to.eql(defaultPackageData);
     });
 
     test('Calls _panel.dispose() once', () => {
