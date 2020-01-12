@@ -10,12 +10,13 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
   onDidChangeTreeData: vscode.Event<PackageListItem | undefined> = this._onDidChangeTreeData.event;
 
   constructor(
-    private packageKey: string,
+    private packageView: string,
     private packageJson: GetPackageJson,
     private extensionPath: string
   ) {}
 
-  refresh(): void {
+  refresh(newPackageJson: GetPackageJson): void {
+    this.packageJson = newPackageJson;
     this._onDidChangeTreeData.fire();
   }
 
@@ -45,9 +46,9 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     } else {
       const packageJson = this.packageJson;
 
-      if (packageJson[this.packageKey]) {
-        Object.keys(packageJson[this.packageKey]).forEach((dependency: string) => {
-          const version: string = packageJson[this.packageKey][dependency];
+      if (packageJson[this.packageView]) {
+        Object.keys(packageJson[this.packageView]).forEach((dependency: string) => {
+          const version: string = packageJson[this.packageView][dependency];
           const depItem = new PackageListItem(
             dependency,
             version,
@@ -65,7 +66,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
 
       if (children.length < 1) {
         const empty = new PackageListItem(
-          `No ${this.packageKey} found`,
+          `No ${this.packageView} found`,
           '',
           this.extensionPath,
           vscode.TreeItemCollapsibleState.None

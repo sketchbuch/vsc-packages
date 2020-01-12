@@ -8,7 +8,7 @@
   "main": "./out/extension.js",
   "icon": "logo.png",
   "activationEvents": [
-    "*"
+    "workspaceContains:./package.json"
   ],
   "author": {
     "name": "sketchbuch"
@@ -66,19 +66,23 @@
       "vsc-packages-activitybar": [
         {
           "id": "vsc-packages-activitybar-deps",
-          "name": "Dependencies"
+          "name": "Dependencies",
+          "when": "vsc-packages-dependencies"
         },
         {
           "id": "vsc-packages-activitybar-dev-deps",
-          "name": "Dev Dependencies"
+          "name": "Dev Dependencies",
+          "when": "vsc-packages-devDependencies"
         },
         {
           "id": "vsc-packages-activitybar-peer-deps",
-          "name": "Peer Dependencies"
+          "name": "Peer Dependencies",
+          "when": "vsc-packages-peerDependencies"
         },
         {
           "id": "vsc-packages-activitybar-optional-deps",
-          "name": "Optional Dependencies"
+          "name": "Optional Dependencies",
+          "when": "vsc-packages-optionalDependencies"
         }
       ]
     },
@@ -87,7 +91,7 @@
         {
           "icon": "./resources/images/light/activitybar-light.svg",
           "id": "vsc-packages-activitybar",
-          "title": "Packages (Node)"
+          "title": "Packages"
         }
       ]
     }
