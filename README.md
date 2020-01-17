@@ -21,6 +21,6 @@ A VSC extension to list packages from package.json and search for and install pa
 
 ## Latest Version
 
-### [1.1.0] - 2020-17-01
+### [1.1.2] - 2020-01-17
 
-- Added file watcher to track changes to package.json at the root of the folder/workspace to keep the treeview up-to-date.
+- Fixed error display
