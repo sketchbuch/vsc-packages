@@ -41,12 +41,10 @@ const setupSidebar = (
     });
 
     watcher.onDidDelete(() => {
-      console.log('### delete');
       refreshViews(extViews, treeProviders);
     });
 
     watcher.onDidCreate(() => {
-      console.log('### create');
       refreshViews(extViews, treeProviders);
     });
 
