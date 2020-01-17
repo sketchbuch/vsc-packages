@@ -1,50 +1,57 @@
 import * as vscode from 'vscode';
-import { EXT, FS_JSON, FS_PACKAGEJSON } from '../constants';
-import { ExtViewList, ExtViews, GetPackageJson } from '../types';
+import {
+  ExtViewList,
+  ExtViews,
+  GetPackageJsonResult,
+  TreeProviders,
+  WorkspaceFolders,
+} from '../types';
+import { FS_PACKAGEJSON } from '../constants';
 import { getPackageJson } from '../utils';
-import { PackageList, shouldShowView } from '.';
+import { PackageList, refreshViews, setViewContext } from '.';
 
-const treeProviders: { [key: string]: PackageList } = {};
-
-const setupSidebar = (extViews: ExtViews, context: vscode.ExtensionContext): void => {
-  const packageJson: GetPackageJson = getPackageJson(vscode.workspace.workspaceFolders);
+const setupSidebar = (
+  extViews: ExtViews,
+  context: vscode.ExtensionContext,
+  workspaceFolders: WorkspaceFolders
+): void => {
+  const treeProviders: TreeProviders = {};
+  const packageJson: GetPackageJsonResult = getPackageJson(workspaceFolders);
 
   Object.keys(extViews).forEach((view: string) => {
-    // Update the value used by the view's "when" condition
-    const isVisible = shouldShowView(view as ExtViewList, packageJson);
-    vscode.commands.executeCommand('setContext', `${EXT}-${view}`, isVisible);
+    setViewContext(view, packageJson);
 
-    // Create view
     const treeDataProvider = new PackageList(view, packageJson, context.extensionPath);
     const disposable = vscode.window.registerTreeDataProvider(
       extViews[view as ExtViewList],
       treeDataProvider
     );
     context.subscriptions.push(disposable);
+
     treeProviders[view] = treeDataProvider;
   });
 
-  vscode.workspace.onDidSaveTextDocument((event: vscode.TextDocument) => {
-    const { workspaceFolders } = vscode.workspace;
+  if (workspaceFolders && workspaceFolders.length > 0) {
+    const watcher = vscode.workspace.createFileSystemWatcher(
+      `${workspaceFolders[0].uri.fsPath}/${FS_PACKAGEJSON}`
+    );
 
-    if (workspaceFolders && workspaceFolders.length > 0) {
-      const { uri, languageId } = event;
+    watcher.onDidChange(() => {
+      refreshViews(extViews, treeProviders);
+    });
 
-      if (languageId === FS_JSON) {
-        // Is folder's package.json
-        if (uri.fsPath === `${workspaceFolders[0].uri.fsPath}/${FS_PACKAGEJSON}`) {
-          const newPackageJson: GetPackageJson = getPackageJson(vscode.workspace.workspaceFolders);
+    watcher.onDidDelete(() => {
+      console.log('### delete');
+      refreshViews(extViews, treeProviders);
+    });
 
-          Object.keys(extViews).forEach(view => {
-            const isVisible = shouldShowView(view as ExtViewList, packageJson);
-            vscode.commands.executeCommand('setContext', `${EXT}-${view}`, isVisible);
+    watcher.onDidCreate(() => {
+      console.log('### create');
+      refreshViews(extViews, treeProviders);
+    });
 
-            treeProviders[view].refresh(newPackageJson);
-          });
-        }
-      }
-    }
-  });
+    context.subscriptions.push(watcher);
+  }
 };
 
 export default setupSidebar;

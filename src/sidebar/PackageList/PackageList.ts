@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { CMD_DISPLAY_PACKAGE } from '../../constants';
-import { GetPackageJson } from '../../types';
+import { GetPackageJsonResult } from '../../types';
 import PackageListItem from './PackageListItem';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
@@ -11,11 +11,11 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
 
   constructor(
     private packageView: string,
-    private packageJson: GetPackageJson,
+    private packageJson: GetPackageJsonResult,
     private extensionPath: string
   ) {}
 
-  refresh(newPackageJson: GetPackageJson): void {
+  refresh(newPackageJson: GetPackageJsonResult): void {
     this.packageJson = newPackageJson;
     this._onDidChangeTreeData.fire();
   }

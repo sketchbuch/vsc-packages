@@ -1,13 +1,13 @@
+import { expect } from 'chai';
 import * as path from 'path';
 import * as sinon from 'sinon';
-import * as utils from '../../../utils';
 import * as vscode from 'vscode';
+import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
+import { GetHtml } from '../../../types';
+import * as utils from '../../../utils';
 import * as webviews from '../../../webviews';
 import getTemplate from '../../../webviews/Package/templates/getTemplate';
 import Package, { defaultPackageData } from '../../../webviews/Package/Package';
-import { expect } from 'chai';
-import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
-import { GetHtml } from '../../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
