@@ -12,7 +12,7 @@ A VSC extension to list packages from package.json and search for and install pa
 
 ## How to use
 
-This extension will add a new sidebar to VSC. It only appears if there is a package.json file in the first folder opened in the workspace (mutile folder support is coming soon).
+This extension will add a new sidebar to VSC. It only appears if there is a package.json file in the first folder opened in the workspace (multiple folder support is coming soon).
 
 It will list all the dependencies contained within the package file with a link to the relevant NPM page or you can get more details within VSC by clicking on one of the dependencies.
 
@@ -30,7 +30,7 @@ Other links to the package's repository and bug tracker are also provided
 - Cache package data from NPM for a short time
 - Cache selected tab in the revive state so that on revival the last active tab can be selected
 - Support different repos in the same worksapce. Currently it only works with one folder in the workspace, to support multiple workspace folders with their own package.json some kind of selector would need to be added (a bit like in the SCM)
-- ~~Add a file watcher to update the sidebar if package.json changes~~ **DONE**
+- ~~Add a file watcher to update the sidebar if the package.json file changes~~ **DONE**
 
 ## Latest Version
 
