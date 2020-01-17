@@ -9,8 +9,10 @@ const errorView = (packageData: CmdCallbackData, error: Error) => {
         ${headlineSnippet(packageData, 'error')}
         </div>
       </header>
-      <p class="error__msg">An error occured</p>
-      <p class="error__msg-sub">${error.message}</p>
+      <div class="view__content error__content">
+        <h4 class="error__msg">An error occured</h4>
+        <p class="error__msg-sub">${error.message}</p>
+      </div>
     </section>`;
 };
 

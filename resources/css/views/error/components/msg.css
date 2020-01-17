@@ -1,10 +1,15 @@
 .error__msg {
-  background: var(--vscode-errorForeground);
-  color: var(--vscode-editor-foreground);
-  font-family: var(--vscode-editor-font-family);
-  font-size: var(--vscode-editor-font-size);
-  font-weight: var(--vscode-editor-font-weight);
-  margin: 0 auto;
-  padding: 10px 20px;
-  border: 1px solid rgab(0, 0, 0, 0.1);
+  color: var(--vscode-list-errorForeground);
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0.5rem auto;
+  opacity: 0.8;
+}
+
+.error__msg-sub {
+  color: var(--vscode-list-errorForeground);
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0.5rem auto;
+  opacity: 0.6;
 }
