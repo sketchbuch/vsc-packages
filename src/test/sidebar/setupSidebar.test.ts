@@ -1,15 +1,55 @@
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
-import setupSidebar from '../../sidebar/setupSidebar';
 import { extViews } from '../../constants';
 import { mockContext } from '../mocks';
+import * as sidebar from '../../sidebar';
+import * as utils from '../../utils';
 
 suite('setupSidebar()', () => {
-  test('Calls fs.accessSync() the correct number of times', () => {
-    const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
-    setupSidebar(extViews, mockContext);
+  const setupSidebar = sidebar.setupSidebar;
 
-    sinon.assert.callCount(spy, 4);
+  test('Calls getPackageJson()', () => {
+    const spy = sinon.spy(utils, 'getPackageJson');
+    setupSidebar(extViews, mockContext, undefined);
+
+    sinon.assert.callCount(spy, 1);
     spy.restore();
+  });
+
+  test('Sets up tree providers correctly', () => {
+    const viewCount = Object.keys(extViews).length;
+    const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
+    const spyContext = sinon.spy(sidebar, 'setViewContext');
+    setupSidebar(extViews, mockContext, undefined);
+
+    sinon.assert.callCount(spy, viewCount);
+    sinon.assert.callCount(spyContext, viewCount);
+    spy.restore();
+  });
+
+  suite('File Watcher:', () => {
+    test('Not created if there are no workspace folders', () => {
+      const spy = sinon.spy(vscode.workspace, 'createFileSystemWatcher');
+      setupSidebar(extViews, mockContext, undefined);
+
+      sinon.assert.callCount(spy, 0);
+      spy.restore();
+    });
+
+    test('Created if there are workspace folders', () => {
+      const spy = sinon.spy(vscode.workspace, 'createFileSystemWatcher');
+      setupSidebar(extViews, mockContext, [
+        {
+          uri: {
+            fsPath: '',
+          } as vscode.Uri,
+          name: 'test',
+          index: 0,
+        },
+      ]);
+
+      sinon.assert.callCount(spy, 1);
+      spy.restore();
+    });
   });
 });
