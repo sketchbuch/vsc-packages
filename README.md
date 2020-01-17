@@ -18,3 +18,9 @@ A VSC extension to list packages from package.json and search for and install pa
 - Cache package data from NPM for a short time
 - Cache selected tab in the revive state so that on revival the last active tab can be selected
 - Support different repos in the same worksapce. Currently it only works with one folder in the workspace, to support multiple workspace folders with their own package.json some kind of selector would need to be added (a bit like in the SCM)
+
+## Latest Version
+
+### [1.1.0] - 2020-17-01
+
+- Added file watcher to track changes to package.json at the root of the folder/workspace to keep the treeview up-to-date.
