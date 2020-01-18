@@ -34,6 +34,6 @@ Other links to the package's repository and bug tracker are also provided
 
 ## Latest Version
 
-### [1.1.2] - 2020-01-17
+### [1.1.3] - 2020-01-17
 
-- Fixed error display
+- Code refactor
