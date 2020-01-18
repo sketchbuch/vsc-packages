@@ -161,8 +161,8 @@
   },
   "lint-staged": {
     "{src, resources/js}/**/*.{js,ts}": [
-      "eslint --config .eslintrc --fix --max-warnings=0",
-      "prettier --config .prettierrc --write",
+      "yarn lint:ts",
+      "yarn lint:prettier",
       "git add"
     ],
     "resources/css/**/*.css": [
