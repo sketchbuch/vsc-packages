@@ -39,6 +39,16 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "vsc-packages-display-package",
+          "when": "never"
+        },
+        {
+          "command": "vsc-packages-open-npmurl",
+          "when": "never"
+        }
+      ],
       "view/item/context": [
         {
           "command": "vsc-packages-open-npmurl",
