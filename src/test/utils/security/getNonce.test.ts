@@ -1,5 +1,5 @@
-import getNonce from '../../../utils/security/getNonce';
 import { expect } from 'chai';
+import { getNonce } from '../../../utils/security/getNonce';
 
 suite('getNonce()', () => {
   test('Returns nonce', () => {

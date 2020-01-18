@@ -14,7 +14,7 @@ import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mo
 import { GetHtml } from '../../../types';
 import * as templates from '../../../templates/package';
 import * as utils from '../../../utils';
-import Package, { defaultPackageData } from '../../../webviews/Package/Package';
+import { Package, defaultPackageData } from '../../../webviews';
 
 suite('Package()', () => {
   test('Creating an instance is successful', () => {

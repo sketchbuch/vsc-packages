@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
-import Package from '../../../webviews/Package/Package';
 import { cmdDisplayPackage } from '../../../commands';
 import { mockContext, packageName } from '../../mocks';
+import { Package } from '../../../webviews';
 
 suite('cmdDisplayPackage()', () => {
   test('Calls Package.createOrShow() correctly', () => {

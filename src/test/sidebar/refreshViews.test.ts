@@ -1,9 +1,9 @@
 import * as sinon from 'sinon';
+import { extensionPath } from '../mocks';
 import { extViews } from '../../constants';
-import { PackageList } from '../../sidebar';
+import { PackageList } from '../../treeviews';
 import * as sidebar from '../../sidebar';
 import * as utils from '../../utils';
-import { extensionPath } from '../mocks';
 
 suite('refreshViews()', () => {
   const viewCount = Object.keys(extViews).length;
