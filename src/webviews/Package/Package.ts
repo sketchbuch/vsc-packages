@@ -1,8 +1,4 @@
 import * as vscode from 'vscode';
-import getTemplate from './templates/getTemplate';
-import { getHtml } from '..';
-import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
-import { NpmPackageData, PackageState, TabboxId, TabMessage, CmdCallbackData } from '../../types';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
@@ -10,6 +6,9 @@ import {
   FS_FOLDER_JS,
   EXT_GLOBALSTATE_VERSION_KEY,
 } from '../../constants';
+import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
+import { getTemplate, getHtml } from '../../templates/package';
+import { NpmPackageData, PackageState, TabboxId, TabMessage, CmdCallbackData } from '../../types';
 
 export const defaultPackageData: CmdCallbackData = { packageName: '' };
 

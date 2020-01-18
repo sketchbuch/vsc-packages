@@ -2,12 +2,6 @@ import { expect } from 'chai';
 import * as path from 'path';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
-import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
-import { GetHtml } from '../../../types';
-import * as utils from '../../../utils';
-import * as webviews from '../../../webviews';
-import getTemplate from '../../../webviews/Package/templates/getTemplate';
-import Package, { defaultPackageData } from '../../../webviews/Package/Package';
 import {
   CMD_VSCODE_OPEN_WV,
   EXT_GLOBALSTATE_KEY,
@@ -16,6 +10,11 @@ import {
   FS_FOLDER_JS,
   FS_FOLDER_RESOURCES,
 } from '../../../constants';
+import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
+import { GetHtml } from '../../../types';
+import * as templates from '../../../templates/package';
+import * as utils from '../../../utils';
+import Package, { defaultPackageData } from '../../../webviews/Package/Package';
 
 suite('Package()', () => {
   test('Creating an instance is successful', () => {
@@ -129,9 +128,9 @@ suite('Package()', () => {
 
   suite('_getHtmlForWebview()', () => {
     test('Calls getHtml() correctly', () => {
-      const spy = sinon.spy(webviews, 'getHtml');
+      const spy = sinon.spy(templates, 'getHtml');
       const getHtmlArgs: GetHtml = {
-        getTemplate,
+        getTemplate: templates.getTemplate,
         extensionPath,
         htmlData: {
           activeTab: 'readme',
