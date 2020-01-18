@@ -124,6 +124,7 @@
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^8.3.4",
     "@schemastore/package": "^0.0.5",
     "@types/axios": "^0.14.0",
     "@types/axios-mock-adapter": "^1.10.0",
@@ -135,6 +136,7 @@
     "@types/stylelint": "^9.10.1",
     "axios-mock-adapter": "^1.17.0",
     "chai": "^4.2.0",
+    "commitlint": "^8.3.5",
     "prettier": "^1.19.1",
     "sinon": "^7.3.2",
     "stylelint": "^13.0.0",
@@ -155,6 +157,7 @@
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "lint-staged",
       "pre-commit": "lint-staged"
     }
