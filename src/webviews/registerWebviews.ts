@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import Package from './Package/Package';
 import { EXT_GLOBALSTATE_KEY, EXT_GLOBALSTATE_VERSION_KEY } from '../constants';
+import { Package } from '.';
 
-const registerWebviews = (context: vscode.ExtensionContext) => {
+export const registerWebviews = (context: vscode.ExtensionContext) => {
   if (vscode.window.registerWebviewPanelSerializer) {
     vscode.window.registerWebviewPanelSerializer(Package.viewType, {
       async deserializeWebviewPanel(webviewPanel: vscode.WebviewPanel) {
@@ -18,5 +18,3 @@ const registerWebviews = (context: vscode.ExtensionContext) => {
     });
   }
 };
-
-export default registerWebviews;

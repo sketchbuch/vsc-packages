@@ -5,7 +5,7 @@ import { FS_PACKAGEJSON, FS_UTF8 } from '../../constants';
 import { GetPackageJsonResult } from '../../types';
 import { pathExists } from './pathExists';
 
-const getPackageJson = (
+export const getPackageJson = (
   workspaceFolders: vscode.WorkspaceFolder[] | undefined
 ): GetPackageJsonResult => {
   if (workspaceFolders && workspaceFolders.length > 0) {
@@ -25,5 +25,3 @@ const getPackageJson = (
 
   return null;
 };
-
-export default getPackageJson;

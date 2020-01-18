@@ -3,7 +3,7 @@ import { ExtViews, GetPackageJsonResult, TreeProviders } from '../types';
 import { getPackageJson } from '../utils';
 import { setViewContext } from './';
 
-const refreshViews = (extViews: ExtViews, treeProviders: TreeProviders): void => {
+export const refreshViews = (extViews: ExtViews, treeProviders: TreeProviders): void => {
   const packageJson: GetPackageJsonResult = getPackageJson(vscode.workspace.workspaceFolders);
 
   Object.keys(extViews).forEach(view => {
@@ -13,5 +13,3 @@ const refreshViews = (extViews: ExtViews, treeProviders: TreeProviders): void =>
     }
   });
 };
-
-export default refreshViews;

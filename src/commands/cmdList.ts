@@ -12,5 +12,3 @@ export const cmdList: Cmd[] = [
     callback: cmdOpenNpm,
   },
 ];
-
-export default cmdList;

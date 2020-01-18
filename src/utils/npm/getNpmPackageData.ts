@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { httpStatusCodes, URL_NPM_REG } from '../../constants';
 import { NpmPackageData } from '../../types';
 
-const getNpmPackageData = async (packageName: string): Promise<NpmPackageData> => {
+export const getNpmPackageData = async (packageName: string): Promise<NpmPackageData> => {
   return await axios.get(`${URL_NPM_REG}${packageName}`).then((response: AxiosResponse) => {
     if (response.status === httpStatusCodes.OK) {
       return response.data;
@@ -13,5 +13,3 @@ const getNpmPackageData = async (packageName: string): Promise<NpmPackageData> =
     );
   });
 };
-
-export default getNpmPackageData;

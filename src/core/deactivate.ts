@@ -1,3 +1,1 @@
-const deactivate = (): void => {};
-
-export default deactivate;
+export const deactivate = (): void => {};

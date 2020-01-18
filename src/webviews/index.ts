@@ -1,2 +1,2 @@
-export { default as Package } from './Package/Package';
-export { default as registerWebviews } from './registerWebviews';
+export * from './Package/Package';
+export * from './registerWebviews';

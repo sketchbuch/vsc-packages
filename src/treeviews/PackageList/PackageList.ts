@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { CMD_DISPLAY_PACKAGE } from '../../constants';
 import { GetPackageJsonResult } from '../../types';
-import PackageListItem from './PackageListItem';
+import { PackageListItem } from './';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListItem | undefined> = new vscode.EventEmitter<
@@ -78,5 +78,3 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     return Promise.resolve(children.sort());
   }
 }
-
-export default PackageList;

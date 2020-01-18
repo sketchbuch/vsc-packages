@@ -1,12 +1,10 @@
 import * as vscode from 'vscode';
-import Package from '../../webviews/Package/Package';
 import { CmdCallback, CmdCallbackData } from '../../types';
+import { Package } from '../../webviews';
 
-const cmdDisplayPackage: CmdCallback = (
+export const cmdDisplayPackage: CmdCallback = (
   data: CmdCallbackData,
   context: vscode.ExtensionContext
 ): void => {
   Package.createOrShow(data, context);
 };
-
-export default cmdDisplayPackage;

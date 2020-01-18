@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { Cmd } from '../types';
-import { PackageListItem } from '../sidebar';
+import { PackageListItem } from '../treeviews';
 
-const registerCommands = (cmdList: Cmd[], context: vscode.ExtensionContext): void => {
+export const registerCommands = (cmdList: Cmd[], context: vscode.ExtensionContext): void => {
   const { registerCommand } = vscode.commands;
 
   cmdList.forEach((cmd: Cmd) => {
@@ -32,5 +32,3 @@ const registerCommands = (cmdList: Cmd[], context: vscode.ExtensionContext): voi
     context.subscriptions.push(disposable);
   });
 };
-
-export default registerCommands;

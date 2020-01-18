@@ -1,6 +1,6 @@
 export const NONCE_CHARS: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-const getNonce = (): string => {
+export const getNonce = (): string => {
   let text: string = '';
 
   for (let i = 0; i < 32; i++) {
@@ -9,5 +9,3 @@ const getNonce = (): string => {
 
   return text;
 };
-
-export default getNonce;

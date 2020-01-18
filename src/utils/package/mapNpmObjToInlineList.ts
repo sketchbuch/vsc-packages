@@ -1,6 +1,6 @@
 import { InlineListSnippet, isContributor, NpmContributors, NpmMaintainer } from '../../types';
 
-const mapNpmObjToInlineList = (
+export const mapNpmObjToInlineList = (
   maintainers: (NpmMaintainer | NpmContributors)[]
 ): InlineListSnippet[] => {
   return maintainers.map(
@@ -17,5 +17,3 @@ const mapNpmObjToInlineList = (
     }
   );
 };
-
-export default mapNpmObjToInlineList;

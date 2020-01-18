@@ -9,5 +9,3 @@ export const pathExists = (pathStr: string): boolean => {
 
   return true;
 };
-
-export default pathExists;

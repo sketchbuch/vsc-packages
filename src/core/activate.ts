@@ -14,5 +14,3 @@ export const setupExt = (cmdList: Cmd[], extViews: ExtViews, context: vscode.Ext
 export const activate = (context: vscode.ExtensionContext): void => {
   setupExt(cmdList, extViews, context);
 };
-
-export default activate;

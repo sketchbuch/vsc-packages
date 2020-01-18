@@ -1,4 +1,8 @@
 import * as vscode from 'vscode';
+import { FS_PACKAGEJSON } from '../constants';
+import { getPackageJson } from '../utils';
+import { PackageList } from '../treeviews';
+import { refreshViews, setViewContext } from '.';
 import {
   ExtViewList,
   ExtViews,
@@ -6,11 +10,8 @@ import {
   TreeProviders,
   WorkspaceFolders,
 } from '../types';
-import { FS_PACKAGEJSON } from '../constants';
-import { getPackageJson } from '../utils';
-import { PackageList, refreshViews, setViewContext } from '.';
 
-const setupSidebar = (
+export const setupSidebar = (
   extViews: ExtViews,
   context: vscode.ExtensionContext,
   workspaceFolders: WorkspaceFolders
@@ -51,5 +52,3 @@ const setupSidebar = (
     context.subscriptions.push(watcher);
   }
 };
-
-export default setupSidebar;

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { FS_FOLDER_IMAGES_DARK, FS_FOLDER_IMAGES_LIGHT } from '../constants';
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
-import { PackageList } from '../sidebar';
+import { PackageList } from '../treeviews';
 
 export type ExtViewList =
   | 'dependencies'

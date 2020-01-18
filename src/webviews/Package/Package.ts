@@ -12,7 +12,7 @@ import { NpmPackageData, PackageState, TabboxId, TabMessage, CmdCallbackData } f
 
 export const defaultPackageData: CmdCallbackData = { packageName: '' };
 
-class Package {
+export class Package {
   private _disposables: vscode.Disposable[] = [];
   private readonly _extensionPath: string;
   private readonly _panel: vscode.WebviewPanel;
@@ -185,5 +185,3 @@ class Package {
     });
   }
 }
-
-export default Package;
