@@ -4,7 +4,7 @@
 
 A VSC extension to list packages from package.json and search for and install packages.
 
-**This is a work-in-progress and began so that I could learn how to make webviews for VSC extensions.**
+**This is a work-in-progress and began so that I could learn how to make web views and tree views for VSC extensions.**
 
 **Installation of packages is currently not possible but coming soon**
 
