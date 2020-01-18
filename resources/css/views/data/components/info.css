@@ -23,10 +23,6 @@
 }
 
 .data__info li:not(:first-child) {
-  margin-left: -2px;
-}
-
-.data__info li:not(:first-child) {
   border-left: 1px solid hsla(0, 0%, 50%, 0.7);
   margin-left: 14px;
   padding-left: 14px;

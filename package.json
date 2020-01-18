@@ -114,6 +114,7 @@
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
     "compile": "tsc --project ./",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
+    "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:ts": "yarn lint:ts:src && yarn lint:ts:test",
     "lint:ts:src": "tslint --config ./tslint.json --fix './src/**/*.ts' --exclude './src/test/**/*'",
     "lint:ts:test": "tslint --config ./src/test/tslint.json --fix './src/test/**/*.ts'",
@@ -131,10 +132,13 @@
     "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
     "@types/sinon": "^7.0.13",
+    "@types/stylelint": "^9.10.1",
     "axios-mock-adapter": "^1.17.0",
     "chai": "^4.2.0",
     "prettier": "^1.19.1",
     "sinon": "^7.3.2",
+    "stylelint": "^13.0.0",
+    "stylelint-config-recommended": "^3.0.0",
     "ts-mockito": "^2.3.1",
     "ts-node": "^8.5.4",
     "tslint": "^5.12.1",
@@ -144,7 +148,27 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "husky": "^4.0.10",
+    "lint-staged": "^9.5.0",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "lint-staged",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src, resources/js}/**/*.{js,ts}": [
+      "eslint --config .eslintrc --fix --max-warnings=0",
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "redources/css/**/*.css": [
+      "yarn lint:css",
+      "yarn lint:prettier",
+      "git add"
+    ]
   }
 }

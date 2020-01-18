@@ -31,10 +31,6 @@
   text-decoration: none;
 }
 
-.table-list__item:last-child .table-list__item-element {
-  border-bottom: 1px solid hsla(0, 0%, 53%, 0.45);
-}
-
 .table-list__item-element:hover,
 .table-list__item-element:focus,
 .table-list__item-element:active {
@@ -45,6 +41,10 @@
 
 .table-list__item-element:active {
   background: hsla(0, 0%, 53%, 0.09);
+}
+
+.table-list__item:last-child .table-list__item-element {
+  border-bottom: 1px solid hsla(0, 0%, 53%, 0.45);
 }
 
 .table-list__item-value {
