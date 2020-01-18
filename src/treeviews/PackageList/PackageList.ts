@@ -24,6 +24,10 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     return element;
   }
 
+  getParent(): vscode.ProviderResult<PackageListItem> {
+    return null;
+  }
+
   getChildren(): Thenable<PackageListItem[]> {
     const children: PackageListItem[] = [];
 
