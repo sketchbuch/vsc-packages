@@ -165,7 +165,7 @@
       "prettier --config .prettierrc --write",
       "git add"
     ],
-    "redources/css/**/*.css": [
+    "resources/css/**/*.css": [
       "yarn lint:css",
       "yarn lint:prettier",
       "git add"
