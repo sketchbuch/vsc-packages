@@ -4,7 +4,7 @@ import * as sinon from 'sinon';
 import * as webviews from '../../webviews';
 import { extViews } from '../../constants';
 import { mockCmds, mockContext } from '../mocks';
-import { setupExt } from '../../core/activate';
+import { setupExt } from '../../core';
 
 suite('activate()', function() {
   test('setupExt() sets up extension correctly', function() {
