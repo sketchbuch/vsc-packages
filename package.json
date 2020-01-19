@@ -36,6 +36,10 @@
           "dark": "./resources/images/dark/activitybar-dark.svg"
         },
         "title": "Open the NPM Page for this Package"
+      },
+      {
+        "command": "vsc-packages-search-packages",
+        "title": "Packages: Search NPM"
       }
     ],
     "menus": {
@@ -58,17 +62,7 @@
             "dark": "./resources/images/dark/activitybar-dark.svg"
           },
           "title": "Open the NPM Page for this Package",
-          "when": "view == vsc-packages-activitybar-deps && viewItem == package-list-item"
-        },
-        {
-          "command": "vsc-packages-open-npmurl",
-          "group": "inline",
-          "icon": {
-            "light": "./resources/images/light/activitybar-light.svg",
-            "dark": "./resources/images/dark/activitybar-dark.svg"
-          },
-          "title": "Open the NPM Page for this Package",
-          "when": "view == vsc-packages-activitybar-dev-deps && viewItem == package-list-item"
+          "when": "viewItem == package-list-item"
         }
       ]
     },

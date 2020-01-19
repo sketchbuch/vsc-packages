@@ -1,7 +1,6 @@
 export const extensionPath = '/test/path';
 export const packageName = 'vsc-quokka-statusbar';
 
-export { default as mockCmds } from './mockCmds';
 export { default as mockContext } from './mockContext';
 export { default as mockContributors } from './mockContributors';
 export { default as mockInlineListContributors } from './mockInlineListContributors';

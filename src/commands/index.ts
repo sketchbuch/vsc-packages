@@ -1,3 +1,2 @@
-export * from './callbacks';
-export * from './cmdList';
+export * from './cmds';
 export * from './registerCommands';

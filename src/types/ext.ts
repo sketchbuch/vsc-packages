@@ -14,11 +14,19 @@ export interface CmdCallbackData {
   packageName: string;
   packageVersion?: string;
 }
-export type CmdCallback = (data: CmdCallbackData, context: vscode.ExtensionContext) => void;
+export type CmdCallbackItem = (
+  packageName: string,
+  packageVersion: string,
+  context: vscode.ExtensionContext
+) => void;
+export type CmdCallbackItemBtn = (packageName: string) => void;
+export type CmdCallback = (context: vscode.ExtensionContext) => void;
 
 export interface Cmd {
   cmd: string;
-  callback: CmdCallback;
+  callback?: CmdCallback;
+  callbackItem?: CmdCallbackItem;
+  callbackItemBtn?: CmdCallbackItemBtn;
 }
 
 export type ImgType = typeof FS_FOLDER_IMAGES_DARK | typeof FS_FOLDER_IMAGES_LIGHT;
