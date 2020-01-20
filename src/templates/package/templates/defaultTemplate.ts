@@ -1,8 +1,11 @@
 import { FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constants';
-import { GetTemplate } from '../../../types';
-import { detailView, errorView, loadingView } from '../';
+import { GetTemplate, PackageHtmlData } from '../../../types';
+import { detailView, errorView, loadingView } from '..';
 
-export const getTemplate = ({ cssPath, htmlData, nonce, scriptPath }: GetTemplate) => {
+export const defaultTemplate = (
+  { cssPath, nonce, scriptPath }: GetTemplate,
+  htmlData: PackageHtmlData
+): string => {
   const { activeTab, packageData, state } = htmlData;
   let content: string;
 

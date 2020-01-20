@@ -11,10 +11,11 @@ import {
   FS_FOLDER_RESOURCES,
 } from '../../../constants';
 import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mocks';
-import { GetHtml } from '../../../types';
-import * as templates from '../../../templates/package';
+import { GetHtml, PackageHtmlData } from '../../../types';
+import * as templates from '../../../templates';
 import * as utils from '../../../utils';
 import { Package, defaultPackageData } from '../../../webviews';
+import { defaultTemplate } from '../../../templates/package';
 
 suite('Package()', () => {
   test('Creating an instance is successful', () => {
@@ -129,8 +130,8 @@ suite('Package()', () => {
   suite('_getHtmlForWebview()', () => {
     test('Calls getHtml() correctly', () => {
       const spy = sinon.spy(templates, 'getHtml');
-      const getHtmlArgs: GetHtml = {
-        getTemplate: templates.getTemplate,
+      const getHtmlArgs: GetHtml<PackageHtmlData> = {
+        template: defaultTemplate,
         extensionPath,
         htmlData: {
           activeTab: 'readme',

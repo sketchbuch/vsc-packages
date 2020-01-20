@@ -1,23 +1,23 @@
 import { expect } from 'chai';
-import { getTemplate } from '../../../../templates/package';
-import { GetTemplate } from '../../../../types';
+import { defaultTemplate } from '../../../../templates/package';
+import { GetTemplate, PackageHtmlData } from '../../../../types';
 import { mockPackageData } from '../../../mocks';
 
-suite('Package getTemplate()', () => {
+suite('Package defaultTemplate()', () => {
+  const htmlData: PackageHtmlData = {
+    activeTab: 'readme',
+    packageData: mockPackageData,
+    state: {
+      data: undefined,
+      error: undefined,
+    },
+  };
   const props: GetTemplate = {
     cssPath: '',
-    htmlData: {
-      activeTab: 'readme',
-      packageData: mockPackageData,
-      state: {
-        data: undefined,
-        error: undefined,
-      },
-    },
     nonce: '3w342erf32',
     scriptPath: '',
   };
-  const result = getTemplate(props);
+  const result = defaultTemplate(props, htmlData);
 
   test('Returns a string', () => {
     expect(result).to.be.a('string');

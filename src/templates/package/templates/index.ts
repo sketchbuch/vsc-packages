@@ -1,2 +1,1 @@
-export * from './getHtml';
-export * from './getTemplate';
+export * from './defaultTemplate';

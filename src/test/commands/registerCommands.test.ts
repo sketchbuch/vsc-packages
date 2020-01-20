@@ -7,7 +7,7 @@ suite('registerCommands()', () => {
   test('Registers the correct number of commands', () => {
     const stub = sinon.stub(vscode.commands, 'registerCommand');
     registerCommands(mockContext);
-    sinon.assert.callCount(stub, 1);
+    sinon.assert.callCount(stub, 3);
     stub.restore();
   });
 });

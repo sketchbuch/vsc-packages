@@ -6,9 +6,17 @@ import {
   FS_FOLDER_JS,
   EXT_GLOBALSTATE_VERSION_KEY,
 } from '../../constants';
+import { defaultTemplate } from '../../templates/package';
+import { getHtml } from '../../templates';
 import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
-import { getTemplate, getHtml } from '../../templates/package';
-import { NpmPackageData, PackageState, TabboxId, TabMessage, CmdCallbackData } from '../../types';
+import {
+  CmdCallbackData,
+  NpmPackageData,
+  PackageHtmlData,
+  PackageState,
+  TabboxId,
+  TabMessage,
+} from '../../types';
 
 export const defaultPackageData: CmdCallbackData = { packageName: '' };
 
@@ -150,9 +158,9 @@ export class Package {
   }
 
   private _getHtmlForWebview(packageData: CmdCallbackData, state: PackageState) {
-    return getHtml({
+    return getHtml<PackageHtmlData>({
       extensionPath: this._extensionPath,
-      getTemplate,
+      template: defaultTemplate,
       htmlData: {
         activeTab: Package.activeTab,
         packageData,
