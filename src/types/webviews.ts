@@ -1,3 +1,4 @@
+import * as vscode from 'vscode';
 import { PackageState, TabboxId, CmdCallbackData } from './';
 
 export interface GetTemplate {
@@ -17,4 +18,14 @@ export interface GetHtml {
   extensionPath: string;
   getTemplate: (args: GetTemplate) => string;
   htmlData: HtmlData;
+}
+
+export interface SearchWebView {
+  createOrShow: (context: vscode.ExtensionContext) => void;
+  dispose: () => void;
+  getHtmlForWebview: () => void;
+  panel?: vscode.WebviewPanel;
+  readonly viewType: string;
+  revive: (context: vscode.ExtensionContext) => void;
+  update: () => void;
 }

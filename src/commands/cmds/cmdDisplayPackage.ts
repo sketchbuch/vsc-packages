@@ -1,8 +1,7 @@
 import * as vscode from 'vscode';
-import { CmdCallbackItem } from '../../types';
 import { Package } from '../../webviews';
 
-export const cmdDisplayPackage: CmdCallbackItem = (
+export const cmdDisplayPackage = (
   packageName: string,
   packageVersion: string,
   context: vscode.ExtensionContext

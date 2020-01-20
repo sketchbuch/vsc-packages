@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CmdCallback } from '../../types';
+import { searchWebview } from '../../webviews';
 
-export const cmdSearchNpm: CmdCallback = (context: vscode.ExtensionContext): void => {
-  console.log('### search npm');
+export const cmdSearchNpm = (context: vscode.ExtensionContext): void => {
+  searchWebview.createOrShow(context);
 };

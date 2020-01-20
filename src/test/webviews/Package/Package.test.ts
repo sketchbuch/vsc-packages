@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
 import {
-  CMD_VSCODE_OPEN_WV,
+  CMD_DISPLAY_PACKAGE_WV,
   EXT_GLOBALSTATE_KEY,
   EXT_GLOBALSTATE_VERSION_KEY,
   FS_FOLDER_CSS,
@@ -27,7 +27,7 @@ suite('Package()', () => {
 
       expect(Package.currentPanel).to.equal(undefined);
       expect(Package.currentPackageData).to.eql(defaultPackageData);
-      expect(Package.viewType).to.equal(CMD_VSCODE_OPEN_WV);
+      expect(Package.viewType).to.equal(CMD_DISPLAY_PACKAGE_WV);
     });
 
     test('Calls panel.onDidDispose() && panel.onDidChangeViewState()', () => {

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import {
-  CMD_VSCODE_OPEN_WV,
+  CMD_DISPLAY_PACKAGE_WV,
   EXT_GLOBALSTATE_KEY,
   FS_FOLDER_CSS,
   FS_FOLDER_JS,
@@ -23,7 +23,7 @@ export class Package {
   public static currentPackageData: CmdCallbackData = { ...defaultPackageData };
   public static currentPanel: Package | undefined;
   public static activeTab: TabboxId = 'readme';
-  public static readonly viewType = CMD_VSCODE_OPEN_WV;
+  public static readonly viewType = CMD_DISPLAY_PACKAGE_WV;
 
   public constructor(
     packageData: CmdCallbackData,
