@@ -4,10 +4,18 @@ import { SearchData } from '../../../types';
 export const searchView = (data: SearchData) => {
   return `
     <section class="search view">
-      <form class="search__content">
-        <h1 class="search__headline">Search</h1>
-        <input id="${EXT}-search" name="${EXT}-search" placeholder="Search NPM for packages..." type="text" />
-        <button type="submit">Search</button>
-      </form>
+      <div class="search__content">
+        <input
+          autocapitalize="off"
+          autocorrect="off"
+          autofocus
+          class="search__input"
+          id="${EXT}-search"
+          name="${EXT}-search"
+          placeholder="Search NPM for packages..."
+          spellcheck="false"
+          type="text"
+        />
+      </div>
     </section>`;
 };

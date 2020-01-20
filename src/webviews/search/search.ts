@@ -29,14 +29,13 @@ export const search = (): WebView => {
       }
     );
 
-    /* panel.webview.onDidReceiveMessage(
-      (message: TabMessage) => {
-        // activeTab = message.activeTab;
-        //Package.updatePanelContent(packageData, this);
+    panel.webview.onDidReceiveMessage(
+      message => {
+        console.log('### message', message);
       },
       undefined,
       curContext.subscriptions
-    ); */
+    );
 
     update();
 
