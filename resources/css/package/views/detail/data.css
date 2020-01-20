@@ -1,7 +1,12 @@
 @import './components/description.css';
 @import './components/info.css';
+@import './components/inline-list.css';
+@import './components/message.css';
 @import './components/readme.css';
+@import './components/tabbox.css';
+@import './components/table-list.css';
 @import './components/version.css';
+@import './components/view.css';
 
 .data__content {
   background: hsla(0, 0%, 53%, 0.1);

@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
+import { defaultTemplate as template } from '../../templates/search';
+import { getHtml } from '../../templates';
 import { getResourceUri } from '../../utils';
-import { WebView } from '../../types';
+import { WebView, SearchHtmlData } from '../../types';
 
 export const search = (): WebView => {
   const disposables: vscode.Disposable[] = [];
@@ -70,15 +72,16 @@ export const search = (): WebView => {
 
   const updatePanelContent = (): void => {
     if (panel) {
-      /* panel.webview.html = getHtml({
+      panel.webview.html = getHtml<SearchHtmlData>({
         extensionPath: curContext.extensionPath,
-        getTemplate,
-        PackageHtmlData: {
-          activeTab: Package.activeTab,
-          packageData,
-          state,
+        template,
+        htmlData: {
+          state: {
+            data: undefined,
+            error: undefined,
+          },
         },
-      }); */
+      });
     }
   };
 

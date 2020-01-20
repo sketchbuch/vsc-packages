@@ -1,0 +1,7 @@
+@import './components/columns.css';
+@import './components/loader.css';
+@import './components/tags.css';
+@import './components/vsc-loader.css';
+
+@import './views/error.css';
+@import './views/loading.css';

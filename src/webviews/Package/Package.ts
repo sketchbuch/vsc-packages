@@ -6,7 +6,7 @@ import {
   FS_FOLDER_JS,
   EXT_GLOBALSTATE_VERSION_KEY,
 } from '../../constants';
-import { defaultTemplate } from '../../templates/package';
+import { defaultTemplate as template } from '../../templates/package';
 import { getHtml } from '../../templates';
 import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
 import {
@@ -160,7 +160,7 @@ export class Package {
   private _getHtmlForWebview(packageData: CmdCallbackData, state: PackageState) {
     return getHtml<PackageHtmlData>({
       extensionPath: this._extensionPath,
-      template: defaultTemplate,
+      template,
       htmlData: {
         activeTab: Package.activeTab,
         packageData,

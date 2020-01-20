@@ -1,4 +1,2 @@
-@import './views/common/common.css';
-@import './views/data/data.css';
-@import './views/error/error.css';
-@import './views/loading/loading.css';
+@import './shared/shared.css';
+@import './package/package.css';
