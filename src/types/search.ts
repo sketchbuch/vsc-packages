@@ -1,5 +1,7 @@
+export type SearchData = {};
+
 export interface SearchState {
-  data?: {};
+  data?: SearchData;
   error?: Error;
 }
 export interface SearchHtmlData {

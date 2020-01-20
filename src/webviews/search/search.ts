@@ -3,11 +3,15 @@ import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../const
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri } from '../../utils';
-import { WebView, SearchHtmlData } from '../../types';
+import { WebView, SearchHtmlData, SearchState } from '../../types';
 
 export const search = (): WebView => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_SEARCH_PACKAGES_WV;
+  const state: SearchState = {
+    data: undefined,
+    error: undefined,
+  };
   let curContext: vscode.ExtensionContext;
   let panel: undefined | vscode.WebviewPanel = undefined;
 
@@ -61,6 +65,10 @@ export const search = (): WebView => {
 
   const loadPanelContent = (): void => {
     updatePanelContent();
+    setTimeout(() => {
+      state.data = {};
+      updatePanelContent();
+    }, 2000);
   };
 
   const setStateForRevival = (): void => {};
@@ -76,10 +84,7 @@ export const search = (): WebView => {
         extensionPath: curContext.extensionPath,
         template,
         htmlData: {
-          state: {
-            data: undefined,
-            error: undefined,
-          },
+          state,
         },
       });
     }

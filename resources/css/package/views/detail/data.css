@@ -6,7 +6,6 @@
 @import './components/tabbox.css';
 @import './components/table-list.css';
 @import './components/version.css';
-@import './components/view.css';
 
 .data__content {
   background: hsla(0, 0%, 53%, 0.1);
