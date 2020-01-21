@@ -6,13 +6,13 @@ export const defaultTemplate = (
   { cssPath, nonce, scriptPath }: GetTemplate,
   htmlData: PackageHtmlData
 ): string => {
-  const { activeTab, packageData, state } = htmlData;
+  const { packageData, state } = htmlData;
   let content: string;
 
   if (state.error) {
     content = errorView(packageData, state.error);
   } else if (state.data) {
-    content = detailView(packageData, activeTab, state.data);
+    content = detailView(packageData, state.activeTab, state.data);
   } else {
     content = loadingView(packageData);
   }

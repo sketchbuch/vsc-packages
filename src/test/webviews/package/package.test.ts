@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+/* import { expect } from 'chai';
 import * as path from 'path';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
@@ -149,3 +149,4 @@ suite('Package()', () => {
     });
   });
 });
+ */

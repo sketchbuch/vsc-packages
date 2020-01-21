@@ -1,16 +1,13 @@
 import * as vscode from 'vscode';
-import { Package } from '../../webviews';
+import { packageWebview } from '../../webviews';
 
 export const cmdDisplayPackage = (
   packageName: string,
   packageVersion: string,
   context: vscode.ExtensionContext
 ): void => {
-  Package.createOrShow(
-    {
-      packageName,
-      packageVersion,
-    },
-    context
-  );
+  packageWebview.show(context, {
+    packageName,
+    packageVersion,
+  });
 };

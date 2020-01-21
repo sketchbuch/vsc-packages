@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
 
-export type PostMessageActions = 'search';
+export type PostMessageActions = 'search' | 'display-package';
 
-export interface PostMessage {
+export interface PostMessage<T> {
   action: PostMessageActions;
-  payload: string;
+  payload: T;
 }
 
 export interface GetTemplate {
@@ -19,7 +19,8 @@ export interface GetHtml<T> {
   htmlData: T;
 }
 
-export interface WebView {
-  revive: (context: vscode.ExtensionContext) => void;
-  show: (context: vscode.ExtensionContext) => void;
+export interface WebView<T> {
+  getViewType: () => string;
+  revive: (context: vscode.ExtensionContext, revivedPanel: vscode.WebviewPanel, data: T) => void;
+  show: (context: vscode.ExtensionContext, data: T) => void;
 }

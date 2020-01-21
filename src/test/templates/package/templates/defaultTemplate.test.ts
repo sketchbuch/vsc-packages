@@ -5,9 +5,9 @@ import { mockPackageData } from '../../../mocks';
 
 suite('Package defaultTemplate()', () => {
   const htmlData: PackageHtmlData = {
-    activeTab: 'readme',
     packageData: mockPackageData,
     state: {
+      activeTab: 'readme',
       data: undefined,
       error: undefined,
     },

@@ -9,7 +9,9 @@
       if (event.key === 'Enter') {
         vscode.postMessage({
           action: 'search',
-          payload: event.target.value,
+          payload: {
+            term: event.target.value,
+          }
         });
       }
     }

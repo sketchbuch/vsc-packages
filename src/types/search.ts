@@ -5,6 +5,11 @@ export interface SearchState {
   error?: Error;
   term: string;
 }
+
+export interface SearchPmPayload {
+  term: string;
+}
+
 export interface SearchHtmlData {
   state: SearchState;
 }

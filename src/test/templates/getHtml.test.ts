@@ -10,9 +10,9 @@ suite('getHtml()', () => {
     template: args => '',
     extensionPath,
     htmlData: {
-      activeTab: 'readme',
       packageData: mockPackageData,
       state: {
+        activeTab: 'readme',
         data: undefined,
         error: undefined,
       },

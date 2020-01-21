@@ -1,11 +1,11 @@
 import * as sinon from 'sinon';
 import { cmdDisplayPackage } from '../../../commands';
 import { mockContext, packageName } from '../../mocks';
-import { Package } from '../../../webviews';
+import { packageWebview } from '../../../webviews';
 
 suite('cmdDisplayPackage()', () => {
   test('Calls Package.createOrShow() correctly', () => {
-    const stub = sinon.stub(Package, 'createOrShow');
+    const stub = sinon.stub(packageWebview, 'show');
     cmdDisplayPackage(packageName, '1.0.0', mockContext);
 
     sinon.assert.callCount(stub, 1);
