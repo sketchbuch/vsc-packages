@@ -9,8 +9,6 @@ export const search = (): WebView<{}> => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_SEARCH_PACKAGES_WV;
   const state: SearchState = {
-    data: undefined,
-    error: undefined,
     term: '',
   };
   let curContext: vscode.ExtensionContext;
@@ -78,16 +76,9 @@ export const search = (): WebView<{}> => {
 
   const loadPanelContent = (): void => {
     updatePanelContent();
-    setTimeout(() => {
-      state.data = {};
-      updatePanelContent();
-    }, 2000);
   };
 
-  // const setStateForRevival = (): void => {};
-
   const update = (): void => {
-    // setStateForRevival();
     loadPanelContent();
   };
 
@@ -108,8 +99,6 @@ export const search = (): WebView<{}> => {
 
     show: (context: vscode.ExtensionContext, data: {}): void => {
       curContext = context;
-
-      // setStateForRevival();
 
       if (curPanel === undefined) {
         createPanel();

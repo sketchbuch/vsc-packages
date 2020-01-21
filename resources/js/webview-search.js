@@ -7,12 +7,16 @@
       event.preventDefault()
 
       if (event.key === 'Enter') {
-        vscode.postMessage({
-          action: 'search',
-          payload: {
-            term: event.target.value,
-          }
-        });
+        const {value} = event.target
+
+        if (value !== '') {
+          vscode.postMessage({
+            action: 'search',
+            payload: {
+              term: value,
+            }
+          });
+        }
       }
     }
 

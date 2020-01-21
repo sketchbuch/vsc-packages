@@ -1,21 +1,13 @@
 import { FS_WEBVIEW_SEARCH_CSS, FS_WEBVIEW_SEARCH_JS } from '../../../constants';
 import { GetTemplate, SearchHtmlData } from '../../../types';
-import { searchView, loadingView } from '..';
+import { searchView } from '..';
 
 export const defaultTemplate = (
   { cssPath, nonce, scriptPath }: GetTemplate,
   htmlData: SearchHtmlData
 ): string => {
   const { state } = htmlData;
-  let content: string = '';
-
-  if (state.error) {
-    // content = errorView(packageData, state.error);
-  } else if (state.data) {
-    content = searchView(state.term);
-  } else {
-    content = loadingView();
-  }
+  const content: string = searchView(state.term);
 
   return `
     <!DOCTYPE html>
