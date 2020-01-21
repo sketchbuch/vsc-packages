@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import { extensionPath, mockPackageData } from '../mocks';
 import { getHtml } from '../../templates';
 import { GetHtml, PackageHtmlData } from '../../types';
@@ -37,13 +37,20 @@ suite('getHtml()', () => {
     spy.restore();
   });
 
-  test.skip('Calls template() correctly', () => {
-    /*     const spy = sinon.spy(props, 'template');
+  test('Calls template() correctly', () => {
+    const spy = sinon.spy(props, 'template');
     getHtml(props);
     sinon.assert.calledOnce(spy);
-    const args = spy.getCall(0).args[0];
-    expect(args.htmlData.packageData.packageName).to.be.eql(packageName);
-    assert.isString(args.nonce);
-    spy.restore(); */
+    const args = spy.getCall(0).args;
+    assert.isDefined(args[0].cssPath);
+    assert.isString(args[0].cssPath);
+    assert.isDefined(args[0].nonce);
+    assert.isString(args[0].nonce);
+    assert.isDefined(args[0].scriptPath);
+    assert.isString(args[0].scriptPath);
+    expect(args[1].packageData.packageName).to.be.eql(mockPackageData.packageName);
+    expect(args[1].packageData.packageVersion).to.be.eql(mockPackageData.packageVersion);
+    expect(args[1].state.activeTab).to.be.eql(props.htmlData.state.activeTab);
+    spy.restore();
   });
 });

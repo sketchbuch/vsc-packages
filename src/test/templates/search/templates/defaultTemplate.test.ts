@@ -1,15 +1,13 @@
 import { expect } from 'chai';
-import { defaultTemplate } from '../../../../templates/package';
-import { GetTemplate, PackageHtmlData } from '../../../../types';
-import { mockPackageData } from '../../../mocks';
+import { defaultTemplate } from '../../../../templates/search';
+import { GetTemplate, SearchHtmlData } from '../../../../types';
 
-suite('package - defaultTemplate()', () => {
-  const htmlData: PackageHtmlData = {
-    packageData: mockPackageData,
+suite('search - defaultTemplate()', () => {
+  const htmlData: SearchHtmlData = {
     state: {
-      activeTab: 'readme',
       data: undefined,
       error: undefined,
+      term: '',
     },
   };
   const props: GetTemplate = {
