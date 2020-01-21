@@ -12,7 +12,7 @@ export const defaultTemplate = (
   if (state.error) {
     // content = errorView(packageData, state.error);
   } else if (state.data) {
-    content = searchView(state.data);
+    content = searchView(state.term);
   } else {
     content = loadingView();
   }

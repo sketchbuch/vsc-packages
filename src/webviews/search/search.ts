@@ -3,7 +3,7 @@ import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../const
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri } from '../../utils';
-import { WebView, SearchHtmlData, SearchState } from '../../types';
+import { WebView, SearchHtmlData, SearchState, PostMessage } from '../../types';
 
 export const search = (): WebView => {
   const disposables: vscode.Disposable[] = [];
@@ -11,6 +11,7 @@ export const search = (): WebView => {
   const state: SearchState = {
     data: undefined,
     error: undefined,
+    term: '',
   };
   let curContext: vscode.ExtensionContext;
   let panel: undefined | vscode.WebviewPanel = undefined;
@@ -30,8 +31,13 @@ export const search = (): WebView => {
     );
 
     panel.webview.onDidReceiveMessage(
-      message => {
-        console.log('### message', message);
+      (message: PostMessage) => {
+        switch (message.action) {
+          case 'search':
+          default:
+            state.term = message.payload;
+            break;
+        }
       },
       undefined,
       curContext.subscriptions
@@ -44,6 +50,7 @@ export const search = (): WebView => {
       () => {
         if (panel && panel.visible) {
           update();
+          updatePanelContent();
         }
       },
       null,
@@ -79,6 +86,7 @@ export const search = (): WebView => {
 
   const updatePanelContent = (): void => {
     if (panel) {
+      console.log('### updatePanelContent()', state.term);
       panel.webview.html = getHtml<SearchHtmlData>({
         extensionPath: curContext.extensionPath,
         template,

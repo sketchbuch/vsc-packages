@@ -1,5 +1,12 @@
 import * as vscode from 'vscode';
 
+export type PostMessageActions = 'search';
+
+export interface PostMessage {
+  action: PostMessageActions;
+  payload: string;
+}
+
 export interface GetTemplate {
   cssPath: string;
   nonce: string;

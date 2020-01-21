@@ -1,7 +1,6 @@
 import { EXT } from '../../../constants';
-import { SearchData } from '../../../types';
 
-export const searchView = (data: SearchData) => {
+export const searchView = (term: string) => {
   return `
     <section class="search view">
       <div class="search__content">
@@ -15,6 +14,7 @@ export const searchView = (data: SearchData) => {
           placeholder="Search NPM for packages..."
           spellcheck="false"
           type="text"
+          value="${term}"
         />
       </div>
     </section>`;
