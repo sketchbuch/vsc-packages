@@ -1,13 +1,9 @@
 import { FS_WEBVIEW_SEARCH_CSS, FS_WEBVIEW_SEARCH_JS } from '../../../constants';
-import { GetTemplate, SearchHtmlData } from '../../../types';
-import { searchView } from '..';
+import { GetTemplate } from '../../../types';
+// import { searchView } from '..';
 
-export const defaultTemplate = (
-  { cssPath, nonce, scriptPath }: GetTemplate,
-  htmlData: SearchHtmlData
-): string => {
-  const { state } = htmlData;
-  const content: string = searchView(state.term, state.loading);
+export const listTemplate = ({ cssPath, nonce, scriptPath }: GetTemplate): string => {
+  const content: string = '<p>List</p>';
 
   return `
     <!DOCTYPE html>
@@ -21,7 +17,7 @@ export const defaultTemplate = (
           style-src 'self' vscode-resource: 'nonce-${nonce}'";
         >
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Packages: Search</title>
+        <title>Packages: Search Result</title>
         <link href="${cssPath}/${FS_WEBVIEW_SEARCH_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
       </head>
 

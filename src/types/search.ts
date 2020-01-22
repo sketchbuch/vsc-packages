@@ -1,6 +1,8 @@
 export type SearchData = {};
 
 export interface SearchState {
+  error?: Error;
+  loading: boolean;
   term: string;
 }
 

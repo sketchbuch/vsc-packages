@@ -1,10 +1,11 @@
 import { EXT } from '../../../constants';
 
-export const searchView = (term: string) => {
+export const searchView = (term: string, loading: boolean) => {
   return `
     <section class="search view">
       <div class="search__content">
         <input
+          ${loading && 'disabled="true"'}
           autocapitalize="off"
           autocorrect="off"
           autofocus
@@ -16,6 +17,7 @@ export const searchView = (term: string) => {
           type="text"
           value="${term}"
         />
+        ${loading === true && `<div class="vsc-loader"></div>`}
       </div>
     </section>`;
 };

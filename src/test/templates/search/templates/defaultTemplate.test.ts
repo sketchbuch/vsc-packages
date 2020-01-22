@@ -5,6 +5,7 @@ import { GetTemplate, SearchHtmlData } from '../../../../types';
 suite('search - defaultTemplate()', () => {
   const htmlData: SearchHtmlData = {
     state: {
+      loading: false,
       term: '',
     },
   };

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
-import { defaultTemplate as template } from '../../templates/search';
+import { defaultTemplate } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
@@ -9,6 +9,8 @@ export const search = (): WebView<{}> => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_SEARCH_PACKAGES_WV;
   const state: SearchState = {
+    error: undefined,
+    loading: false,
     term: '',
   };
   let curContext: vscode.ExtensionContext;
@@ -39,6 +41,7 @@ export const search = (): WebView<{}> => {
             case 'search':
             default:
               state.term = message.payload.term;
+              state.loading = true;
               break;
           }
 
@@ -75,7 +78,9 @@ export const search = (): WebView<{}> => {
   };
 
   const loadPanelContent = (): void => {
-    updatePanelContent();
+    if (!state.loading) {
+      updatePanelContent();
+    }
   };
 
   const update = (): void => {
@@ -86,7 +91,8 @@ export const search = (): WebView<{}> => {
     if (curPanel) {
       curPanel.webview.html = getHtml<SearchHtmlData>({
         extensionPath: curContext.extensionPath,
-        template,
+        // template: state.term ? listTemplate : defaultTemplate,
+        template: defaultTemplate,
         htmlData: {
           state,
         },
