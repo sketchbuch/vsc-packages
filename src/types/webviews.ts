@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export type PostMessageActions = 'search' | 'display-package';
+export type PostMessageActions = 'clear' | 'display-package' | 'search';
 
 export interface PostMessage<T> {
   action: PostMessageActions;

@@ -1,5 +1,10 @@
 import * as vscode from 'vscode';
-import { CMD_DISPLAY_PACKAGE, CMD_OPEN_NPM, CMD_SEARCH_PACKAGES } from '../constants';
+import {
+  CMD_DISPLAY_PACKAGE,
+  CMD_OPEN_NPM,
+  CMD_SEARCH_PACKAGES,
+  CMD_SEARCH_RESULTS,
+} from '../constants';
 import { cmdDisplayPackage, cmdOpenNpm, cmdSearchNpm } from '.';
 
 export const registerCommands = (context: vscode.ExtensionContext): void => {
@@ -19,6 +24,12 @@ export const registerCommands = (context: vscode.ExtensionContext): void => {
 
   context.subscriptions.push(
     registerCommand(CMD_SEARCH_PACKAGES, (): void => {
+      cmdSearchNpm(context);
+    })
+  );
+
+  context.subscriptions.push(
+    registerCommand(CMD_SEARCH_RESULTS, (): void => {
       cmdSearchNpm(context);
     })
   );

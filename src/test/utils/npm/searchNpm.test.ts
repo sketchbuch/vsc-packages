@@ -1,9 +1,9 @@
+import { expect } from 'chai';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { expect } from 'chai';
 import { httpStatusCodes, URL_NPM_SEARCH } from '../../../constants';
-import { NpmSearchResults } from '../../../types';
 import { searchNpm } from '../../../utils';
+import { SearchNormalisedResults } from '../../../types';
 
 suite('searchNpm()', () => {
   test('Rejects if a network error occurs', async () => {
@@ -34,7 +34,7 @@ suite('searchNpm()', () => {
 
   test('Resolves the search data if no error', async () => {
     await searchNpm('react')
-      .then((data: NpmSearchResults) => {
+      .then((data: SearchNormalisedResults) => {
         expect(data).to.have.property('from');
         expect(data).to.have.property('results');
         expect(data).to.have.property('total');

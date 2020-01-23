@@ -1,2 +1,2 @@
-export * from './loadingView';
+export * from './errorView';
 export * from './searchView';

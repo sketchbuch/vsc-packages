@@ -2,13 +2,14 @@ import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
 import { defaultTemplate } from '../../templates/search';
 import { getHtml } from '../../templates';
-import { getResourceUri } from '../../utils';
+import { getResourceUri, searchNpm } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
 
 export const search = (): WebView<{}> => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_SEARCH_PACKAGES_WV;
   const state: SearchState = {
+    data: undefined,
     error: undefined,
     loading: false,
     term: '',
@@ -38,6 +39,10 @@ export const search = (): WebView<{}> => {
       curPanel.webview.onDidReceiveMessage(
         (message: PostMessage<SearchPmPayload>) => {
           switch (message.action) {
+            case 'clear':
+              state.term = '';
+              break;
+
             case 'search':
             default:
               state.term = message.payload.term;
@@ -45,7 +50,7 @@ export const search = (): WebView<{}> => {
               break;
           }
 
-          updatePanelContent();
+          loadPanelContent();
         },
         undefined,
         curContext.subscriptions
@@ -78,8 +83,23 @@ export const search = (): WebView<{}> => {
   };
 
   const loadPanelContent = (): void => {
-    if (!state.loading) {
-      updatePanelContent();
+    updatePanelContent();
+
+    if (state.loading) {
+      state.data = undefined;
+      state.error = undefined;
+
+      searchNpm(state.term)
+        .then(data => {
+          state.data = data;
+        })
+        .catch((error: Error) => {
+          state.error = error;
+        })
+        .finally(() => {
+          state.loading = false;
+          updatePanelContent();
+        });
     }
   };
 

@@ -10,7 +10,7 @@ export const errorView = (packageData: CmdCallbackData, error: Error) => {
         </div>
       </header>
       <div class="view__content error__content">
-        <h4 class="error__msg">An error occured</h4>
+        <h4 class="error__msg">Error loading package data</h4>
         <p class="error__msg-sub">${error.message}</p>
       </div>
     </section>`;

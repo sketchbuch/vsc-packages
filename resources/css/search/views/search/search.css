@@ -5,25 +5,3 @@
   height: 100%;
   justify-content: center;
 }
-
-.search__input {
-  background: var(--vscode-input-background);
-  border: 1px solid transparent;
-  color: var(--vscode-input-foreground);
-  font-size: 30px;
-  line-height: 1.2;
-  margin: 0 auto;
-  max-width: 450px;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  width: 100%;
-}
-
-.search__input::-webkit-input-placeholder {
-  color: rgba(128, 128, 128, 0.4);
-}
-
-.search__input:focus {
-  border-color: var(--vscode-focusBorder);
-  outline: none;
-}
