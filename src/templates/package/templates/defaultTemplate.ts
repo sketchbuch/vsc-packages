@@ -1,6 +1,7 @@
+import { detailView, errorView, loadingView } from '..';
 import { FS_WEBVIEW_PACKAGE_CSS, FS_WEBVIEW_PACKAGE_JS } from '../../../constants';
 import { GetTemplate, PackageHtmlData } from '../../../types';
-import { detailView, errorView, loadingView } from '..';
+import { metaTagsSnippet } from '../../shared';
 
 export const defaultTemplate = (
   { cssPath, nonce, scriptPath }: GetTemplate,
@@ -21,14 +22,7 @@ export const defaultTemplate = (
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self' vscode-resource: 'nonce-${nonce}';
-          img-src 'self' vscode-resource: data: 'nonce-${nonce}';
-          script-src 'self' vscode-resource: 'nonce-${nonce}';
-          style-src 'self' vscode-resource: 'nonce-${nonce}'";
-        >
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        ${metaTagsSnippet(nonce)}
         <title>${packageData.packageName}</title>
         <link href="${cssPath}/${FS_WEBVIEW_PACKAGE_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
       </head>

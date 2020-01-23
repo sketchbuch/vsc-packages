@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
-import { defaultTemplate } from '../../templates/search';
+import { defaultTemplate, resultsTemplate } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
@@ -30,6 +30,12 @@ export const search = (): WebView<{}> => {
         ],
       }
     );
+
+    // Reset state in case editor was closed whilst displaying results
+    state.data = undefined;
+    state.error = undefined;
+    state.loading = false;
+    state.term = '';
 
     setupPanel();
   };
@@ -83,9 +89,10 @@ export const search = (): WebView<{}> => {
   };
 
   const loadPanelContent = (): void => {
-    updatePanelContent();
-
-    if (state.loading) {
+    if (!state.loading) {
+      updatePanelContent();
+    } else {
+      updatePanelContent();
       state.data = undefined;
       state.error = undefined;
 
@@ -109,10 +116,10 @@ export const search = (): WebView<{}> => {
 
   const updatePanelContent = (): void => {
     if (curPanel) {
+      console.log('### updatePanelContent()', state.term, state.loading);
       curPanel.webview.html = getHtml<SearchHtmlData>({
         extensionPath: curContext.extensionPath,
-        // template: state.term ? listTemplate : defaultTemplate,
-        template: defaultTemplate,
+        template: state.term ? resultsTemplate : defaultTemplate,
         htmlData: {
           state,
         },

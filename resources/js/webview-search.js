@@ -43,15 +43,13 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       searchField.addEventListener('keyup', onSearchKeyUp);
+      searchClearer.addEventListener('click', onSearchClearerClick);
 
     });
 
     window.addEventListener('unload', () => {
       searchField.removeEventListener('keyup', onSearchKeyUp);
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      searchClearer.addEventListener('click', onSearchClearerClick);
+      searchField.removeEventListener('click', onSearchClearerClick);
     });
   }
 })();

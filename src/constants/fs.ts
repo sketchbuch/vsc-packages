@@ -10,4 +10,5 @@ export const FS_UTF8 = 'utf-8';
 export const FS_WEBVIEW_PACKAGE_CSS = 'webview-package.css';
 export const FS_WEBVIEW_PACKAGE_JS = 'webview-package.js';
 export const FS_WEBVIEW_SEARCH_CSS = 'webview-search.css';
+export const FS_WEBVIEW_SEARCH_RESULTS_CSS = 'webview-search-results.css';
 export const FS_WEBVIEW_SEARCH_JS = 'webview-search.js';

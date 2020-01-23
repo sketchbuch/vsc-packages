@@ -1,2 +1,2 @@
 export * from './defaultTemplate';
-export * from './listTemplate';
+export * from './resultsTemplate';
