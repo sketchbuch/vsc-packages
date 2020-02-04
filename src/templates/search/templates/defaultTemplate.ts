@@ -14,7 +14,7 @@ export const defaultTemplate = (
   if (state.error) {
     content = errorView(state.error);
   } else {
-    content = searchView(state.term, state.loading);
+    content = searchView(state);
   }
 
   return `

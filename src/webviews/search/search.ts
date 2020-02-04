@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
-import { defaultTemplate, resultsTemplate } from '../../templates/search';
+import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
@@ -12,6 +12,7 @@ export const search = (): WebView<{}> => {
     data: undefined,
     error: undefined,
     loading: false,
+    sort: 'optimal',
     term: '',
   };
   let curContext: vscode.ExtensionContext;
@@ -46,13 +47,24 @@ export const search = (): WebView<{}> => {
         (message: PostMessage<SearchPmPayload>) => {
           switch (message.action) {
             case 'clear':
+              state.data = undefined;
+              state.error = undefined;
+              state.sort = 'optimal';
               state.term = '';
+
+              break;
+
+            case 'sort':
+              if (state.term !== '') {
+                state.loading = true;
+              }
+              state.sort = message.payload.sort;
               break;
 
             case 'search':
             default:
-              state.term = message.payload.term;
               state.loading = true;
+              state.term = message.payload.term.toLocaleLowerCase();
               break;
           }
 
@@ -96,7 +108,7 @@ export const search = (): WebView<{}> => {
       state.data = undefined;
       state.error = undefined;
 
-      searchNpm(state.term)
+      searchNpm(state.term, { sortBy: state.sort })
         .then(data => {
           state.data = data;
         })
@@ -116,10 +128,9 @@ export const search = (): WebView<{}> => {
 
   const updatePanelContent = (): void => {
     if (curPanel) {
-      console.log('### updatePanelContent()', state.term, state.loading);
       curPanel.webview.html = getHtml<SearchHtmlData>({
         extensionPath: curContext.extensionPath,
-        template: state.term ? resultsTemplate : defaultTemplate,
+        template,
         htmlData: {
           state,
         },

@@ -138,9 +138,10 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
     "@schemastore/package": "^0.0.5",
-    "@types/axios": "^0.14.0",
     "@types/axios-mock-adapter": "^1.10.0",
+    "@types/axios": "^0.14.0",
     "@types/chai": "^4.1.7",
+    "@types/libnpmsearch": "^2.0.1",
     "@types/marked": "^0.7.2",
     "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
@@ -164,6 +165,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "husky": "^4.0.10",
+    "libnpmsearch": "^2.0.2",
     "lint-staged": "^9.5.0",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2"

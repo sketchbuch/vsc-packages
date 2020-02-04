@@ -15,7 +15,7 @@ const clearButton = (name: string) => {
     <a class="search-field__clearer" href="" id="${name}-clearer" title="Clear field"><span>+</span></a>`;
 };
 
-export const searchFieldSnippet = (term: string, loading: boolean, name: string) => {
+export const searchFieldSnippet = (term: string, loading: boolean, name: string): string => {
   return `
     <div class="search-field">
       <input
@@ -28,7 +28,7 @@ export const searchFieldSnippet = (term: string, loading: boolean, name: string)
         }"
         id="${name}"
         name="${name}"
-        placeholder="Search NPM..."
+        placeholder="search npm..."
         spellcheck="false"
         type="text"
         value="${term}"

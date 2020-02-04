@@ -1,16 +1,25 @@
 import { expect } from 'chai';
 import { searchView } from '../../../../templates/search';
+import { SearchState } from '../../../../types';
 
 suite('search - searchView()', () => {
+  const state: SearchState = {
+    data: undefined,
+    error: undefined,
+    loading: false,
+    sort: 'optimal',
+    term: '',
+  };
+
   test('Returns a string', () => {
-    expect(searchView('', false)).to.be.a('string');
+    expect(searchView(state)).to.be.a('string');
   });
 
   test('Renders an input', () => {
-    expect(searchView('', false)).contains(`<input`);
+    expect(searchView(state)).contains(`<input`);
   });
 
   test('Sets value correctly', () => {
-    expect(searchView('vscode', true)).contains(`value="vscode"`);
+    expect(searchView(state)).contains(`value="vscode"`);
   });
 });

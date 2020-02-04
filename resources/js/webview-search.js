@@ -1,6 +1,7 @@
 (function () {
   const vscode = acquireVsCodeApi();
   const searchField = document.getElementById('vsc-packages-search');
+  const sortField = document.getElementById('vsc-packages-search-sort');
 
   if (searchField) {
     const searchClearer = document.getElementById('vsc-packages-search-clearer');
@@ -42,14 +43,36 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      searchField.addEventListener('keyup', onSearchKeyUp);
       searchClearer.addEventListener('click', onSearchClearerClick);
+      searchField.addEventListener('keyup', onSearchKeyUp);
 
     });
 
     window.addEventListener('unload', () => {
-      searchField.removeEventListener('keyup', onSearchKeyUp);
       searchField.removeEventListener('click', onSearchClearerClick);
+      searchField.removeEventListener('keyup', onSearchKeyUp);
+    });
+  }
+
+  if (sortField) {
+    const onSortChange = (event) => {
+      const {value} = event.target;
+
+      vscode.postMessage({
+        action: 'sort',
+        payload: {
+          sort: value,
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      sortField.addEventListener('change', onSortChange);
+
+    });
+
+    window.addEventListener('unload', () => {
+      sortField.removeEventListener('change', onSortChange);
     });
   }
 })();

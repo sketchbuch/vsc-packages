@@ -1,0 +1,32 @@
+.info-message {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.info-message > * {
+  color: var(--vscode-editorCodeLens-foreground);
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 5px auto;
+  max-width: 66%;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.info-message p {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.info-message > *:first-child {
+  margin-top: 0;
+}
+
+.info-message > *:last-child {
+  margin-bottom: 0;
+}

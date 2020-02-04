@@ -1,28 +1,22 @@
+import { NpmSearchResults } from './npm';
+
 export type SearchData = {};
+export type SearchSortDefault = 'optimal';
+export type SearchSort = 'maintenance' | SearchSortDefault | 'popularity' | 'quality';
 
 export interface SearchState {
-  data?: SearchNormalisedResults;
+  data?: NpmSearchResults;
   error?: Error;
   loading: boolean;
+  sort: SearchSort;
   term: string;
 }
 
 export interface SearchPmPayload {
+  sort: SearchSort;
   term: string;
 }
 
 export interface SearchHtmlData {
   state: SearchState;
-}
-
-export interface SearchNormalisedResult {
-  description: string;
-  name: string;
-  version: string;
-}
-
-export interface SearchNormalisedResults {
-  from: number;
-  results: SearchNormalisedResult[];
-  total: number;
 }

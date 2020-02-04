@@ -1,6 +1,8 @@
 @import './components/columns.css';
+@import './components/info-message.css';
 @import './components/loader.css';
 @import './components/search-field.css';
+@import './components/search-sort.css';
 @import './components/spinner.css';
 @import './components/tags.css';
 @import './components/view.css';
