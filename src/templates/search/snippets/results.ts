@@ -1,6 +1,7 @@
+import { EXT } from '../../../constants';
 import { NpmSearchResult, NpmSearchResults } from '../../../types';
 
-export const results = (results: NpmSearchResults) => {
+export const results = (results: NpmSearchResults, page: number) => {
   return `
     <div class="results">
       <ul class="results__list">
@@ -18,6 +19,10 @@ export const results = (results: NpmSearchResults) => {
           })
           .join('')}
       </ul>
+      <div class="results__more">
+        <input id="${EXT}-search-more-page"  readonly type="hidden" value="${page}" />
+        <a id="${EXT}-search-more-btn" class="results__more-btn monaco-button monaco-text-button setting-list-addButton">Load more...</a>
+      </div>
     </div>
   `;
 };

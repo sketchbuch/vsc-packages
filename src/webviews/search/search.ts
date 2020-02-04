@@ -1,20 +1,23 @@
 import * as vscode from 'vscode';
-import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS } from '../../constants';
+import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS, SEARCH_LIMIT } from '../../constants';
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
 
+const defaultState: SearchState = Object.freeze({
+  data: undefined,
+  error: undefined,
+  loading: false,
+  page: 1,
+  sort: 'optimal',
+  term: '',
+});
+
 export const search = (): WebView<{}> => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_SEARCH_PACKAGES_WV;
-  const state: SearchState = {
-    data: undefined,
-    error: undefined,
-    loading: false,
-    sort: 'optimal',
-    term: '',
-  };
+  let state: SearchState = { ...defaultState };
   let curContext: vscode.ExtensionContext;
   let curPanel: undefined | vscode.WebviewPanel = undefined;
 
@@ -33,10 +36,7 @@ export const search = (): WebView<{}> => {
     );
 
     // Reset state in case editor was closed whilst displaying results
-    state.data = undefined;
-    state.error = undefined;
-    state.loading = false;
-    state.term = '';
+    state = { ...defaultState };
 
     setupPanel();
   };
@@ -47,24 +47,39 @@ export const search = (): WebView<{}> => {
         (message: PostMessage<SearchPmPayload>) => {
           switch (message.action) {
             case 'clear':
-              state.data = undefined;
-              state.error = undefined;
-              state.sort = 'optimal';
-              state.term = '';
+              state = { ...defaultState };
 
               break;
 
-            case 'sort':
-              if (state.term !== '') {
+            case 'more':
+              if (message.payload.page) {
                 state.loading = true;
+                state.page = message.payload.page + 1;
               }
-              state.sort = message.payload.sort;
+              break;
+
+            case 'sort':
+              if (message.payload.sort) {
+                if (state.term !== '') {
+                  state.loading = true;
+                }
+
+                state.page = 1;
+                state.sort = message.payload.sort;
+              }
               break;
 
             case 'search':
             default:
-              state.loading = true;
-              state.term = message.payload.term.toLocaleLowerCase();
+              if (message.payload.term) {
+                if (message.payload.term !== state.term) {
+                  state.data = undefined;
+                  state.page = 1;
+                }
+
+                state.loading = true;
+                state.term = message.payload.term.toLocaleLowerCase();
+              }
               break;
           }
 
@@ -105,12 +120,15 @@ export const search = (): WebView<{}> => {
       updatePanelContent();
     } else {
       updatePanelContent();
-      state.data = undefined;
       state.error = undefined;
 
-      searchNpm(state.term, { sortBy: state.sort })
+      searchNpm(state.term, {
+        from: (state.page - 1) * SEARCH_LIMIT,
+        limit: SEARCH_LIMIT,
+        sortBy: state.sort,
+      })
         .then(data => {
-          state.data = data;
+          state.data = state.data ? [...state.data, ...data] : [...data];
         })
         .catch((error: Error) => {
           state.error = error;

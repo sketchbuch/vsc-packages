@@ -7,6 +7,7 @@ suite('search - searchView()', () => {
     data: undefined,
     error: undefined,
     loading: false,
+    page: 1,
     sort: 'optimal',
     term: '',
   };

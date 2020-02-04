@@ -8,13 +8,15 @@ export interface SearchState {
   data?: NpmSearchResults;
   error?: Error;
   loading: boolean;
+  page: number;
   sort: SearchSort;
   term: string;
 }
 
 export interface SearchPmPayload {
-  sort: SearchSort;
-  term: string;
+  page?: number;
+  sort?: SearchSort;
+  term?: string;
 }
 
 export interface SearchHtmlData {

@@ -2,6 +2,8 @@
   const vscode = acquireVsCodeApi();
   const searchField = document.getElementById('vsc-packages-search');
   const sortField = document.getElementById('vsc-packages-search-sort');
+  const moreBtn = document.getElementById('vsc-packages-search-more-btn');
+  const morePage = document.getElementById('vsc-packages-search-more-page');
 
   if (searchField) {
     const searchClearer = document.getElementById('vsc-packages-search-clearer');
@@ -73,6 +75,29 @@
 
     window.addEventListener('unload', () => {
       sortField.removeEventListener('change', onSortChange);
+    });
+  }
+
+  if (moreBtn && morePage) {
+    const onMoreClick = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      vscode.postMessage({
+        action: 'more',
+        payload: {
+          page: parseInt(morePage.value, 10)
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      moreBtn.addEventListener('click', onMoreClick);
+
+    });
+
+    window.addEventListener('unload', () => {
+      moreBtn.removeEventListener('click', onMoreClick);
     });
   }
 })();

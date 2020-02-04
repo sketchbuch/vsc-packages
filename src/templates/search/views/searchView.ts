@@ -4,14 +4,14 @@ import { SearchState } from '../../../types';
 import { infoMessageSnippet, results } from '../snippets';
 
 export const searchView = (state: SearchState) => {
-  const { data, loading, sort, term } = state;
+  const { data, loading, page, sort, term } = state;
   let content: string = '';
 
   if (loading) {
     content = '<div class="vsc-loader"></div>';
   } else if (data) {
     if (data.length > 0) {
-      content = results(data);
+      content = results(data, page);
     } else {
       content = infoMessageSnippet('No packages found', 'Please try modifying your search term');
     }

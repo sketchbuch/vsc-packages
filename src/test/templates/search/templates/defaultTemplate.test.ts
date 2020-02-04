@@ -6,6 +6,7 @@ suite('search - defaultTemplate()', () => {
   const htmlData: SearchHtmlData = {
     state: {
       loading: false,
+      page: 1,
       sort: 'optimal',
       term: '',
     },
