@@ -4,7 +4,7 @@ import { loadingView } from '../../../../templates/package';
 import { mockPackageData } from '../../../mocks';
 import * as snippets from '../../../../templates/package/snippets';
 
-suite('loadingView()', () => {
+suite('package - loadingView()', () => {
   test('Returns a string', () => {
     expect(loadingView(mockPackageData)).to.be.a('string');
   });

@@ -1,15 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
-import { httpStatusCodes, URL_NPM_SEARCH } from '../../constants';
+import * as search from 'libnpmsearch';
 import { NpmSearchResults } from '../../types';
+import { SEARCH_LIMIT } from '../../constants';
 
-export const searchNpm = async (searchTerm: string): Promise<NpmSearchResults> => {
-  return await axios.get(`${URL_NPM_SEARCH}${searchTerm}`).then((response: AxiosResponse) => {
-    if (response.status === httpStatusCodes.OK) {
-      return response.data;
-    }
+const defaultOptions: search.Options = Object.freeze({
+  from: 0,
+  limit: SEARCH_LIMIT,
+  sortBy: 'optimal',
+});
 
-    return Promise.reject(
-      new Error(`An error occured whilst trying to search NPM for "${searchTerm}"`)
-    );
-  });
+export const searchNpm = async (
+  searchTerm: string,
+  options: search.Options = {}
+): Promise<NpmSearchResults> => {
+  return await search(searchTerm, { ...defaultOptions, ...options });
 };

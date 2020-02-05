@@ -4,7 +4,7 @@ import { errorView } from '../../../../templates/package';
 import { mockPackageData } from '../../../mocks';
 import * as snippets from '../../../../templates/package/snippets';
 
-suite('errorView()', () => {
+suite('package - errorView()', () => {
   const mockError = new Error('An error occured!');
 
   test('Returns a string', () => {

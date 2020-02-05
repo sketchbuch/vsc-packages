@@ -1,0 +1,15 @@
+@import './components/page-browser.css';
+@import './components/results.css';
+@import './components/search-bar.css';
+
+.search {
+  height: 100%;
+  position: relative;
+}
+
+.search__content {
+  background: hsla(0, 0%, 53%, 0.1);
+  height: calc(100% - 60px);
+  position: relative;
+  top: 70px;
+}

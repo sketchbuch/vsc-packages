@@ -1,9 +1,21 @@
-import { NpmPackageData } from './';
+import { NpmPackageData, CmdCallbackData } from './';
 
 export interface PackageState {
+  activeTab: TabboxId;
   data?: NpmPackageData;
   error?: Error;
 }
+
+export interface PackageHtmlData {
+  packageData: CmdCallbackData;
+  state: PackageState;
+}
+
+export interface PackagePmPayload {
+  activeTab: TabboxId;
+}
+
+export interface PackageData extends CmdCallbackData {}
 
 export interface InlineListSnippet {
   email?: string;

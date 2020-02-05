@@ -27,6 +27,12 @@
             vscode.postMessage({
               activeTab: tabId,
             });
+            vscode.postMessage({
+              action: 'display-package',
+              payload: {
+                activeTab: tabId,
+              }
+            });
           }
         });
       }

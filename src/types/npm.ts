@@ -1,4 +1,5 @@
 import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
+import * as search from 'libnpmsearch';
 
 export interface NpmAuthor {
   name: string;
@@ -64,14 +65,5 @@ export interface NpmPackageData {
   _rev: string;
 }
 
-export interface NpmSearchResult {
-  description: string[];
-  name: string[];
-  version: string[];
-}
-
-export interface NpmSearchResults {
-  from: number;
-  results: NpmSearchResult[];
-  total: number;
-}
+export type NpmSearchResult = search.Result;
+export type NpmSearchResults = NpmSearchResult[];

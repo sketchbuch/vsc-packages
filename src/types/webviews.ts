@@ -1,20 +1,26 @@
-import { PackageState, TabboxId, CmdCallbackData } from './';
+import * as vscode from 'vscode';
+
+export type PostMessageActions = 'clear' | 'display-package' | 'more' | 'search' | 'sort';
+
+export interface PostMessage<T> {
+  action: PostMessageActions;
+  payload: T;
+}
 
 export interface GetTemplate {
   cssPath: string;
-  htmlData: HtmlData;
   nonce: string;
   scriptPath: string;
 }
 
-export interface HtmlData {
-  activeTab: TabboxId;
-  packageData: CmdCallbackData;
-  state: PackageState;
+export interface GetHtml<T> {
+  extensionPath: string;
+  template: (args: GetTemplate, htmlData: T) => string;
+  htmlData: T;
 }
 
-export interface GetHtml {
-  extensionPath: string;
-  getTemplate: (args: GetTemplate) => string;
-  htmlData: HtmlData;
+export interface WebView<T> {
+  getViewType: () => string;
+  revive: (context: vscode.ExtensionContext, revivedPanel: vscode.WebviewPanel, data: T) => void;
+  show: (context: vscode.ExtensionContext, data: T) => void;
 }
