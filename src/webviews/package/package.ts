@@ -20,18 +20,20 @@ import { defaultTemplate as template } from '../../templates/package';
 import { getHtml } from '../../templates';
 import { getResourceUri, getPackageTabTitle, getNpmPackageData } from '../../utils';
 
+const defaultState: PackageState = Object.freeze({
+  activeTab: 'readme',
+  data: undefined,
+  error: undefined,
+});
+
 export const pkg = (): WebView<PackageData> => {
   const disposables: vscode.Disposable[] = [];
   const viewType = CMD_DISPLAY_PACKAGE_WV;
-  const state: PackageState = {
-    activeTab: 'readme',
-    data: undefined,
-    error: undefined,
-  };
   const packageData: CmdCallbackData = {
     packageName: '',
     packageVersion: '',
   };
+  let state: PackageState = { ...defaultState };
   let curContext: vscode.ExtensionContext;
   let curPanel: undefined | vscode.WebviewPanel = undefined;
 
@@ -96,9 +98,7 @@ export const pkg = (): WebView<PackageData> => {
   };
 
   const loadPanelContent = (): void => {
-    state.activeTab = 'readme';
-    state.data = undefined;
-    state.error = undefined;
+    state = { ...defaultState };
 
     updatePanelContent();
 

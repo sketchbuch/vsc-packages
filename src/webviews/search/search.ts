@@ -120,6 +120,7 @@ export const search = (): WebView<{}> => {
       updatePanelContent();
     } else {
       updatePanelContent();
+
       state.error = undefined;
 
       searchNpm(state.term, {
@@ -128,7 +129,7 @@ export const search = (): WebView<{}> => {
         sortBy: state.sort,
       })
         .then(data => {
-          state.data = state.data ? [...state.data, ...data] : [...data];
+          state.data = state.data && state.page > 1 ? [...state.data, ...data] : [...data];
         })
         .catch((error: Error) => {
           state.error = error;
