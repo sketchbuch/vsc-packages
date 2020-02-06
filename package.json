@@ -86,13 +86,12 @@
       "vsc-packages-activitybar": [
         {
           "id": "vsc-packages-activitybar-folders",
-          "name": "Workspace Folders",
-          "when": "vsc-packages-visible"
+          "name": "Workspace Folders"
         },
         {
           "id": "vsc-packages-activitybar-packagejson",
           "name": "Packages",
-          "when": "vsc-packages-folder && vsc-packages-visible"
+          "when": "vsc-packages-folder"
         }
       ]
     },
@@ -101,8 +100,7 @@
         {
           "icon": "./resources/images/light/activitybar-light.svg",
           "id": "vsc-packages-activitybar",
-          "title": "Packages",
-          "when": "vsc-packages-visible"
+          "title": "Packages"
         }
       ]
     }
