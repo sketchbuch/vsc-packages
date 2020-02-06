@@ -1,12 +1,14 @@
 import * as vscode from 'vscode';
 import { FolderList, PackageList } from '../treeviews';
-import { ExtViews, WorkspaceFolders } from '../types';
+import { WorkspaceFolders } from '../types';
+import { EXT } from '../constants';
 
 export const setupSidebar = (
   context: vscode.ExtensionContext,
   workspaceFolders: WorkspaceFolders
 ): void => {
   if (workspaceFolders) {
+    vscode.commands.executeCommand('setContext', `${EXT}-visible`, true);
     const folderTreeDataProvider = new FolderList(workspaceFolders, context);
     const folderDisposable = vscode.window.registerTreeDataProvider(
       'vsc-packages-activitybar-folders',
@@ -21,5 +23,7 @@ export const setupSidebar = (
     );
     context.subscriptions.push(packageJsonDisposable);
     context.workspaceState.update('packageJsonDataProvider', packageJsonDataProvider);
+  } else {
+    vscode.commands.executeCommand('setContext', `${EXT}-visible`, false);
   }
 };

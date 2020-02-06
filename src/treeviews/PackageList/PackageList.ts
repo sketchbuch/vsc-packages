@@ -1,11 +1,8 @@
 import * as vscode from 'vscode';
-import { CMD_DISPLAY_PACKAGE, extViews, EXT } from '../../constants';
+import { CMD_DISPLAY_PACKAGE, extViews, EXT, FS_PACKAGEJSON } from '../../constants';
 import { getPackageJson } from '../../utils';
-import { GetPackageJsonResult } from '../../types';
 import { PackageListItem, PackageListDep } from './';
-
-export type PackageListChild = PackageListItem | PackageListDep;
-export type PackageListChildren = (PackageListItem | PackageListDep)[];
+import { PackageListChild, PackageListChildren } from '../../types';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListChild | undefined> = new vscode.EventEmitter<
@@ -13,10 +10,32 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
   >();
   onDidChangeTreeData: vscode.Event<PackageListChild | undefined> = this._onDidChangeTreeData.event;
 
-  private packageJson: GetPackageJsonResult = null;
-  private extensionPath: string = '';
+  private watchers: string[] = [];
 
   constructor(private context: vscode.ExtensionContext) {}
+
+  createWatcher(folder: vscode.WorkspaceFolder): void {
+    if (!this.watchers.includes(folder.name)) {
+      const watcher = vscode.workspace.createFileSystemWatcher(
+        `${folder.uri.fsPath}/${FS_PACKAGEJSON}`
+      );
+
+      watcher.onDidChange(() => {
+        this.refresh();
+      });
+
+      watcher.onDidDelete(() => {
+        this.refresh();
+      });
+
+      watcher.onDidCreate(() => {
+        this.refresh();
+      });
+
+      this.context.subscriptions.push(watcher);
+      this.watchers.push(folder.name);
+    }
+  }
 
   refresh(): void {
     this._onDidChangeTreeData.fire();
@@ -35,6 +54,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
     const curFolder = this.context.workspaceState.get<vscode.WorkspaceFolder>('selectedFolder');
 
     if (curFolder) {
+      this.createWatcher(curFolder);
       const packageJson = getPackageJson(curFolder);
 
       if (packageJson instanceof Error) {
