@@ -10,7 +10,7 @@ suite('setupSidebar()', () => {
 
   test('Calls getPackageJson()', () => {
     const spy = sinon.spy(utils, 'getPackageJson');
-    setupSidebar(extViews, mockContext, undefined);
+    setupSidebar(mockContext, undefined);
 
     sinon.assert.callCount(spy, 1);
     spy.restore();
@@ -20,7 +20,7 @@ suite('setupSidebar()', () => {
     const viewCount = Object.keys(extViews).length;
     const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
     const spyContext = sinon.spy(sidebar, 'setViewContext');
-    setupSidebar(extViews, mockContext, undefined);
+    setupSidebar(mockContext, undefined);
 
     sinon.assert.callCount(spy, viewCount);
     sinon.assert.callCount(spyContext, viewCount);
@@ -30,7 +30,7 @@ suite('setupSidebar()', () => {
   suite('File Watcher:', () => {
     test('Not created if there are no workspace folders', () => {
       const spy = sinon.spy(vscode.workspace, 'createFileSystemWatcher');
-      setupSidebar(extViews, mockContext, undefined);
+      setupSidebar(mockContext, undefined);
 
       sinon.assert.callCount(spy, 0);
       spy.restore();
@@ -38,7 +38,7 @@ suite('setupSidebar()', () => {
 
     test('Created if there are workspace folders', () => {
       const spy = sinon.spy(vscode.workspace, 'createFileSystemWatcher');
-      setupSidebar(extViews, mockContext, [
+      setupSidebar(mockContext, [
         {
           uri: {
             fsPath: '',

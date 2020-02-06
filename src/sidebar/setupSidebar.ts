@@ -1,54 +1,25 @@
 import * as vscode from 'vscode';
-import { FS_PACKAGEJSON } from '../constants';
-import { getPackageJson } from '../utils';
-import { PackageList } from '../treeviews';
-import { refreshViews, setViewContext } from '.';
-import {
-  ExtViewList,
-  ExtViews,
-  GetPackageJsonResult,
-  TreeProviders,
-  WorkspaceFolders,
-} from '../types';
+import { FolderList, PackageList } from '../treeviews';
+import { ExtViews, WorkspaceFolders } from '../types';
 
 export const setupSidebar = (
-  extViews: ExtViews,
   context: vscode.ExtensionContext,
   workspaceFolders: WorkspaceFolders
 ): void => {
-  const treeProviders: TreeProviders = {};
-  const packageJson: GetPackageJsonResult = getPackageJson(workspaceFolders);
-
-  Object.keys(extViews).forEach((view: string) => {
-    setViewContext(view, packageJson);
-
-    const treeDataProvider = new PackageList(view, packageJson, context.extensionPath);
-    const disposable = vscode.window.registerTreeDataProvider(
-      extViews[view as ExtViewList],
-      treeDataProvider
+  if (workspaceFolders) {
+    const folderTreeDataProvider = new FolderList(workspaceFolders, context);
+    const folderDisposable = vscode.window.registerTreeDataProvider(
+      'vsc-packages-activitybar-folders',
+      folderTreeDataProvider
     );
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(folderDisposable);
 
-    treeProviders[view] = treeDataProvider;
-  });
-
-  if (workspaceFolders && workspaceFolders.length > 0) {
-    const watcher = vscode.workspace.createFileSystemWatcher(
-      `${workspaceFolders[0].uri.fsPath}/${FS_PACKAGEJSON}`
+    const packageJsonDataProvider = new PackageList(context);
+    const packageJsonDisposable = vscode.window.registerTreeDataProvider(
+      'vsc-packages-activitybar-packagejson',
+      packageJsonDataProvider
     );
-
-    watcher.onDidChange(() => {
-      refreshViews(extViews, treeProviders);
-    });
-
-    watcher.onDidDelete(() => {
-      refreshViews(extViews, treeProviders);
-    });
-
-    watcher.onDidCreate(() => {
-      refreshViews(extViews, treeProviders);
-    });
-
-    context.subscriptions.push(watcher);
+    context.subscriptions.push(packageJsonDisposable);
+    context.workspaceState.update('packageJsonDataProvider', packageJsonDataProvider);
   }
 };

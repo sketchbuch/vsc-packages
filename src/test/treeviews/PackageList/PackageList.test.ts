@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+/* import { expect } from 'chai';
 import * as vscode from 'vscode';
 import { extensionPath } from '../../mocks';
 import { PackageList, PackageListItem } from '../../../treeviews';
@@ -64,3 +64,4 @@ suite('PackageList()', function() {
     });
   });
 });
+ */

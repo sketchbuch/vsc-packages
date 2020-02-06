@@ -1,22 +1,24 @@
 import * as vscode from 'vscode';
-import { CMD_DISPLAY_PACKAGE } from '../../constants';
+import { CMD_DISPLAY_PACKAGE, extViews, EXT } from '../../constants';
+import { getPackageJson } from '../../utils';
 import { GetPackageJsonResult } from '../../types';
-import { PackageListItem } from './';
+import { PackageListItem, PackageListDep } from './';
 
-export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
-  _onDidChangeTreeData: vscode.EventEmitter<PackageListItem | undefined> = new vscode.EventEmitter<
-    PackageListItem | undefined
+export type PackageListChild = PackageListItem | PackageListDep;
+export type PackageListChildren = (PackageListItem | PackageListDep)[];
+
+export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
+  _onDidChangeTreeData: vscode.EventEmitter<PackageListChild | undefined> = new vscode.EventEmitter<
+    PackageListChild | undefined
   >();
-  onDidChangeTreeData: vscode.Event<PackageListItem | undefined> = this._onDidChangeTreeData.event;
+  onDidChangeTreeData: vscode.Event<PackageListChild | undefined> = this._onDidChangeTreeData.event;
 
-  constructor(
-    private packageView: string,
-    private packageJson: GetPackageJsonResult,
-    private extensionPath: string
-  ) {}
+  private packageJson: GetPackageJsonResult = null;
+  private extensionPath: string = '';
 
-  refresh(newPackageJson: GetPackageJsonResult): void {
-    this.packageJson = newPackageJson;
+  constructor(private context: vscode.ExtensionContext) {}
+
+  refresh(): void {
     this._onDidChangeTreeData.fire();
   }
 
@@ -28,57 +30,68 @@ export class PackageList implements vscode.TreeDataProvider<PackageListItem> {
     return null;
   }
 
-  getChildren(): Thenable<PackageListItem[]> {
-    const children: PackageListItem[] = [];
+  getChildren(element?: PackageListItem): Thenable<PackageListChildren> {
+    const children: PackageListChildren = [];
+    const curFolder = this.context.workspaceState.get<vscode.WorkspaceFolder>('selectedFolder');
 
-    if (this.packageJson instanceof Error) {
-      const error = new PackageListItem(
-        'Error reading package.json',
-        '',
-        this.extensionPath,
-        vscode.TreeItemCollapsibleState.None
-      );
-      children.push(error);
-    } else if (this.packageJson === null) {
-      const noFolders = new PackageListItem(
-        'No Folder or Workspace opened',
-        '',
-        this.extensionPath,
-        vscode.TreeItemCollapsibleState.None
-      );
-      children.push(noFolders);
-    } else {
-      const packageJson = this.packageJson;
+    if (curFolder) {
+      const packageJson = getPackageJson(curFolder);
 
-      if (packageJson[this.packageView]) {
-        Object.keys(packageJson[this.packageView]).forEach((dependency: string) => {
-          const version: string = packageJson[this.packageView][dependency];
-          const depItem = new PackageListItem(
-            dependency,
-            version,
-            this.extensionPath,
-            vscode.TreeItemCollapsibleState.None,
-            {
-              command: CMD_DISPLAY_PACKAGE,
-              title: '',
-              arguments: [dependency, version],
-            }
-          );
-          children.push(depItem);
-        });
+      if (packageJson instanceof Error) {
+        vscode.window.showErrorMessage(
+          `An error occured whilst reading package.json for ${curFolder.name}: ${packageJson.message}`
+        );
       }
 
-      if (children.length < 1) {
-        const empty = new PackageListItem(
-          `No ${this.packageView} found`,
-          '',
-          this.extensionPath,
-          vscode.TreeItemCollapsibleState.None
-        );
-        children.push(empty);
+      if (element) {
+        const depType: string = element.label;
+
+        if (!(packageJson instanceof Error) && packageJson !== null) {
+          if (packageJson[depType]) {
+            Object.keys(packageJson[depType])
+              .sort()
+              .forEach((dependency: string) => {
+                const version: string = packageJson[depType][dependency];
+                const depItem = new PackageListItem(
+                  dependency,
+                  version,
+                  this.context.extensionPath,
+                  vscode.TreeItemCollapsibleState.None,
+                  {
+                    command: CMD_DISPLAY_PACKAGE,
+                    title: '',
+                    arguments: [dependency, version],
+                  }
+                );
+                children.push(depItem);
+              });
+          }
+        }
+      } else {
+        Object.keys(extViews)
+          .sort()
+          .forEach((depType: string) => {
+            let depCount = 0;
+
+            if (!(packageJson instanceof Error) && packageJson !== null) {
+              if (packageJson[depType] !== undefined) {
+                depCount = Object.keys(packageJson[depType]).length;
+              }
+            }
+
+            if (depCount > 0) {
+              const depTypeItem = new PackageListDep(
+                depType,
+                depCount,
+                this.context.extensionPath,
+                vscode.TreeItemCollapsibleState.Collapsed
+              );
+              children.push(depTypeItem);
+            }
+          });
       }
     }
 
-    return Promise.resolve(children.sort());
+    return Promise.resolve(children);
   }
 }

@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+/* import * as vscode from 'vscode';
 import { expect } from 'chai';
 import { extensionPath } from '../../mocks';
 import {
@@ -44,3 +44,4 @@ suite('PackageListItem()', () => {
     expect(newItem.contextValue).to.be.equal(EXT_PACKAGELIST_ITEM_CTX);
   });
 });
+ */

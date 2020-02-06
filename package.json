@@ -38,6 +38,10 @@
         "title": "Open the NPM Page for this Package"
       },
       {
+        "command": "vsc-packages-select-folder",
+        "title": "View packages in this folder"
+      },
+      {
         "command": "vsc-packages-search-packages",
         "title": "Packages: Search NPM"
       },
@@ -59,6 +63,10 @@
         {
           "command": "vsc-packages-search-results",
           "when": "never"
+        },
+        {
+          "command": "vsc-packages-select-folder",
+          "when": "never"
         }
       ],
       "view/item/context": [
@@ -77,24 +85,13 @@
     "views": {
       "vsc-packages-activitybar": [
         {
-          "id": "vsc-packages-activitybar-deps",
-          "name": "Dependencies",
-          "when": "vsc-packages-dependencies"
+          "id": "vsc-packages-activitybar-folders",
+          "name": "Workspace Folders"
         },
         {
-          "id": "vsc-packages-activitybar-dev-deps",
-          "name": "Dev Dependencies",
-          "when": "vsc-packages-devDependencies"
-        },
-        {
-          "id": "vsc-packages-activitybar-peer-deps",
-          "name": "Peer Dependencies",
-          "when": "vsc-packages-peerDependencies"
-        },
-        {
-          "id": "vsc-packages-activitybar-optional-deps",
-          "name": "Optional Dependencies",
-          "when": "vsc-packages-optionalDependencies"
+          "id": "vsc-packages-activitybar-packagejson",
+          "name": "Packages",
+          "when": "vsc-packages-folder"
         }
       ]
     },

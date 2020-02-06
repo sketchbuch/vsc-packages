@@ -19,7 +19,7 @@ suite('activate()', function() {
 
     sinon.assert.calledWith(stubRc, mockContext);
     sinon.assert.calledWith(stubWv, mockContext);
-    sinon.assert.calledWith(stubSb, extViews, mockContext, undefined);
+    sinon.assert.calledWith(stubSb, mockContext, undefined);
 
     stubRc.restore();
     stubWv.restore();

@@ -1,4 +1,4 @@
-import * as sinon from 'sinon';
+/* import * as sinon from 'sinon';
 import { extensionPath } from '../mocks';
 import { extViews } from '../../constants';
 import { PackageList } from '../../treeviews';
@@ -49,3 +49,4 @@ suite('refreshViews()', () => {
     spyOptDep.restore();
   });
 });
+ */

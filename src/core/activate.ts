@@ -8,7 +8,7 @@ import { setupSidebar } from '../sidebar';
 export const setupExt = (extViews: ExtViews, context: vscode.ExtensionContext) => {
   registerCommands(context);
   registerWebviews(context);
-  setupSidebar(extViews, context, vscode.workspace.workspaceFolders);
+  setupSidebar(context, vscode.workspace.workspaceFolders);
 };
 
 export const activate = (context: vscode.ExtensionContext): void => {

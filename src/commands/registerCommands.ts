@@ -4,8 +4,9 @@ import {
   CMD_OPEN_NPM,
   CMD_SEARCH_PACKAGES,
   CMD_SEARCH_RESULTS,
+  CMD_SELECT_FOLDER,
 } from '../constants';
-import { cmdDisplayPackage, cmdOpenNpm, cmdSearchNpm } from '.';
+import { cmdDisplayPackage, cmdOpenNpm, cmdSearchNpm, cmdSelectFolder } from '.';
 
 export const registerCommands = (context: vscode.ExtensionContext): void => {
   const { registerCommand } = vscode.commands;
@@ -32,5 +33,14 @@ export const registerCommands = (context: vscode.ExtensionContext): void => {
     registerCommand(CMD_SEARCH_RESULTS, (): void => {
       cmdSearchNpm(context);
     })
+  );
+
+  context.subscriptions.push(
+    registerCommand(
+      CMD_SELECT_FOLDER,
+      (folder: vscode.WorkspaceFolder, context: vscode.ExtensionContext): void => {
+        cmdSelectFolder(folder, context);
+      }
+    )
   );
 };
