@@ -6,20 +6,20 @@ export const setupSidebar = (
   context: vscode.ExtensionContext,
   workspaceFolders: WorkspaceFolders
 ): void => {
-  if (workspaceFolders) {
-    const folderTreeDataProvider = new FolderList(workspaceFolders, context);
-    const folderDisposable = vscode.window.registerTreeDataProvider(
+  const folderTreeDataProvider = new FolderList(workspaceFolders, context);
+  context.subscriptions.push(
+    vscode.window.registerTreeDataProvider(
       'vsc-packages-activitybar-folders',
       folderTreeDataProvider
-    );
-    context.subscriptions.push(folderDisposable);
+    )
+  );
 
-    const packageJsonDataProvider = new PackageList(context);
-    const packageJsonDisposable = vscode.window.registerTreeDataProvider(
+  const packageJsonDataProvider = new PackageList(context);
+  context.subscriptions.push(
+    vscode.window.registerTreeDataProvider(
       'vsc-packages-activitybar-packagejson',
       packageJsonDataProvider
-    );
-    context.subscriptions.push(packageJsonDisposable);
-    context.workspaceState.update('packageJsonDataProvider', packageJsonDataProvider);
-  }
+    )
+  );
+  context.workspaceState.update('packageJsonDataProvider', packageJsonDataProvider);
 };

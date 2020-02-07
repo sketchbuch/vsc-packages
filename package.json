@@ -8,7 +8,7 @@
   "main": "./out/extension.js",
   "icon": "logo.png",
   "activationEvents": [
-    "workspaceContains:./package.json"
+    "*"
   ],
   "author": {
     "name": "sketchbuch"

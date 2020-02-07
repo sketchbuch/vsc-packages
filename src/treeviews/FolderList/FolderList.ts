@@ -9,7 +9,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
   onDidChangeTreeData: vscode.Event<FolderListItem | undefined> = this._onDidChangeTreeData.event;
 
   constructor(
-    private workspaceFolders: vscode.WorkspaceFolder[],
+    private workspaceFolders: vscode.WorkspaceFolder[] | undefined,
     private context: vscode.ExtensionContext
   ) {}
 
@@ -28,19 +28,28 @@ export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
   getChildren(): Thenable<FolderListItem[]> {
     const children: FolderListItem[] = [];
 
-    this.workspaceFolders.forEach((folder: vscode.WorkspaceFolder) => {
+    if (this.workspaceFolders && this.workspaceFolders.length > 0) {
+      this.workspaceFolders.forEach((folder: vscode.WorkspaceFolder) => {
+        const folderItem = new FolderListItem(
+          folder.name,
+          this.context.extensionPath,
+          vscode.TreeItemCollapsibleState.None,
+          {
+            command: CMD_SELECT_FOLDER,
+            title: '',
+            arguments: [folder, this.context],
+          }
+        );
+        children.push(folderItem);
+      });
+    } else {
       const folderItem = new FolderListItem(
-        folder.name,
+        'No folders or workspaces open',
         this.context.extensionPath,
-        vscode.TreeItemCollapsibleState.None,
-        {
-          command: CMD_SELECT_FOLDER,
-          title: '',
-          arguments: [folder, this.context],
-        }
+        vscode.TreeItemCollapsibleState.None
       );
       children.push(folderItem);
-    });
+    }
 
     return Promise.resolve(children);
   }
