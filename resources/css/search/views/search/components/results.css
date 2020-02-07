@@ -85,3 +85,38 @@
   background: var(--vscode-button-hoverBackground);
   color: var(--vscode-button-foreground);
 }
+
+.results__actions,
+.results__item:hover .results__item-description {
+  display: none;
+}
+
+.results__item:hover .results__actions {
+  display: block;
+}
+
+.results__action {
+  color: var(--vscode-textLink-foreground);
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+  margin-right: 10px;
+  user-select: none;
+}
+
+.results__action:hover {
+  text-decoration: underline;
+}
+
+.results__action:focus {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+
+.results__action-label {
+  display: inline-block;
+  line-height: 1.3;
+  opacity: 0.5;
+  margin-right: 10px;
+  user-select: none;
+}

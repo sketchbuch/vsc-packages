@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS, SEARCH_LIMIT } from '../../constants';
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
-import { getResourceUri, searchNpm } from '../../utils';
+import { getResourceUri, searchNpm, addPackage } from '../../utils';
 import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
 
 const defaultState: SearchState = Object.freeze({
@@ -21,7 +21,7 @@ export const search = (): WebView<{}> => {
   let curContext: vscode.ExtensionContext;
   let curPanel: undefined | vscode.WebviewPanel = undefined;
 
-  const createPanel = (): void => {
+  const createPanel = (context: vscode.ExtensionContext): void => {
     curPanel = vscode.window.createWebviewPanel(
       viewType,
       'Packages: Search',
@@ -38,16 +38,54 @@ export const search = (): WebView<{}> => {
     // Reset state in case editor was closed whilst displaying results
     state = { ...defaultState };
 
-    setupPanel();
+    setupPanel(context);
   };
 
-  const setupPanel = (): void => {
+  const setupPanel = (context: vscode.ExtensionContext): void => {
     if (curPanel) {
       curPanel.webview.onDidReceiveMessage(
         (message: PostMessage<SearchPmPayload>) => {
           switch (message.action) {
             case 'clear':
               state = { ...defaultState };
+
+              break;
+
+            case 'install':
+              if (message.payload.install) {
+                const curFolder = context.workspaceState.get<vscode.WorkspaceFolder>(
+                  'selectedFolder'
+                );
+
+                const { install } = message.payload;
+
+                if (curFolder) {
+                  addPackage(install.package, install.type, curFolder)
+                    .then(() => {
+                      const packageManager: 'yarn' | 'npm' =
+                        vscode.workspace.getConfiguration().get('packageManager') || 'yarn';
+
+                      let installType = install.type;
+
+                      if (packageManager === 'npm' && install.type === 'peerDependencies') {
+                        installType = 'dependencies';
+                      }
+
+                      vscode.window.showInformationMessage(
+                        `${install.package} has been added to ${installType}`
+                      );
+                    })
+                    .catch(({ error }) => {
+                      vscode.window.showErrorMessage(
+                        `An error occured whilst installing ${install.package}: ${error.message}`
+                      );
+                    });
+                } else {
+                  vscode.window.showWarningMessage(
+                    'Unable to install dependency. Please first select a folder in the Packages sidebar'
+                  );
+                }
+              }
 
               break;
 
@@ -164,7 +202,7 @@ export const search = (): WebView<{}> => {
       curContext = context;
 
       if (curPanel === undefined) {
-        createPanel();
+        createPanel(context);
       }
 
       if (curPanel) {
@@ -185,7 +223,7 @@ export const search = (): WebView<{}> => {
       curContext = context;
       curPanel = revivedPanel;
 
-      setupPanel();
+      setupPanel(context);
     },
   };
 

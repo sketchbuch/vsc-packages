@@ -14,6 +14,21 @@ export const results = (results: NpmSearchResults, page: number) => {
                   <span class="results__item-version">v${record.version}</span>
                 </p>
                 <p class="results__item-description">${record.description}</p>
+                <div class="results__actions">
+                  <span class="results__action-label">Install as:</span>
+                  <span class="results__action" data-package="${record.name}" data-type="dependencies" tabindex="0">
+                    Dependency
+                  </span>
+                  <span class="results__action" data-package="${record.name}" data-type="devDependencies" tabindex="0">
+                    Dev Dependency
+                  </span>
+                  <span class="results__action" data-package="${record.name}" data-type="peerDependencies" tabindex="0">
+                    Peer Dependency
+                  </span>
+                  <span class="results__action" data-package="${record.name}" data-type="optionalDependencies" tabindex="0">
+                    Optional Dependency
+                  </span>
+                </div>
               </li>
             `;
           })

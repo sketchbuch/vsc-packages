@@ -50,6 +50,20 @@
         "title": "Search Results"
       }
     ],
+    "configuration": {
+      "title": "Packages",
+      "properties": {
+        "packageManager": {
+          "type": "string",
+          "default": "yarn",
+          "description": "Select the package manger that should be used to install packages",
+          "enum": [
+            "npm",
+            "yarn"
+          ]
+        }
+      }
+    },
     "menus": {
       "commandPalette": [
         {
