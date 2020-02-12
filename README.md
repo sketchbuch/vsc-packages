@@ -6,8 +6,6 @@ A VSC extension to list packages from package.json and search for and install pa
 
 **This is a work-in-progress and began so that I could learn how to make web views and tree views for VSC extensions.**
 
-**Installation of packages is currently not possible but coming soon**
-
 ![alt text](https://raw.githubusercontent.com/sketchbuch/vsc-packages/master/docs/images/vsc-packages-ani.gif 'VSC Packages')
 
 ## How to use
@@ -42,7 +40,7 @@ A command is provided to search NPM (a setting is available to set if yarn or np
 
 ## Latest Version
 
-### [1.2.0] - 2020-02-11
+### [1.2.1] - 2020-02-11
 
 - Added search
 - Added support for multiple folders in a workspace
