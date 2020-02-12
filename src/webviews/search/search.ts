@@ -1,9 +1,22 @@
 import * as vscode from 'vscode';
-import { CMD_SEARCH_PACKAGES_WV, FS_FOLDER_CSS, FS_FOLDER_JS, SEARCH_LIMIT } from '../../constants';
+import {
+  AddPackageData,
+  PostMessage,
+  SearchHtmlData,
+  SearchPmPayload,
+  SearchState,
+  WebView,
+} from '../../types';
+import {
+  CMD_SEARCH_PACKAGES_WV,
+  EXT_WSSTATE_SELFOLDER,
+  FS_FOLDER_CSS,
+  FS_FOLDER_JS,
+  SEARCH_LIMIT,
+} from '../../constants';
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm, addPackage } from '../../utils';
-import { PostMessage, SearchHtmlData, SearchPmPayload, SearchState, WebView } from '../../types';
 
 const defaultState: SearchState = Object.freeze({
   data: undefined,
@@ -54,30 +67,33 @@ export const search = (): WebView<{}> => {
             case 'install':
               if (message.payload.install) {
                 const curFolder = context.workspaceState.get<vscode.WorkspaceFolder>(
-                  'selectedFolder'
+                  EXT_WSSTATE_SELFOLDER
                 );
 
                 const { install } = message.payload;
 
                 if (curFolder) {
                   addPackage(install.package, install.type, curFolder)
-                    .then(() => {
-                      const packageManager: 'yarn' | 'npm' =
-                        vscode.workspace.getConfiguration().get('packageManager') || 'yarn';
-
-                      let installType = install.type;
-
-                      if (packageManager === 'npm' && install.type === 'peerDependencies') {
-                        installType = 'dependencies';
-                      }
-
+                    .then(({ dependencyType }: AddPackageData) => {
                       vscode.window.showInformationMessage(
-                        `${install.package} has been added to ${installType}`
+                        `${install.package} has been added to ${dependencyType}`
                       );
                     })
-                    .catch(({ error }) => {
+                    .catch(({ error }: AddPackageData) => {
+                      let err: string[] = [];
+
+                      if (error) {
+                        if (error.code) {
+                          err = err.concat(error.code.toString());
+                        }
+
+                        if (error.signal) {
+                          err = err.concat(error.signal.toString());
+                        }
+                      }
+
                       vscode.window.showErrorMessage(
-                        `An error occured whilst installing ${install.package}: ${error.message}`
+                        `An error occured whilst installing ${install.package}: ${err.join(' - ')}`
                       );
                     });
                 } else {

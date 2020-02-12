@@ -19,8 +19,4 @@ suite('search - searchView()', () => {
   test('Renders an input', () => {
     expect(searchView(state)).contains(`<input`);
   });
-
-  test('Sets value correctly', () => {
-    expect(searchView(state)).contains(`value="vscode"`);
-  });
 });

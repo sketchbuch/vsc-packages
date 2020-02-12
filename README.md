@@ -18,20 +18,32 @@ Doing so opens a new editor showing information obtained from the NPM registry i
 
 Other links to the package's repository and bug tracker are also provided
 
+A command is provided to search NPM (a setting is available to set if yarn or npm should be used)
+
 ## Todo
 
+- Add ability to move packages between dependency types (like from devDependencies to optional dendencies)
+- Scroll to start of newely loaded page when searching
+- Show in search results if a package is installed
+- Display an alert if a package is installed twice
 - Add ability to install a specific version or upgrade to a specific version
 - Show uninstalled packages differently in the sidebar
 - Show out-of-date packages differently in the sidebar
 - Show unused packages differently in the sidebar
 - Cache package data from NPM for a short time
 - Cache selected tab in the revive state so that on revival the last active tab can be selected
+
+## Done
+
+- ~~Install NPM packages~~ **DONE**
 - ~~Add a file watcher to update the sidebar if the package.json file changes~~ **DONE**
 - ~~Add search functionality - as tree views can't show a search box this will probably be in a web view.~~ **DONE**
 - ~~Support different repos in the same worksapce. Currently it only works with one folder in the workspace, to support multiple workspace folders with their own package.json some kind of selector would need to be added (a bit like in the SCM)~~ **DONE**
 
 ## Latest Version
 
-### [1.1.3] - 2020-01-17
+### [1.2.0] - 2020-02-11
 
-- Code refactor
+- Added search
+- Added support for multiple folders in a workspace
+- Added ability to install packages

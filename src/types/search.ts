@@ -1,5 +1,5 @@
 import { NpmSearchResults } from './npm';
-import { ExtViewList } from '.';
+import { ExtDepTypes } from '.';
 
 export type SearchData = {};
 export type SearchSortDefault = 'optimal';
@@ -17,7 +17,7 @@ export interface SearchState {
 export interface SearchPmPayload {
   install?: {
     package: string;
-    type: ExtViewList;
+    type: ExtDepTypes;
   };
   page?: number;
   sort?: SearchSort;

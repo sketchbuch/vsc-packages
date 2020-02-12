@@ -1,20 +1,17 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
-import { ExtViewList } from '../../types';
+import { ExtDepTypes, AddPackage, AddPackageData } from '../../types';
 
 export const addPackage = (
   pkgName: string,
-  installType: ExtViewList,
+  installType: ExtDepTypes,
   folder: vscode.WorkspaceFolder
-): Promise<{
-  error?: Error;
-  stdout: string;
-  stderr: string;
-}> => {
+): AddPackage => {
   const packageManager: 'yarn' | 'npm' =
     vscode.workspace.getConfiguration().get('packageManager') || 'yarn';
   const options = { cwd: folder.uri.path };
-  const depType = installType.replace('Dependencies', '');
+  const cmdInstallType = installType.replace('Dependencies', '');
+  let dependencyType = installType;
   let command: string;
 
   if (packageManager === 'npm' && installType === 'peerDependencies') {
@@ -24,21 +21,22 @@ export const addPackage = (
   }
 
   if (packageManager === 'npm') {
-    const npmInstallType = installType === 'peerDependencies' ? 'dependencies' : installType;
-    const installSwitch = npmInstallType !== 'dependencies' ? `--save-${depType} ` : '--save ';
+    dependencyType = installType === 'peerDependencies' ? 'dependencies' : installType;
+    const installSwitch =
+      dependencyType !== 'dependencies' ? `--save-${cmdInstallType} ` : '--save ';
     command = `npm install ${installSwitch}${pkgName}`;
   } else {
-    const installSwitch = installType !== 'dependencies' ? ` --${depType}` : '';
+    const installSwitch = installType !== 'dependencies' ? ` --${cmdInstallType}` : '';
     command = `yarn add ${pkgName}${installSwitch}`;
   }
 
-  return new Promise<{ stdout: string; stderr: string }>((resolve, reject) => {
+  return new Promise<AddPackageData>((resolve, reject) => {
     exec(command, options, (error, stdout, stderr) => {
       if (error) {
-        reject({ error, stdout, stderr });
+        reject({ dependencyType, error, stderr, stdout });
       }
 
-      resolve({ stdout, stderr });
+      resolve({ dependencyType, error, stderr, stdout });
     });
   });
 };

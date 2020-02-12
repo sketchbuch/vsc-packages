@@ -1,5 +1,10 @@
 import * as vscode from 'vscode';
-import { CMD_DISPLAY_PACKAGE, extViews, FS_PACKAGEJSON } from '../../constants';
+import {
+  CMD_DISPLAY_PACKAGE,
+  EXT_WSSTATE_SELFOLDER,
+  extViews,
+  FS_PACKAGEJSON,
+} from '../../constants';
 import { getPackageJson } from '../../utils';
 import { PackageListItem, PackageListDep } from './';
 import { PackageListChild, PackageListChildren } from '../../types';
@@ -51,7 +56,9 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
 
   getChildren(element?: PackageListItem): Thenable<PackageListChildren> {
     const children: PackageListChildren = [];
-    const curFolder = this.context.workspaceState.get<vscode.WorkspaceFolder>('selectedFolder');
+    const curFolder = this.context.workspaceState.get<vscode.WorkspaceFolder>(
+      EXT_WSSTATE_SELFOLDER
+    );
 
     if (curFolder) {
       this.createWatcher(curFolder);
@@ -119,7 +126,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
                   depType,
                   depCount,
                   this.context.extensionPath,
-                  vscode.TreeItemCollapsibleState.Collapsed
+                  vscode.TreeItemCollapsibleState.Expanded
                 );
                 children.push(depTypeItem);
               }

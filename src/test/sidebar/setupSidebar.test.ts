@@ -1,14 +1,42 @@
+import { expect } from 'chai';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
-import { extViews } from '../../constants';
+import {
+  EXT_ACTIVITYBAR_FOLDERS,
+  EXT_ACTIVITYBAR_PACKAGEJSON,
+  EXT_WSSTATE_JSON_DP,
+} from '../../constants';
 import { mockContext } from '../mocks';
 import * as sidebar from '../../sidebar';
-import * as utils from '../../utils';
+import { FolderList, PackageList } from '../../treeviews';
 
 suite('setupSidebar()', () => {
   const setupSidebar = sidebar.setupSidebar;
 
-  test('Calls getPackageJson()', () => {
+  test('Sets up tree providers correctly', () => {
+    const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
+    const spyWsState = sinon.spy(mockContext.workspaceState, 'update');
+
+    setupSidebar(mockContext, undefined);
+
+    sinon.assert.callCount(spy, 2);
+    const spyFolderArgs = spy.getCall(0).args;
+    const spyPackageArgs = spy.getCall(1).args;
+    expect(spyFolderArgs[0]).to.equal(EXT_ACTIVITYBAR_FOLDERS);
+    expect(spyFolderArgs[1]).to.be.an.instanceof(FolderList);
+    expect(spyPackageArgs[0]).to.equal(EXT_ACTIVITYBAR_PACKAGEJSON);
+    expect(spyPackageArgs[1]).to.be.an.instanceof(PackageList);
+
+    sinon.assert.callCount(spyWsState, 1);
+    const spyWsStateArgs = spyWsState.getCall(0).args;
+    expect(spyWsStateArgs[0]).to.equal(EXT_WSSTATE_JSON_DP);
+    expect(spyWsStateArgs[1]).to.be.an.instanceof(PackageList);
+
+    spy.restore();
+    spyWsState.restore();
+  });
+
+  /* test('Calls getPackageJson()', () => {
     const spy = sinon.spy(utils, 'getPackageJson');
     setupSidebar(mockContext, undefined);
 
@@ -51,5 +79,5 @@ suite('setupSidebar()', () => {
       sinon.assert.callCount(spy, 1);
       spy.restore();
     });
-  });
+  }); */
 });

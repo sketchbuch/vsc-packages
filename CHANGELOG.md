@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.2.0](https://github.com/sketchbuch/vsc-packages/compare/v1.1.3...v1.2.0) - 2020-02-11
+
+- Added search
+- Added support for multiple folders in a workspace
+- Added ability to install packages
+
 ## [1.1.3](https://github.com/sketchbuch/vsc-packages/compare/v1.1.1...v1.1.2) (2020-01-17)
 
 - Code refactor

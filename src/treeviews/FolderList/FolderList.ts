@@ -11,9 +11,14 @@ export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
   constructor(
     private workspaceFolders: vscode.WorkspaceFolder[] | undefined,
     private context: vscode.ExtensionContext
-  ) {}
+  ) {
+    vscode.workspace.onDidChangeWorkspaceFolders(() => {
+      this.refresh(vscode.workspace.workspaceFolders);
+    });
+  }
 
-  refresh(): void {
+  refresh(workspaceFolders: vscode.WorkspaceFolder[] | undefined): void {
+    this.workspaceFolders = workspaceFolders;
     this._onDidChangeTreeData.fire();
   }
 

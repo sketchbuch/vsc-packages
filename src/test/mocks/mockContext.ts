@@ -12,7 +12,10 @@ const mockContext = {
   logPath: '',
   storagePath: '',
   subscriptions: [],
-  workspaceState: {} as vscode.Memento,
+  workspaceState: {
+    get: (key: string) => {},
+    update: (key: string, value: any) => {},
+  } as vscode.Memento,
 } as vscode.ExtensionContext;
 
 export default { ...mockContext };
