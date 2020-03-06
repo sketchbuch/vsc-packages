@@ -1,0 +1,13 @@
+version: 1
+update_configs:
+  - package_manager: 'javascript'
+    commit_message:
+      include_scope: true
+      prefix: 'chore'
+    default_reviewers:
+      - sketchbuch
+    default_labels:
+      - 'dependencies'
+    directory: '/'
+    target_branch: 'develop'
+    update_schedule: 'live'
