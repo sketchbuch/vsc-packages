@@ -154,7 +154,7 @@
     "@types/chai": "^4.1.7",
     "@types/libnpmsearch": "^2.0.1",
     "@types/marked": "^0.7.2",
-    "@types/mocha": "^2.2.42",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^10.12.21",
     "@types/sinon": "^7.0.13",
     "@types/stylelint": "^9.10.1",
