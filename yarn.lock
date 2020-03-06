@@ -2559,11 +2559,6 @@ markdown-table@^1.1.0:
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.3.tgz#9fcb69bcfdb8717bfd0398c6ec2d93036ef8de60"
   integrity sha512-1RUZVgQlpJSPWYbFSpmudq5nHY1doEIv89gBtF0s4gW1GF2XorxcA/70M5vq7rLv0a6mhOUccRsqkwhwLCIQ2Q==
 
-marked@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
-  integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
-
 marked@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
@@ -4508,14 +4503,14 @@ yargs-parser@^16.1.0:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yarn-audit-html@^1.1.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/yarn-audit-html/-/yarn-audit-html-1.2.1.tgz#5185377705dd06428ad862536bc1b3e00814195d"
-  integrity sha512-fpE99vQ/qS/pArNYa3XD2ESJwANNJvbbbgtx7k5oP08uWipyoigIz8mv5Wq7SY7slEE/Ak7bOj/37+u71Zg2bw==
+yarn-audit-html@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/yarn-audit-html/-/yarn-audit-html-1.2.2.tgz#93906e46e2cdb77480372634ed5c5cd529079022"
+  integrity sha512-2NoBcSIqKXBnt8JkSonXjowuXUh69ai4KETltOVqlCY26Rkq2QA+hA11s4Ur9Hqzv5O3oYQvD7C7BTr/62sMEA==
   dependencies:
     commander "^4.0.0"
     ejs "^3.0.0"
-    marked "^0.7.0"
+    marked "^0.8.0"
 
 yn@^3.0.0:
   version "3.1.1"
