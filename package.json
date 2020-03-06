@@ -151,7 +151,7 @@
     "@schemastore/package": "^0.0.5",
     "@types/axios-mock-adapter": "^1.10.0",
     "@types/axios": "^0.14.0",
-    "@types/chai": "^4.1.7",
+    "@types/chai": "^4.2.10",
     "@types/libnpmsearch": "^2.0.1",
     "@types/marked": "^0.7.2",
     "@types/mocha": "^7.0.2",
