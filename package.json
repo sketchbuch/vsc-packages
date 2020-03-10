@@ -163,7 +163,7 @@
     "chai": "^4.2.0",
     "commitlint": "^8.3.5",
     "prettier": "^1.19.1",
-    "sinon": "^7.3.2",
+    "sinon": "^9.0.1",
     "stylelint": "^13.2.1",
     "stylelint-config-recommended": "^3.0.0",
     "ts-mockito": "^2.3.1",
