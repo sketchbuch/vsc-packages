@@ -159,7 +159,7 @@
     "@types/sinon": "^7.5.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
-    "axios-mock-adapter": "^1.17.0",
+    "axios-mock-adapter": "^1.18.0",
     "chai": "^4.2.0",
     "commitlint": "^8.3.5",
     "prettier": "^1.19.1",
