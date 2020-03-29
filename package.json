@@ -177,7 +177,7 @@
     "axios": "^0.19.2",
     "husky": "^4.2.3",
     "libnpmsearch": "^2.0.2",
-    "lint-staged": "^10.0.8",
+    "lint-staged": "^10.0.10",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2"
   },
