@@ -155,7 +155,7 @@
     "@types/libnpmsearch": "^2.0.1",
     "@types/marked": "^0.7.3",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.9.0",
+    "@types/node": "^13.13.2",
     "@types/sinon": "^7.5.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
