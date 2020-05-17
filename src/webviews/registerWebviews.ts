@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { EXT_GLOBALSTATE_KEY, EXT_GLOBALSTATE_VERSION_KEY } from '../constants';
+import { EXT_STATE_KEY, EXT_STATE_VERSION_KEY } from '../constants';
 import { packageWebview, searchWebview } from '.';
 
 export const registerWebviews = (context: vscode.ExtensionContext) => {
@@ -7,8 +7,8 @@ export const registerWebviews = (context: vscode.ExtensionContext) => {
     vscode.window.registerWebviewPanelSerializer(packageWebview.getViewType(), {
       async deserializeWebviewPanel(webviewPanel: vscode.WebviewPanel) {
         packageWebview.revive(context, webviewPanel, {
-          packageName: context.globalState.get(EXT_GLOBALSTATE_KEY) || '',
-          packageVersion: context.globalState.get(EXT_GLOBALSTATE_VERSION_KEY) || '',
+          packageName: context.workspaceState.get(EXT_STATE_KEY) || '',
+          packageVersion: context.workspaceState.get(EXT_STATE_VERSION_KEY) || '',
         });
       },
     });

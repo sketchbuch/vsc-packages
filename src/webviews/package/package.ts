@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import {
   CMD_DISPLAY_PACKAGE_WV,
-  EXT_GLOBALSTATE_KEY,
-  EXT_GLOBALSTATE_VERSION_KEY,
+  EXT_STATE_KEY,
+  EXT_STATE_VERSION_KEY,
   FS_FOLDER_CSS,
   FS_FOLDER_JS,
 } from '../../constants';
@@ -114,8 +114,8 @@ export const pkg = (): WebView<PackageData> => {
   };
 
   const setStateForRevival = (): void => {
-    curContext.globalState.update(EXT_GLOBALSTATE_KEY, packageData.packageName);
-    curContext.globalState.update(EXT_GLOBALSTATE_VERSION_KEY, packageData.packageVersion);
+    curContext.workspaceState.update(EXT_STATE_KEY, packageData.packageName);
+    curContext.workspaceState.update(EXT_STATE_VERSION_KEY, packageData.packageVersion);
   };
 
   const update = (): void => {
