@@ -7,8 +7,12 @@ import {
   CMD_SELECT_FOLDER,
 } from '../constants';
 import { cmdDisplayPackage, cmdOpenNpm, cmdSearchNpm, cmdSelectFolder } from '.';
+import { PackageList } from '../treeviews';
 
-export const registerCommands = (context: vscode.ExtensionContext): void => {
+export const registerCommands = (
+  context: vscode.ExtensionContext,
+  packageJsonDataProvider: PackageList
+): void => {
   const { registerCommand } = vscode.commands;
 
   context.subscriptions.push(
@@ -39,7 +43,7 @@ export const registerCommands = (context: vscode.ExtensionContext): void => {
     registerCommand(
       CMD_SELECT_FOLDER,
       (folder: vscode.WorkspaceFolder, context: vscode.ExtensionContext): void => {
-        cmdSelectFolder(folder, context);
+        cmdSelectFolder(folder, context, packageJsonDataProvider);
       }
     )
   );

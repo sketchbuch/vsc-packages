@@ -2,8 +2,9 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import * as vscode from 'vscode';
 import { cmdSelectFolder } from '../../../commands';
-import { EXT_WSSTATE_SELFOLDER, EXT, EXT_WSSTATE_JSON_DP } from '../../../constants';
+import { EXT, EXT_WSSTATE_SELFOLDER } from '../../../constants';
 import { mockContext, mockWorkspaceFolder } from '../../mocks';
+import { PackageList } from '../../../treeviews';
 
 suite('cmdSelectFolder()', () => {
   test('Calls searchWebview.show() correctly', () => {
@@ -12,7 +13,7 @@ suite('cmdSelectFolder()', () => {
     const spy3 = sinon.stub(mockContext.workspaceState, 'get');
 
     const folder = mockWorkspaceFolder();
-    cmdSelectFolder(folder, mockContext);
+    cmdSelectFolder(folder, mockContext, new PackageList(mockContext));
 
     sinon.assert.callCount(spy, 1);
     const spyArgs = spy.getCall(0).args;
@@ -25,10 +26,8 @@ suite('cmdSelectFolder()', () => {
     expect(spy2Args[1]).to.equal(`${EXT}-folder`);
     expect(spy2Args[2]).to.equal(folder);
 
-    sinon.assert.callCount(spy3, 2);
+    sinon.assert.callCount(spy3, 1);
     expect(spy3.getCall(0).args[0]).to.equal(EXT_WSSTATE_SELFOLDER);
-    expect(spy3.getCall(1).args[0]).to.equal(EXT_WSSTATE_JSON_DP);
-
     spy.restore();
     spy2.restore();
     spy3.restore();
