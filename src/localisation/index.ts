@@ -11,11 +11,13 @@ const deepCache: Translations = {};
 export const t = (key: string, placeholders: Placeholders | null = null): string => {
   let translation = translations[key] || key;
 
-  // Deep check if no flat translation exists and we haven't already dived for this key...
+  // Deep check if no flat translation exists...
   if (key.includes('.') && !translations[key]) {
     if (deepCache[key]) {
-      translation = deepCache[key] as string;
+      translation = deepCache[key];
     } else {
+      deepCache[key] = key;
+
       const paths = key.split('.');
       const finalPath = paths.pop();
 
@@ -27,8 +29,6 @@ export const t = (key: string, placeholders: Placeholders | null = null): string
           translationPath = translationPath[path];
         }
       }
-
-      deepCache[key] = key;
 
       if (finalPath && typeof translationPath !== 'string') {
         if (translationPath[finalPath] && typeof translationPath[finalPath] === 'string') {

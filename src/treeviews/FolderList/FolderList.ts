@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { CMD_SELECT_FOLDER } from '../../constants';
 import { FolderListItem } from '.';
+import { t } from '../../localisation';
 
 export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
   _onDidChangeTreeData: vscode.EventEmitter<FolderListItem | undefined> = new vscode.EventEmitter<
@@ -35,25 +36,27 @@ export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
 
     if (this.workspaceFolders && this.workspaceFolders.length > 0) {
       this.workspaceFolders.forEach((folder: vscode.WorkspaceFolder) => {
-        const folderItem = new FolderListItem(
-          folder.name,
-          this.context.extensionPath,
-          vscode.TreeItemCollapsibleState.None,
-          {
-            command: CMD_SELECT_FOLDER,
-            title: '',
-            arguments: [folder, this.context],
-          }
+        children.push(
+          new FolderListItem(
+            folder.name,
+            this.context.extensionPath,
+            vscode.TreeItemCollapsibleState.None,
+            {
+              command: CMD_SELECT_FOLDER,
+              title: '',
+              arguments: [folder, this.context],
+            }
+          )
         );
-        children.push(folderItem);
       });
     } else {
-      const folderItem = new FolderListItem(
-        'No folders or workspaces open',
-        this.context.extensionPath,
-        vscode.TreeItemCollapsibleState.None
+      children.push(
+        new FolderListItem(
+          t('treeViews.folder.noFolders'),
+          this.context.extensionPath,
+          vscode.TreeItemCollapsibleState.None
+        )
       );
-      children.push(folderItem);
     }
 
     return Promise.resolve(children);

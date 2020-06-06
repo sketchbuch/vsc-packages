@@ -17,6 +17,7 @@ import {
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm, addPackage } from '../../utils';
+import { t } from '../../localisation';
 
 const defaultState: SearchState = Object.freeze({
   data: undefined,
@@ -37,7 +38,7 @@ export const search = (): WebView<{}> => {
   const createPanel = (context: vscode.ExtensionContext): void => {
     curPanel = vscode.window.createWebviewPanel(
       viewType,
-      'Packages: Search',
+      t('webViews.search.tabTitle'),
       vscode.ViewColumn.Active,
       {
         enableScripts: true,
@@ -76,7 +77,10 @@ export const search = (): WebView<{}> => {
                   addPackage(install.package, install.type, curFolder)
                     .then(({ dependencyType }: AddPackageData) => {
                       vscode.window.showInformationMessage(
-                        `${install.package} has been added to ${dependencyType}`
+                        t('messages.pkgInstallSuccess', {
+                          dependencyType,
+                          package: install.package,
+                        })
                       );
                     })
                     .catch(({ error }: AddPackageData) => {
@@ -93,13 +97,14 @@ export const search = (): WebView<{}> => {
                       }
 
                       vscode.window.showErrorMessage(
-                        `An error occured whilst installing ${install.package}: ${err.join(' - ')}`
+                        t('messages.pkgInstallError', {
+                          error: err.join(' - '),
+                          package: install.package,
+                        })
                       );
                     });
                 } else {
-                  vscode.window.showWarningMessage(
-                    'Unable to install dependency. Please first select a folder in the Packages sidebar'
-                  );
+                  vscode.window.showWarningMessage(t('messages.pkgInstallNoFolder'));
                 }
               }
 

@@ -6,13 +6,30 @@
   "cmd.search-results": "Search Results",
   "config.title": "Packages",
   "config.packageManager.description": "Select the package manger that should be used to install packages.",
-  "views.btn.open-npmurl": "Open the NPM Page for this Package",
-  "views.activitybar-packagejson": "Packages",
+  "messages": {
+    "pkgInstallError": "An error occured whilst installing {{package}}: {{error}}",
+    "pkgInstallNoFolder": "Unable to install dependency. Please first select a folder in the Packages sidebar",
+    "pkgInstallSuccess": "{{package}} has been added to {{dependencyType}}"
+  },
+  "treeViews": {
+    "folder": {
+      "noFolders": "No folders or workspaces open"
+    },
+    "package": {
+      "npPkgJson": "Error whilst reading package.json",
+      "readError": "No package.json file found"
+    }
+  },
   "views.activitybar-folders": "Workspace Folders",
+  "views.activitybar-packagejson": "Packages",
+  "views.btn.open-npmurl": "Open the NPM Page for this Package",
   "viewsContainers.activitybar": "Packages",
   "webViews": {
     "packages": {
       "tabTitle": "Package: {{packageName}}"
+    },
+    "search": {
+      "tabTitle": "Packages: Search"
     }
   }
 }
