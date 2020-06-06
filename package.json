@@ -112,7 +112,7 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "icon": "./resources/images/light/activitybar-light.svg",
+          "icon": "./resources/images/activitybar.svg",
           "id": "vsc-packages-activitybar",
           "title": "Packages"
         }
