@@ -10,7 +10,7 @@ import { setupSidebar } from '../sidebar';
 let packageJsonDataProvider: PackageList | undefined = undefined;
 
 export const setupExt = (extViews: ExtDeps, context: vscode.ExtensionContext, lang: string) => {
-  loadTranslations(lang, context.extensionPath);
+  loadTranslations('en', context.extensionPath);
   packageJsonDataProvider = new PackageList(context);
   registerCommands(context, packageJsonDataProvider);
   registerWebviews(context);

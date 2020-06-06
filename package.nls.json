@@ -9,5 +9,10 @@
   "views.btn.open-npmurl": "Open the NPM Page for this Package",
   "views.activitybar-packagejson": "Packages",
   "views.activitybar-folders": "Workspace Folders",
-  "viewsContainers.activitybar": "Packages"
+  "viewsContainers.activitybar": "Packages",
+  "webViews": {
+    "packages": {
+      "tabTitle": "Package: {{packageName}}"
+    }
+  }
 }
