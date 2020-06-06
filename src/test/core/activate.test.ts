@@ -11,7 +11,7 @@ suite('activate()', function() {
     const stubRc = sinon.stub(commands, 'registerCommands');
     const stubWv = sinon.stub(webviews, 'registerWebviews');
     const stubSb = sinon.stub(sidebar, 'setupSidebar');
-    setupExt(extViews, mockContext);
+    setupExt(extViews, mockContext, 'en');
 
     sinon.assert.calledOnce(stubRc);
     sinon.assert.calledOnce(stubWv);

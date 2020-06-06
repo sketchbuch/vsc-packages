@@ -1,12 +1,8 @@
 {
   "name": "vsc-packages",
-  "displayName": "Package Installer",
   "description": "A VSC extension to list packages from package.json and search for and install packages.",
+  "displayName": "Package Installer",
   "version": "1.2.2",
-  "license": "SEE LICENSE IN LICENSE.txt",
-  "publisher": "sketchbuch",
-  "main": "./out/extension.js",
-  "icon": "logo.png",
   "activationEvents": [
     "*"
   ],
@@ -27,7 +23,7 @@
           "light": "./resources/images/light/activitybar-light.svg",
           "dark": "./resources/images/dark/activitybar-dark.svg"
         },
-        "title": "Display Package"
+        "title": "%cmd.display-package%"
       },
       {
         "command": "vsc-packages-open-npmurl",
@@ -35,28 +31,28 @@
           "light": "./resources/images/light/activitybar-light.svg",
           "dark": "./resources/images/dark/activitybar-dark.svg"
         },
-        "title": "Open the NPM Page for this Package"
+        "title": "%cmd.open-npmurl%"
       },
       {
         "command": "vsc-packages-select-folder",
-        "title": "View packages in this folder"
+        "title": "%cmd.select-folder%"
       },
       {
         "command": "vsc-packages-search-packages",
-        "title": "Packages: Search NPM"
+        "title": "%cmd.search-packages%"
       },
       {
         "command": "vsc-packages-search-results",
-        "title": "Search Results"
+        "title": "%cmd.search-results%"
       }
     ],
     "configuration": {
-      "title": "Packages",
+      "title": "%config.title%",
       "properties": {
         "packageManager": {
           "type": "string",
           "default": "yarn",
-          "description": "Select the package manger that should be used to install packages",
+          "description": "%config.packageManager.description%",
           "enum": [
             "npm",
             "yarn"
@@ -91,7 +87,7 @@
             "light": "./resources/images/light/activitybar-light.svg",
             "dark": "./resources/images/dark/activitybar-dark.svg"
           },
-          "title": "Open the NPM Page for this Package",
+          "title": "%views.btn.open-npmurl%",
           "when": "viewItem == package-list-item"
         }
       ]
@@ -100,11 +96,11 @@
       "vsc-packages-activitybar": [
         {
           "id": "vsc-packages-activitybar-folders",
-          "name": "Workspace Folders"
+          "name": "%views.activitybar-folders%"
         },
         {
           "id": "vsc-packages-activitybar-packagejson",
-          "name": "Packages",
+          "name": "%views.activitybar-packagejson%",
           "when": "vsc-packages-folder"
         }
       ]
@@ -114,7 +110,7 @@
         {
           "icon": "./resources/images/activitybar.svg",
           "id": "vsc-packages-activitybar",
-          "title": "Packages"
+          "title": "%viewsContainers.activitybar%"
         }
       ]
     }
@@ -122,6 +118,7 @@
   "engines": {
     "vscode": "^1.40.0"
   },
+  "icon": "logo.png",
   "keywords": [
     "dependencies",
     "installer",
@@ -129,6 +126,9 @@
     "package.json",
     "package"
   ],
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "main": "./out/extension.js",
+  "publisher": "sketchbuch",
   "repository": {
     "type": "git",
     "url": "https://github.com/sketchbuch/vsc-packages"

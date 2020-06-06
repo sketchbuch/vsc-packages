@@ -1,0 +1,13 @@
+{
+  "cmd.display-package": "Pakete anzeigen",
+  "cmd.open-npmurl": "Öffnen Sie die NPM-Seite für dieses Paket",
+  "cmd.select-folder": "Pakete in diesem Ordner anzeigen",
+  "cmd.search-packages": "Packages: NPM durchsuchen",
+  "cmd.search-results": "Suchergebnisse",
+  "config.title": "Packages",
+  "config.packageManager.description": "Wählen Sie den Paketmanager aus, der zum Installieren von Paketen verwendet werden soll.",
+  "views.btn.open-npmurl": "Open the NPM Page for this Package",
+  "views.activitybar-packagejson": "Pakete",
+  "views.activitybar-folders": "Arbeitsberich-Verzeichnisse",
+  "viewsContainers.activitybar": "Pakete"
+}

@@ -1,0 +1,13 @@
+{
+  "cmd.display-package": "Display Package",
+  "cmd.open-npmurl": "Open the NPM Page for this Package",
+  "cmd.select-folder": "View packages in this folder",
+  "cmd.search-packages": "Packages: Search NPM",
+  "cmd.search-results": "Search Results",
+  "config.title": "Packages",
+  "config.packageManager.description": "Select the package manger that should be used to install packages.",
+  "views.btn.open-npmurl": "Open the NPM Page for this Package",
+  "views.activitybar-packagejson": "Packages",
+  "views.activitybar-folders": "Workspace Folders",
+  "viewsContainers.activitybar": "Packages"
+}
