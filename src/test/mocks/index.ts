@@ -1,4 +1,6 @@
-export const extensionPath = '/test/path';
+import * as path from 'path';
+
+export const extensionPath = path.resolve(`${__dirname}/../../..`);
 export const packageName = 'vsc-quokka-statusbar';
 
 export { default as mockContext } from './mockContext';
