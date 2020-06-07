@@ -2,6 +2,7 @@ import { errorView, searchView } from '..';
 import { FS_WEBVIEW_SEARCH_CSS, FS_WEBVIEW_SEARCH_JS } from '../../../constants';
 import { GetTemplate, SearchHtmlData } from '../../../types';
 import { metaTagsSnippet } from '../../shared';
+import { t } from '../../../localisation';
 
 export const defaultTemplate = (
   { cssPath, nonce, scriptPath }: GetTemplate,
@@ -23,7 +24,7 @@ export const defaultTemplate = (
     <html lang="en">
       <head>
         ${metaTagsSnippet(nonce)}
-        <title>Packages: Search</title>
+        <title>${t('webViews.search.tabTitle')}</title>
         <link href="${cssPath}/${FS_WEBVIEW_SEARCH_CSS}" nonce="${nonce}" rel="stylesheet" type="text/css">
       </head>
 
