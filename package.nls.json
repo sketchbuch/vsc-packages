@@ -11,6 +11,15 @@
     "pkgInstallNoFolder": "Unable to install dependency. Please first select a folder in the Packages sidebar",
     "pkgInstallSuccess": "{{package}} has been added to {{dependencyType}}"
   },
+  "templates": {
+    "package": {},
+    "search": {
+      "errorView": {
+        "headline": "Error searching the NPM registry"
+      }
+    },
+    "shared": {}
+  },
   "treeViews": {
     "folder": {
       "noFolders": "No folders or workspaces open"

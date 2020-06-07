@@ -16,6 +16,7 @@ export const defaultTemplate = (
   } else {
     content = searchView(state);
   }
+  content = errorView(new Error('Bummer'));
 
   return `
     <!DOCTYPE html>
