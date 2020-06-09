@@ -20,16 +20,16 @@
       {
         "command": "vsc-packages-display-package",
         "icon": {
-          "light": "./resources/images/light/activitybar-light.svg",
-          "dark": "./resources/images/dark/activitybar-dark.svg"
+          "light": "./resources/images/light/dep.svg",
+          "dark": "./resources/images/dark/dep.svg"
         },
         "title": "%cmd.display-package%"
       },
       {
         "command": "vsc-packages-open-npmurl",
         "icon": {
-          "light": "./resources/images/light/activitybar-light.svg",
-          "dark": "./resources/images/dark/activitybar-dark.svg"
+          "light": "./resources/images/light/dep.svg",
+          "dark": "./resources/images/dark/dep.svg"
         },
         "title": "%cmd.open-npmurl%"
       },
@@ -84,8 +84,8 @@
           "command": "vsc-packages-open-npmurl",
           "group": "inline",
           "icon": {
-            "light": "./resources/images/light/activitybar-light.svg",
-            "dark": "./resources/images/dark/activitybar-dark.svg"
+            "light": "./resources/images/light/dep.svg",
+            "dark": "./resources/images/dark/dep.svg"
           },
           "title": "%views.btn.open-npmurl%",
           "when": "viewItem == package-list-item"
