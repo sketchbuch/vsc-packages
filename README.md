@@ -38,10 +38,13 @@ A command is provided to search NPM (a setting is available to set if yarn or np
 - ~~Add search functionality - as tree views can't show a search box this will probably be in a web view.~~ **DONE**
 - ~~Support different repos in the same worksapce. Currently it only works with one folder in the workspace, to support multiple workspace folders with their own package.json some kind of selector would need to be added (a bit like in the SCM)~~ **DONE**
 
+## Translations
+
+This extension is localised, if you want it in your language please send me a translated "package.nls.json" file which you can find in the root of this extension. A basic german translation is provided, but as german is not my native langauge feel free to submit corrections.
+
 ## Latest Version
 
-### [1.2.1] - 2020-02-11
+#### [1.3.0](https://github.com/sketchbuch/vsc-packages/compare/v1.2.1...v1.3.0) - 2020-02-11
 
-- Added search
-- Added support for multiple folders in a workspace
-- Added ability to install packages
+- New Icon
+- Localised
