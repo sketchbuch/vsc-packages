@@ -15,6 +15,7 @@ import {
   timeSnippet,
   versionSnippet,
 } from '../snippets';
+import { t } from '../../../localisation';
 
 export const detailView = (
   packageData: CmdCallbackData,
@@ -38,16 +39,16 @@ export const detailView = (
   const tabboxItems: TabboxItems = [
     {
       button: {
-        label: 'Readme',
+        label: t('webViews.packages.detailView.tabs.readme.tabLabel'),
         selected: activeTab === 'readme',
       },
       content: () => readmeSnippet(readme),
-      emptyMessage: 'No readme available',
+      emptyMessage: t('webViews.packages.detailView.tabs.readme.empty'),
       id: 'readme',
     },
     {
       button: {
-        label: 'Versions',
+        label: t('webViews.packages.detailView.tabs.versions.tabLabel'),
         selected: activeTab === 'versions',
       },
       content: () =>
@@ -55,16 +56,16 @@ export const detailView = (
           () => tagsSnippet(tags, packageData.packageName),
           () => timeSnippet(time, packageData.packageName)
         ),
-      emptyMessage: 'No version information available',
+      emptyMessage: t('webViews.packages.detailView.tabs.versions.empty'),
       id: 'versions',
     },
     {
       button: {
-        label: 'Developers',
+        label: t('webViews.packages.detailView.tabs.dev.tabLabel'),
         selected: activeTab === 'developers',
       },
       content: () => maintainerSnippet(maintainers) + contribSnippet(contributors),
-      emptyMessage: 'No maintainer/contributor infromation available',
+      emptyMessage: t('webViews.packages.detailView.tabs.dev.empty'),
       id: 'developers',
     },
   ];

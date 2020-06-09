@@ -1,7 +1,8 @@
 import { EXT } from '../../../constants';
+import { infoMessageSnippet, results } from '../snippets';
 import { searchFieldSnippet, searchSortSnippet } from '../../shared';
 import { SearchState } from '../../../types';
-import { infoMessageSnippet, results } from '../snippets';
+import { t } from '../../../localisation';
 
 export const searchView = (state: SearchState) => {
   const { data, loading, page, sort, term } = state;
@@ -13,12 +14,15 @@ export const searchView = (state: SearchState) => {
     if (data.length > 0) {
       content = results(data, page);
     } else {
-      content = infoMessageSnippet('No packages found', 'Please try modifying your search term');
+      content = infoMessageSnippet(
+        t('webViews.search.searchView.noResults.headline'),
+        t('webViews.search.searchView.noResults.description')
+      );
     }
   } else {
     content = infoMessageSnippet(
-      'Enter a search term to begin',
-      'Matching packages will be listed here for you to install'
+      t('webViews.search.searchView.search.headline'),
+      t('webViews.search.searchView.search.description')
     );
   }
 
