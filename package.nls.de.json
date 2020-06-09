@@ -6,8 +6,99 @@
   "cmd.search-results": "Suchergebnisse",
   "config.title": "Packages",
   "config.packageManager.description": "Wählen Sie den Paketmanager aus, der zum Installieren von Paketen verwendet werden soll.",
-  "views.btn.open-npmurl": "Open the NPM Page for this Package",
+  "messages": {
+    "pkgInstallError": "Bei der Installation ist ein Fehler aufgetreten {{package}}: {{error}}",
+    "pkgInstallNoFolder": "Dependency kann nicht installiert werden. Bitte wählen Sie zuerst einen Ordner in der Seitenleiste aus",
+    "pkgInstallSuccess": "{{package}} hinzugefügt als {{dependencyType}}"
+  },
+  "treeViews": {
+    "folder": {
+      "noFolders": "Keine Verzeichnis oder Arbeitsbereiche"
+    },
+    "package": {
+      "npPkgJson": "Fehler beim Lesen von package.json",
+      "readError": "Kein package.json gefunden"
+    }
+  },
+  "views.btn.open-npmurl": "NPM-Seite für dieser Packet öffnen",
   "views.activitybar-packagejson": "Pakete",
   "views.activitybar-folders": "Arbeitsberich-Verzeichnisse",
-  "viewsContainers.activitybar": "Pakete"
+  "viewsContainers.activitybar": "Pakete",
+  "webViews": {
+    "packages": {
+      "detailView": {
+        "authorTooltip": "Hersteller",
+        "bugs": "Issues",
+        "contrib": "Contributors",
+        "headlineTooltip": "Versionnummer in package.json",
+        "home": "Startseite",
+        "inlineList": {
+          "emailTooltip": "E-Mail {{email}}"
+        },
+        "licenceTooltip": "Lizenz",
+        "maintainer": "Maintainers",
+        "repository": "Repository",
+        "tablelist": {
+          "npmVersionLink": "NPM-Seite für v{{version}} öffnen"
+        },
+        "tabs": {
+          "dev": {
+            "empty": "Keine Maintainer/Contributor informationen verfügbar",
+            "tabLabel": "Entwickler"
+          },
+          "readme": {
+            "empty": "Kein readme verfügbar",
+            "tabLabel": "Readme"
+          },
+          "versions": {
+            "empty": "Keine Versionsinformationen verfügbar",
+            "tabLabel": "Versionen"
+          }
+        },
+        "tags": "Aktuelle Tags ({{count}})",
+        "time": "Versionenhistorie ({{count}})",
+        "versionTooltip": "Aktuelle Version"
+      },
+      "errorView": {
+        "headline": "Fehler beim Laden der Paketdaten"
+      },
+      "tabTitle": "Paket: {{packageName}}"
+    },
+    "search": {
+      "errorView": {
+        "headline": "Fehler beim Durchsuchen der NPM-Registrierung"
+      },
+      "searchView": {
+        "noResults": {
+          "headline": "Keine Packete gefunden",
+          "description": "Änden Sie ihren Sucheingabe und versuchen Sie es eneut"
+        },
+        "results": {
+          "dep": "Dependency",
+          "devdep": "Dev Dependency",
+          "installLabel": "Installieren als:",
+          "loadMoreBtn": "Mehr laden",
+          "optdep": "Optional Dependency",
+          "peerdep": "Peer Dependency"
+        },
+        "search": {
+          "headline": "Geben Sie einen Suchbegriff ein",
+          "description": "Passende Pakete werden dennach aufgelistet, damit Sie sie installieren können"
+        },
+        "searchField": {
+          "clearBtn": "Löschen",
+          "fieldTooltip": "NPM wird durch gesucht...",
+          "fieldPlaceholder": "npm durchsuchen..."
+        },
+        "searchSort": {
+          "label": "Sortieren nach: ",
+          "sortPopularity": "Beliebtheit",
+          "sortQuality": "Qualität",
+          "sortRelevance": "Bedeutung",
+          "sortUpdated": "Letztes Update"
+        }
+      },
+      "tabTitle": "Pakete: Search"
+    }
+  }
 }

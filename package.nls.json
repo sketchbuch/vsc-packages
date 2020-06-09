@@ -26,6 +26,42 @@
   "viewsContainers.activitybar": "Packages",
   "webViews": {
     "packages": {
+      "detailView": {
+        "authorTooltip": "Author",
+        "bugs": "Issues",
+        "contrib": "Contributors",
+        "headlineTooltip": "Version listed in package.json",
+        "home": "Homepage",
+        "inlineList": {
+          "emailTooltip": "Email {{email}}"
+        },
+        "licenceTooltip": "Licence",
+        "maintainer": "Maintainers",
+        "repository": "Repository",
+        "tablelist": {
+          "npmVersionLink": "Open NPM page for v{{version}}"
+        },
+        "tabs": {
+          "dev": {
+            "empty": "No maintainer/contributor information available",
+            "tabLabel": "Developers"
+          },
+          "readme": {
+            "empty": "No readme available",
+            "tabLabel": "Readme"
+          },
+          "versions": {
+            "empty": "No version information available",
+            "tabLabel": "Versions"
+          }
+        },
+        "tags": "Current Tags ({{count}})",
+        "time": "Version History ({{count}})",
+        "versionTooltip": "Latest Version"
+      },
+      "errorView": {
+        "headline": "Error loading package data"
+      },
       "tabTitle": "Package: {{packageName}}"
     },
     "search": {
@@ -48,6 +84,18 @@
         "search": {
           "headline": "Enter a search term to begin",
           "description": "Matching packages will be listed here for you to install"
+        },
+        "searchField": {
+          "clearBtn": "Clear field",
+          "fieldTooltip": "Searching NPM...",
+          "fieldPlaceholder": "search npm..."
+        },
+        "searchSort": {
+          "label": "Sort by: ",
+          "sortPopularity": "Popularity",
+          "sortQuality": "Quality",
+          "sortRelevance": "Relevance",
+          "sortUpdated": "Last Update"
         }
       },
       "tabTitle": "Packages: Search"
