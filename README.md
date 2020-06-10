@@ -33,6 +33,7 @@ A command is provided to search NPM (a setting is available to set if yarn or np
 
 ## Done
 
+- ~~Translate extension~~ **DONE**
 - ~~Install NPM packages~~ **DONE**
 - ~~Add a file watcher to update the sidebar if the package.json file changes~~ **DONE**
 - ~~Add search functionality - as tree views can't show a search box this will probably be in a web view.~~ **DONE**
