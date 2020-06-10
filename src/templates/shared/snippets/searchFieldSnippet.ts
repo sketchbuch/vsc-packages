@@ -1,3 +1,5 @@
+import { t } from '../../../localisation';
+
 const loadingIcon = () => {
   return `
     <span class="search-field__loader">
@@ -12,14 +14,19 @@ const loadingIcon = () => {
 
 const clearButton = (name: string) => {
   return `
-    <a class="search-field__clearer" href="" id="${name}-clearer" title="Clear field"><span>+</span></a>`;
+    <a class="search-field__clearer" href="" id="${name}-clearer" title="${t(
+    'webViews.search.searchField.clearBtn'
+  )}"><span>+</span></a>`;
 };
 
 export const searchFieldSnippet = (term: string, loading: boolean, name: string): string => {
   return `
     <div class="search-field">
       <input
-        ${loading && 'disabled="true" title="Searching NPM..."'}
+        ${loading &&
+          'disabled="true" title="' +
+            t('webViews.search.searchView.searchField.fieldTooltip') +
+            '"'}
         autocapitalize="off"
         autocorrect="off"
         autofocus
@@ -28,7 +35,7 @@ export const searchFieldSnippet = (term: string, loading: boolean, name: string)
         }"
         id="${name}"
         name="${name}"
-        placeholder="search npm..."
+        placeholder="${t('webViews.search.searchView.searchField.fieldPlaceholder')}"
         spellcheck="false"
         type="text"
         value="${term}"

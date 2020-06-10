@@ -1,4 +1,5 @@
 import { NpmTags, TableListSnippet } from '../../../types';
+import { t } from '../../../localisation';
 import { tableListSnippet } from './';
 
 export const tagsSnippet = (tags: NpmTags | undefined, packageName: string): string => {
@@ -12,7 +13,11 @@ export const tagsSnippet = (tags: NpmTags | undefined, packageName: string): str
       }
     );
 
-    return tableListSnippet(items, packageName, `Current Tags (${items.length})`);
+    return tableListSnippet(
+      items,
+      packageName,
+      t('webViews.packages.detailView.maintainer', { count: items.length.toString() })
+    );
   }
 
   return '';

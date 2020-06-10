@@ -1,5 +1,6 @@
 import { EXT } from '../../../constants';
 import { NpmSearchResult, NpmSearchResults } from '../../../types';
+import { t } from '../../../localisation';
 
 export const results = (results: NpmSearchResults, page: number) => {
   return `
@@ -15,18 +16,28 @@ export const results = (results: NpmSearchResults, page: number) => {
                 </p>
                 <p class="results__item-description">${record.description}</p>
                 <div class="results__actions">
-                  <span class="results__action-label">Install as:</span>
-                  <span class="results__action" data-package="${record.name}" data-type="dependencies" tabindex="0">
-                    Dependency
+                  <span class="results__action-label">${t(
+                    'webViews.search.searchView.results.installLabel'
+                  )}</span>
+                  <span class="results__action" data-package="${
+                    record.name
+                  }" data-type="dependencies" tabindex="0">
+                  ${t('webViews.search.searchView.results.dep')}
                   </span>
-                  <span class="results__action" data-package="${record.name}" data-type="devDependencies" tabindex="0">
-                    Dev Dependency
+                  <span class="results__action" data-package="${
+                    record.name
+                  }" data-type="devDependencies" tabindex="0">
+                  ${t('webViews.search.searchView.results.devdep')}
                   </span>
-                  <span class="results__action" data-package="${record.name}" data-type="peerDependencies" tabindex="0">
-                    Peer Dependency
+                  <span class="results__action" data-package="${
+                    record.name
+                  }" data-type="peerDependencies" tabindex="0">
+                  ${t('webViews.search.searchView.results.peerdep')}
                   </span>
-                  <span class="results__action" data-package="${record.name}" data-type="optionalDependencies" tabindex="0">
-                    Optional Dependency
+                  <span class="results__action" data-package="${
+                    record.name
+                  }" data-type="optionalDependencies" tabindex="0">
+                  ${t('webViews.search.searchView.results.optdep')}
                   </span>
                 </div>
               </li>
@@ -36,7 +47,9 @@ export const results = (results: NpmSearchResults, page: number) => {
       </ul>
       <div class="results__more">
         <input id="${EXT}-search-more-page"  readonly type="hidden" value="${page}" />
-        <a id="${EXT}-search-more-btn" class="results__more-btn monaco-button monaco-text-button setting-list-addButton">Load more...</a>
+        <a id="${EXT}-search-more-btn" class="results__more-btn monaco-button monaco-text-button setting-list-addButton">${t(
+    'webViews.search.searchView.results.loadMoreBtn'
+  )}</a>
       </div>
     </div>
   `;

@@ -1,5 +1,6 @@
 import { CmdCallbackData } from '../../../types';
 import { headlineSnippet } from '../snippets';
+import { t } from '../../../localisation';
 
 export const errorView = (packageData: CmdCallbackData, error: Error) => {
   return `
@@ -10,7 +11,7 @@ export const errorView = (packageData: CmdCallbackData, error: Error) => {
         </div>
       </header>
       <div class="view__content error__content">
-        <h4 class="error__msg">Error loading package data</h4>
+        <h4 class="error__msg">${t('webViews.packages.errorView.headline')}</h4>
         <p class="error__msg-sub">${error.message}</p>
       </div>
     </section>`;

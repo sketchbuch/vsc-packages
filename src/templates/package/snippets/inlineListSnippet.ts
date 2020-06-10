@@ -1,4 +1,5 @@
 import { InlineListSnippet } from '../../../types/package';
+import { t } from '../../../localisation';
 
 export const inlineListSnippet = (items: InlineListSnippet[], title?: string): string => {
   if (items.length > 0) {
@@ -18,7 +19,12 @@ export const inlineListSnippet = (items: InlineListSnippet[], title?: string): s
               } else if (item.email) {
                 return `
                   <div class="inline-list__item">
-                    <a class="inline-list__element" href="mailto:${item.email}" title="Email ${item.email}">@ ${item.label}</a>
+                    <a class="inline-list__element" href="mailto:${item.email}" title="${t(
+                  'webViews.packages.detailView.inlineList.emailTooltip',
+                  {
+                    email: item.email,
+                  }
+                )}">@ ${item.label}</a>
                   </div>`;
               }
 

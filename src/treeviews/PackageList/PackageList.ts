@@ -6,8 +6,9 @@ import {
   FS_PACKAGEJSON,
 } from '../../constants';
 import { getPackageJson } from '../../utils';
-import { PackageListItem, PackageListDep } from './';
 import { PackageListChild, PackageListChildren } from '../../types';
+import { PackageListItem, PackageListDep } from './';
+import { t } from '../../localisation';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListChild | undefined> = new vscode.EventEmitter<
@@ -96,21 +97,23 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
         }
       } else {
         if (packageJson instanceof Error) {
-          const depTypeItem = new PackageListDep(
-            'Error whilst reading package.json',
-            -1,
-            this.context.extensionPath,
-            vscode.TreeItemCollapsibleState.None
+          children.push(
+            new PackageListDep(
+              t('treeViews.package.readError'),
+              -1,
+              this.context.extensionPath,
+              vscode.TreeItemCollapsibleState.None
+            )
           );
-          children.push(depTypeItem);
         } else if (packageJson === null) {
-          const depTypeItem = new PackageListDep(
-            'No package.json file found',
-            -1,
-            this.context.extensionPath,
-            vscode.TreeItemCollapsibleState.None
+          children.push(
+            new PackageListDep(
+              t('treeViews.package.npPkgJson'),
+              -1,
+              this.context.extensionPath,
+              vscode.TreeItemCollapsibleState.None
+            )
           );
-          children.push(depTypeItem);
         } else {
           Object.keys(extViews)
             .sort()
