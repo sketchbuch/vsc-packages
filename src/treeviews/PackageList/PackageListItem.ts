@@ -26,8 +26,8 @@ export class PackageListItem extends vscode.TreeItem {
   }
 
   iconPath = {
-    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'activitybar-light.svg'),
-    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'activitybar-dark.svg'),
+    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'dep.svg'),
+    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'dep.svg'),
   };
 
   contextValue = EXT_PACKAGELIST_ITEM_CTX;

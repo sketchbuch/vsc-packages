@@ -1,3 +1,4 @@
+import { t } from '../../../localisation';
 import { TableListSnippet } from '../../../types/package';
 import { URL_NPM } from '../../../constants';
 
@@ -15,7 +16,11 @@ export const tableListSnippet = (
             .map((item: TableListSnippet): string => {
               return `
               <div class="table-list__item">
-                <a class="table-list__item-element" href="${URL_NPM}${packageName}/v/${item.label}" title="Open NPM page for v${item.label}">
+                <a class="table-list__item-element" href="${URL_NPM}${packageName}/v/${
+                item.label
+              }" title="${t('webViews.packages.detailView.tablelist.npmVersionLink', {
+                version: item.label,
+              })}">
                   <span class="table-list__item-label">
                     ${item.label}
                   </span>

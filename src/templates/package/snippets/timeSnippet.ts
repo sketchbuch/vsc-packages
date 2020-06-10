@@ -1,6 +1,7 @@
-import * as timeago from 'timeago.js';
 import { NpmTime, TableListSnippet } from '../../../types';
+import { t } from '../../../localisation';
 import { tableListSnippet } from '.';
+import * as timeago from 'timeago.js';
 
 export const timeSnippet = (time: NpmTime | undefined, packageName: string): string => {
   if (time) {
@@ -16,7 +17,11 @@ export const timeSnippet = (time: NpmTime | undefined, packageName: string): str
       )
       .reverse();
 
-    return tableListSnippet(items, packageName, `Version History (${items.length})`);
+    return tableListSnippet(
+      items,
+      packageName,
+      t('webViews.packages.detailView.time', { count: items.length.toString() })
+    );
   }
 
   return '';

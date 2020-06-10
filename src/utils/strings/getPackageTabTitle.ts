@@ -1,4 +1,5 @@
+import { t } from '../../localisation';
+
 export const getPackageTabTitle = (packageName: string): string => {
-  // TODO - localise
-  return `Package: ${packageName}`;
+  return t('webViews.packages.tabTitle', { packageName });
 };

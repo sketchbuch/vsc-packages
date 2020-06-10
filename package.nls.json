@@ -1,0 +1,90 @@
+{
+  "cmd.display-package": "Display Package",
+  "cmd.open-npmurl": "Open the NPM Page for this Package",
+  "cmd.search-packages": "Packages: Search NPM",
+  "cmd.search-results": "Search Results",
+  "cmd.select-folder": "View packages in this folder",
+  "config.packageManager.description": "Select the package manger that should be used to install packages.",
+  "config.title": "Packages",
+  "views.activitybar-folders": "Workspace Folders",
+  "views.activitybar-packagejson": "Packages",
+  "views.btn.open-npmurl": "Open the NPM Page for this Package",
+  "viewsContainers.activitybar": "Packages",
+  "webViews": {
+    "packages": {
+      "detailView": {
+        "authorTooltip": "Author",
+        "bugs": "Issues",
+        "contrib": "Contributors",
+        "headlineTooltip": "Version listed in package.json",
+        "home": "Homepage",
+        "inlineList": {
+          "emailTooltip": "Email {{email}}"
+        },
+        "licenceTooltip": "Licence",
+        "maintainer": "Maintainers",
+        "repository": "Repository",
+        "tablelist": {
+          "npmVersionLink": "Open NPM page for v{{version}}"
+        },
+        "tabs": {
+          "dev": {
+            "empty": "No maintainer/contributor information available",
+            "tabLabel": "Developers"
+          },
+          "readme": {
+            "empty": "No readme available",
+            "tabLabel": "Readme"
+          },
+          "versions": {
+            "empty": "No version information available",
+            "tabLabel": "Versions"
+          }
+        },
+        "tags": "Current Tags ({{count}})",
+        "time": "Version History ({{count}})",
+        "versionTooltip": "Latest Version"
+      },
+      "errorView": {
+        "headline": "Error loading package data"
+      },
+      "tabTitle": "Package: {{packageName}}"
+    },
+    "search": {
+      "errorView": {
+        "headline": "Error searching the NPM registry"
+      },
+      "searchView": {
+        "noResults": {
+          "headline": "No packages found",
+          "description": "Please try modifying your search term"
+        },
+        "results": {
+          "dep": "Dependency",
+          "devdep": "Dev Dependency",
+          "installLabel": "Install as:",
+          "loadMoreBtn": "Load more...",
+          "optdep": "Optional Dependency",
+          "peerdep": "Peer Dependency"
+        },
+        "search": {
+          "headline": "Enter a search term to begin",
+          "description": "Matching packages will be listed here for you to install"
+        },
+        "searchField": {
+          "clearBtn": "Clear field",
+          "fieldTooltip": "Searching NPM...",
+          "fieldPlaceholder": "search npm..."
+        },
+        "searchSort": {
+          "label": "Sort by: ",
+          "sortPopularity": "Popularity",
+          "sortQuality": "Quality",
+          "sortRelevance": "Relevance",
+          "sortUpdated": "Last Update"
+        }
+      },
+      "tabTitle": "Packages: Search"
+    }
+  }
+}
