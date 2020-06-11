@@ -1,0 +1,15 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+
+hr {
+  margin-left: -20px;
+  margin-right: -20px;
+}

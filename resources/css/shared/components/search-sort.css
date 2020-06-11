@@ -1,0 +1,20 @@
+.search-sort {
+  position: relative;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.search-sort__label {
+  color: var(--vscode-settings-textInputForeground);
+}
+
+.search-sort__select {
+  background-color: inherit;
+  border-color: var(--vscode-inputOption-activeBorder);
+  font-family: var(--vscode-font-family);
+  padding: 2px 8px;
+}
+
+.search-sort__select:focus {
+  outline-color: var(--vscode-focusBorder);
+}

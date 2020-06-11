@@ -1,0 +1,7 @@
+.data__description {
+  margin-bottom: 0;
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

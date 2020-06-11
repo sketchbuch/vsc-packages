@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es6", "dom"],
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "outDir": "out",
+    "rootDir": "src",
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es6"
+  },
+  "exclude": ["node_modules", ".vscode-test"],
+  "include": ["src/**/*", "resources/js/**/*"]
+}
