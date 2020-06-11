@@ -45,7 +45,7 @@ This extension is localised, if you want it in your language please send me a tr
 
 ## Latest Version
 
-#### [1.3.14](https://github.com/sketchbuch/vsc-packages/compare/v1.2.1...v1.3.14) - 2020-02-11
+#### [1.4.0](https://github.com/sketchbuch/vsc-packages/compare/v1.2.1...v1.4.0) - 2020-02-11
 
 - New Icon
 - Localised
