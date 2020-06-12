@@ -14,12 +14,25 @@ export const getPackageJson = (workspaceFolder: vscode.WorkspaceFolder): GetPack
 
       try {
         packageJson = fs.readFileSync(packageJsonPath, FS_UTF8);
-        return JSON.parse(packageJson);
+        return {
+          data: JSON.parse(packageJson),
+          error: null,
+        };
       } catch (error) {
-        return error;
+        vscode.window.showErrorMessage(
+          `Error whilst reading package.json for ${workspaceFolder.name}: ${error.message}`
+        );
+
+        return {
+          data: null,
+          error,
+        };
       }
     }
   }
 
-  return null;
+  return {
+    data: null,
+    error: null,
+  };
 };

@@ -1,8 +1,10 @@
 import { GetPackageJsonResult, ExtDepTypes } from '../types';
 
 export const shouldShowView = (view: ExtDepTypes, packageJson: GetPackageJsonResult): boolean => {
-  if (packageJson !== null && !(packageJson instanceof Error)) {
-    if (packageJson[view] !== undefined) {
+  const { data, error } = packageJson;
+
+  if (data !== null && !error) {
+    if (data[view] !== undefined) {
       return true;
     }
   }
