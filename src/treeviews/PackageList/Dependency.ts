@@ -6,7 +6,7 @@ import {
 } from '../../constants';
 import { getImagePath } from '../../utils';
 
-export class PackageListDep extends vscode.TreeItem {
+export class Dependency extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly depCount: number,
