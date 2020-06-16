@@ -7,7 +7,7 @@ import {
   CMD_SELECT_FOLDER,
 } from '../constants';
 import { cmdDisplayPackage, cmdOpenNpm, cmdSearchNpm, cmdSelectFolder } from '.';
-import { PackageList } from '../treeviews';
+import { PackageList, PackageListItem } from '../treeviews';
 
 export const registerCommands = (
   context: vscode.ExtensionContext,
@@ -22,7 +22,7 @@ export const registerCommands = (
   );
 
   context.subscriptions.push(
-    registerCommand(CMD_OPEN_NPM, (packageName: string): void => {
+    registerCommand(CMD_OPEN_NPM, (packageName: PackageListItem): void => {
       cmdOpenNpm(packageName);
     })
   );
