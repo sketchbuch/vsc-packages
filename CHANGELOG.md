@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.4.1](https://github.com/sketchbuch/vsc-packages/compare/v1.4.0...v1.4.1) - 2020-06-18
+
+- Fixed open npm URL not working - see PR #103 from https://github.com/arjunkesava
+
 ## [1.4.0](https://github.com/sketchbuch/vsc-packages/compare/v1.2.1...v1.4.0) - 2020-02-11
 
 - New Icon
