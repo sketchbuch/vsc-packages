@@ -1,3 +1,3 @@
 export * from './PackageList';
-export * from './Dependency';
-export * from './Package';
+export * from './items/DependencyItem';
+export * from './items/PackageItem';

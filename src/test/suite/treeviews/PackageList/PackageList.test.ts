@@ -1,7 +1,7 @@
 /* import { expect } from 'chai';
 import * as vscode from 'vscode';
 import { extensionPath } from '../../mocks';
-import { PackageList, PackageListItem } from '../../../../treeviews';
+import { PackageList, PackageItem } from '../../../../treeviews';
 
 suite('PackageList()', function() {
   const packageView = 'dependencies';
@@ -10,7 +10,7 @@ suite('PackageList()', function() {
   test('getTreeItem() returns the element', () => {
     const label = 'test-package';
     const version = '1.0.0';
-    const element = new PackageListItem(
+    const element = new PackageItem(
       label,
       version,
       extensionPath,
@@ -24,7 +24,7 @@ suite('PackageList()', function() {
     test('Returns the empty message if workspaceFolders = null', async () => {
       const children = await newList.getChildren();
       expect(children.length).to.be.equal(1);
-      expect(children[0].label).to.be.equal(`No Folder or Workspace opened`);
+      expect(children[0].label).to.be.equal(`No FolderItem or Workspace opened`);
     });
 
     test('Returns the error message if reading package.json errored', async () => {

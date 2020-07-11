@@ -1,2 +1,2 @@
 export * from './FolderList';
-export * from './FolderListItem';
+export * from './items/FolderItem';

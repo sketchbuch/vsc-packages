@@ -1,4 +1,4 @@
-import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
+import { JSONSchemaForNPMPackageJsonFiles as PackageJsonNpm } from '@schemastore/package';
 import * as search from 'libnpmsearch';
 
 export interface NpmAuthor {
@@ -41,7 +41,7 @@ export interface NpmUsers {
 }
 
 export interface NpmVersions {
-  [key: string]: JSONSchemaForNPMPackageJsonFiles;
+  [key: string]: PackageJsonNpm;
 }
 
 export interface NpmPackageData {

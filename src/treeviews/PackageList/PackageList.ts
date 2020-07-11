@@ -7,7 +7,7 @@ import {
   extViews,
   FS_PACKAGEJSON,
 } from '../../constants';
-import { Dependency, Package } from './';
+import { DependencyItem, PackageItem } from '.';
 import { getPackageJson } from '../../utils';
 import { GetPackageJsonResult, PackageListChild, PackageListChildren } from '../../types';
 
@@ -50,15 +50,15 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
     this._onDidChangeTreeData.fire(undefined);
   }
 
-  getTreeItem(element: Package): vscode.TreeItem {
+  getTreeItem(element: PackageItem): vscode.TreeItem {
     return element;
   }
 
-  getParent(): vscode.ProviderResult<Package> {
+  getParent(): vscode.ProviderResult<PackageItem> {
     return null;
   }
 
-  getChildren(element?: Package): Thenable<PackageListChildren> {
+  getChildren(element?: PackageItem): Thenable<PackageListChildren> {
     const curFolder = this.context.workspaceState.get<vscode.WorkspaceFolder>(
       EXT_WSSTATE_SELFOLDER
     );
@@ -72,16 +72,16 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
       }
 
       if (element) {
-        children = this.getPackage(this.packageJson, element);
+        children = this.getPackages(this.packageJson, element);
       } else {
-        children = this.getDependency(this.packageJson);
+        children = this.getDependencies(this.packageJson);
       }
     }
 
     return Promise.resolve(children);
   }
 
-  getPackage(packageJson: GetPackageJsonResult, dependencyType: Package): PackageListChildren {
+  getPackages(packageJson: GetPackageJsonResult, dependencyType: PackageItem): PackageListChildren {
     const { data, error } = packageJson;
 
     if (!error && data !== null) {
@@ -94,7 +94,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
             .map((dep: string) => {
               const version: string = dependency[dep];
 
-              return new Package(
+              return new PackageItem(
                 dep,
                 version,
                 this.context.extensionPath,
@@ -113,12 +113,12 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
     return [];
   }
 
-  getDependency(packageJson: GetPackageJsonResult): PackageListChildren {
+  getDependencies(packageJson: GetPackageJsonResult): PackageListChildren {
     const { data, error } = packageJson;
 
     if (error) {
       return [
-        new Dependency(
+        new DependencyItem(
           t('treeViews.package.readError'),
           -1,
           this.context.extensionPath,
@@ -127,7 +127,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
       ];
     } else if (data === null) {
       return [
-        new Dependency(
+        new DependencyItem(
           t('treeViews.package.npPkgJson'),
           -1,
           this.context.extensionPath,
@@ -148,7 +148,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
             if (depCount > 0) {
               return [
                 ...allTypes,
-                new Dependency(
+                new DependencyItem(
                   depType,
                   depCount,
                   this.context.extensionPath,

@@ -8,12 +8,12 @@ import {
   FS_FOLDER_IMAGES_LIGHT,
   FS_FOLDER_RESOURCES,
 } from '../../../../constants';
-import { PackageListItem } from '../../../../treeviews';
+import { PackageItem } from '../../../../treeviews';
 
-suite('PackageListItem()', () => {
+suite('PackageItem()', () => {
   const label = 'test-package';
   const version = '1.0.0';
-  const newItem = new PackageListItem(
+  const newItem = new PackageItem(
     label,
     version,
     extensionPath,
