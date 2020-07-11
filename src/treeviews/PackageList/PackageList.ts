@@ -7,9 +7,9 @@ import {
   extViews,
   FS_PACKAGEJSON,
 } from '../../constants';
-import { Dependency, Package } from './';
 import { getPackageJson } from '../../utils';
-import { GetPackageJsonResult , PackageListChild, PackageListChildren, } from '../../types';
+import { Dependency, Package } from './';
+import { GetPackageJsonResult, PackageListChild, PackageListChildren } from '../../types';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListChild | undefined> = new vscode.EventEmitter<
@@ -81,7 +81,6 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
     return Promise.resolve(children);
   }
 
-
   getPackage(packageJson: GetPackageJsonResult, dependencyType: Package): PackageListChildren {
     const { data, error } = packageJson;
 
@@ -106,14 +105,13 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
                   arguments: [dep, version],
                 }
               );
-            })
+            }),
         ];
       }
     }
 
     return [];
   }
-
 
   getDependency(packageJson: GetPackageJsonResult): PackageListChildren {
     const { data, error } = packageJson;
@@ -125,39 +123,42 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
           -1,
           this.context.extensionPath,
           vscode.TreeItemCollapsibleState.None
-        )
+        ),
       ];
     } else if (data === null) {
-        return [
-          new Dependency(
-            t('treeViews.package.npPkgJson'),
-            -1,
-            this.context.extensionPath,
-            vscode.TreeItemCollapsibleState.None
-          )
-        ];
+      return [
+        new Dependency(
+          t('treeViews.package.npPkgJson'),
+          -1,
+          this.context.extensionPath,
+          vscode.TreeItemCollapsibleState.None
+        ),
+      ];
     } else {
       return [
         ...Object.keys(extViews)
-        .sort()
-        .reduce((allTypes: PackageListChildren, depType: string): PackageListChildren => {
-          let depCount = 0;
-  
-          if (data[depType] !== undefined) {
-            depCount = Object.keys(data[depType]).length;
-          }
-  
-          if (depCount > 0) {
-            return [...allTypes, new Dependency(
-              depType,
-              depCount,
-              this.context.extensionPath,
-              vscode.TreeItemCollapsibleState.Expanded
-            )];
-          }
-  
-          return [...allTypes];
-        }, [])
+          .sort()
+          .reduce((allTypes: PackageListChildren, depType: string): PackageListChildren => {
+            let depCount = 0;
+
+            if (data[depType] !== undefined) {
+              depCount = Object.keys(data[depType]).length;
+            }
+
+            if (depCount > 0) {
+              return [
+                ...allTypes,
+                new Dependency(
+                  depType,
+                  depCount,
+                  this.context.extensionPath,
+                  vscode.TreeItemCollapsibleState.Expanded
+                ),
+              ];
+            }
+
+            return [...allTypes];
+          }, []),
       ];
     }
   }
