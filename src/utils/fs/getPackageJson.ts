@@ -4,8 +4,9 @@ import * as vscode from 'vscode';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../constants';
 import { GetPackageJsonResult } from '../../types';
 import { pathExists } from './pathExists';
+import { WsFolder } from '../../treeviews/FolderList/FolderList.interface';
 
-export const getPackageJson = (workspaceFolder: vscode.WorkspaceFolder): GetPackageJsonResult => {
+export const getPackageJson = (workspaceFolder: WsFolder): GetPackageJsonResult => {
   if (workspaceFolder) {
     const packageJsonPath: string = path.join(workspaceFolder.uri.fsPath, FS_PACKAGEJSON);
 

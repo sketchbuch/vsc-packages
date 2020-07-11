@@ -6,6 +6,8 @@ import { CMD_SELECT_FOLDER, FS_PACKAGEJSON } from '../../constants';
 import { FolderItem } from '.';
 import { getPackageJson } from '../../utils';
 import { GetPackageJsonResult } from '../../types';
+import { VsCodeWsFolders, WsFolder, WsFolders } from './FolderList.interface';
+import { convertWsFolders } from './helpers/convertWsFolders';
 
 export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   _onDidChangeTreeData: vscode.EventEmitter<FolderItem | undefined> = new vscode.EventEmitter<
@@ -13,36 +15,41 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   >();
   onDidChangeTreeData: vscode.Event<FolderItem | undefined> = this._onDidChangeTreeData.event;
   
-  private watchers: string[] = [];
+  private context: vscode.ExtensionContext;
   private packageJsons: {
     [key: string]: GetPackageJsonResult
   } = {};
+  private watchers: string[] = [];
+  private workspaceFolders: WsFolders;
 
   constructor(
-    private workspaceFolders: readonly vscode.WorkspaceFolder[] | undefined,
-    private context: vscode.ExtensionContext
+    workspaceFolders: VsCodeWsFolders,
+    context: vscode.ExtensionContext
   ) {
+    this.context = context;
+    this.workspaceFolders = convertWsFolders(workspaceFolders);
+
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
-      this.refresh(vscode.workspace.workspaceFolders);
+      this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
     });
   }
 
-  createWatcher(folder: vscode.WorkspaceFolder): void {
+  createWatcher(folder: WsFolder): void {
     if (!this.watchers.includes(folder.name)) {
       const watcher = vscode.workspace.createFileSystemWatcher(
         `${folder.uri.fsPath}/${FS_PACKAGEJSON}`
       );
 
       watcher.onDidChange(() => {
-        this.refresh(vscode.workspace.workspaceFolders);
+        this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
       });
 
       watcher.onDidDelete(() => {
-        this.refresh(vscode.workspace.workspaceFolders);
+        this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
       });
 
       watcher.onDidCreate(() => {
-        this.refresh(vscode.workspace.workspaceFolders);
+        this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
       });
 
       this.context.subscriptions.push(watcher);
@@ -50,9 +57,12 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     }
   }
 
-  refresh(workspaceFolders: readonly vscode.WorkspaceFolder[] | undefined): void {
+  refresh(workspaceFolders: WsFolders, addToExisting: boolean = false): void {
     this.packageJsons = {};
-    this.workspaceFolders = workspaceFolders;
+    this.workspaceFolders = addToExisting ? [...this.workspaceFolders, ...workspaceFolders] : [...workspaceFolders];
+
+
+    console.log('### this.workspaceFolders', this.workspaceFolders);
     this._onDidChangeTreeData.fire(undefined);
   }
 
@@ -89,15 +99,14 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
         } */
       }
     } else if (this.workspaceFolders && this.workspaceFolders.length > 0) {
-      this.workspaceFolders.forEach((folder: vscode.WorkspaceFolder) => {
+      this.workspaceFolders.forEach((folder: WsFolder) => {
         let expandedState = vscode.TreeItemCollapsibleState.None;
-        //expandedState = vscode.TreeItemCollapsibleState.Expanded;
         this.createWatcher(folder);
   
         if (this.packageJsons[folder.name] === undefined) {
           this.packageJsons[folder.name] = getPackageJson(folder);
           const { data, error } = this.packageJsons[folder.name];
-          let subFolders: vscode.Uri[] = [];
+          let subFolders: WsFolders = [];
 
           if (!error && data !== null && data.workspaces) {
             data.workspaces.forEach((workspace: string) => {
@@ -106,12 +115,17 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
               if (wsFolder.slice(-2) === '/*') {
                 const wildCardFolder = wsFolder.substring(0, wsFolder.length - 2);
                 const filenames = fs.readdirSync(wildCardFolder);
-                subFolders = filenames.reduce((allFolders: vscode.Uri[], curFilename: string): vscode.Uri[] => {
+
+                subFolders = filenames.reduce((allFolders: WsFolders, curFilename: string): WsFolders => {
                   try {
                     const wsSubFolder = path.join(wildCardFolder, curFilename);
 
                     if (fs.lstatSync(wsSubFolder).isDirectory()) {
-                      return [...allFolders, vscode.Uri.file(wsSubFolder)];
+                      return [...allFolders, {
+                        name: curFilename,
+                        parent: folder.uri.path,
+                        uri: vscode.Uri.file(wsSubFolder)
+                      }];
                     }
                   } catch {
                     // Do nothing...
@@ -122,7 +136,11 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
               } else {
                 try {
                   if (fs.lstatSync(wsFolder).isDirectory()) {
-                    subFolders = [...subFolders, vscode.Uri.file(wsFolder)];
+                    subFolders = [...subFolders, {
+                      name: wsFolder.replace(folder.uri.path, '').slice(1),
+                      parent: folder.uri.path, 
+                      uri: vscode.Uri.file(wsFolder)
+                    }];
                   }
                 } catch {
                   // Do nothing...
@@ -133,9 +151,8 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
 
           if (subFolders.length) {
             expandedState = vscode.TreeItemCollapsibleState.Expanded;
+            this.refresh(subFolders, true);
           }
-
-          console.log('### subFolders', subFolders);
         }
 
         children.push(
