@@ -7,8 +7,8 @@ import {
   extViews,
   FS_PACKAGEJSON,
 } from '../../constants';
-import { getPackageJson } from '../../utils';
 import { Dependency, Package } from './';
+import { getPackageJson } from '../../utils';
 import { GetPackageJsonResult, PackageListChild, PackageListChildren } from '../../types';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
