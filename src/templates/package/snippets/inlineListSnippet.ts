@@ -1,5 +1,5 @@
 import { InlineListSnippet } from '../../../types/package';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const inlineListSnippet = (items: InlineListSnippet[], title?: string): string => {
   if (items.length > 0) {

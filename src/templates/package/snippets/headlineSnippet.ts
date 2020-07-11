@@ -1,5 +1,5 @@
 import { CmdCallbackData } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const headlineSnippet = (packageData: CmdCallbackData, classType: string): string => {
   const { packageName, packageVersion } = packageData;

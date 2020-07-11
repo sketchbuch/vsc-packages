@@ -1,5 +1,5 @@
 import { NpmTime, TableListSnippet } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 import { tableListSnippet } from '.';
 import * as timeago from 'timeago.js';
 

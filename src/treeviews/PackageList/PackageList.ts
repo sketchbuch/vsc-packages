@@ -8,7 +8,7 @@ import {
 import { getPackageJson } from '../../utils';
 import { PackageListChild, PackageListChildren } from '../../types';
 import { PackageListItem, PackageListDep } from './';
-import { t } from '../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
   _onDidChangeTreeData: vscode.EventEmitter<PackageListChild | undefined> = new vscode.EventEmitter<

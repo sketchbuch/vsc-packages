@@ -1,5 +1,5 @@
 import { SearchSort } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const searchSortSnippet = (name: string, selected: SearchSort): string => {
   return `

@@ -1,5 +1,5 @@
 import { NpmBugs } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const bugsSnippet = (bugs: NpmBugs | undefined): string => {
   if (bugs) {

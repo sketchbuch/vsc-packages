@@ -17,7 +17,7 @@ import {
 import { defaultTemplate as template } from '../../templates/search';
 import { getHtml } from '../../templates';
 import { getResourceUri, searchNpm, addPackage } from '../../utils';
-import { t } from '../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 const defaultState: SearchState = Object.freeze({
   data: undefined,

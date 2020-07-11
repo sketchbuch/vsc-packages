@@ -15,7 +15,7 @@ import {
   timeSnippet,
   versionSnippet,
 } from '../snippets';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const detailView = (
   packageData: CmdCallbackData,

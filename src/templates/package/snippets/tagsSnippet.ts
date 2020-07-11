@@ -1,5 +1,5 @@
 import { NpmTags, TableListSnippet } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 import { tableListSnippet } from './';
 
 export const tagsSnippet = (tags: NpmTags | undefined, packageName: string): string => {

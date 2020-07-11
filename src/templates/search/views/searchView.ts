@@ -2,7 +2,7 @@ import { EXT } from '../../../constants';
 import { infoMessageSnippet, results } from '../snippets';
 import { searchFieldSnippet, searchSortSnippet } from '../../shared';
 import { SearchState } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const searchView = (state: SearchState) => {
   const { data, loading, page, sort, term } = state;

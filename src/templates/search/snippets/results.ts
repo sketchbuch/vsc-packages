@@ -1,6 +1,6 @@
 import { EXT } from '../../../constants';
 import { NpmSearchResult, NpmSearchResults } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const results = (results: NpmSearchResults, page: number) => {
   return `

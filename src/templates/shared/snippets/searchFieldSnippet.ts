@@ -1,4 +1,4 @@
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 const loadingIcon = () => {
   return `

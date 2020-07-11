@@ -2,7 +2,7 @@ import { errorView, searchView } from '..';
 import { FS_WEBVIEW_SEARCH_CSS, FS_WEBVIEW_SEARCH_JS } from '../../../constants';
 import { GetTemplate, SearchHtmlData } from '../../../types';
 import { metaTagsSnippet } from '../../shared';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const defaultTemplate = (
   { cssPath, nonce, scriptPath }: GetTemplate,

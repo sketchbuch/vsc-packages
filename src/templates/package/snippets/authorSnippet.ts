@@ -1,5 +1,5 @@
 import { NpmAuthor } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const authorSnippet = (author: NpmAuthor | undefined): string => {
   if (author) {

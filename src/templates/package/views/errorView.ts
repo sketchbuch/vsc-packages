@@ -1,6 +1,6 @@
 import { CmdCallbackData } from '../../../types';
 import { headlineSnippet } from '../snippets';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const errorView = (packageData: CmdCallbackData, error: Error) => {
   return `

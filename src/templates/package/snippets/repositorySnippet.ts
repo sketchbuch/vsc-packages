@@ -1,5 +1,5 @@
 import { NpmRepository } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const repositorySnippet = (repository: NpmRepository | undefined): string => {
   if (repository) {

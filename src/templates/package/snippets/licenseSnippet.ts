@@ -1,4 +1,4 @@
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const licenseSnippet = (license: string): string => {
   if (license) {

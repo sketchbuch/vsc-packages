@@ -1,5 +1,5 @@
 import { NpmTags } from '../../../types';
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const versionSnippet = (distTags: NpmTags | undefined): string => {
   if (distTags && distTags.latest) {

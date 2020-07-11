@@ -1,4 +1,4 @@
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 import { TableListSnippet } from '../../../types/package';
 import { URL_NPM } from '../../../constants';
 

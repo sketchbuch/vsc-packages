@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { CMD_SELECT_FOLDER } from '../../constants';
 import { FolderListItem } from '.';
-import { t } from '../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export class FolderList implements vscode.TreeDataProvider<FolderListItem> {
   _onDidChangeTreeData: vscode.EventEmitter<FolderListItem | undefined> = new vscode.EventEmitter<

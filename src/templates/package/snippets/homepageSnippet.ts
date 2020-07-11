@@ -1,4 +1,4 @@
-import { t } from '../../../localisation';
+import { t } from 'vscode-ext-localisation';
 
 export const homepageSnippet = (homepage: string | undefined): string => {
   if (homepage) {

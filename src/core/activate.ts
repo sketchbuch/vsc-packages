@@ -1,5 +1,5 @@
+import { loadTranslations, getVscodeLang } from 'vscode-ext-localisation';
 import * as vscode from 'vscode';
-import { getVscodeLang, loadTranslations } from '../localisation';
 import { PackageList } from '../treeviews';
 import { registerCommands } from '../commands';
 import { registerWebviews } from '../webviews';
