@@ -60,9 +60,6 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   refresh(workspaceFolders: WsFolders, addToExisting: boolean = false): void {
     this.packageJsons = {};
     this.workspaceFolders = addToExisting ? [...this.workspaceFolders, ...workspaceFolders] : [...workspaceFolders];
-
-
-    console.log('### this.workspaceFolders', this.workspaceFolders);
     this._onDidChangeTreeData.fire(undefined);
   }
 
@@ -121,11 +118,9 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
                     const wsSubFolder = path.join(wildCardFolder, curFilename);
 
                     if (fs.lstatSync(wsSubFolder).isDirectory()) {
-                      return [...allFolders, {
-                        name: curFilename,
-                        parent: folder.uri.path,
-                        uri: vscode.Uri.file(wsSubFolder)
-                      }];
+                      const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
+                      this.createWatcher(newFolder);
+                      return [...allFolders, newFolder];
                     }
                   } catch {
                     // Do nothing...
@@ -136,11 +131,9 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
               } else {
                 try {
                   if (fs.lstatSync(wsFolder).isDirectory()) {
-                    subFolders = [...subFolders, {
-                      name: wsFolder.replace(folder.uri.path, '').slice(1),
-                      parent: folder.uri.path, 
-                      uri: vscode.Uri.file(wsFolder)
-                    }];
+                    const newFolder = this.getWsFolder(wsFolder.replace(folder.uri.path, '').slice(1), wsFolder, folder);
+                    subFolders = [...subFolders, newFolder];
+                    this.createWatcher(newFolder);
                   }
                 } catch {
                   // Do nothing...
@@ -179,5 +172,13 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     }
 
     return Promise.resolve(children);
+  }
+
+  getWsFolder(name: string, folderPath: string, parentFolder: WsFolder): WsFolder {
+    return {
+      name,
+      parent: parentFolder.name, 
+      uri: vscode.Uri.file(folderPath)
+    };
   }
 }
