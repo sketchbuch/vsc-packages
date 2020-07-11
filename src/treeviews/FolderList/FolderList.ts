@@ -131,6 +131,10 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
             });
           }
 
+          if (subFolders.length) {
+            expandedState = vscode.TreeItemCollapsibleState.Expanded;
+          }
+
           console.log('### subFolders', subFolders);
         }
 
