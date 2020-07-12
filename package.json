@@ -178,7 +178,6 @@
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",
     "typescript": "^3.8.3",
-    "vscode-ext-localisation": "file:/home/stephen/Dev/npm/vscode-ext-localisation",
     "vscode-test": "^1.3.0",
     "yarn-audit-html": "^1.2.2"
   },
@@ -188,7 +187,8 @@
     "libnpmsearch": "^2.0.2",
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "vscode-ext-localisation": "^1.0.1"
   },
   "husky2": {
     "hooks": {

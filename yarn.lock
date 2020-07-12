@@ -4542,8 +4542,10 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-"vscode-ext-localisation@file:/home/stephen/Dev/npm/vscode-ext-localisation":
-  version "1.0.0"
+vscode-ext-localisation@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vscode-ext-localisation/-/vscode-ext-localisation-1.0.1.tgz#59c2b2b9f7e59b1d22241b8b351a54307425d5d0"
+  integrity sha512-re70E6VxInCMf4AoNehDh4G3sJTwA7d+mi/5ZdVQhBFK4IHRgbOQajaGA440RL64NKO7SPVG9MOLZOIJ7FoRIg==
   dependencies:
     path "^0.12.7"
 
