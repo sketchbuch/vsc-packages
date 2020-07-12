@@ -19,9 +19,9 @@
         "headlineTooltip": "Versionnummer in package.json",
         "home": "Startseite",
         "inlineList": {
-          "emailTooltip": "E-Mail {{email}}"
+          "emailTooltip": "E-Mail {{email}}",
+          "licenceTooltip": "Lizenz"
         },
-        "licenceTooltip": "Lizenz",
         "maintainer": "Maintainers",
         "repository": "Repository",
         "tablelist": {
