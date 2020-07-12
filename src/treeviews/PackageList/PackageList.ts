@@ -68,7 +68,10 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
       this.createWatcher(curFolder);
 
       if (this.packageJson === null) {
-        this.packageJson = getPackageJson(curFolder);
+        this.packageJson = getPackageJson({
+          name: curFolder.name,
+          uri: curFolder.uri
+        });
       }
 
       if (element) {
