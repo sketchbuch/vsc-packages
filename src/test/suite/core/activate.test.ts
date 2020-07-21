@@ -1,30 +1,41 @@
-/* import * as commands from '../../../commands';
+/* import * as trans from 'vscode-ext-localisation';
+import { mockContext } from '../../mocks';
+import { PackageList } from '../../../treeviews';
+import { setupExt } from '../../../core';
+import * as commands from '../../../commands';
 import * as sidebar from '../../../sidebar';
 import * as sinon from 'sinon';
-import * as webviews from '../../../webviews';
-import { mockContext } from '../../mocks';
-import { setupExt } from '../../../core'; */
+import * as webviews from '../../../webviews'; */
 
 suite('activate()', function() {
   test('setupExt() sets up extension correctly', function() {
-    // TODO - Fix spy import issue
-/*     const stubRc = sinon.stub(commands, 'registerCommands');
-    const stubWv = sinon.stub(webviews, 'registerWebviews');
-    const stubSb = sinon.stub(sidebar, 'setupSidebar');
+    // TODO - Fix test
+    /* const stubCommands = sinon.stub(commands, 'registerCommands');
+    const stubWebviews = sinon.stub(webviews, 'registerWebviews');
+    const stubSidebar = sinon.stub(sidebar, 'setupSidebar');
+    const stubTransGetLang = sinon.stub(trans, 'getVscodeLang');
+    const stubTransLoad = sinon.stub(trans, 'getVscodeLang');
+
     setupExt(mockContext, 'en');
 
-    sinon.assert.calledOnce(stubRc);
-    sinon.assert.calledOnce(stubWv);
-    sinon.assert.calledOnce(stubSb);
+    sinon.assert.calledOnce(stubCommands);
+    sinon.assert.calledOnce(stubWebviews);
+    sinon.assert.calledOnce(stubSidebar);
+    sinon.assert.calledOnce(stubTransGetLang);
+    sinon.assert.calledOnce(stubTransGetLang);
 
-    // TODO - Fix assert
-    // sinon.assert.calledWith(stubRc, mockContext, new PackageList(mockContext));
-    sinon.assert.calledWith(stubWv, mockContext);
-    // TODO - Fix assert
-    // sinon.assert.calledWith(stubSb, mockContext, undefined, new PackageList(mockContext));
+    sinon.assert.calledOnce(stubCommands);
+    sinon.assert.calledOnce(stubWebviews);
+    sinon.assert.calledOnce(stubSidebar);
 
-    stubRc.restore();
-    stubWv.restore();
-    stubSb.restore(); */
+    sinon.assert.calledWith(stubCommands, mockContext, new PackageList(mockContext));
+    sinon.assert.calledWith(stubWebviews, mockContext);
+    sinon.assert.calledWith(stubSidebar, mockContext, undefined, new PackageList(mockContext));
+
+    stubCommands.restore();
+    stubWebviews.restore();
+    stubSidebar.restore(); 
+    stubTransGetLang.restore();
+    stubTransLoad.restore(); */
   });
 });

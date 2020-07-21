@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { EXT } from '../constants';
 import { ExtDepTypes, GetPackageJsonResult } from '../types';
-import { shouldShowView } from './';
+import { shouldShowView } from './shouldShowView';
 
 export const setViewContext = (view: string, packageJson: GetPackageJsonResult) => {
   vscode.commands.executeCommand(

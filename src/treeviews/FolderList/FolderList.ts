@@ -111,6 +111,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     return {
       command: CMD_SELECT_FOLDER,
       title: '',
+      // TODO - Make this command take a WsFolder instead of a vscode folder
       arguments: [folder, this.context],
     };
   }
