@@ -18,7 +18,7 @@ suite('tabboxSnippet()', () => {
 
   test('Renders emptyMessage if no content', () => {
     const noContentItems = [...mockTabBoxItems];
-    noContentItems[0].content = () => '';
+    noContentItems[0].content = (): string => '';
     expect(tabboxSnippet(noContentItems)).to.contain(noContentItems[0].emptyMessage);
   });
 });

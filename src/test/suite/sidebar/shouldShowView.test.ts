@@ -13,7 +13,7 @@ suite('shouldShowView()', () => {
       devDependencies: {
         'react-dom': '1.0.1',
       },
-    }
+    },
   };
 
   test('Returns false if not in package.json', () => {

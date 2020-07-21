@@ -10,6 +10,7 @@ suite('versionSnippet()', () => {
   };
 
   test('Returns an empty string if dist-tags undefined or there is no latest', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { latest, ...mockDistTags2 } = mockDistTags;
 
     const result1 = versionSnippet(undefined);

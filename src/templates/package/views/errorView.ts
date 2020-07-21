@@ -2,7 +2,7 @@ import { CmdCallbackData } from '../../../types';
 import { headlineSnippet } from '../snippets';
 import { t } from 'vscode-ext-localisation';
 
-export const errorView = (packageData: CmdCallbackData, error: Error) => {
+export const errorView = (packageData: CmdCallbackData, error: Error): string => {
   return `
     <section class="error view">
       <header class="error__header view__header">

@@ -1,7 +1,7 @@
 import { CmdCallbackData } from '../../../types';
 import { headlineSnippet } from '../snippets';
 
-export const loadingView = (packageData: CmdCallbackData) => {
+export const loadingView = (packageData: CmdCallbackData): string => {
   return `
     <section class="loading view">
       <header class="loading__header view__header">

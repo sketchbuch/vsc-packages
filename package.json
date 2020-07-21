@@ -139,10 +139,8 @@
     "compile": "tsc -p ./",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
-    "lint:ts:src": "tslint --config ./tslint.json --fix './src/**/*.ts' --exclude './src/test/**/*'",
-    "lint:ts:test": "tslint --config ./src/test/tslint.json --fix './src/test/**/*.ts'",
-    "lint:ts": "yarn lint:ts:src && yarn lint:ts:test",
-    "lint": "eslint src --ext ts",
+    "lint:ts": "eslint src --ext ts --fix",
+    "lint": "yarn lint:ts && yarn lint:prettier && yarn lint:css",
     "pretest": "yarn run compile && yarn run lint",
     "vscode:prepublish": "yarn run compile",
     "watch": "tsc -watch -p ./"
@@ -192,14 +190,14 @@
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2"
   },
-  "husky2": {
+  "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "lint-staged",
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged2": {
+  "lint-staged": {
     "{src, resources/js}/**/*.{js,ts}": [
       "yarn lint:ts",
       "yarn lint:prettier",

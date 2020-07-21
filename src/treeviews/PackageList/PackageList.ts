@@ -70,7 +70,7 @@ export class PackageList implements vscode.TreeDataProvider<PackageListChild> {
       if (this.packageJson === null) {
         this.packageJson = getPackageJson({
           name: curFolder.name,
-          uri: curFolder.uri
+          uri: curFolder.uri,
         });
       }
 

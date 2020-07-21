@@ -7,7 +7,7 @@ import { GetHtml, PackageHtmlData } from '../../../types';
 
 suite('getHtml()', () => {
   const props: GetHtml<PackageHtmlData> = {
-    template: args => '',
+    template: () => '',
     extensionPath,
     htmlData: {
       packageData: mockPackageData,
@@ -24,7 +24,7 @@ suite('getHtml()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   test('Calls utils.getResourceUri() correctly', () => {
+  /*   test('Calls utils.getResourceUri() correctly', () => {
     const spy = sinon.spy(utils, 'getResourceUri');
     getHtml(props);
     sinon.assert.calledTwice(spy);

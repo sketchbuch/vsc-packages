@@ -11,7 +11,7 @@ export const getPackageJson = (workspaceFolder: WsFolder): GetPackageJsonResult 
     const packageJsonPath: string = path.join(workspaceFolder.uri.fsPath, FS_PACKAGEJSON);
 
     if (pathExists(packageJsonPath)) {
-      let packageJson: string = '';
+      let packageJson = '';
 
       try {
         packageJson = fs.readFileSync(packageJsonPath, FS_UTF8);

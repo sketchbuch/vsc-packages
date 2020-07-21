@@ -1,4 +1,4 @@
-export const infoMessageSnippet = (heading: string, message: string) => {
+export const infoMessageSnippet = (heading: string, message: string): string => {
   return `
     <div class="info-message">
       <h2>${heading}</h2>

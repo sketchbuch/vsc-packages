@@ -29,7 +29,7 @@ suite('timeSnippet()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   test('Calls tableListSnippet()', () => {
+  /*   test('Calls tableListSnippet()', () => {
     const spy = sinon.spy(snippets, 'tableListSnippet');
     timeSnippet(mockTime, packageName);
     sinon.assert.callCount(spy, 1);

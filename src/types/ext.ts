@@ -30,12 +30,12 @@ export type AddPackageData = {
 export type AddPackage = Promise<AddPackageData>;
 
 export interface PackageJsonYarn {
-  workspaces?: string[]
+  workspaces?: string[];
 }
 
 export type PackageJson = PackageJsonNpm & PackageJsonYarn;
 
 export interface GetPackageJsonResult {
-  data: PackageJson | null
-  error?: Error | null
+  data: PackageJson | null;
+  error?: Error | null;
 }

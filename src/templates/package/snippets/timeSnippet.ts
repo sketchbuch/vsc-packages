@@ -5,6 +5,7 @@ import * as timeago from 'timeago.js';
 
 export const timeSnippet = (time: NpmTime | undefined, packageName: string): string => {
   if (time) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { created, modified, ...versionTags } = time;
     const items = Object.keys(versionTags)
       .map(

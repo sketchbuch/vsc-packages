@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as vscode from 'vscode';
 import {
   CMD_DISPLAY_PACKAGE_WV,

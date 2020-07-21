@@ -16,7 +16,7 @@ export const tagsSnippet = (tags: NpmTags | undefined, packageName: string): str
     return tableListSnippet(
       items,
       packageName,
-      t('webViews.packages.detailView.maintainer', { count: items.length.toString() })
+      t('webViews.packages.detailView.tags', { count: items.length.toString() })
     );
   }
 

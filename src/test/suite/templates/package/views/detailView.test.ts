@@ -27,7 +27,7 @@ suite('package - detailView()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   ([
+  /*   ([
     'authorSnippet',
     'bugsSnippet',
     'homepageSnippet',
@@ -36,7 +36,7 @@ suite('package - detailView()', () => {
     'tabboxSnippet',
   ] as Snippets[]).forEach((methodName: Snippets) => testSnippetCall(methodName)); */
 
-/*   test('Renders a title', () => {
+  /*   test('Renders a title', () => {
     const spy = sinon.spy(snippets, 'headlineSnippet');
     detailView(mockPackageData, 'readme', mockNpmData);
 

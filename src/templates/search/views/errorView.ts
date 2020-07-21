@@ -1,6 +1,6 @@
 import { t } from 'vscode-ext-localisation';
 
-export const errorView = (error: Error) => {
+export const errorView = (error: Error): string => {
   return `
     <section class="error view">
       <div class="view__content error__content">

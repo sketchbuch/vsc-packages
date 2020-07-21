@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as vscode from 'vscode';
 import { extensionPath } from '.';
 
@@ -7,16 +8,24 @@ const mockContext = {
   extensionPath,
   extensionUri: {} as vscode.Uri,
   globalState: {
-    get: (key: string) => {},
-    update: (key: string, value: any) => {},
+    get: (key: string) => {
+      // Do nothing...
+    },
+    update: (key: string, value: never) => {
+      // Do nothing...
+    },
   } as vscode.Memento,
   globalStoragePath: '',
   logPath: '',
   storagePath: '',
   subscriptions: [],
   workspaceState: {
-    get: (key: string) => {},
-    update: (key: string, value: any) => {},
+    get: (key: string) => {
+      // Do nothing...
+    },
+    update: (key: string, value: never) => {
+      // Do nothing...
+    },
   } as vscode.Memento,
 } as vscode.ExtensionContext;
 

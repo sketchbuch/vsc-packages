@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-const mockWorkspaceFolder = (fakeFolder: boolean = false): vscode.WorkspaceFolder => {
+const mockWorkspaceFolder = (fakeFolder = false): vscode.WorkspaceFolder => {
   return {
     index: 0,
     name: 'folder',

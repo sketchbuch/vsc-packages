@@ -14,17 +14,14 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     FolderItem | undefined
   >();
   onDidChangeTreeData: vscode.Event<FolderItem | undefined> = this._onDidChangeTreeData.event;
-  
+
   private packageJsons: {
-    [key: string]: GetPackageJsonResult
+    [key: string]: GetPackageJsonResult;
   } = {};
   private watchers: string[] = [];
   private workspaceFolders: WsFolders;
 
-  constructor(
-    workspaceFolders: VsCodeWsFolders,
-    private context: vscode.ExtensionContext
-  ) {
+  constructor(workspaceFolders: VsCodeWsFolders, private context: vscode.ExtensionContext) {
     this.workspaceFolders = this.collectFolders(convertWsFolders(workspaceFolders));
 
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
@@ -36,7 +33,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     return workspaceFolders.reduce((allFolders: WsFolders, folder: WsFolder): WsFolders => {
       this.createWatcher(folder);
       let folders = [folder];
-  
+
       if (this.packageJsons[folder.name] === undefined) {
         this.packageJsons[folder.name] = getPackageJson(folder);
         const { data, error } = this.packageJsons[folder.name];
@@ -44,30 +41,37 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
         if (!error && data !== null && data.workspaces) {
           data.workspaces.forEach((workspace: string) => {
             const wsFolder = path.join(folder.uri.fsPath, workspace);
-            
+
             if (wsFolder.slice(-2) === '/*') {
               const wildCardFolder = wsFolder.substring(0, wsFolder.length - 2);
               const filenames = fs.readdirSync(wildCardFolder);
 
-              folders = filenames.reduce((allFolders: WsFolders, curFilename: string): WsFolders => {
-                try {
-                  const wsSubFolder = path.join(wildCardFolder, curFilename);
+              folders = filenames.reduce(
+                (allFolders: WsFolders, curFilename: string): WsFolders => {
+                  try {
+                    const wsSubFolder = path.join(wildCardFolder, curFilename);
 
-                  if (fs.lstatSync(wsSubFolder).isDirectory()) {
-                    const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
-                    this.createWatcher(newFolder);
-                    return [...allFolders, newFolder];
+                    if (fs.lstatSync(wsSubFolder).isDirectory()) {
+                      const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
+                      this.createWatcher(newFolder);
+                      return [...allFolders, newFolder];
+                    }
+                  } catch {
+                    // Do nothing...
                   }
-                } catch {
-                  // Do nothing...
-                }
 
-                return allFolders;
-              }, folders);
+                  return allFolders;
+                },
+                folders
+              );
             } else {
               try {
                 if (fs.lstatSync(wsFolder).isDirectory()) {
-                  const newFolder = this.getWsFolder(wsFolder.replace(folder.uri.path, '').slice(1), wsFolder, folder);
+                  const newFolder = this.getWsFolder(
+                    wsFolder.replace(folder.uri.path, '').slice(1),
+                    wsFolder,
+                    folder
+                  );
                   folders = [...folders, newFolder];
                   this.createWatcher(newFolder);
                 }
@@ -77,7 +81,6 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
             }
           });
         }
-
       }
 
       return [...allFolders, ...folders];
@@ -115,8 +118,8 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
       arguments: [folder, this.context],
     };
   }
-  
-  getParent?(element: FolderItem): vscode.ProviderResult<FolderItem> {
+
+  getParent(): vscode.ProviderResult<FolderItem> {
     return null;
   }
 
@@ -127,13 +130,13 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   getWsFolder(name: string, folderPath: string, parentFolder: WsFolder): WsFolder {
     return {
       name,
-      parent: parentFolder.name, 
-      uri: vscode.Uri.file(folderPath)
+      parent: parentFolder.name,
+      uri: vscode.Uri.file(folderPath),
     };
   }
 
   hasChildern(folderName: string): boolean {
-    return this.workspaceFolders.some((f) => f.parent === folderName);
+    return this.workspaceFolders.some(f => f.parent === folderName);
   }
 
   isChildOfParent(parentFolderName: string, folder: WsFolder): boolean {
@@ -152,7 +155,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
 
   getChildren(parent?: FolderItem): Thenable<FolderItem[]> {
     const children: FolderItem[] = [];
-    
+
     if (this.workspaceFolders && this.workspaceFolders.length > 0) {
       if (parent) {
         this.workspaceFolders.forEach((folder: WsFolder) => {
@@ -188,7 +191,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
         });
       }
     }
-    
+
     if (children.length < 1) {
       children.push(
         new FolderItem(
