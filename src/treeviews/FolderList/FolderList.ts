@@ -42,7 +42,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
           data.workspaces.forEach((workspace: string) => {
             const wsFolder = path.join(folder.uri.fsPath, workspace);
 
-            if (wsFolder.slice(-2) === '/*') {
+            if (this.isWildcardFolder(wsFolder)) {
               const wildCardFolder = wsFolder.substring(0, wsFolder.length - 2);
               const filenames = fs.readdirSync(wildCardFolder);
 
@@ -145,6 +145,10 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
 
   isParent(folder: WsFolder): boolean {
     return !folder.parent;
+  }
+
+  isWildcardFolder(wsFolder: string): boolean {
+    return wsFolder.slice(-2) === '/*';
   }
 
   refresh(workspaceFolders: WsFolders): void {
