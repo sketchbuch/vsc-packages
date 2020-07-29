@@ -1,3 +1,4 @@
+export * from './arrays';
 export * from './fs';
 export * from './npm';
 export * from './package';

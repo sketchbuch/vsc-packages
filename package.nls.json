@@ -10,6 +10,12 @@
   "views.activitybar-packagejson": "Packages",
   "views.btn.open-npmurl": "Open the NPM Page for this Package",
   "viewsContainers.activitybar": "Packages",
+  "treeViews": {
+    "folder": {
+      "loading": "Collecting folders...",
+      "noFolders": "No Workspaces folders found"
+    }
+  },
   "webViews": {
     "packages": {
       "detailView": {

@@ -3,26 +3,30 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { CMD_SELECT_FOLDER, FS_PACKAGEJSON } from '../../constants';
-import { FolderItem } from '.';
-import { getPackageJson } from '../../utils';
-import { GetPackageJsonResult } from '../../types';
-import { VsCodeWsFolders, WsFolder, WsFolders } from './FolderList.interface';
+import { FolderEmpty, FolderItem, FolderLoading } from '.';
+import { getPackageJson, sortWsFolders } from '../../utils';
+import {
+  FolderListChild,
+  FolderListChildren,
+  VsCodeWsFolders,
+  WsFolder,
+  WsFolders,
+} from './FolderList.interface';
 import { convertWsFolders } from './helpers/convertWsFolders';
 
-export class FolderList implements vscode.TreeDataProvider<FolderItem> {
-  _onDidChangeTreeData: vscode.EventEmitter<FolderItem | undefined> = new vscode.EventEmitter<
-    FolderItem | undefined
+export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
+  _onDidChangeTreeData: vscode.EventEmitter<FolderListChild | undefined> = new vscode.EventEmitter<
+    FolderListChild | undefined
   >();
-  onDidChangeTreeData: vscode.Event<FolderItem | undefined> = this._onDidChangeTreeData.event;
+  onDidChangeTreeData: vscode.Event<FolderListChild | undefined> = this._onDidChangeTreeData.event;
 
-  private packageJsons: {
-    [key: string]: GetPackageJsonResult;
-  } = {};
+  private loading = true;
   private watchers: string[] = [];
   private workspaceFolders: WsFolders;
 
   constructor(workspaceFolders: VsCodeWsFolders, private context: vscode.ExtensionContext) {
     this.workspaceFolders = this.collectFolders(convertWsFolders(workspaceFolders));
+    this.loading = false;
 
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
       this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
@@ -32,56 +36,56 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   collectFolders(workspaceFolders: WsFolders): WsFolders {
     return workspaceFolders.reduce((allFolders: WsFolders, folder: WsFolder): WsFolders => {
       this.createWatcher(folder);
+      const { data, error } = getPackageJson(folder);
       let folders = [folder];
+      let subFolders: WsFolder[] = [];
 
-      if (this.packageJsons[folder.name] === undefined) {
-        this.packageJsons[folder.name] = getPackageJson(folder);
-        const { data, error } = this.packageJsons[folder.name];
+      if (!error && data !== null && data.workspaces) {
+        data.workspaces.forEach((workspace: string): void => {
+          const wsFolder = path.join(folder.uri.fsPath, workspace);
 
-        if (!error && data !== null && data.workspaces) {
-          data.workspaces.forEach((workspace: string) => {
-            const wsFolder = path.join(folder.uri.fsPath, workspace);
+          if (this.isWildcardFolder(wsFolder)) {
+            const wildCardFolder = wsFolder.substring(0, wsFolder.length - 2);
+            const filenames = fs.readdirSync(wildCardFolder);
 
-            if (this.isWildcardFolder(wsFolder)) {
-              const wildCardFolder = wsFolder.substring(0, wsFolder.length - 2);
-              const filenames = fs.readdirSync(wildCardFolder);
+            subFolders = filenames.reduce(
+              (allFolders: WsFolders, curFilename: string): WsFolders => {
+                try {
+                  const wsSubFolder = path.join(wildCardFolder, curFilename);
 
-              folders = filenames.reduce(
-                (allFolders: WsFolders, curFilename: string): WsFolders => {
-                  try {
-                    const wsSubFolder = path.join(wildCardFolder, curFilename);
-
-                    if (fs.lstatSync(wsSubFolder).isDirectory()) {
-                      const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
-                      this.createWatcher(newFolder);
-                      return [...allFolders, newFolder];
-                    }
-                  } catch {
-                    // Do nothing...
+                  if (fs.lstatSync(wsSubFolder).isDirectory()) {
+                    const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
+                    this.createWatcher(newFolder);
+                    return [...allFolders, newFolder];
                   }
-
-                  return allFolders;
-                },
-                folders
-              );
-            } else {
-              try {
-                if (fs.lstatSync(wsFolder).isDirectory()) {
-                  const newFolder = this.getWsFolder(
-                    wsFolder.replace(folder.uri.path, '').slice(1),
-                    wsFolder,
-                    folder
-                  );
-                  folders = [...folders, newFolder];
-                  this.createWatcher(newFolder);
+                } catch {
+                  // Do nothing...
                 }
-              } catch {
-                // Do nothing...
+
+                return allFolders;
+              },
+              subFolders
+            );
+          } else {
+            try {
+              if (fs.lstatSync(wsFolder).isDirectory()) {
+                const newFolder = this.getWsFolder(
+                  wsFolder.replace(folder.uri.path, '').slice(1),
+                  wsFolder,
+                  folder
+                );
+                subFolders = [...subFolders, newFolder];
+                this.createWatcher(newFolder);
               }
+            } catch {
+              // Do nothing...
             }
-          });
-        }
+          }
+        });
       }
+
+      subFolders.sort(sortWsFolders);
+      folders = [...folders, ...subFolders];
 
       return [...allFolders, ...folders];
     }, []);
@@ -114,16 +118,15 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
     return {
       command: CMD_SELECT_FOLDER,
       title: '',
-      // TODO - Make this command take a WsFolder instead of a vscode folder
       arguments: [folder, this.context],
     };
   }
 
-  getParent(): vscode.ProviderResult<FolderItem> {
+  getParent(): vscode.ProviderResult<FolderListChild> {
     return null;
   }
 
-  getTreeItem(element: FolderItem): vscode.TreeItem {
+  getTreeItem(element: FolderListChild): vscode.TreeItem {
     return element;
   }
 
@@ -152,15 +155,24 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
   }
 
   refresh(workspaceFolders: WsFolders): void {
+    this.loading = true;
     this.workspaceFolders = this.collectFolders(workspaceFolders);
-    this.packageJsons = {};
+    this.loading = false;
     this._onDidChangeTreeData.fire(undefined);
   }
 
-  getChildren(parent?: FolderItem): Thenable<FolderItem[]> {
-    const children: FolderItem[] = [];
+  getChildren(parent?: FolderListChild): Thenable<FolderListChildren> {
+    const children: FolderListChildren = [];
 
-    if (this.workspaceFolders && this.workspaceFolders.length > 0) {
+    if (this.loading) {
+      children.push(
+        new FolderLoading(
+          'Loadinng...',
+          this.context.extensionPath,
+          vscode.TreeItemCollapsibleState.None
+        )
+      );
+    } else if (this.workspaceFolders && this.workspaceFolders.length > 0) {
       if (parent) {
         this.workspaceFolders.forEach((folder: WsFolder) => {
           if (this.isChildOfParent(parent.label, folder)) {
@@ -177,11 +189,9 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
       } else {
         this.workspaceFolders.forEach((folder: WsFolder) => {
           if (this.isParent(folder)) {
-            let expandedState = vscode.TreeItemCollapsibleState.None;
-
-            if (this.hasChildern(folder.name)) {
-              expandedState = vscode.TreeItemCollapsibleState.Expanded;
-            }
+            const expandedState = this.hasChildern(folder.name)
+              ? vscode.TreeItemCollapsibleState.Expanded
+              : vscode.TreeItemCollapsibleState.None;
 
             children.push(
               new FolderItem(
@@ -198,7 +208,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderItem> {
 
     if (children.length < 1) {
       children.push(
-        new FolderItem(
+        new FolderEmpty(
           t('treeViews.folder.noFolders'),
           this.context.extensionPath,
           vscode.TreeItemCollapsibleState.None

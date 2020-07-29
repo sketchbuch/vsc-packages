@@ -10,6 +10,12 @@
   "views.activitybar-packagejson": "Pakete",
   "views.btn.open-npmurl": "NPM-Seite für dieser Packet öffnen",
   "viewsContainers.activitybar": "Pakete",
+  "treeViews": {
+    "folder": {
+      "loading": "Verzeichnisse finden...",
+      "noFolders": "Kein Arbeitsberich-Verzeichnisse gefunden"
+    }
+  },
   "webViews": {
     "packages": {
       "detailView": {
