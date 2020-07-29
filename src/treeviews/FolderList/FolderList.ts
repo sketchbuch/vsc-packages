@@ -167,7 +167,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
     if (this.loading) {
       children.push(
         new FolderLoading(
-          'Loadinng...',
+          t('treeViews.folder.loading'),
           this.context.extensionPath,
           vscode.TreeItemCollapsibleState.None
         )
