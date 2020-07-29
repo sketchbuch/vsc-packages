@@ -156,6 +156,8 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
 
   refresh(workspaceFolders: WsFolders): void {
     this.loading = true;
+    this.workspaceFolders = [];
+    this._onDidChangeTreeData.fire(undefined);
     this.workspaceFolders = this.collectFolders(workspaceFolders);
     this.loading = false;
     this._onDidChangeTreeData.fire(undefined);
@@ -204,16 +206,16 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
           }
         });
       }
-    }
 
-    if (children.length < 1) {
-      children.push(
-        new FolderEmpty(
-          t('treeViews.folder.noFolders'),
-          this.context.extensionPath,
-          vscode.TreeItemCollapsibleState.None
-        )
-      );
+      if (children.length < 1) {
+        children.push(
+          new FolderEmpty(
+            t('treeViews.folder.noFolders'),
+            this.context.extensionPath,
+            vscode.TreeItemCollapsibleState.None
+          )
+        );
+      }
     }
 
     return Promise.resolve(children);
