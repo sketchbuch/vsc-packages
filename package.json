@@ -57,6 +57,14 @@
             "npm",
             "yarn"
           ]
+        },
+        "depth": {
+          "default": 0,
+          "description": "%config.depth.description%",
+          "maximum": 5,
+          "minimum": 0,
+          "scope": "application",
+          "type": "number"
         }
       }
     },

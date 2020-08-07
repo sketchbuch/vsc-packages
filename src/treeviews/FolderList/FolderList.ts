@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { CMD_SELECT_FOLDER, FS_PACKAGEJSON } from '../../constants';
 import { FolderEmpty, FolderItem, FolderLoading } from '.';
-import { getPackageJson, sortWsFolders } from '../../utils';
+import { getPackageJson, sortWsFolders, findPackageJsonFiles } from '../../utils';
 import {
   FolderListChild,
   FolderListChildren,
@@ -20,23 +20,43 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
   >();
   onDidChangeTreeData: vscode.Event<FolderListChild | undefined> = this._onDidChangeTreeData.event;
 
-  private loading = true;
+  private isLoading = true;
   private watchers: string[] = [];
   private workspaceFolders: WsFolders;
 
   constructor(workspaceFolders: VsCodeWsFolders, private context: vscode.ExtensionContext) {
+    this.loading();
     this.workspaceFolders = this.collectFolders(convertWsFolders(workspaceFolders));
-    this.loading = false;
+    this.isLoading = false;
 
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
       this.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
     });
   }
 
+  collectDeepFolders = (folder: WsFolder, depth: number, excludeFolders: string[]): WsFolders => {
+    const wsFolderPath = folder.uri.path;
+
+    return findPackageJsonFiles(wsFolderPath, depth, excludeFolders)
+      .filter(file => file !== `${wsFolderPath}/${FS_PACKAGEJSON}`)
+      .map(file => {
+        const wsName = file
+          .replace(wsFolderPath, '')
+          .slice(1)
+          .replace(`/${FS_PACKAGEJSON}`, '');
+        const folderPath = file.replace(`/${FS_PACKAGEJSON}`, '');
+
+        return this.getWsFolder(wsName, folderPath, folder);
+      });
+  };
+
   collectFolders(workspaceFolders: WsFolders): WsFolders {
+    const depth: number = vscode.workspace.getConfiguration().get('depth') || 0;
+
     return workspaceFolders.reduce((allFolders: WsFolders, folder: WsFolder): WsFolders => {
       this.createWatcher(folder);
       const { data, error } = getPackageJson(folder);
+      let excludeFolders: string[] = [];
       let folders = [folder];
       let subFolders: WsFolder[] = [];
 
@@ -56,6 +76,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
                   if (fs.lstatSync(wsSubFolder).isDirectory()) {
                     const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
                     this.createWatcher(newFolder);
+                    excludeFolders = [...excludeFolders, wsSubFolder];
                     return [...allFolders, newFolder];
                   }
                 } catch {
@@ -75,6 +96,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
                   folder
                 );
                 subFolders = [...subFolders, newFolder];
+                excludeFolders = [...excludeFolders, wsFolder];
                 this.createWatcher(newFolder);
               }
             } catch {
@@ -84,9 +106,12 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
         });
       }
 
+      if (depth) {
+        subFolders = [...subFolders, ...this.collectDeepFolders(folder, depth, excludeFolders)];
+      }
+
       subFolders.sort(sortWsFolders);
       folders = [...folders, ...subFolders];
-
       return [...allFolders, ...folders];
     }, []);
   }
@@ -154,19 +179,23 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
     return wsFolder.slice(-2) === '/*';
   }
 
-  refresh(workspaceFolders: WsFolders): void {
-    this.loading = true;
+  loading(): void {
     this.workspaceFolders = [];
+    this.isLoading = true;
     this._onDidChangeTreeData.fire(undefined);
+  }
+
+  refresh(workspaceFolders: WsFolders): void {
+    this.loading();
     this.workspaceFolders = this.collectFolders(workspaceFolders);
-    this.loading = false;
+    this.isLoading = false;
     this._onDidChangeTreeData.fire(undefined);
   }
 
   getChildren(parent?: FolderListChild): Thenable<FolderListChildren> {
     const children: FolderListChildren = [];
 
-    if (this.loading) {
+    if (this.isLoading) {
       children.push(
         new FolderLoading(
           t('treeViews.folder.loading'),

@@ -1,4 +1,5 @@
 export * from './ext';
+export * from './fs';
 export * from './guards/isContributor';
 export * from './misc';
 export * from './network';
