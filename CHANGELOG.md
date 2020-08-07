@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.5.0](https://github.com/sketchbuch/vsc-packages/compare/v1.4.2...v1.5.0) - 2020-08-07
+
+- Added support for Yarn Workspaces
+- Added ability to look deeper into each workspace folder (up to 5 levels deep) to find additional packages.json files.
+
 ## [1.4.2](https://github.com/sketchbuch/vsc-packages/compare/v1.4.1...v1.4.2) - 2020-07-12
 
 - Fixed translation dependency issue
