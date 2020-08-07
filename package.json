@@ -2,7 +2,7 @@
   "name": "vsc-packages",
   "description": "A VSC extension to list packages from package.json and search for and install packages.",
   "displayName": "Package Installer",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "activationEvents": [
     "*"
   ],
@@ -173,15 +173,15 @@
     "axios-mock-adapter": "^1.17.0",
     "chai": "^4.2.0",
     "commitlint": "^8.3.5",
-    "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^6.8.0",
     "glob": "^7.1.6",
     "mocha": "^7.1.2",
     "prettier": "^1.19.1",
     "sinon": "^9.0.2",
-    "stylelint": "^13.2.1",
     "stylelint-config-recommended": "^3.0.0",
+    "stylelint": "^13.2.1",
     "ts-mockito": "^2.3.1",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",
@@ -196,7 +196,8 @@
     "libnpmsearch": "^2.0.2",
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "vscode-ext-localisation": "^1.0.1"
   },
   "husky": {
     "hooks": {

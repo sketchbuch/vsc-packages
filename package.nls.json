@@ -26,9 +26,9 @@
         "headlineTooltip": "Version listed in package.json",
         "home": "Homepage",
         "inlineList": {
-          "emailTooltip": "Email {{email}}"
+          "emailTooltip": "Email {{email}}",
+          "licenceTooltip": "Licence"
         },
-        "licenceTooltip": "Licence",
         "maintainer": "Maintainers",
         "repository": "Repository",
         "tablelist": {

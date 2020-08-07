@@ -45,6 +45,7 @@ This extension is localised, if you want it in your language please send me a tr
 
 ## Latest Version
 
-#### [1.4.1](https://github.com/sketchbuch/vsc-packages/compare/v1.4.0...v1.4.1) - 2020-06-18
+#### [1.4.2](https://github.com/sketchbuch/vsc-packages/compare/v1.4.1...v1.4.2) - 2020-07-12
 
-- Fixed open npm URL not working - see PR #103 from https://github.com/arjunkesava
+- Fixed translation dependency issue
+- Fixed Licence tooltip not found
