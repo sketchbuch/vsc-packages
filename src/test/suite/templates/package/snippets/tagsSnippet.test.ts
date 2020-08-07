@@ -21,7 +21,7 @@ suite('tagsSnippet()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   test('Calls tableListSnippet()', () => {
+  /*   test('Calls tableListSnippet()', () => {
     const spy = sinon.spy(snippets, 'tableListSnippet');
     tagsSnippet(mockTags, packageName);
     sinon.assert.callCount(spy, 1);

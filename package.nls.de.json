@@ -4,12 +4,19 @@
   "cmd.search-packages": "Packages: NPM durchsuchen",
   "cmd.search-results": "Suchergebnisse",
   "cmd.select-folder": "Pakete in diesem Ordner anzeigen",
+  "config.depth.description": "Tiefe von Unterordnern, die auch nach package.json Datein durch gesucht sollten",
   "config.packageManager.description": "Wählen Sie den Paketmanager aus, der zum Installieren von Paketen verwendet werden soll.",
   "config.title": "Packages",
   "views.activitybar-folders": "Arbeitsberich-Verzeichnisse",
   "views.activitybar-packagejson": "Pakete",
   "views.btn.open-npmurl": "NPM-Seite für dieser Packet öffnen",
   "viewsContainers.activitybar": "Pakete",
+  "treeViews": {
+    "folder": {
+      "loading": "Verzeichnisse finden...",
+      "noFolders": "Kein Arbeitsberich-Verzeichnisse gefunden"
+    }
+  },
   "webViews": {
     "packages": {
       "detailView": {

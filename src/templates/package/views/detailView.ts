@@ -21,7 +21,7 @@ export const detailView = (
   packageData: CmdCallbackData,
   activeTab: TabboxId,
   data: NpmPackageData
-) => {
+): string => {
   const {
     'dist-tags': tags,
     author,
@@ -42,7 +42,7 @@ export const detailView = (
         label: t('webViews.packages.detailView.tabs.readme.tabLabel'),
         selected: activeTab === 'readme',
       },
-      content: () => readmeSnippet(readme),
+      content: (): string => readmeSnippet(readme),
       emptyMessage: t('webViews.packages.detailView.tabs.readme.empty'),
       id: 'readme',
     },
@@ -51,7 +51,7 @@ export const detailView = (
         label: t('webViews.packages.detailView.tabs.versions.tabLabel'),
         selected: activeTab === 'versions',
       },
-      content: () =>
+      content: (): string =>
         columnsSnippet(
           () => tagsSnippet(tags, packageData.packageName),
           () => timeSnippet(time, packageData.packageName)
@@ -64,7 +64,7 @@ export const detailView = (
         label: t('webViews.packages.detailView.tabs.dev.tabLabel'),
         selected: activeTab === 'developers',
       },
-      content: () => maintainerSnippet(maintainers) + contribSnippet(contributors),
+      content: (): string => maintainerSnippet(maintainers) + contribSnippet(contributors),
       emptyMessage: t('webViews.packages.detailView.tabs.dev.empty'),
       id: 'developers',
     },

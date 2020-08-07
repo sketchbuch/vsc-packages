@@ -12,7 +12,7 @@ suite('package - errorView()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   test('Renders a title', () => {
+  /*   test('Renders a title', () => {
     const spy = sinon.spy(snippets, 'headlineSnippet');
     errorView(mockPackageData, mockError);
 

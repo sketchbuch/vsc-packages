@@ -31,6 +31,8 @@ suite('getNpmPackageData()', () => {
         expect(data).to.have.property('name');
         expect(data.name).to.equal('react');
       })
-      .catch(() => {});
+      .catch(() => {
+        // Do nothing...
+      });
   });
 });

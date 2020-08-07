@@ -18,7 +18,7 @@ suite('maintainerSnippet()', () => {
   });
 
   // TODO - Fix spy import issue
-/*   test('Calls mapNpmObjToInlineList() correctly', () => {
+  /*   test('Calls mapNpmObjToInlineList() correctly', () => {
     const spy = sinon.spy(utils, 'mapNpmObjToInlineList');
     maintainerSnippet(mockMaintainers);
     sinon.assert.callCount(spy, 1);

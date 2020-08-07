@@ -14,28 +14,28 @@ import { extensionPath, mockContext, mockPackageData, mockPanel } from '../../mo
 import { GetHtml, PackageHtmlData } from '../../../../types';
 import * as templates from '../../../../templates';
 import * as utils from '../../../../utils';
-import { Package, defaultPackageData } from '../../../../webviews';
+import { PackageItem, defaultPackageData } from '../../../../webviews';
 import { defaultTemplate } from '../../../../templates/package';
 
-suite('Package()', () => {
+suite('PackageItem()', () => {
   test('Creating an instance is successful', () => {
-    expect(() => new Package(mockPackageData, mockPanel, mockContext)).not.to.throw();
+    expect(() => new PackageItem(mockPackageData, mockPanel, mockContext)).not.to.throw();
   });
 
   suite('constructor()', () => {
     test('Public properties are set to defaults', () => {
-      new Package(mockPackageData, mockPanel, mockContext);
+      new PackageItem(mockPackageData, mockPanel, mockContext);
 
-      expect(Package.currentPanel).to.equal(undefined);
-      expect(Package.currentPackageData).to.eql(defaultPackageData);
-      expect(Package.viewType).to.equal(CMD_DISPLAY_PACKAGE_WV);
+      expect(PackageItem.currentPanel).to.equal(undefined);
+      expect(PackageItem.currentPackageData).to.eql(defaultPackageData);
+      expect(PackageItem.viewType).to.equal(CMD_DISPLAY_PACKAGE_WV);
     });
 
     test('Calls panel.onDidDispose() && panel.onDidChangeViewState()', () => {
       const spyOnDidChangeViewState = sinon.spy(mockPanel, 'onDidChangeViewState');
       const spyOnDidDispose = sinon.spy(mockPanel, 'onDidDispose');
 
-      new Package(mockPackageData, mockPanel, mockContext);
+      new PackageItem(mockPackageData, mockPanel, mockContext);
 
       sinon.assert.calledOnce(spyOnDidChangeViewState);
       sinon.assert.calledOnce(spyOnDidDispose);
@@ -48,11 +48,11 @@ suite('Package()', () => {
   suite('createOrShow()', () => {
     test('Calls createWebviewPanel() correctly', () => {
       const spy = sinon.spy(vscode.window, 'createWebviewPanel');
-      Package.createOrShow(mockPackageData, mockContext);
+      PackageItem.createOrShow(mockPackageData, mockContext);
       sinon.assert.calledOnce(spy);
       sinon.assert.calledWith(
         spy,
-        Package.viewType,
+        PackageItem.viewType,
         utils.getPackageTabTitle(mockPackageData.packageName),
         vscode.ViewColumn.Active,
         {
@@ -71,8 +71,8 @@ suite('Package()', () => {
     });
 
     test('Calls setStateForRevival() correctly', () => {
-      const spy = sinon.spy(Package, 'setStateForRevival');
-      Package.createOrShow(mockPackageData, mockContext);
+      const spy = sinon.spy(PackageItem, 'setStateForRevival');
+      PackageItem.createOrShow(mockPackageData, mockContext);
       sinon.assert.calledOnce(spy);
       sinon.assert.calledWith(spy, mockPackageData, mockContext);
       spy.restore();
@@ -81,8 +81,8 @@ suite('Package()', () => {
 
   suite('setStateForRevival()', () => {
     test('Calls setStateForRevival() correctly', () => {
-      const spy = sinon.spy(Package, 'setStateForRevival');
-      Package.revive(mockPackageData, mockPanel, mockContext);
+      const spy = sinon.spy(PackageItem, 'setStateForRevival');
+      PackageItem.revive(mockPackageData, mockPanel, mockContext);
       sinon.assert.calledTwice(spy); // Once also in _update which is triggered
       sinon.assert.calledWith(spy, mockPackageData, mockContext);
       spy.restore();
@@ -92,7 +92,7 @@ suite('Package()', () => {
   suite('setStateForRevival()', () => {
     test('Calls context.globalState.update correctly', () => {
       const spy = sinon.spy(mockContext.globalState, 'update');
-      Package.setStateForRevival(mockPackageData, mockContext);
+      PackageItem.setStateForRevival(mockPackageData, mockContext);
       sinon.assert.calledTwice(spy);
 
       const callArgs1 = spy.getCall(0).args;
@@ -106,21 +106,21 @@ suite('Package()', () => {
   });
 
   suite('dispose()', () => {
-    test('Resets Package.currentPanel', () => {
-      const instance = new Package(mockPackageData, mockPanel, mockContext);
+    test('Resets PackageItem.currentPanel', () => {
+      const instance = new PackageItem(mockPackageData, mockPanel, mockContext);
       instance.dispose();
-      expect(Package.currentPanel).to.equal(undefined);
+      expect(PackageItem.currentPanel).to.equal(undefined);
     });
 
-    test('Resets Package.currentPackageData', () => {
-      const instance = new Package(mockPackageData, mockPanel, mockContext);
+    test('Resets PackageItem.currentPackageData', () => {
+      const instance = new PackageItem(mockPackageData, mockPanel, mockContext);
       instance.dispose();
-      expect(Package.currentPackageData).to.eql(defaultPackageData);
+      expect(PackageItem.currentPackageData).to.eql(defaultPackageData);
     });
 
     test('Calls _panel.dispose() once', () => {
       const spy = sinon.spy(mockPanel, 'dispose');
-      const instance = new Package(mockPackageData, mockPanel, mockContext);
+      const instance = new PackageItem(mockPackageData, mockPanel, mockContext);
       instance.dispose();
       sinon.assert.calledOnce(spy);
       spy.restore();
@@ -142,7 +142,7 @@ suite('Package()', () => {
           },
         },
       };
-      new Package(mockPackageData, mockPanel, mockContext);
+      new PackageItem(mockPackageData, mockPanel, mockContext);
       sinon.assert.calledOnce(spy);
       sinon.assert.calledWith(spy, getHtmlArgs);
       spy.restore();

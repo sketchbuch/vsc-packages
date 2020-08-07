@@ -1,6 +1,6 @@
 import { t } from 'vscode-ext-localisation';
 
-const loadingIcon = () => {
+const loadingIcon = (): string => {
   return `
     <span class="search-field__loader">
       <span class="search-field__spinner spinner">
@@ -12,7 +12,7 @@ const loadingIcon = () => {
     </span>`;
 };
 
-const clearButton = (name: string) => {
+const clearButton = (name: string): string => {
   return `
     <a class="search-field__clearer" href="" id="${name}-clearer" title="${t(
     'webViews.search.searchField.clearBtn'

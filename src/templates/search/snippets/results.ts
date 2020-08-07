@@ -2,7 +2,7 @@ import { EXT } from '../../../constants';
 import { NpmSearchResult, NpmSearchResults } from '../../../types';
 import { t } from 'vscode-ext-localisation';
 
-export const results = (results: NpmSearchResults, page: number) => {
+export const results = (results: NpmSearchResults, page: number): string => {
   return `
     <div class="results">
       <ul class="results__list">

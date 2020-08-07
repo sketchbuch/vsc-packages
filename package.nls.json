@@ -4,12 +4,19 @@
   "cmd.search-packages": "Packages: Search NPM",
   "cmd.search-results": "Search Results",
   "cmd.select-folder": "View packages in this folder",
+  "config.depth.description": "Depth to search below each workspace folder for additional package.json files",
   "config.packageManager.description": "Select the package manger that should be used to install packages.",
   "config.title": "Packages",
   "views.activitybar-folders": "Workspace Folders",
   "views.activitybar-packagejson": "Packages",
   "views.btn.open-npmurl": "Open the NPM Page for this Package",
   "viewsContainers.activitybar": "Packages",
+  "treeViews": {
+    "folder": {
+      "loading": "Collecting folders...",
+      "noFolders": "No Workspaces folders found"
+    }
+  },
   "webViews": {
     "packages": {
       "detailView": {

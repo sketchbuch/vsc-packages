@@ -57,6 +57,14 @@
             "npm",
             "yarn"
           ]
+        },
+        "depth": {
+          "default": 0,
+          "description": "%config.depth.description%",
+          "maximum": 5,
+          "minimum": 0,
+          "scope": "application",
+          "type": "number"
         }
       }
     },
@@ -139,10 +147,8 @@
     "compile": "tsc -p ./",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
-    "lint:ts:src": "tslint --config ./tslint.json --fix './src/**/*.ts' --exclude './src/test/**/*'",
-    "lint:ts:test": "tslint --config ./src/test/tslint.json --fix './src/test/**/*.ts'",
-    "lint:ts": "yarn lint:ts:src && yarn lint:ts:test",
-    "lint": "eslint src --ext ts",
+    "lint:ts": "eslint src --ext ts --fix",
+    "lint": "yarn lint:ts && yarn lint:prettier && yarn lint:css",
     "pretest": "yarn run compile && yarn run lint",
     "vscode:prepublish": "yarn run compile",
     "watch": "tsc -watch -p ./"
@@ -158,7 +164,7 @@
     "@types/marked": "^0.7.3",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.11.0",
-    "@types/sinon": "^7.5.2",
+    "@types/sinon": "^9.0.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
     "@types/vscode": "^1.46.0",
@@ -167,17 +173,20 @@
     "axios-mock-adapter": "^1.17.0",
     "chai": "^4.2.0",
     "commitlint": "^8.3.5",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint": "^6.8.0",
     "glob": "^7.1.6",
     "mocha": "^7.1.2",
     "prettier": "^1.19.1",
-    "sinon": "^7.3.2",
-    "stylelint": "^13.2.1",
+    "sinon": "^9.0.2",
     "stylelint-config-recommended": "^3.0.0",
+    "stylelint": "^13.2.1",
     "ts-mockito": "^2.3.1",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",
     "typescript": "^3.8.3",
+    "vscode-ext-localisation": "^1.0.1",
     "vscode-test": "^1.3.0",
     "yarn-audit-html": "^1.2.2"
   },
@@ -190,14 +199,14 @@
     "timeago.js": "^4.0.2",
     "vscode-ext-localisation": "^1.0.1"
   },
-  "husky2": {
+  "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "lint-staged",
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged2": {
+  "lint-staged": {
     "{src, resources/js}/**/*.{js,ts}": [
       "yarn lint:ts",
       "yarn lint:prettier",

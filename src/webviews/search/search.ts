@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as vscode from 'vscode';
 import {
   AddPackageData,
@@ -219,7 +220,7 @@ export const search = (): WebView<{}> => {
   const webView: WebView<{}> = {
     getViewType: () => viewType,
 
-    show: (context: vscode.ExtensionContext, data: {}): void => {
+    show: (context: vscode.ExtensionContext): void => {
       curContext = context;
 
       if (curPanel === undefined) {
@@ -236,11 +237,7 @@ export const search = (): WebView<{}> => {
       }
     },
 
-    revive: (
-      context: vscode.ExtensionContext,
-      revivedPanel: vscode.WebviewPanel,
-      data: {}
-    ): void => {
+    revive: (context: vscode.ExtensionContext, revivedPanel: vscode.WebviewPanel): void => {
       curContext = context;
       curPanel = revivedPanel;
 

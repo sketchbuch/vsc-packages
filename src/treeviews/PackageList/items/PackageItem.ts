@@ -3,10 +3,10 @@ import {
   EXT_PACKAGELIST_ITEM_CTX,
   FS_FOLDER_IMAGES_DARK,
   FS_FOLDER_IMAGES_LIGHT,
-} from '../../constants';
-import { getImagePath } from '../../utils';
+} from '../../../constants';
+import { getImagePath } from '../../../utils';
 
-export class PackageListItem extends vscode.TreeItem {
+export class PackageItem extends vscode.TreeItem {
   constructor(
     public readonly label: string,
     public readonly version: string,

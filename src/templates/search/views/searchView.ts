@@ -4,9 +4,9 @@ import { searchFieldSnippet, searchSortSnippet } from '../../shared';
 import { SearchState } from '../../../types';
 import { t } from 'vscode-ext-localisation';
 
-export const searchView = (state: SearchState) => {
+export const searchView = (state: SearchState): string => {
   const { data, loading, page, sort, term } = state;
-  let content: string = '';
+  let content = '';
 
   if (loading) {
     content = '<div class="vsc-loader"></div>';

@@ -4,10 +4,10 @@ import { columnsSnippet } from '../../../../../templates/package';
 suite('columnsSnippet()', () => {
   const testContentLeft = '<div class="test-content-left"></div>';
   const testContentRight = '<div class="test-content-right"></div>';
-  const left = () => '';
-  const right = () => '';
-  const left2 = () => testContentLeft;
-  const right2 = () => testContentRight;
+  const left = (): string => '';
+  const right = (): string => '';
+  const left2 = (): string => testContentLeft;
+  const right2 = (): string => testContentRight;
 
   test('Returns a string', () => {
     expect(columnsSnippet(left, right)).to.be.a('string');

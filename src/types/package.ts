@@ -15,7 +15,7 @@ export interface PackagePmPayload {
   activeTab: TabboxId;
 }
 
-export interface PackageData extends CmdCallbackData {}
+export type PackageData = CmdCallbackData;
 
 export interface InlineListSnippet {
   email?: string;

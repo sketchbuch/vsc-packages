@@ -1,6 +1,6 @@
-import { JSONSchemaForNPMPackageJsonFiles } from '@schemastore/package';
+import { JSONSchemaForNPMPackageJsonFiles as PackageJsonNpm } from '@schemastore/package';
 import { FS_FOLDER_IMAGES_DARK, FS_FOLDER_IMAGES_LIGHT } from '../constants';
-import { PackageList, PackageListItem, PackageListDep } from '../treeviews';
+import { DependencyItem, PackageItem, PackageList } from '../treeviews';
 import { ExecException } from 'child_process';
 
 export type ExtDepTypes =
@@ -16,9 +16,8 @@ export interface CmdCallbackData {
 }
 
 export type ImgType = typeof FS_FOLDER_IMAGES_DARK | typeof FS_FOLDER_IMAGES_LIGHT;
-export type GetPackageJsonResult = JSONSchemaForNPMPackageJsonFiles | null | Error;
 export type TreeProviders = { [key: string]: PackageList };
-export type PackageListChild = PackageListItem | PackageListDep;
+export type PackageListChild = PackageItem | DependencyItem;
 export type PackageListChildren = PackageListChild[];
 
 export type AddPackageData = {
@@ -29,3 +28,14 @@ export type AddPackageData = {
 };
 
 export type AddPackage = Promise<AddPackageData>;
+
+export interface PackageJsonYarn {
+  workspaces?: string[];
+}
+
+export type PackageJson = PackageJsonNpm & PackageJsonYarn;
+
+export interface GetPackageJsonResult {
+  data: PackageJson | null;
+  error?: Error | null;
+}

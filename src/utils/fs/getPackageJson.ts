@@ -4,22 +4,36 @@ import * as vscode from 'vscode';
 import { FS_PACKAGEJSON, FS_UTF8 } from '../../constants';
 import { GetPackageJsonResult } from '../../types';
 import { pathExists } from './pathExists';
+import { WsFolder } from '../../treeviews/FolderList/FolderList.interface';
 
-export const getPackageJson = (workspaceFolder: vscode.WorkspaceFolder): GetPackageJsonResult => {
+export const getPackageJson = (workspaceFolder: WsFolder): GetPackageJsonResult => {
   if (workspaceFolder) {
     const packageJsonPath: string = path.join(workspaceFolder.uri.fsPath, FS_PACKAGEJSON);
 
     if (pathExists(packageJsonPath)) {
-      let packageJson: string = '';
+      let packageJson = '';
 
       try {
         packageJson = fs.readFileSync(packageJsonPath, FS_UTF8);
-        return JSON.parse(packageJson);
+        return {
+          data: JSON.parse(packageJson),
+          error: null,
+        };
       } catch (error) {
-        return error;
+        vscode.window.showErrorMessage(
+          `Error whilst reading package.json for ${workspaceFolder.name}: ${error.message}`
+        );
+
+        return {
+          data: null,
+          error,
+        };
       }
     }
   }
 
-  return null;
+  return {
+    data: null,
+    error: null,
+  };
 };

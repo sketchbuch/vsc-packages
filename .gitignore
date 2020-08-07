@@ -5,6 +5,7 @@ out
 
 # File
 *.code-workspace
+*.DS_Store
 *.vsix
 audit-report.html
 Colours.css
