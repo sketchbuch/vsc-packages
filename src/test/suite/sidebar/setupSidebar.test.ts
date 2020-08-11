@@ -12,7 +12,11 @@ suite('setupSidebar()', () => {
   test('Sets up tree providers correctly', () => {
     const spy = sinon.spy(vscode.window, 'registerTreeDataProvider');
 
-    setupSidebar(mockContext, undefined, new PackageList(mockContext));
+    setupSidebar(
+      mockContext,
+      new FolderList(vscode.workspace.workspaceFolders, mockContext),
+      new PackageList(mockContext)
+    );
 
     sinon.assert.callCount(spy, 2);
     const spyFolderArgs = spy.getCall(0).args;

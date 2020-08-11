@@ -7,6 +7,7 @@
   "config.depth.description": "Depth to search below each workspace folder for additional package.json files",
   "config.packageManager.description": "Select the package manger that should be used to install packages.",
   "config.title": "Packages",
+  "ext.folderList.refresh": "Reload Workspaces",
   "views.activitybar-folders": "Workspace Folders",
   "views.activitybar-packagejson": "Packages",
   "views.btn.open-npmurl": "Open the NPM Page for this Package",

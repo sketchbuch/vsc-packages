@@ -42,6 +42,14 @@
         "title": "%cmd.search-packages%"
       },
       {
+        "command": "vsc-packages-sidebar-refresh",
+        "icon": {
+          "light": "./resources/images/light/refresh.svg",
+          "dark": "./resources/images/dark/refresh.svg"
+        },
+        "title": "%ext.folderList.refresh%"
+      },
+      {
         "command": "vsc-packages-search-results",
         "title": "%cmd.search-results%"
       }
@@ -97,6 +105,13 @@
           },
           "title": "%views.btn.open-npmurl%",
           "when": "viewItem == package-list-item"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "vsc-packages-sidebar-refresh",
+          "group": "navigation",
+          "when": "view == vsc-packages-activitybar-folders && vsc-packages-folders-loaded"
         }
       ]
     },
