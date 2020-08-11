@@ -2,9 +2,9 @@ import { t } from 'vscode-ext-localisation';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { CMD_SELECT_FOLDER, FS_PACKAGEJSON } from '../../constants';
+import { CMD_SELECT_FOLDER, FS_PACKAGEJSON, EXT_LOADED } from '../../constants';
 import { FolderEmpty, FolderItem, FolderLoading } from '.';
-import { getPackageJson, sortWsFolders, findPackageJsonFiles } from '../../utils';
+import { getPackageJson, sortWsFolders, findPackageJsonFiles, checkFile } from '../../utils';
 import {
   FolderListChild,
   FolderListChildren,
@@ -27,6 +27,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
   constructor(workspaceFolders: VsCodeWsFolders, private context: vscode.ExtensionContext) {
     this.loading();
     this.workspaceFolders = this.collectFolders(convertWsFolders(workspaceFolders));
+    vscode.commands.executeCommand('setContext', EXT_LOADED, true);
     this.isLoading = false;
 
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
@@ -72,8 +73,9 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
               (allFolders: WsFolders, curFilename: string): WsFolders => {
                 try {
                   const wsSubFolder = path.join(wildCardFolder, curFilename);
+                  const { isFolder } = checkFile(wsSubFolder);
 
-                  if (fs.lstatSync(wsSubFolder).isDirectory()) {
+                  if (isFolder) {
                     const newFolder = this.getWsFolder(curFilename, wsSubFolder, folder);
                     this.createWatcher(newFolder);
                     excludeFolders = [...excludeFolders, wsSubFolder];
@@ -89,7 +91,9 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
             );
           } else {
             try {
-              if (fs.lstatSync(wsFolder).isDirectory()) {
+              const { isFolder } = checkFile(wsFolder);
+
+              if (isFolder) {
                 const newFolder = this.getWsFolder(
                   wsFolder.replace(folder.uri.path, '').slice(1),
                   wsFolder,
@@ -188,6 +192,7 @@ export class FolderList implements vscode.TreeDataProvider<FolderListChild> {
   refresh(workspaceFolders: WsFolders): void {
     this.loading();
     this.workspaceFolders = this.collectFolders(workspaceFolders);
+    vscode.commands.executeCommand('setContext', EXT_LOADED, true);
     this.isLoading = false;
     this._onDidChangeTreeData.fire(undefined);
   }

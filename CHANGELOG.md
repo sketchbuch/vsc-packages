@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.5.1](https://github.com/sketchbuch/vsc-packages/compare/v1.5.0...v1.5.1) - 2020-08-11
+
+- Watch for changes to depth config and refresh folder view
+- Added a refresh button to the folder list
+
 ## [1.5.0](https://github.com/sketchbuch/vsc-packages/compare/v1.4.2...v1.5.0) - 2020-08-07
 
 - Added support for Yarn Workspaces

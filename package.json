@@ -2,7 +2,7 @@
   "name": "vsc-packages",
   "description": "A VSC extension to list packages from package.json and search for and install packages.",
   "displayName": "Package Installer",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "activationEvents": [
     "*"
   ],
@@ -40,6 +40,14 @@
       {
         "command": "vsc-packages-search-packages",
         "title": "%cmd.search-packages%"
+      },
+      {
+        "command": "vsc-packages-sidebar-refresh",
+        "icon": {
+          "light": "./resources/images/light/refresh.svg",
+          "dark": "./resources/images/dark/refresh.svg"
+        },
+        "title": "%ext.folderList.refresh%"
       },
       {
         "command": "vsc-packages-search-results",
@@ -97,6 +105,13 @@
           },
           "title": "%views.btn.open-npmurl%",
           "when": "viewItem == package-list-item"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "vsc-packages-sidebar-refresh",
+          "group": "navigation",
+          "when": "view == vsc-packages-activitybar-folders && vsc-packages-folders-loaded"
         }
       ]
     },

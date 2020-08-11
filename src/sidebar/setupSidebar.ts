@@ -1,14 +1,13 @@
 import * as vscode from 'vscode';
 import { FolderList, PackageList } from '../treeviews';
-import { WorkspaceFolders } from '../types';
 import { EXT_ACTIVITYBAR_FOLDERS, EXT_ACTIVITYBAR_PACKAGEJSON } from '../constants';
+import { convertWsFolders } from '../treeviews/FolderList/helpers/convertWsFolders';
 
 export const setupSidebar = (
   context: vscode.ExtensionContext,
-  workspaceFolders: WorkspaceFolders,
+  folderTreeDataProvider: FolderList,
   packageJsonDataProvider: PackageList
 ): void => {
-  const folderTreeDataProvider = new FolderList(workspaceFolders, context);
   context.subscriptions.push(
     vscode.window.registerTreeDataProvider(EXT_ACTIVITYBAR_FOLDERS, folderTreeDataProvider)
   );
@@ -16,4 +15,10 @@ export const setupSidebar = (
   context.subscriptions.push(
     vscode.window.registerTreeDataProvider(EXT_ACTIVITYBAR_PACKAGEJSON, packageJsonDataProvider)
   );
+
+  vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
+    if (event.affectsConfiguration('depth')) {
+      folderTreeDataProvider.refresh(convertWsFolders(vscode.workspace.workspaceFolders));
+    }
+  });
 };
