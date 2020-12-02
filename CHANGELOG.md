@@ -1,6 +1,6 @@
 # Change Log
 
-## [1.6.0](https://github.com/sketchbuch/vsc-packages/compare/v1.5.1...v1.6.0) - 2020-08-11
+## [1.6.1](https://github.com/sketchbuch/vsc-packages/compare/v1.5.1...v1.6.1) - 2020-08-11
 
 - Extension is now bundled with parcel
 
