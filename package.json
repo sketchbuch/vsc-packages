@@ -158,20 +158,20 @@
   },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
-    "build": "parcel build ./src/extension.ts -d dist --target=node6",
+    "build": "parcel build ./src/extension.ts -d dist --target=node",
     "clean:cache": "rimraf ./.cache/*",
     "clean:dist": "rimraf ./dist/*",
     "clean:test": "rimraf ./test/*",
     "clean": "yarn clean:cache && yarn clean:dist && yarn clean:test",
+    "compile": "tsc -p ./",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:js": "eslint ./resources/js --ext js --fix",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
     "lint:ts": "eslint ./src --ext ts --fix",
     "lint": "yarn lint:js && yarn lint:ts && yarn lint:prettier && yarn lint:css",
-    "pretest": "yarn clean:dist && yarn run build && yarn run lint",
-    "test": "yarn clean:test && tsc -p ./",
-    "vscode:prepublish": "yarn build",
-    "watch": "parcel ./src/extension.ts -d dist --target=node6"
+    "pretest": "yarn clean:dist && yarn build && yarn lint",
+    "test": "yarn clean:test && yarn compile",
+    "vscode:prepublish": "yarn clean:dist && yarn build"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -187,6 +187,7 @@
     "@types/sinon": "^9.0.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
+    "@types/vscode": "^1.51.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "axios-mock-adapter": "^1.17.0",
@@ -197,6 +198,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "glob": "^7.1.6",
     "mocha": "^7.1.2",
+    "parcel": "^2.0.0-beta.1",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
     "sinon": "^9.0.2",
@@ -217,7 +219,6 @@
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2",
-    "vscode": "^1.1.37",
     "vscode-ext-localisation": "^1.0.1"
   },
   "husky": {

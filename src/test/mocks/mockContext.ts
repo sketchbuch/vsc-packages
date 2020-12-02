@@ -4,7 +4,8 @@ import { extensionPath } from '.';
 
 const mockContext = {
   asAbsolutePath: (relativePath: string) => relativePath,
-  environmentVariableCollection: {},
+  environmentVariableCollection: {} as vscode.EnvironmentVariableCollection,
+  extensionMode: vscode.ExtensionMode.Test,
   extensionPath,
   extensionUri: {} as vscode.Uri,
   globalState: {
@@ -16,11 +17,11 @@ const mockContext = {
     },
   } as vscode.Memento & { setKeysForSync(keys: string[]): void },
   globalStoragePath: '',
+  globalStorageUri: {} as vscode.Uri,
   logPath: '',
+  logUri: {} as vscode.Uri,
   storagePath: '',
   storageUri: undefined,
-  globalStorageUri: {} as vscode.Uri,
-  logUri: {} as vscode.Uri,
   subscriptions: [],
   workspaceState: {
     get: (key: string) => {

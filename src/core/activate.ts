@@ -1,9 +1,9 @@
-import { loadTranslations, getVscodeLang } from 'vscode-ext-localisation';
 import * as vscode from 'vscode';
-import { FolderList, PackageList } from '../treeviews';
+import { getVscodeLang, loadTranslations } from 'vscode-ext-localisation';
 import { registerCommands } from '../commands';
-import { registerWebviews } from '../webviews';
 import { setupSidebar } from '../sidebar';
+import { FolderList, PackageList } from '../treeviews';
+import { registerWebviews } from '../webviews';
 
 export const setupExt = (context: vscode.ExtensionContext, lang: string): void => {
   loadTranslations(lang, context.extensionPath);

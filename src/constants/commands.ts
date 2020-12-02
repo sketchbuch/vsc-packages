@@ -8,7 +8,7 @@ export const CMD_SEARCH_PACKAGES = `${EXT}-search-packages`;
 export const CMD_SEARCH_RESULTS = `${EXT}-search-results`;
 export const CMD_SELECT_FOLDER = `${EXT}-select-folder`;
 
-// Inbult:
+// Inbuilt:
 export const CMD_VSCODE_OPEN = 'vscode.open';
 
 // Webview views;

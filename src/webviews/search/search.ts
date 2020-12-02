@@ -1,5 +1,15 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as vscode from 'vscode';
+import { t } from 'vscode-ext-localisation';
+import {
+  CMD_SEARCH_PACKAGES_WV,
+  EXT_WSSTATE_SELFOLDER,
+  FS_FOLDER_CSS,
+  FS_FOLDER_JS,
+  SEARCH_LIMIT,
+} from '../../constants';
+import { getHtml } from '../../templates';
+import { defaultTemplate as template } from '../../templates/search';
 import {
   AddPackageData,
   PostMessage,
@@ -8,17 +18,7 @@ import {
   SearchState,
   WebView,
 } from '../../types';
-import {
-  CMD_SEARCH_PACKAGES_WV,
-  EXT_WSSTATE_SELFOLDER,
-  FS_FOLDER_CSS,
-  FS_FOLDER_JS,
-  SEARCH_LIMIT,
-} from '../../constants';
-import { defaultTemplate as template } from '../../templates/search';
-import { getHtml } from '../../templates';
-import { getResourceUri, searchNpm, addPackage } from '../../utils';
-import { t } from 'vscode-ext-localisation';
+import { addPackage, getResourceUri, searchNpm } from '../../utils';
 
 const defaultState: SearchState = Object.freeze({
   data: undefined,

@@ -7,6 +7,8 @@ import {
   FS_FOLDER_CSS,
   FS_FOLDER_JS,
 } from '../../constants';
+import { getHtml } from '../../templates';
+import { defaultTemplate as template } from '../../templates/package';
 import {
   CmdCallbackData,
   NpmPackageData,
@@ -17,9 +19,7 @@ import {
   PostMessage,
   WebView,
 } from '../../types';
-import { defaultTemplate as template } from '../../templates/package';
-import { getHtml } from '../../templates';
-import { getResourceUri, getPackageTabTitle, getNpmPackageData } from '../../utils';
+import { getNpmPackageData, getPackageTabTitle, getResourceUri } from '../../utils';
 
 const defaultState: PackageState = Object.freeze({
   activeTab: 'readme',
