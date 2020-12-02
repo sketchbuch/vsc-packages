@@ -1,4 +1,4 @@
-import * as renderMarkdown from 'marked';
+import renderMarkdown from 'marked';
 
 export const readmeSnippet = (readme: string): string => {
   if (readme) {

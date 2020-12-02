@@ -7,14 +7,14 @@
     const tabs = ['readme', 'versions', 'developers'];
     let selectedTab = null;
 
-    tabs.forEach((tabId) => {
+    tabs.forEach(tabId => {
       const tab = document.getElementById(`tabbtn-${tabId}`);
 
       if (tab) {
         if (tab.dataset.selected) {
           selectedTab = tab;
         }
-        allTabs.push(tab)
+        allTabs.push(tab);
 
         tab.addEventListener('click', () => {
           if (!tab.dataset.selected) {
@@ -23,7 +23,7 @@
             }
 
             tab.setAttribute(selectedAttr, true);
-            selectedTab = tab
+            selectedTab = tab;
             vscode.postMessage({
               activeTab: tabId,
             });
@@ -31,17 +31,17 @@
               action: 'display-package',
               payload: {
                 activeTab: tabId,
-              }
+              },
             });
           }
         });
       }
-    })
+    });
 
     if (!selectedTab && allTabs.length > 0) {
       selectedTab = allTabs[0];
     }
-  }
+  };
 
   document.addEventListener('DOMContentLoaded', () => {
     setupTabs();

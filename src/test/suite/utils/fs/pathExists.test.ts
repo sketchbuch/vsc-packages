@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as fs from 'fs';
-import * as sinon from 'sinon';
+import fs from 'fs';
+import sinon from 'sinon';
 import { pathExists } from '../../../../utils/fs/pathExists';
 
 suite('pathExists()', () => {

@@ -1,6 +1,6 @@
-import * as search from 'libnpmsearch';
-import { NpmSearchResults } from '../../types';
+import search from 'libnpmsearch';
 import { SEARCH_LIMIT } from '../../constants';
+import { NpmSearchResults } from '../../types';
 
 const defaultOptions: search.Options = Object.freeze({
   from: 0,

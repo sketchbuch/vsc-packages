@@ -6,13 +6,25 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "outDir": "out",
+    "outDir": "test",
     "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
+    "esModuleInterop": true,
     "target": "es6"
   },
-  "exclude": ["node_modules", ".vscode-test"],
-  "include": ["src/**/*", "resources/js/**/*"]
+  "exclude": [
+    ".cache", 
+    ".vscode-test", 
+    "/test",
+    "build",
+    "dist",
+    "node_modules",
+    "out",
+    "resources/js/**/*",
+  ],
+  "include": [
+    "src/**/*",
+  ]
 }

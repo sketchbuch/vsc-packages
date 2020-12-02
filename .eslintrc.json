@@ -5,6 +5,15 @@
     "node": true
   },
   "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
+  "ignorePatterns": ["dist/*.js"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"]
+      }
+    }
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -15,12 +24,12 @@
   "rules": {
     "@typescript-eslint/ban-ts-ignore": 0,
     "@typescript-eslint/class-name-casing": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/semi": "warn",
     "comma-dangle": ["warn", "only-multiline"],
     "curly": "warn",
     "eol-last": ["error", "always"],
     "eqeqeq": "warn",
-    "indent": ["error", 2],
     "no-extra-semi": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }],
     "no-throw-literal": "warn",

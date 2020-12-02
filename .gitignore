@@ -1,9 +1,12 @@
 # Folders
 .vscode-test/
+/.cache
+/dist
+/out
+/test
 node_modules
-out
 
-# File
+# Files
 *.code-workspace
 *.DS_Store
 *.vsix
