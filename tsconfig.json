@@ -16,14 +16,14 @@
   "exclude": [
     ".cache", 
     ".vscode-test", 
+    "/test",
     "build",
     "dist",
     "node_modules",
     "out",
-    "/test"
+    "resources/js/**/*",
   ],
   "include": [
-    "resources/js/**/*",
     "src/**/*",
   ]
 }

@@ -16,13 +16,13 @@
       const newEvent = new Event('keyup');
       newEvent.key = 'Escape';
       searchField.dispatchEvent(newEvent);
-    }
+    };
 
     const onSearchKeyUp = (event) => {
       event.preventDefault();
       event.stopPropagation();
 
-      const {value} = event.target;
+      const { value } = event.target;
 
       if (value) {
         if (event.key === 'Escape') {
@@ -33,7 +33,7 @@
             },
           });
         } else if (event.key === 'Enter') {
-          const {value} = event.target;
+          const { value } = event.target;
 
           vscode.postMessage({
             action: 'search',
@@ -43,7 +43,7 @@
           });
         }
       }
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
       searchClearer.addEventListener('click', onSearchClearerClick);
@@ -59,7 +59,7 @@
 
   if (sortField) {
     const onSortChange = (event) => {
-      const {value} = event.target;
+      const { value } = event.target;
 
       vscode.postMessage({
         action: 'sort',
@@ -67,7 +67,7 @@
           sort: value,
         }
       });
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
       sortField.addEventListener('change', onSortChange);
@@ -90,7 +90,7 @@
           page: parseInt(morePage.value, 10)
         }
       });
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
       moreBtn.addEventListener('click', onMoreClick);
@@ -107,7 +107,7 @@
       event.preventDefault();
       event.stopPropagation();
 
-      const {package, type} = event.target.dataset;
+      const { package, type } = event.target.dataset;
 
       vscode.postMessage({
         action: 'install',
@@ -118,18 +118,18 @@
           }
         }
       });
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
       Array.from(resultActions).forEach((action) => {
         action.addEventListener('click', onActionClick);
-      })
+      });
     });
 
     window.addEventListener('unload', () => {
       Array.from(resultActions).forEach((action) => {
         action.removeEventListener('click', onActionClick);
-      })
+      });
     });
   }
 })();

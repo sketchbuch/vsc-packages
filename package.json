@@ -165,13 +165,14 @@
     "clean": "yarn clean:cache && yarn clean:dist && yarn clean:test",
     "compile": "parcel build ./src/extension.ts -d dist --target=node6",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
+    "lint:js": "eslint ./resources/js --ext js --fix",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
-    "lint:ts": "eslint src --ext ts --fix",
-    "lint": "yarn lint:ts && yarn lint:prettier && yarn lint:css",
+    "lint:ts": "eslint ./src --ext ts --fix",
+    "lint": "yarn lint:js && yarn lint:ts && yarn lint:prettier && yarn lint:css",
     "pretest": "yarn clean:dist && yarn run compile && yarn run lint",
     "test-compile": "yarn clean:test && tsc -p ./",
     "vscode:prepublish": "yarn build",
-    "watch": "parcel ./src/extension.ts -d dist --no-minify --target=node6"
+    "watch": "parcel ./src/extension.ts -d dist --target=node6"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
