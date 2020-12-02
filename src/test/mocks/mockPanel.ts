@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as vscode from 'vscode';
-import { getPackageTabTitle } from '../../utils/strings/getPackageTabTitle';
 import { packageName } from '.';
+import { getPackageTabTitle } from '../../utils/strings/getPackageTabTitle';
 
-const webview = {
-  onDidReceiveMessage: (callback: () => void) => {
-    // Do nothing...
-  },
-  asWebviewUri: (localResource: vscode.Uri) => {
-    // Do nothing...
-  },
-} as vscode.Webview;
+const webview = {} as vscode.Webview;
 
 const mockPanel: vscode.WebviewPanel = {
   active: true,

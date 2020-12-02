@@ -150,7 +150,7 @@
     "package"
   ],
   "license": "SEE LICENSE IN LICENSE.txt",
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "publisher": "sketchbuch",
   "repository": {
     "type": "git",
@@ -158,17 +158,20 @@
   },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
-    "build": "parcel build ./src/extension.ts",
-    "compile": "tsc -p ./",
-    "dev": "parcel ./src/extension.ts",
+    "build": "yarn clean:dist && yarn compile",
+    "clean:cache": "rimraf ./.cache/*",
+    "clean:dist": "rimraf ./dist/*",
+    "clean:test": "rimraf ./test/*",
+    "clean": "yarn clean:cache && yarn clean:dist && yarn clean:test",
+    "compile": "parcel build ./src/extension.ts -d dist --target=node6",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
     "lint:ts": "eslint src --ext ts --fix",
     "lint": "yarn lint:ts && yarn lint:prettier && yarn lint:css",
-    "pretest": "yarn run compile && yarn run lint",
-    "test": "node ./out/test/runTest.js",
-    "vscode:prepublish": "yarn run compile",
-    "watch": "tsc -watch -p ./"
+    "pretest": "yarn clean:dist && yarn run compile && yarn run lint",
+    "test-compile": "yarn clean:test && tsc -p ./",
+    "vscode:prepublish": "yarn build",
+    "watch": "parcel ./src/extension.ts -d dist --no-minify --target=node6"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -184,7 +187,6 @@
     "@types/sinon": "^9.0.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
-    "@types/vscode": "^1.46.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "axios-mock-adapter": "^1.17.0",
@@ -215,6 +217,7 @@
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2",
+    "vscode": "^1.1.37",
     "vscode-ext-localisation": "^1.0.1"
   },
   "husky": {
