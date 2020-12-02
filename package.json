@@ -2,7 +2,7 @@
   "name": "vsc-packages",
   "description": "A VSC extension to list packages from package.json and search for and install packages.",
   "displayName": "Package Installer",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "activationEvents": [
     "*"
   ],
