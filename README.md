@@ -26,7 +26,6 @@ This extension is localised, if you want it in your language please send me a tr
 
 ## Latest Version
 
-#### [1.5.1](https://github.com/sketchbuch/vsc-packages/compare/v1.5.0...v1.5.1) - 2020-08-11
+#### [1.6.0](https://github.com/sketchbuch/vsc-packages/compare/v1.5.1...v1.6.0) - 2020-08-11
 
-- Watch for changes to depth config and refresh folder view
-- Added a refresh button to the folder list
+- Extension is now bundled with parcel
