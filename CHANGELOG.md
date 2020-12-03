@@ -1,6 +1,6 @@
 # Change Log
 
-## [1.6.3](https://github.com/sketchbuch/vsc-packages/compare/v1.5.1...v1.6.3) - 2020-12-02
+## [1.6.5](https://github.com/sketchbuch/vsc-packages/compare/v1.5.1...v1.6.5) - 2020-12-03
 
 - Extension is now bundled with parcel
 - Fix missing translations
