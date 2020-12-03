@@ -156,9 +156,27 @@
     "type": "git",
     "url": "https://github.com/sketchbuch/vsc-packages"
   },
+  "sources": "./dist/extension.js",
+  "targets": {
+    "extension": {
+      "includeNodeModules": {
+        "vscode": false
+      }
+    },
+    "main": {
+      "includeNodeModules": {
+        "vscode": false
+      }
+    },
+    "default": {
+      "includeNodeModules": {
+        "vscode": false
+      }
+    }
+  },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
-    "build": "parcel build ./src/extension.ts -d dist --target=node",
+    "build": "parcel build ./src/extension.ts --target=node",
     "clean:cache": "rimraf ./.cache/*",
     "clean:dist": "rimraf ./dist/*",
     "clean:test": "rimraf ./test/*",
@@ -187,7 +205,7 @@
     "@types/sinon": "^9.0.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
-    "@types/vscode": "^1.51.0",
+    "@types/vscode": "1.34.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "axios-mock-adapter": "^1.17.0",
@@ -218,6 +236,7 @@
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2",
+    "vscode": "^1.1.37",
     "vscode-ext-localisation": "^1.0.1"
   },
   "husky": {
