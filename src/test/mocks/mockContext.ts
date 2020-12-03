@@ -4,8 +4,6 @@ import { extensionPath } from '.';
 
 const mockContext = {
   asAbsolutePath: (relativePath: string) => relativePath,
-  environmentVariableCollection: {} as vscode.EnvironmentVariableCollection,
-  extensionMode: vscode.ExtensionMode.Test,
   extensionPath,
   extensionUri: {} as vscode.Uri,
   globalState: {

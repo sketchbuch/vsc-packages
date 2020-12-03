@@ -1,10 +1,10 @@
-import { t } from 'vscode-ext-localisation';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { CMD_SELECT_FOLDER, FS_PACKAGEJSON, EXT_LOADED } from '../../constants';
+import { t } from 'vscode-ext-localisation';
 import { FolderEmpty, FolderItem, FolderLoading } from '.';
-import { getPackageJson, sortWsFolders, findPackageJsonFiles, checkFile } from '../../utils';
+import { CMD_SELECT_FOLDER, EXT_LOADED, FS_PACKAGEJSON } from '../../constants';
+import { checkFile, findPackageJsonFiles, getPackageJson, sortWsFolders } from '../../utils';
 import {
   FolderListChild,
   FolderListChildren,

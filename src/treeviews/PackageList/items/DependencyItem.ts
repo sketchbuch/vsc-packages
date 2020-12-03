@@ -15,31 +15,16 @@ export class DependencyItem extends vscode.TreeItem {
     public readonly command?: vscode.Command
   ) {
     super(label, collapsibleState);
-  }
-
-  get tooltip(): string {
-    if (this.depCount >= 0) {
-      return `${this.label} (${this.depCount})`;
-    }
-
-    return this.label;
-  }
-
-  get description(): string {
-    if (this.depCount >= 0) {
-      return `(${this.depCount})`;
-    }
-
-    return '';
-  }
-
-  iconPath =
-    this.depCount >= 0
+    const hasDeps = depCount >= 0;
+    this.tooltip = hasDeps ? `${this.label} (${this.depCount})` : this.label;
+    this.description = hasDeps ? `(${this.depCount})` : '';
+    this.iconPath = hasDeps
       ? {
-          light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'dep-type-light.svg'),
-          dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'dep-type-dark.svg'),
+          light: getImagePath(extensionPath, FS_FOLDER_IMAGES_LIGHT, 'dep-type-light.svg'),
+          dark: getImagePath(extensionPath, FS_FOLDER_IMAGES_DARK, 'dep-type-dark.svg'),
         }
       : undefined;
+  }
 
   contextValue = EXT_PACKAGELIST_DEP_CTX;
 }

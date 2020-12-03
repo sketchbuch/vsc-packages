@@ -15,20 +15,14 @@ export class PackageItem extends vscode.TreeItem {
     public readonly command?: vscode.Command
   ) {
     super(label, collapsibleState);
-  }
+    this.tooltip = `${this.label} (${this.version})`;
+    this.description = `${this.version}`;
 
-  get tooltip(): string {
-    return `${this.label} (${this.version})`;
+    this.iconPath = {
+      light: getImagePath(extensionPath, FS_FOLDER_IMAGES_LIGHT, 'dep.svg'),
+      dark: getImagePath(extensionPath, FS_FOLDER_IMAGES_DARK, 'dep.svg'),
+    };
   }
-
-  get description(): string {
-    return `${this.version}`;
-  }
-
-  iconPath = {
-    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'dep.svg'),
-    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'dep.svg'),
-  };
 
   contextValue = EXT_PACKAGELIST_ITEM_CTX;
 }
