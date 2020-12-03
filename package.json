@@ -2,7 +2,7 @@
   "name": "vsc-packages",
   "description": "A VSC extension to list packages from package.json and search for and install packages.",
   "displayName": "Package Installer",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "activationEvents": [
     "*"
   ],
@@ -139,6 +139,7 @@
     }
   },
   "engines": {
+    "node": ">= 12.16.1",
     "vscode": "^1.51.0"
   },
   "icon": "logo.png",
@@ -156,22 +157,42 @@
     "type": "git",
     "url": "https://github.com/sketchbuch/vsc-packages"
   },
+  "targets": {
+    "dev": {
+      "context": "node",
+      "distDir": "dist",
+      "includeNodeModules": false,
+      "minify": false,
+      "sourceMap": true
+    },
+    "release": {
+      "context": "node",
+      "distDir": "dist",
+      "includeNodeModules": {
+        "vscode": false
+      },
+      "minify": true,
+      "sourceMap": false
+    }
+  },
   "scripts": {
     "audit-html": "yarn audit --json | yarn-audit-html --output audit-report.html",
-    "build": "parcel build ./src/extension.ts -d dist --target=node",
-    "clean:cache": "rimraf ./.cache/*",
+    "build:dev": "parcel build ./src/extension.ts --target=dev",
+    "build:release": "parcel build ./src/extension.ts --target=release",
+    "clean:cache": "rimraf ./.parcel-cache/*",
     "clean:dist": "rimraf ./dist/*",
     "clean:test": "rimraf ./test/*",
     "clean": "yarn clean:cache && yarn clean:dist && yarn clean:test",
     "compile": "tsc -p ./",
+    "dev": "yarn clean:dist && yarn build:dev",
     "lint:css": "stylelint --config=.stylelintrc './resources/css/**/*.css'",
     "lint:js": "eslint ./resources/js --ext js --fix",
     "lint:prettier": "prettier --write --config ./.prettierrc.js './{src, resources/js}/**/*.{js,ts}'",
     "lint:ts": "eslint ./src --ext ts --fix",
     "lint": "yarn lint:js && yarn lint:ts && yarn lint:prettier && yarn lint:css",
-    "pretest": "yarn clean:dist && yarn build && yarn lint",
+    "pretest": "yarn clean:dist && yarn build:dev && yarn lint",
     "test": "yarn clean:test && yarn compile",
-    "vscode:prepublish": "yarn clean:dist && yarn build"
+    "vscode:prepublish": "yarn clean:dist && yarn build:release"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -187,7 +208,7 @@
     "@types/sinon": "^9.0.2",
     "@types/stylelint": "^9.10.1",
     "@types/vfile-message": "^2.0.0",
-    "@types/vscode": "^1.51.0",
+    "@types/vscode": "1.34.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "axios-mock-adapter": "^1.17.0",
@@ -199,7 +220,6 @@
     "glob": "^7.1.6",
     "mocha": "^7.1.2",
     "parcel": "^2.0.0-beta.1",
-    "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
     "sinon": "^9.0.2",
     "stylelint": "^13.2.1",

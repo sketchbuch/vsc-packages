@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import {
   EXT_FOLDERLIST_ITEM_LOADING_CTX,
-  FS_FOLDER_IMAGES_LIGHT,
   FS_FOLDER_IMAGES_DARK,
+  FS_FOLDER_IMAGES_LIGHT,
 } from '../../../constants';
 import { getImagePath } from '../../../utils';
 
@@ -13,20 +13,13 @@ export class FolderLoading extends vscode.TreeItem {
     public readonly collapsibleState: vscode.TreeItemCollapsibleState
   ) {
     super(label, collapsibleState);
+    this.tooltip = this.label;
+    this.description = '';
+    this.iconPath = {
+      light: getImagePath(extensionPath, FS_FOLDER_IMAGES_LIGHT, 'loading.svg'),
+      dark: getImagePath(extensionPath, FS_FOLDER_IMAGES_DARK, 'loading.svg'),
+    };
   }
-
-  get tooltip(): string {
-    return `${this.label}`;
-  }
-
-  get description(): string {
-    return '';
-  }
-
-  iconPath = {
-    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'loading.svg'),
-    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'loading.svg'),
-  };
 
   contextValue = EXT_FOLDERLIST_ITEM_LOADING_CTX;
 }

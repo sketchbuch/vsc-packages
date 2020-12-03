@@ -1,5 +1,6 @@
 # Folders
 .vscode-test/
+/.parcel-cache
 /.cache
 /dist
 /out

@@ -12,6 +12,11 @@
   "views.activitybar-packagejson": "Pakete",
   "views.btn.open-npmurl": "NPM-Seite für dieser Packet öffnen",
   "viewsContainers.activitybar": "Pakete",
+  "messages": {
+    "pkgInstallSuccess": "{{package}} hinzugefügt als {{dependencyType}}",
+    "pkgInstallError": "Bei der Installation von {{package}} ist ein Fehler aufgetreten: {{error}}",
+    "pkgInstallNoFolder": "Abhängigkeit kann nicht installiert werden. Bitte wählen Sie zuerst einen Arbeitsberich-Verzeichnisse in der Seitenleiste"
+  },
   "treeViews": {
     "folder": {
       "loading": "Verzeichnisse finden...",

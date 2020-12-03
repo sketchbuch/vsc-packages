@@ -12,6 +12,11 @@
   "views.activitybar-packagejson": "Packages",
   "views.btn.open-npmurl": "Open the NPM Page for this Package",
   "viewsContainers.activitybar": "Packages",
+  "messages": {
+    "pkgInstallSuccess": "{{package}} has been added to {{dependencyType}}",
+    "pkgInstallError": "An error occured whilst installing {{package}}: {{error}}",
+    "pkgInstallNoFolder": "Unable to install dependency. Please first select a folder in the Packages sidebar"
+  },
   "treeViews": {
     "folder": {
       "loading": "Collecting folders...",

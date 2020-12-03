@@ -8,14 +8,8 @@ export class FolderEmpty extends vscode.TreeItem {
     public readonly collapsibleState: vscode.TreeItemCollapsibleState
   ) {
     super(label, collapsibleState);
-  }
-
-  get tooltip(): string {
-    return `${this.label}`;
-  }
-
-  get description(): string {
-    return '';
+    this.tooltip = this.label;
+    this.description = '';
   }
 
   iconPath = {

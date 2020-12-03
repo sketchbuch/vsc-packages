@@ -1,6 +1,8 @@
 # Folders
 .vscode-test/**
 .vscode/**
+/.parcel-cache/**
+/.cache/**
 node_modules/**
 out/
 src/
@@ -10,5 +12,6 @@ src/
 **/.eslintrc.json
 **/*.map
 **/*.ts
+**/*.vsix
 **/tsconfig.json
 vsc-extension-quickstart.md

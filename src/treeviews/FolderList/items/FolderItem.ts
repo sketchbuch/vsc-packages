@@ -14,20 +14,13 @@ export class FolderItem extends vscode.TreeItem {
     public readonly command?: vscode.Command
   ) {
     super(label, collapsibleState);
+    this.tooltip = `View packages for "${this.label}"`;
+    this.description = '';
+    this.iconPath = {
+      light: getImagePath(extensionPath, FS_FOLDER_IMAGES_LIGHT, 'folder-light.svg'),
+      dark: getImagePath(extensionPath, FS_FOLDER_IMAGES_DARK, 'folder-dark.svg'),
+    };
   }
-
-  get tooltip(): string {
-    return `View packages for "${this.label}"`;
-  }
-
-  get description(): string {
-    return '';
-  }
-
-  iconPath = {
-    light: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_LIGHT, 'folder-light.svg'),
-    dark: getImagePath(this.extensionPath, FS_FOLDER_IMAGES_DARK, 'folder-dark.svg'),
-  };
 
   contextValue = EXT_FOLDERLIST_ITEM_CTX;
 }
