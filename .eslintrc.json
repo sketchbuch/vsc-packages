@@ -5,7 +5,7 @@
     "node": true
   },
   "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
-  "ignorePatterns": ["dist/*.js"],
+  "ignorePatterns": ["dist/*.js", "test/*.js"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
