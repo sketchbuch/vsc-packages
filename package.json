@@ -159,16 +159,22 @@
   "sources": "./dist/extension.js",
   "targets": {
     "extension": {
+      "context": "node",
+      "distDir": "dist",
       "includeNodeModules": {
         "vscode": false
       }
     },
     "main": {
+      "context": "node",
+      "distDir": "dist",
       "includeNodeModules": {
         "vscode": false
       }
     },
     "default": {
+      "context": "node",
+      "distDir": "dist",
       "includeNodeModules": {
         "vscode": false
       }
@@ -236,7 +242,6 @@
     "lint-staged": "^10.0.8",
     "marked": "^0.8.0",
     "timeago.js": "^4.0.2",
-    "vscode": "^1.1.37",
     "vscode-ext-localisation": "^1.0.1"
   },
   "husky": {
