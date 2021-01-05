@@ -232,7 +232,7 @@
     "yarn-audit-html": "^1.2.2"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "husky": "^4.2.3",
     "libnpmsearch": "^2.0.2",
     "lint-staged": "^10.0.8",
